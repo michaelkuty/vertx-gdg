@@ -1,0 +1,292 @@
+%% LyX 1.5.5 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[a4paper,twoside,czech,czech,openright,cleardoubleempty,BCOR10mm,DIV11]{scrreprt}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{varioref}
+\usepackage{wrapfig}
+\usepackage{fancybox}
+\usepackage{calc}
+\usepackage{framed}
+\usepackage{url}
+\usepackage{graphicx}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\providecommand{\LyX}{L\kern-.1667em\lower.25em\hbox{Y}\kern-.125emX\@}
+\newcommand{\lyxline}[1][1pt]{%
+  \par\noindent%
+  \rule[.5ex]{\linewidth}{#1}\par}
+\newcommand{\noun}[1]{\textsc{#1}}
+%% Special footnote code from the package 'stblftnt.sty'
+%% Author: Robin Fairbairns -- Last revised Dec 13 1996
+\let\SF@@footnote\footnote
+\def\footnote{\ifx\protect\@typeset@protect
+    \expandafter\SF@@footnote
+  \else
+    \expandafter\SF@gobble@opt
+  \fi
+}
+\expandafter\def\csname SF@gobble@opt \endcsname{\@ifnextchar[%]
+  \SF@gobble@twobracket
+  \@gobble
+}
+\edef\SF@gobble@opt{\noexpand\protect
+  \expandafter\noexpand\csname SF@gobble@opt \endcsname}
+\def\SF@gobble@twobracket[#1]#2{}
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\newenvironment{lyxcode}
+{\begin{list}{}{
+\setlength{\rightmargin}{\leftmargin}
+\setlength{\listparindent}{0pt}% needed for AMS classes
+\raggedright
+\setlength{\itemsep}{0pt}
+\setlength{\parsep}{0pt}
+\normalfont\ttfamily}%
+ \item[]}
+{\end{list}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+%<-------------------------------společná nastavení------------------------------>
+\usepackage[czech]{babel}%počeštění názvů (Obsah, Kapitola, Literatura atp.)
+\usepackage[]{hyperref} %odkazy v  pdf jsou klikací s barevnými rámečky
+\usepackage[numbers,sort&compress]{natbib} %balíček pro citace literatury  
+\usepackage{hypernat}%interakce mezi hyperref a natbib
+\newcommand{\BibTeX}{{\sc Bib}\TeX}%BibTeX logo
+\hypersetup{   % Nastavení polí PDF dokumentu 
+pdftitle={Sablona pro psani zaverecnych praci v LyXu},%   
+pdfauthor={Vitezslav Vydra},%  
+pdfsubject={},%   
+pdfkeywords={\v{s}ablona,LaTeX,LyX}%                             
+}
+\usepackage{multicol}
+
+
+
+
+%<-----------------------------volání stylů----------------------------------------->
+% (znak % je označení komentáře: co je za ním, není aktivní)
+%<------------------------------------písmo----------------------------------------->
+%\usepackage{packages/bc-latinmodern}
+%\usepackage{packages/bc-times}
+\usepackage{packages/bc-palatino}
+%\usepackage{packages/bc-iwona}
+%\usepackage{packages/bc-helvetika}
+
+
+%<------------------------------záhlaví stránek------------------------------------>
+%\usepackage{packages/bc-headings}
+\usepackage{packages/bc-fancyhdr}
+
+%<------------------------------hlavičky kapitol------------------------------------>
+%\usepackage{packages/bc-neueskapitel}
+\usepackage{packages/bc-fancychap}
+
+\makeatother
+
+\usepackage{babel}
+
+\begin{document}
+~\thispagestyle{empty}{\small ~\vfill{}
+}{\small \par}
+
+\noindent {\small Na tomto místě mohou být napsána případná poděkování
+(vedoucímu práce, konzultantovi, tomu kdo půjčil software, literaturu,
+poskytl data apod.). \newpage{}}{\small \par}
+
+~\thispagestyle{empty}\vfill{}
+Tato stránka je tzv. protititul a je graficky součástí titulní stránky.
+Nechte ji prázdnou, nebo na ni umístěte vhodnou fotografii či ilustraci.
+
+\cleardoublepage{}~\thispagestyle{empty}\begin{center}\pagenumbering{roman}\vspace{10mm}
+
+
+\textsf{\textsc{\noun{\LARGE České vysoké učení technické v Praze}}}\\
+\vspace{0.5em}
+\textsf{\textsc{\noun{\LARGE Fakulta stavební}}}\\
+\vspace*{1em}
+\textsf{\textsc{\noun{\Large katedra fyziky}}}\vspace{15mm}
+
+
+%%% Aby vložení loga  správně fungovalo, je třeba mít soubor lev.png nahraný v pracovním adresáři,
+%%% tj. v adresáři, kde se nachází překládaný zdrojový soubor. 
+\includegraphics[width=0.3\textwidth]{obrazky/lev}\vspace{15mm}
+
+
+\textsf{\huge BAKALÁŘSKÁ/DIPLOMOVÁ PRÁCE}{\huge \par}
+
+\vspace{15mm}
+
+
+\textsf{\LARGE Název práce}{\LARGE \par}
+
+\vspace{10mm}
+
+
+\end{center} 
+
+\vspace*{\fill}
+
+
+\vspace{10mm}
+
+
+\begin{description}
+\item [{{\large Autor:}}] \noindent \textsf{\large Jméno autora}{\large \par}
+\item [{{\large Vedoucí~práce:}}] \noindent \textsf{\large Doc. RNDr.
+Vítězslav Vydra, CSc.}{\large \hfill{}}\textsf{\large Praha, 2008}{\large{}
+% doplňte rok vzniku vaší bakalářské práce
+}{\large \par}
+\end{description}
+\clearpage{}
+
+{\small \thispagestyle{plain}\addcontentsline{toc}{chapter}{Abstrakt} }{\small \par}
+
+\noindent {\small ~\vfill{}
+}{\small \par}
+
+\begin{description}
+\item [{{\small Název~práce:}}] \noindent {\small Název bakalářské práce}{\small \par}
+\item [{{\small Autor:}}] \noindent {\small Jméno autora}{\small \par}
+\item [{{\small Katedra~(ústav):}}] \noindent Kate{\small dra fyziky}{\small \par}
+\item [{{\small Vedoucí~bakalářské~práce:}}] \noindent Doc. RNDr. Vítězslav
+Vydra, CSc.
+\item [{{\small e-mail~vedoucího:}}] \noindent {\small vydra@fsv.cvut.cz}\\
+{\small \par}
+\item [{{\small Abstrakt}}] \noindent {\small V předložené práci studujeme...
+Uvede se abstrakt v rozsahu 80 až 200 slov. Lorem ipsum dolor sit
+amet, consectetuer adipiscing elit. Ut sit amet sem. Mauris nec turpis
+ac sem mollis pretium. Suspendisse neque massa, suscipit id, dictum
+in, porta at, quam. Nunc suscipit, pede vel elementum pretium, nisl
+urna sodales velit, sit amet auctor elit quam id tellus. Nullam sollicitudin.}{\small \par}
+\item [{{\small Klíčová~slova:}}] \noindent {\small klíčová slova (3 až
+5)}\\
+{\small \lyxline{\small}}{\small \par}
+\item [{{\small Title:}}] \noindent {\small Název bakalářské práce v angličtině}{\small \par}
+\item [{{\small Author:}}] \noindent {\small Jméno autora}{\small \par}
+\item [{{\small Department:}}] \noindent {\small Název katedry či ústavu
+v angličtině}{\small \par}
+\item [{{\small Supervisor:}}] \noindent {\small Jméno s tituly jako v
+české verzi, event. pracoviště}{\small \par}
+\item [{{\small Supervisor's~e-mail~address:}}] \noindent {\small e-mailová
+adresa vedoucího}\\
+{\small \par}
+\item [{{\small Abstract}}] \noindent {\small In the present work we study
+... Uvede se anglický abstrakt v rozsahu 80 až 200 slov. Lorem ipsum
+dolor sit amet, consectetuer adipiscing elit. Ut sit amet sem. Mauris
+nec turpis ac sem mollis pretium. Suspendisse neque massa, suscipit
+id, dictum in, porta at, quam. Nunc suscipit, pede vel elementum pretium,
+nisl urna sodales velit, sit amet auctor elit quam id tellus. Nullam
+sollicitudin. Donec hendrerit. Aliquam ac nibh. Vivamus mi. Sed felis.
+Proin pretium elit in neque. Pellentesque at turpis. Maecenas convallis.
+Vestibulum id lectus. }{\small \par}
+\item [{{\small Keywords:}}] \noindent {\small klíčová slova (3 až 5) v
+angličtině}{\small \par}
+\end{description}
+\cleardoublepage{}\thispagestyle{empty}~{\small \addcontentsline{toc}{chapter}{Zadání
+práce} }{\small \par}
+
+
+
+\newpage{}\thispagestyle{empty}~
+
+
+
+\newpage{}\thispagestyle{plain}
+
+{\small %\setcounter{page}{3} % nastavení číslování stránek
+\ }{\small \par}
+
+\noindent {\small \vfill{}
+ % nastavuje dynamické umístění následujícího textu do spodní části stránky
+~}{\small \par}
+
+\noindent {\small Prohlašuji, že jsem svou bakalářskou práci napsal(a)
+samostatně a výhradně s použitím citovaných pramenů. Souhlasím se
+zapůjčováním práce a jejím zveřejňováním.}{\small \par}
+
+{\small \bigskip{}
+}\noindent {\small{} V Praze dne \today\hspace{\fill}Jméno Příjmení
++ podpis}\\
+{\small{} % doplňte patřičné datum, jméno a příjmení
+}{\small \par}
+
+{\small %%%   Výtisk pak na tomto míste nezapomeňte PODEPSAT!
+%%%                                         *********
+}{\small \par}
+
+\cleardoublepage{}\thispagestyle{empty}{\small \tableofcontents{}% vkládá automaticky generovaný obsah dokumentu
+\cleardoublepage{}}{\small \par}
+
+\include{uvod}
+
+\include{sablona}
+
+\include{uvod_LyX}
+
+\include{zaver}
+
+\begin{thebibliography}{10}
+\bibitem{Thesis-templates}\emph{\LyX{} and \LaTeX{} Thesis Themplates}
+{[}online]. {[}cit. 2008-09-28]. Dostupný z WWW: \url{http://www.thesis-template.com/}
+
+\bibitem{Diplomka-v-LaTeXu}Pele,\emph{ Diplomka v \LaTeX{}u} {[}online].
+{[}cit. 2008-09-28]. Dostupný z WWW: \url{pele.gzk.cz/node/37}
+
+\bibitem{Jirkovy-stranky}Roubal, Jiří\emph{. Jirkovy stránky}~{[}online].
+{[}cit. 2008-09-28]. Dostupný z WWW: \url{dce.felk.cvut.cz/roubal/}
+
+\bibitem{Lyx-cesky}Vydra, Vítězslav.\emph{ Počeštění \LyX{}u}~{[}online].
+2008 {[}cit. 2008-09-28]. Dostupný z WWW: \url{people.fsv.cvut.cz/~vydra/lyxcesky.htm}
+
+\bibitem{Tex-Gyre}\emph{Písmo \TeX-Gyre}~{[}online]. {[}cit. 2008-09-28].
+Dostupný z WWW: \url{www.gust.org.pl/projects/e-foundry/tex-gyre}
+
+\bibitem{NeuesKapitel}\emph{Neues Kapitel-Layout}~{[}online]. {[}cit.
+2008-09-28]. Dostupný z WWW: \url{www.thesis-template.de/archives/5#more-5}
+
+\bibitem{Vavreckova}Vavrečková, Šárka. \emph{Úprava dokumentů}~{[}online].
+{[}cit. 2008-09-28]. Dostupný z WWW:\url{axpsu.fpf.slu.cz/~vav10ui/obsahy/dipl/typografie.pdf}
+
+\bibitem{diplPraceSLU}\emph{Zdroje informací pro diplomové práce,
+SLU}~{[}online]. {[}cit. 2008-09-28]. Dostupný z WWW: \url{axpsu.fpf.slu.cz/~vav10ui/obsahy/dipl/typodipl.html}
+
+\bibitem{V-cem}\emph{V čem napsat diplomovou práci}~{[}online].
+{[}cit. 2008-09-28]. Dostupný z WWW: \url{www.student.cvut.cz/cwut/index.php/Diplomová_práce#V_.C4.8Dem_napsat_diplomovou_pr.C3.A1ci}
+
+\bibitem{Menousek}Menoušek, Jiří. \emph{Jak (ne)napsat diplomovou
+a dizertační práci}~{[}online]. {[}cit. 2008-09-28]. Dostupný z WWW:
+\url{www.csmo.cz/other/dizert.php}
+
+\bibitem{Polach}Polách, Eduard. \emph{Pravidla sazby diplomových
+prací}~{[}online]. {[}cit. 2008-09-28]. Dostupný z WWW: \url{home.pf.jcu.cz/~edpo/pravidla/pravidla.html}
+
+\bibitem{Citace}Farkašová, Blanka, Krčál, Martin. \emph{Projekt bibliografické
+citace}~{[}online]. {[}cit. 2008-09-28]. Dostupný z WWW: \url{www.citace.com}.
+
+\end{thebibliography}
+~\\
+Tento seznam literatury byl vytvořen přímo v Lyxu pomocí stylu ,,Bibliografie{}``
+a generátoru citací~\cite{Citace}. Pořadí citací je takové, jak
+je sami napíšeme.
+
+\bibliographystyle{csplainnat}
+\bibliography{bakalarka}
+~\\
+~\\
+Tento seznam literatury byl vytvořen pomocí \BibTeX u s použitím
+stylu \texttt{csplainnat}. Citace jsou automaticky seřazeny podle
+abecedy.
+
+\addcontentsline{toc}{chapter}{Literatura} 
+
+\cleardoublepage{}
+
+\include{prilohy}
+\end{document}

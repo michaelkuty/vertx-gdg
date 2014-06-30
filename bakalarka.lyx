@@ -1,0 +1,1542 @@
+#LyX 1.5.5 created this file. For more info see http://www.lyx.org/
+\lyxformat 276
+\begin_document
+\begin_header
+\textclass scrreprt
+\begin_preamble
+%<-------------------------------společná nastavení------------------------------>
+\usepackage[czech]{babel}%počeštění názvů (Obsah, Kapitola, Literatura atp.)
+\usepackage[]{hyperref} %odkazy v  pdf jsou klikací s barevnými rámečky
+\usepackage[numbers,sort&compress]{natbib} %balíček pro citace literatury  
+\usepackage{hypernat}%interakce mezi hyperref a natbib
+\usepackage{color}%kvůli barvám ČVUT
+\newcommand{\BibTeX}{{\sc Bib}\TeX}%BibTeX logo
+\hypersetup{   % Nastavení polí PDF dokumentu 
+pdftitle={Sablona pro psani zaverecnych praci v LyXu},%   
+pdfauthor={Vitezslav Vydra},%  
+pdfsubject={},%   
+pdfkeywords={\v{s}ablona,LaTeX,LyX}%                             
+}
+\usepackage{multicol}
+
+
+
+
+%<-----------------------------volání stylů----------------------------------------->
+% (znak % je označení komentáře: co je za ním, není aktivní)
+%<------------------------------------písmo----------------------------------------->
+%\usepackage{packages/bc-latinmodern}
+\usepackage{packages/bc-times}
+%\usepackage{packages/bc-palatino}
+%\usepackage{packages/bc-iwona}
+%\usepackage{packages/bc-helvetika}
+
+
+%<------------------------------záhlaví stránek------------------------------------>
+%\usepackage{packages/bc-headings}
+\usepackage{packages/bc-fancyhdr}
+
+%<------------------------------hlavičky kapitol------------------------------------>
+%\usepackage{packages/bc-neueskapitel}
+\usepackage{packages/bc-fancychap}
+\end_preamble
+\options czech,openright,cleardoubleempty,BCOR10mm,DIV11
+\language czech
+\inputencoding utf8
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\paperfontsize default
+\spacing single
+\papersize a4paper
+\use_geometry false
+\use_amsmath 1
+\use_esint 0
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\defskip medskip
+\quotes_language german
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Standard
+Copyright 2008, Vítězslav Vydra, verze pro LyX 1.5.5 a MiKTex 2.7
+\end_layout
+
+\begin_layout Standard
+\InsetSpace ~
+
+\end_layout
+
+\begin_layout Standard
+Dokument v pdf vytvoříte kliknutím na ikonu Acrobatu v hlavním menu!
+\end_layout
+
+\begin_layout Standard
+\InsetSpace ~
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+V nastavení dokumentu raději nic neměňte, pokud nevíte přesně co děláte!
+\end_layout
+
+\begin_layout Standard
+\InsetSpace ~
+
+\end_layout
+
+\begin_layout Standard
+Změnit lze použitý styl, pokud vám současný nevyhovuje (Dokument -> Nastavení
+ -> Preambule LaTeXu).
+ Zakomentujte (vložením znaku %) styl, které chcete zrušit, odkomentujte
+ (odstraněním znaku % styl, který chcete použít).
+ 
+\end_layout
+
+\begin_layout Standard
+\InsetSpace ~
+
+\end_layout
+
+\begin_layout Standard
+Změnit lze případně též šířku papíru, která bude schována ve vazbě (to vám
+ řeknou tam, kam dáte práci svázat).
+ Nastaveno je 10 mm (Dokument -> Nastavení -> Třída dokumentu -> Možnosti:
+ BCOR10mm).
+ 
+\end_layout
+
+\begin_layout Standard
+Neměnte velikost okrajů stránky, ty se počítají automaticky podle složitého
+ algoritmu v závislosti na velikosti stránky a písma.
+ Pokud chcete 
+\emph on
+opravdu
+\emph default
+ změnit velikost okrajů, vložte do možností třídy dokumentu parametr DIVx,
+ kde x je číslo větší než 4.
+ Čím větší číslo, tím menší okraje.
+\end_layout
+
+\end_inset
+
+\InsetSpace ~
+
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Standard
+Volný list před titulní stranou (nemusí být při použití měkké vazby), může
+ obsahovat poděkování
+\end_layout
+
+\end_inset
+
+
+\size small
+\InsetSpace ~
+
+\begin_inset VSpace vfill
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\size normal
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+noindent 
+\end_layout
+
+\end_inset
+
+
+\size small
+Na tomto místě mohou být napsána případná poděkování (vedoucímu práce, konzultan
+tovi, tomu kdo půjčil software, literaturu, poskytl data apod.).
+ 
+\newpage
+
+\end_layout
+
+\begin_layout Standard
+\InsetSpace ~
+
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\begin_inset VSpace vfill
+\end_inset
+
+Tato stránka je tzv.
+ protititul a je graficky součástí titulní stránky.
+ Nechte ji prázdnou, nebo na ni umístěte vhodnou fotografii či ilustraci.
+\end_layout
+
+\begin_layout Standard
+
+\cleardoublepage
+\InsetSpace ~
+
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+begin{center}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+pagenumbering{roman}
+\end_layout
+
+\end_inset
+
+
+\begin_inset VSpace 10mm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\family sans
+\shape smallcaps
+\size largest
+\noun on
+České vysoké učení technické v Praze
+\family default
+\shape default
+\size default
+\noun default
+
+\newline
+
+\begin_inset VSpace 0.5em
+\end_inset
+
+
+\family sans
+\shape smallcaps
+\size largest
+\noun on
+Fakulta stavební
+\family default
+\shape default
+\size default
+\noun default
+
+\newline
+
+\begin_inset VSpace 1em*
+\end_inset
+
+
+\family sans
+\shape smallcaps
+\size larger
+\noun on
+katedra fyziky
+\family default
+\shape default
+\size default
+\noun default
+
+\begin_inset VSpace 15mm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\size normal
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+%%% Aby vložení loga  správně fungovalo, je třeba mít soubor lev.png nahraný
+ v pracovním adresáři,
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%%% tj.
+ v adresáři, kde se nachází překládaný zdrojový soubor.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename obrazky/lev.png
+	lyxscale 50
+	width 30text%
+
+\end_inset
+
+
+\size default
+
+\begin_inset VSpace 15mm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\family sans
+\size huge
+BAKALÁŘSKÁ/DIPLOMOVÁ PRÁCE
+\end_layout
+
+\begin_layout Standard
+
+\size normal
+\begin_inset VSpace 15mm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\family sans
+\size largest
+Název práce
+\end_layout
+
+\begin_layout Standard
+
+\size normal
+\begin_inset VSpace 10mm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{center} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace vfill*
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\size normal
+\begin_inset VSpace 10mm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+\noindent
+\align block
+
+\family sans
+\size large
+Autor: Jméno autora
+\end_layout
+
+\begin_layout Description
+\noindent
+\align block
+
+\family sans
+\size large
+Vedoucí\InsetSpace ~
+práce: Doc.
+ RNDr.
+ Vítězslav Vydra, CSc.
+\family default
+
+\hfill
+
+\family sans
+Praha, 2008
+\family default
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% doplňte rok vzniku vaší bakalářské práce
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\clearpage
+
+\end_layout
+
+\begin_layout Standard
+
+\size small
+\begin_inset Note Note
+status open
+
+\begin_layout Standard
+
+\size small
+Anotace
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+thispagestyle{plain}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+addcontentsline{toc}{chapter}{
+\end_layout
+
+\end_inset
+
+Abstrakt
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\size small
+\InsetSpace ~
+
+\begin_inset VSpace vfill
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+\noindent
+
+\series bold
+\size small
+Název\InsetSpace ~
+práce:
+\series default
+ Název bakalářské práce
+\end_layout
+
+\begin_layout Description
+\noindent
+
+\series bold
+\size small
+Autor:
+\series default
+ Jméno autora
+\end_layout
+
+\begin_layout Description
+\noindent
+
+\series bold
+\size small
+Katedra\InsetSpace ~
+(ústav):
+\series default
+\size default
+ Kate
+\size small
+dra fyziky
+\end_layout
+
+\begin_layout Description
+\noindent
+
+\series bold
+\size small
+Vedoucí\InsetSpace ~
+bakalářské\InsetSpace ~
+práce:
+\series default
+ 
+\size default
+Doc.
+ RNDr.
+ Vítězslav Vydra, CSc.
+\end_layout
+
+\begin_layout Description
+\noindent
+
+\series bold
+\size small
+e-mail\InsetSpace ~
+vedoucího: 
+\series default
+vydra@fsv.cvut.cz
+\newline
+
+\end_layout
+
+\begin_layout Description
+\noindent
+
+\size small
+Abstrakt V předložené práci studujeme...
+ Uvede se abstrakt v rozsahu 80 až 200 slov.
+ Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+ Ut sit amet sem.
+ Mauris nec turpis ac sem mollis pretium.
+ Suspendisse neque massa, suscipit id, dictum in, porta at, quam.
+ Nunc suscipit, pede vel elementum pretium, nisl urna sodales velit, sit
+ amet auctor elit quam id tellus.
+ Nullam sollicitudin.
+\end_layout
+
+\begin_layout Description
+\noindent
+
+\size small
+Klíčová\InsetSpace ~
+slova: klíčová slova (3 až 5)
+\newline
+
+\end_layout
+
+\begin_layout Description
+\noindent
+
+\size small
+
+\lyxline
+
+\end_layout
+
+\begin_layout Description
+\noindent
+
+\series bold
+\size small
+Title: 
+\series default
+Název bakalářské práce v angličtině
+\end_layout
+
+\begin_layout Description
+\noindent
+
+\series bold
+\size small
+Author:
+\series default
+ Jméno autora
+\end_layout
+
+\begin_layout Description
+\noindent
+
+\series bold
+\size small
+Department:
+\series default
+ Název katedry či ústavu v angličtině
+\end_layout
+
+\begin_layout Description
+\noindent
+
+\series bold
+\size small
+Supervisor:
+\series default
+ Jméno s tituly jako v české verzi, event.
+ pracoviště
+\end_layout
+
+\begin_layout Description
+\noindent
+
+\series bold
+\size small
+Supervisor's\InsetSpace ~
+e-mail\InsetSpace ~
+address:
+\series default
+ e-mailová adresa vedoucího
+\newline
+
+\end_layout
+
+\begin_layout Description
+\noindent
+
+\series bold
+\size small
+Abstract
+\series default
+ In the present work we study ...
+ Uvede se anglický abstrakt v rozsahu 80 až 200 slov.
+ Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+ Ut sit amet sem.
+ Mauris nec turpis ac sem mollis pretium.
+ Suspendisse neque massa, suscipit id, dictum in, porta at, quam.
+ Nunc suscipit, pede vel elementum pretium, nisl urna sodales velit, sit
+ amet auctor elit quam id tellus.
+ Nullam sollicitudin.
+ Donec hendrerit.
+ Aliquam ac nibh.
+ Vivamus mi.
+ Sed felis.
+ Proin pretium elit in neque.
+ Pellentesque at turpis.
+ Maecenas convallis.
+ Vestibulum id lectus.
+ 
+\end_layout
+
+\begin_layout Description
+\noindent
+
+\size small
+Keywords: klíčová slova (3 až 5) v angličtině
+\end_layout
+
+\begin_layout Standard
+
+\cleardoublepage
+
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+\InsetSpace ~
+
+\size small
+
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+addcontentsline{toc}{chapter}{
+\end_layout
+
+\end_inset
+
+Zadání práce
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Standard
+Zadání práce (formulář)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\newpage
+
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+\InsetSpace ~
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Standard
+Zadní strana formuláře :)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\newpage
+
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+thispagestyle{plain}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\size small
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+%
+\backslash
+setcounter{page}{3}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% nastavení číslování stránek
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+\InsetSpace \space{}
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\size small
+\begin_inset VSpace vfill
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% nastavuje dynamické umístění následujícího textu do spodní části stránky
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+\InsetSpace ~
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\size small
+Prohlašuji, že jsem svou bakalářskou práci napsal(a) samostatně a výhradně
+ s použitím citovaných pramenů.
+ Souhlasím se zapůjčováním práce a jejím zveřejňováním.
+\end_layout
+
+\begin_layout Standard
+
+\size small
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\size normal
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+noindent 
+\end_layout
+
+\end_inset
+
+
+\size small
+ V Praze dne 
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+today
+\backslash
+hspace{
+\backslash
+fill}
+\end_layout
+
+\end_inset
+
+Jméno Příjmení + podpis
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% doplňte patřičné datum, jméno a příjmení
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\size small
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%%%   Výtisk pak na tomto míste nezapomeňte PODEPSAT!
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%%%                                         *********
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\cleardoublepage
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\size small
+
+\begin_inset LatexCommand tableofcontents
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% vkládá automaticky generovaný obsah dokumentu
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\cleardoublepage
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Standard
+Vlastní text je vložen Vložit -> Soubor -> Dokument potomka.
+ Kapitoly je tak možné editovat každou zvlášť, což je výhodné u rozsáhlejších
+ prací.
+ Jinou možností je psát text přímo sem.
+\end_layout
+
+\end_inset
+
+
+\begin_inset Include \include{uvod.lyx}
+preview false
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Include \include{sablona.lyx}
+preview false
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Include \include{uvod_LyX.lyx}
+preview false
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Include \include{zaver.lyx}
+preview false
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset LatexCommand bibitem
+key "Thesis-templates"
+
+\end_inset
+
+
+\emph on
+LyX and LaTeX Thesis Themplates
+\emph default
+ [online].
+ [cit.
+ 2008-09-28].
+ Dostupný z WWW: 
+\begin_inset LatexCommand url
+target "http://www.thesis-template.com/"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset LatexCommand bibitem
+key "Diplomka-v-LaTeXu"
+
+\end_inset
+
+Pele,
+\emph on
+ Diplomka v LaTeXu
+\emph default
+ [online].
+ [cit.
+ 2008-09-28].
+ Dostupný z WWW: 
+\begin_inset LatexCommand htmlurl
+target "pele.gzk.cz/node/37"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset LatexCommand bibitem
+key "Jirkovy-stranky"
+
+\end_inset
+
+Roubal, Jiří
+\emph on
+.
+ Jirkovy stránky
+\emph default
+\InsetSpace ~
+[online].
+ [cit.
+ 2008-09-28].
+ Dostupný z WWW: 
+\begin_inset LatexCommand htmlurl
+target "dce.felk.cvut.cz/roubal/"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset LatexCommand bibitem
+key "Lyx-cesky"
+
+\end_inset
+
+Vydra, Vítězslav.
+
+\emph on
+ Počeštění LyXu
+\emph default
+\InsetSpace ~
+[online].
+ 2008 [cit.
+ 2008-09-28].
+ Dostupný z WWW: 
+\begin_inset LatexCommand htmlurl
+target "people.fsv.cvut.cz/~vydra/lyxcesky.htm"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset LatexCommand bibitem
+key "Tex-Gyre"
+
+\end_inset
+
+
+\emph on
+Písmo 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+TeX
+\end_layout
+
+\end_inset
+
+-Gyre
+\emph default
+\InsetSpace ~
+[online].
+ [cit.
+ 2008-09-28].
+ Dostupný z WWW: 
+\begin_inset LatexCommand htmlurl
+target "www.gust.org.pl/projects/e-foundry/tex-gyre"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset LatexCommand bibitem
+key "NeuesKapitel"
+
+\end_inset
+
+
+\emph on
+Neues Kapitel-Layout
+\emph default
+\InsetSpace ~
+[online].
+ [cit.
+ 2008-09-28].
+ Dostupný z WWW: 
+\begin_inset LatexCommand htmlurl
+target "www.thesis-template.de/archives/5#more-5"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset LatexCommand bibitem
+key "Vavreckova"
+
+\end_inset
+
+Vavrečková, Šárka.
+ 
+\emph on
+Úprava dokumentů
+\emph default
+\InsetSpace ~
+[online].
+ [cit.
+ 2008-09-28].
+ Dostupný z WWW:
+\begin_inset LatexCommand htmlurl
+target "axpsu.fpf.slu.cz/~vav10ui/obsahy/dipl/typografie.pdf"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset LatexCommand bibitem
+key "diplPraceSLU"
+
+\end_inset
+
+
+\emph on
+Zdroje informací pro diplomové práce, SLU
+\emph default
+\InsetSpace ~
+[online].
+ [cit.
+ 2008-09-28].
+ Dostupný z WWW: 
+\begin_inset LatexCommand htmlurl
+target "axpsu.fpf.slu.cz/~vav10ui/obsahy/dipl/typodipl.html"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset LatexCommand bibitem
+key "V-cem"
+
+\end_inset
+
+
+\emph on
+V čem napsat diplomovou práci
+\emph default
+\InsetSpace ~
+[online].
+ [cit.
+ 2008-09-28].
+ Dostupný z WWW: 
+\begin_inset LatexCommand htmlurl
+target "www.student.cvut.cz/cwut/index.php/Diplomová_práce#V_.C4.8Dem_napsat_diplomovou_pr.C3.A1ci"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset LatexCommand bibitem
+key "Menousek"
+
+\end_inset
+
+Menoušek, Jiří.
+ 
+\emph on
+Jak (ne)napsat diplomovou a dizertační práci
+\emph default
+\InsetSpace ~
+[online].
+ [cit.
+ 2008-09-28].
+ Dostupný z WWW: 
+\begin_inset LatexCommand htmlurl
+target "www.csmo.cz/other/dizert.php"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset LatexCommand bibitem
+key "Polach"
+
+\end_inset
+
+Polách, Eduard.
+ 
+\emph on
+Pravidla sazby diplomových prací
+\emph default
+\InsetSpace ~
+[online].
+ [cit.
+ 2008-09-28].
+ Dostupný z WWW: 
+\begin_inset LatexCommand htmlurl
+target "home.pf.jcu.cz/~edpo/pravidla/pravidla.html"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset LatexCommand bibitem
+key "Citace"
+
+\end_inset
+
+Farkašová, Blanka, Krčál, Martin.
+ 
+\emph on
+Projekt bibliografické citace
+\emph default
+\InsetSpace ~
+[online].
+ [cit.
+ 2008-09-28].
+ Dostupný z WWW: 
+\begin_inset LatexCommand url
+target "www.citace.com"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\InsetSpace ~
+
+\newline
+Tento seznam literatury byl vytvořen přímo v Lyxu pomocí stylu 
+\begin_inset Quotes gld
+\end_inset
+
+Bibliografie
+\begin_inset Quotes grd
+\end_inset
+
+ a generátoru citací\InsetSpace ~
+
+\begin_inset LatexCommand cite
+key "Citace"
+
+\end_inset
+
+.
+ Pořadí citací je takové, jak je sami napíšeme.
+\end_layout
+
+\begin_layout Standard
+\begin_inset LatexCommand bibtex
+options "csplainnat"
+bibfiles "bakalarka"
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Standard
+Pokud použijete 
+\emph on
+styl
+\emph default
+ 
+\begin_inset Quotes gld
+\end_inset
+
+Bibliografie
+\begin_inset Quotes grd
+\end_inset
+
+, tak bibliografii generovanou BibTeXem smažte (a naopak)!!!!!
+\end_layout
+
+\end_inset
+
+\InsetSpace ~
+
+\newline
+\InsetSpace ~
+
+\newline
+Tento seznam literatury byl vytvořen pomocí 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+BibTeX 
+\end_layout
+
+\end_inset
+
+u s použitím stylu 
+\family typewriter
+csplainnat
+\family default
+.
+ Citace jsou automaticky seřazeny podle abecedy.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+addcontentsline{toc}{chapter}{
+\end_layout
+
+\end_inset
+
+Literatura
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Standard
+Tento příkaz přidá Literaturu do obsahu
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\cleardoublepage
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Include \include{prilohy.lyx}
+preview false
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

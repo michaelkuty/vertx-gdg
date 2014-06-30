@@ -1,0 +1,81 @@
+% This file was created with JabRef 2.3.1.
+% Encoding: UTF8
+
+@ARTICLE{Julakova,
+  author = {Eva Jul{\'{a}}kov{\'{a}}},
+  title = {Rovnice, jednotky a veličiny - jak s nimi?},
+  journal = {Chem. Listy},
+  year = {2005},
+  volume = {99},
+  pages = {250--257},
+  url = {homen.vsb.cz/~wih15/Publikace/RovniceSymboly.doc}
+}
+
+@ONLINE{graficky_manual_CVUT,
+  url = {www.cvut.cz/pracoviste/odbor-vnejsich-vztahu/dokumenty/manual_cvut_9_1.pdf},
+  author = {Reklamní~a~umělecká~agentura~Klubko~55},
+  year = {2004},
+  title = {Grafický manuál identity Českého vysokého učení technického v Praze}
+}
+
+@BOOK{Lamport,
+  title = {Latex: a document preparation system},
+  publisher = {Addison-Wesley Longman Publishing Co., Inc.},
+  year = {1986},
+  author = {Leslie Lamport},
+  address = {Boston, MA, USA},
+  isbn = {0-201-15790-X}
+}
+
+@ONLINE{csplainnat,
+  url = {kraken.pedf.cuni.cz/texing/},
+  cited = {2.\,6.\,2008},
+  author = {David Mudr{\'{a}}k},
+  title = {A modification of BibTeX style `plainnat.bst' for Czech references
+	style according to ČSN ISO 690 (1996).}
+}
+
+@MANUAL{BibTeXing,
+  title = {{\BibTeX}ing},
+  author = {Oren Patashnik},
+  year = {1988},
+  note = {\href{run:C:/Program Files/MiKTeX
+	
+	2.7/doc/bibtex/btxdoc.dvi}{\tt Dostupné~z: C:\textbackslash{}Program~Files\textbackslash{}MiKTeX
+	2.7\textbackslash{}doc\textbackslash{}bibtex\textbackslash{}btxdoc.dvi
+	
+	}}
+}
+
+@ONLINE{LyxVisualTour,
+  url = {www.lyx.org/VisualTour},
+  cited = {2.\,6.\,2008},
+  title = {LyX Visual Tour}
+}
+
+@ONLINE{BibTeXWiki,
+  url = {cs.wikipedia.org/wiki/BibTeX},
+  cited = {28.\,9.\,2008},
+  publisher = {Wikipedia},
+  year = {2008},
+  title = {\BibTeX}
+}
+
+@ONLINE{Jabref,
+  url = {jabref.sourceforge.net},
+  cited = {2.\,6.\,2008},
+  year = {2007},
+  title = {JabRef Reference Manager},
+  month = {12}
+}
+
+@comment{jabref-meta: selector_publisher:}
+
+@comment{jabref-meta: selector_author:}
+
+@comment{jabref-meta: selector_journal:}
+
+@comment{jabref-meta: selector_keywords:}
+
+@comment{jabref-entrytype: Online: req[url;cited] opt[author;publisher;year;title]}
+

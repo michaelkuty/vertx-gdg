@@ -1,0 +1,267 @@
+#LyX 1.5.5 created this file. For more info see http://www.lyx.org/
+\lyxformat 276
+\begin_document
+\begin_header
+\textclass scrreprt
+\begin_preamble
+%<-------------------------------společná nastavení------------------------------>
+\usepackage[czech]{babel}%počeštění názvů (Obsah, Kapitola, Literatura atp.)
+\usepackage[]{hyperref} %odkazy v  pdf jsou klikací s barevnými rámečky
+\hypersetup{   % Nastaven\'{\i} pol\'{\i} PDF dokumentu 
+pdftitle={Sablona pro psani zaverecnych praci v LyXu},%   
+pdfauthor={Vitezslav Vydra},%  
+pdfsubject={},%   
+pdfkeywords={\v{s}ablona,LaTeX,LyX}%                             
+}
+\usepackage{multicol}
+
+
+
+
+%<-----------------------------volání stylů----------------------------------------->
+% (znak % je označení komentáře: co je za ním, není aktivní)
+%<------------------------------------písmo----------------------------------------->
+%\usepackage{packages/bc-latinmodern}
+%\usepackage{packages/bc-times}
+%\usepackage{packages/bc-palatino}
+\usepackage{packages/bc-iwona}
+
+%<------------------------------záhlaví stránek------------------------------------>
+%\usepackage{packages/bc-headings}
+\usepackage{packages/bc-fancyhdr}
+
+%<------------------------------hlavičky kapitol------------------------------------>
+%\usepackage{packages/bc-neueskapitel}
+%\usepackage{packages/bc-fancychap}
+\end_preamble
+\options openright,cleardoubleempty,BCOR10mm
+\language czech
+\inputencoding utf8
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\paperfontsize default
+\spacing single
+\papersize a4paper
+\use_geometry false
+\use_amsmath 1
+\use_esint 0
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\defskip medskip
+\quotes_language german
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+pagenumbering{arabic}%start arabic pagination from 1
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Chapter
+Úvod
+\end_layout
+
+\begin_layout Standard
+Často slýcháme tvrzení, že u závěrečné práce nezáleží tolik na grafické
+ úpravě, jako na obsahu
+\begin_inset Foot
+status open
+
+\begin_layout Standard
+Je zvláštní, že nic takového se neříká o gramatické správnosti textu --
+ sebemenší gramatickou chybičku Vám každý člen zkušební komise rád škodolibě
+ vyčte (viz poznámka 
+\begin_inset LatexCommand vref
+reference "fn:Pocit"
+
+\end_inset
+
+)! 
+\end_layout
+
+\end_inset
+
+.
+ To je tvrzení bezesporu pravdivé.
+ Avšak neříká, že na grafické úpravě nezáleží vůbec.
+ Ani že čím hůře práce vypadá, tím je obsahově lepší.
+ Většinou totiž platí spíše opak.
+ 
+\end_layout
+
+\begin_layout Standard
+Je asi jedno, jak vypadá podprůměrná práce (stejně ji nikdo nečte), ale
+ myslete na to, že 
+\emph on
+Vaši skvělou
+\emph default
+ 
+\emph on
+práci
+\emph default
+ bude možná číst spousta lidí!
+\end_layout
+
+\begin_layout Standard
+Samozřejmě nemělo by smysl vytvářet typograficky dokonalý dokument, pokud
+ by tvorba takového dokumentu spotřebovala neúměrně mnoho času, který by
+ pak chyběl pro vlastní práci.
+ O kvalitě výstupu ale ve značné míře rozhoduje použitá 
+\emph on
+šablona
+\emph default
+.
+ A\InsetSpace ~
+psát do špatné šablony je stejně pracné, jako do dobré...
+\end_layout
+
+\begin_layout Standard
+Předkládaná šablona je pokusem takovou dobrou šablonu studentům poskytnout.
+ Je určena pro WYSIWYM
+\begin_inset Foot
+status open
+
+\begin_layout Standard
+What You See Is What You Mean.
+\end_layout
+
+\end_inset
+
+ textový editor 
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+href{http://www.lyx.org/}{
+\end_layout
+
+\end_inset
+
+LyX
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Marginal
+status open
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+raggedright{}
+\end_layout
+
+\end_inset
+
+LyX
+\end_layout
+
+\end_inset
+
+, což je 
+\emph on
+frontend
+\emph default
+ typografického sázecího systému LaTeX.
+ Samotný LaTeX je poněkud náročný, a rozhodně bych ho nedoporučil použít
+ začátečníkům pro psaní bakalářky
+\begin_inset Foot
+status open
+
+\begin_layout Standard
+Seznámit se podrobněji s LateXem lze například v knize autora systému\InsetSpace ~
+
+\begin_inset LatexCommand cite
+key "Lamport"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ S pomocí LyXu to ale jde -- LyX není náročnější, než jiné editory, spíše
+ naopak.
+ Vytváření 
+\emph on
+dlouhých,
+\emph default
+ 
+\emph on
+strukturovaných
+\emph default
+ dokumentů je v LyXu snazší.
+ Pokud tedy vaše práce bude mít několik kapitol, rozdělených do sekcí a
+ podsekcí, bude mít obsah a číslované obrázky nebo dokonce číslované rovnice,
+ bude mít seznam literatury a uvnitř práce bude tato literatura citována
+ -- pak je LyX správná volba! Naučit se základy ovládání zabere půl dne
+\begin_inset Foot
+status open
+
+\begin_layout Standard
+LyX je přeci jen trochu 
+\emph on
+jiný
+\emph default
+ než obvyklé wordprocessory!
+\end_layout
+
+\end_inset
+
+, ale tento čas se během práce několikanásobně vrátí.
+\end_layout
+
+\begin_layout Standard
+Za zmínku ještě stojí, že LyX i LaTeX jsou úplně zadarmo (GNU General Public
+ License)!
+\end_layout
+
+\end_body
+\end_document

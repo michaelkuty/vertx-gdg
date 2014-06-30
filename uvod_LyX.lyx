@@ -1,0 +1,1680 @@
+#LyX 1.5.5 created this file. For more info see http://www.lyx.org/
+\lyxformat 276
+\begin_document
+\begin_header
+\textclass scrreprt
+\begin_preamble
+%<-------------------------------společná nastavení------------------------------>
+\usepackage[czech]{babel}%počeštění názvů (Obsah, Kapitola, Literatura atp.)
+\usepackage[]{hyperref} %odkazy v  pdf jsou klikací s barevnými rámečky
+\newcommand{\BibTeX}{{\sc Bib}\TeX}%BibTeX logo
+\hypersetup{   % Nastaven\'{\i} pol\'{\i} PDF dokumentu 
+pdftitle={Sablona pro psani zaverecnych praci v LyXu},%   
+pdfauthor={Vitezslav Vydra},%  
+pdfsubject={},%   
+pdfkeywords={\v{s}ablona,LaTeX,LyX}%                             
+}
+\usepackage{multicol}
+
+
+
+
+%<-----------------------------volání stylů----------------------------------------->
+% (znak % je označení komentáře: co je za ním, není aktivní)
+%<------------------------------------písmo----------------------------------------->
+\usepackage{packages/bc-latinmodern}
+%\usepackage{packages/bc-times}
+%\usepackage{packages/bc-palatino}
+%\usepackage{packages/bc-iwona}
+
+%<------------------------------záhlaví stránek------------------------------------>
+%\usepackage{packages/bc-headings}
+\usepackage{packages/bc-fancyhdr}
+
+%<------------------------------hlavičky kapitol------------------------------------>
+%\usepackage{packages/bc-neueskapitel}
+%\usepackage{packages/bc-fancychap}
+\end_preamble
+\options czech,openright,cleardoubleempty,BCOR10mm,DIV10
+\language czech
+\inputencoding utf8
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\paperfontsize default
+\spacing single
+\papersize a4paper
+\use_geometry false
+\use_amsmath 1
+\use_esint 0
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\defskip medskip
+\quotes_language german
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+\begin_inset OptArg
+status open
+
+\begin_layout Standard
+Úvod do Lyxu
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Standard
+Je-li název hodně dlouhý, vložte krátký titulek Vložit -> Krátký titulek,
+ ten se pak použije v obsahu a v hlavičkách
+\end_layout
+
+\end_inset
+
+Šíleně stručný úvod do LyXu
+\begin_inset Note Note
+status open
+
+\begin_layout Standard
+Název kapitoly se stane názvem kapitoly poté co v něm umístíte kurzor a
+ v roletce vlevo nahoře v hlavním menu LyXu vyberete 
+\begin_inset Quotes gld
+\end_inset
+
+Kapitola
+\begin_inset Quotes grd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Instalace
+\end_layout
+
+\begin_layout Standard
+Instalace LyXu je dnes už poměrně jednoduchou záležitostí i na Windows.
+ Na počítači, který není připojen k internetu, volíme instalátor 
+\begin_inset Quotes gld
+\end_inset
+
+full
+\begin_inset Quotes grd
+\end_inset
+
+.
+ Během instalace MikTeXu jsme dotázáni, zda si přejeme, aby chybějící balíčky
+ byly doinstalovány 
+\emph on
+on-the-fly
+\emph default
+, doporučuji zaškrtnout 
+\emph on
+ano
+\emph default
+.
+ Potíže bývají pravidelně pouze s instalací kontroly pravopisu
+\begin_inset Foot
+status collapsed
+
+\begin_layout Standard
+LyX 1.5 jsem instaloval na třech počítačích, jen na jednom se mi podařilo
+ kontrolu pravopisu zprovoznit.
+ Nevím proč, možná proto, že šlo o anglické Windows.
+ Kontrolu pravopisu lze provádět i externě: vyexportovat text jako 
+\family typewriter
+\emph on
+Plain text
+\family default
+\emph default
+ a výsledný soubor pak prohlédnout v PSPadu nebo ve Wordu.
+ Opravovat se ovšem musí v LyXu!
+\end_layout
+
+\end_inset
+
+.
+ Po skončení instalace v LyXu otevřeme šablonu 
+\family typewriter
+bakalarka.lyx
+\family default
+ a klikneme na ikonku 
+\begin_inset Graphics
+	filename obrazky/pdf.png
+
+\end_inset
+
+.
+ Poprvé vytváření souboru chvíli trvá, protože se doinstalovávají chybějící
+ balíčky, hlavně písma.
+\end_layout
+
+\begin_layout Subsection
+České dělení slov
+\end_layout
+
+\begin_layout Standard
+Po otestování správné funkce LyXu můžeme v MikTeXu nastavit české dělení
+ slov: 
+\family typewriter
+Start 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ Všechny programy 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ Miktex2.7 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ Settings
+\family default
+ a na kartě 
+\family typewriter
+Languages
+\family default
+ zaškrtneme položku
+\family typewriter
+ Czech
+\family default
+.
+ 
+\end_layout
+
+\begin_layout Subsection
+Odstranění předložek na konci řádku
+\end_layout
+
+\begin_layout Standard
+Aby LyX nenechával předložky v, s atp.
+ na konci řádku je třeba mezi předložku a slovo vložit nezlomitelnou mezeru.
+ To je možné dělat ručně (Ctrl + Mezerník) nebo automaticky pomocí slavného
+ programu 
+\noun on
+dr.
+ Olšáka
+\family typewriter
+\noun default
+ vlna32.exe
+\family default
+
+\begin_inset Foot
+status open
+
+\begin_layout Standard
+Nezlomitelná mezera se v LaTeXu označuje symbolem ~, proto  
+\emph on
+vlna
+\emph default
+.
+\end_layout
+
+\end_inset
+
+.
+ Chceme-li používat program 
+\family typewriter
+vlna32.exe
+\family default
+ zkopírujeme soubory 
+\family typewriter
+vlna32.exe
+\family default
+ a 
+\family typewriter
+vlnapdf.bat
+\family default
+ do složky 
+\family typewriter
+C:
+\backslash
+Program Files
+\backslash
+Lyx15
+\backslash
+bin, v
+\family default
+ LyXu zvolíme 
+\family typewriter
+Nástroje 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ Nastavení 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ Konvertory
+\family default
+.
+ V seznamu vybereme 
+\family typewriter
+
+\begin_inset Quotes gld
+\end_inset
+
+LaTeX (pdflatex) -> PDF (pdflatex)
+\begin_inset Quotes grd
+\end_inset
+
+
+\family default
+ a do 
+\family typewriter
+Konvertor
+\family default
+ místo 
+\family typewriter
+
+\begin_inset Quotes gld
+\end_inset
+
+pdflatex $$i
+\begin_inset Quotes grd
+\end_inset
+
+
+\family default
+ napíšeme 
+\family typewriter
+
+\begin_inset Quotes gld
+\end_inset
+
+vlnapdf.bat $$i
+\begin_inset Quotes grd
+\end_inset
+
+
+\family default
+ a stiskneme 
+\family typewriter
+
+\begin_inset Box ovalbox
+position "t"
+hor_pos "c"
+has_inner_box 0
+inner_pos "t"
+use_parbox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status collapsed
+
+\begin_layout Standard
+
+\family typewriter
+Změnit
+\end_layout
+
+\end_inset
+
+
+\family default
+ a 
+\family typewriter
+
+\begin_inset Box ovalbox
+position "t"
+hor_pos "c"
+has_inner_box 0
+inner_pos "t"
+use_parbox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status collapsed
+
+\begin_layout Standard
+
+\family typewriter
+Uložit
+\end_layout
+
+\end_inset
+
+
+\family default
+.
+ 
+\end_layout
+
+\begin_layout Section
+Práce s LyXem
+\begin_inset Foot
+status open
+
+\begin_layout Standard
+Tento úvod si neklade za cíl nahradit stávající návody a nápovědy pro LyX:
+ najdete je jednak v\InsetSpace ~
+samotném LyXu, a také na webových stránkách projektu\InsetSpace ~
+
+\begin_inset LatexCommand cite
+key "LyXVisualTour"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Framed
+status open
+
+\begin_layout Standard
+\noindent
+Návody jak co udělat se objeví ve formě poznámek až po otevření zdrojového
+ souboru tohoto dokumentu (
+\family typewriter
+uvod_LyX.lyx
+\family default
+) v Lyxu!
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Styly, aneb zapomeňte na formátování
+\end_layout
+
+\begin_layout Standard
+První zlozvyk, který se při práci s LyXem musíte odnaučit, je zvyk individuálně
+ formátovat nadpisy a odstavce a seznamy, zkrátka vše co by se mělo formátovat
+ na globální úrovni, tj.
+ na úrovni dokumentu.
+ V LyXu opravdu jen výjimečně určujeme, že 
+\emph on
+tento text
+\emph default
+ má být psán tím a tím písmem, určité velikosti a řezu.
+ Místo toho prostě určíme: toto je nadpis té a té úrovně, toto je číslovaný
+ seznam a toto je základní (standardní) text.
+ Jak se to dělá je základní a nejdůležitější znalost v LyXu.
+ Do textu umístíme kurzor a v roletce (v menu vlevo nahoře) vybereme příslušný
+ 
+\emph on
+styl
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+Místo roletky (ta je docela dlouhá a málo přehledná) je výhodnější používat
+ klávesové zkratky.
+ Příkazem Alt+p se aktivuje možnost definovat styl odstavce, ve kterém je
+ kurzor.
+ Dělá se to stiskem další klávesy.
+ Seznam těch nejdůležitějších je hned na začátku tabulky\InsetSpace ~
+
+\begin_inset LatexCommand vpageref
+reference "tab:zkratky"
+
+\end_inset
+
+ přílohy.
+ To, jak má který styl vypadat, je definováno na úrovni třídy dokumentu
+ a je lepší tyto definice neměnit, pokud nevíte přesně jak a proč.
+ V této šabloně je doporučeno měnit pouze používaná písma a hlavičky kapitol.
+ Jak, to je vysvětleno v sekci\InsetSpace ~
+
+\begin_inset LatexCommand ref
+reference "sec:Změna-vzhledu"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Vkládání číslovaných objektů
+\begin_inset Note Note
+status open
+
+\begin_layout Standard
+Podkapitola = 
+\begin_inset Quotes gld
+\end_inset
+
+Sekce
+\begin_inset Quotes grd
+\end_inset
+
+ v roletce vlevo nahoře
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Vkládání obrázků a tabulek
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Standard
+Vložení obrázku či tabulky: Vložit -> Plovoucí objekt -> Obrázek (tabulka).
+ Do rámečku s kurzorem vepsat popis obrázku, pak kliknout před popis 
+\begin_inset Quotes gld
+\end_inset
+
+Obrázek č.
+ x
+\begin_inset Quotes grd
+\end_inset
+
+ a Vložit -> Obrázek..., vybrat soubor s obrázkem (Procházet) a upravit rozměry
+ obrázku.
+\end_layout
+
+\begin_layout Standard
+Vložení obrázku či tabulky obtékané textem: Vložit -> Plovoucí objekt ->
+ Obtékání, pak Vložit -> Obrázek (nebo tabulku) a upravit rozměry (levé
+ ucho myši) a parametry obtékání
+\end_layout
+
+\end_inset
+
+
+\begin_inset Wrap figure
+width "50col%"
+status open
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename obrazky/lev.png
+	lyxscale 40
+	width 30text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+Lev obtékaný textem.
+ Obtékaným obrázkům se ale raději vyhněte.
+ 
+\begin_inset LatexCommand label
+name "fig:Lev"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ Obrázek lze vložit téměř v jakémkoliv formátu.
+ Vektorové obrázky (grafy a diagramy z Inkscapu, Wordu, Excelu atp.), převeďte
+ před použitím na pdf.
+ Jen tak dostanete perfektní výsledek a malou velikost výstupního souboru.
+ Tak je tomu i\InsetSpace ~
+v\InsetSpace ~
+případě obrázku
+\begin_inset Note Note
+status open
+
+\begin_layout Standard
+Před křížový odkaz vkládáme nezlomitelnou mezeru (Ctrl+mezerník)
+\end_layout
+
+\end_inset
+
+\InsetSpace ~
+
+\begin_inset LatexCommand vref
+reference "fig:LevII"
+
+\end_inset
+
+.
+ Obrázek má jen 28 kB, přesto jej můžete zvětšit třeba na A0 -- všimněte
+ si přitom toho malého textu pod levým dolním okrajem, písmo je stále krásné
+ i při zvětšování obrázku.
+ Pokud byste použili bitmapový obrázek (bmp, jpg, png), nebyl by text patrně
+ vůbec čitelný! 
+\end_layout
+
+\begin_layout Subsubsection
+Citování literatury
+\end_layout
+
+\begin_layout Standard
+Důležitou součástí práce je seznam použité literatury.
+ Před jeho vytvořením doporučuju prostudovat Projekt Bibliografické citace\InsetSpace ~
+
+\begin_inset LatexCommand cite
+key "Citace"
+
+\end_inset
+
+.
+ Seznam použité literatury lze vytvořit dvěma způsoby:
+\end_layout
+
+\begin_layout Enumerate
+Pomocí stylu Bibliografie (příklad je na konci souboru 
+\family typewriter
+bakalarka.lyx
+\family default
+).
+ Citace musíme vytvořit a formátovat sami, při respektování zvyklostí respektive
+ norem, které vytváření citací upravují.
+ Může nám pomoci generátor citací\InsetSpace ~
+
+\begin_inset LatexCommand cite
+after "karta generátor"
+key "Citace"
+
+\end_inset
+
+.
+ Tento způsob vytváření seznamu literatury je pracnější, ale pro začátečníka
+ snadněji pochopitelný a proto patrně vhodnější.
+\end_layout
+
+\begin_layout Enumerate
+Pomocí 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+BibTeX 
+\end_layout
+
+\end_inset
+
+u, který je součástí LaTeXu a je dobře implementován i do LyXu.
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+BibTeX 
+\end_layout
+
+\end_inset
+
+ se sám postará o dokonalé vytvoření citací z databáze citací (v našem případě
+\noun on
+ 
+\family typewriter
+\noun default
+bakalarka.bib
+\family default
+) podle námi zvoleného stylu.
+ Velkou výhodou tohoto způsobu je, že citace jsou vytvořeny (a formátovány)
+ naprosto jednotně, podle ČSN ISO 690 (pokud použijeme styl 
+\family typewriter
+csplainnat
+\family default
+\InsetSpace ~
+
+\begin_inset LatexCommand cite
+key "csplainnat"
+
+\end_inset
+
+), respektive podle mezinárodních zvyklostí (pokud použijeme styl 
+\family typewriter
+plainnat
+\family default
+ nebo u
+\family typewriter
+nsrtnat).
+
+\family default
+ Citace jsou automaticky seřazeny, buď podle abecedy nebo podle pořádí citování
+ v práci.
+ Databázi citací 
+\family typewriter
+bakalarka.bib 
+\family default
+lze vytvořit a editovat v jakémkoliv textovém editoru, který umí kódování
+ češtiny utf8, nebo pomocí specializovaného programu, výborný je například
+ JabRef\InsetSpace ~
+
+\begin_inset LatexCommand cite
+key "Jabref"
+
+\end_inset
+
+.
+ Zde je příklad záznamu citace knížky (
+\family typewriter
+@BOOK
+\family default
+) Leslie Lamporta\InsetSpace ~
+
+\begin_inset LatexCommand cite
+key "Lamport"
+
+\end_inset
+
+ v souboru 
+\family typewriter
+bakalarka.bib
+\family default
+ (komentáře jsou viditelné pouze při otevření souboru uvod_Lyx.lyx v LyXu):
+\end_layout
+
+\begin_layout LyX-Code
+@BOOK{Lamport, 
+\family typewriter
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Standard
+
+\family typewriter
+označení typu citace (book) a značka (bibtexkey), která se používá pro ocitování
+ knížky v textu
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+title = {Latex: a document preparation system}, 
+\family typewriter
+
+\begin_inset Note Note
+status open
+
+\begin_layout Standard
+
+\family typewriter
+Titul knížky
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+publisher = {Addison-Wesley Longman Publishing Co., Inc.}, 
+\end_layout
+
+\begin_layout LyX-Code
+year = {1986}, 
+\family typewriter
+
+\begin_inset Note Note
+status open
+
+\begin_layout Standard
+
+\family typewriter
+rok publikování
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+author = {Leslie Lamport}, 
+\family typewriter
+
+\begin_inset Note Note
+status open
+
+\begin_layout Standard
+
+\family typewriter
+autor knihy
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+address = {Boston, MA, USA}, 
+\end_layout
+
+\begin_layout LyX-Code
+isbn = {0-201-15790-X} }
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout Standard
+Za zmínku stojí, že bibliografické záznamy ve formátu 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+BibTeX 
+\end_layout
+
+\end_inset
+
+ lze vygenerovat v řadě online databázích (například ISI Web of Knowledge
+ -- pro studenty ČVUT přístupný přes bránu 
+\begin_inset LatexCommand url
+target "https://dialog.cvut.cz/"
+
+\end_inset
+
+ -- se stejným uživatelským jménem a heslem jako do KOSu).
+ Výše uvedený záznam byl vygenerován vyhledávačem Google Scholar 
+\begin_inset LatexCommand url
+target "http://scholar.google.cz/"
+
+\end_inset
+
+, který je přístupný všem.
+ Jedinou nevýhodou 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+BibTeX 
+\end_layout
+
+\end_inset
+
+u je, že neumí dobře česky.
+ Ve jménech autorů je místo háčků a čárek nutné použít LaTeXový zápis diakritiky
+ ({
+\backslash
+'{a}} pro á,{
+\backslash
+v{c}} pro č a {
+\backslash
+r{u}} pro ů atp.).
+ Také je třeba dát pozor na uzavření všech složených závorek v záznamech
+ (použijete-li JabRef, tak tento problém odpadá).
+ Kompletní návod k 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+BibTeX 
+\end_layout
+
+\end_inset
+
+u najdete v instalaci MikTeXu\InsetSpace ~
+
+\begin_inset LatexCommand cite
+key "BibTeXing"
+
+\end_inset
+
+, na internetu je ovšem mnoho jednoduších návodů pro začátečníky, například\InsetSpace ~
+
+\begin_inset LatexCommand cite
+key "BibTeXWiki"
+
+\end_inset
+
+.
+\newline
+
+\newline
+Na konci souboru
+\family typewriter
+ bakalarka.lyx
+\family default
+ jsou použity oba uvedené způsoby, nelekněte se proto, že jsou v této práci
+ 
+\emph on
+dva
+\emph default
+ seznamy literatury.
+ Vy se musíte rozhodnout jen pro jeden způsob a druhý v šabloně smazat.
+ Máme-li vytvořen seznam použité literatury, odkazy na citace vkládáme do
+ textu pomocí menu Vložit 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ Citace\SpecialChar \ldots{}
+
+\end_layout
+
+\begin_layout Subsubsection
+Vkládání poznámek, plovoucích obrázků a odkazů na obrázky
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename obrazky/wedgeSplit.pdf
+	lyxscale 50
+	height 40theight%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+Obrázek, tentokrát plovoucí, neobtékaný.
+ Čísla a titulky obrázků se uvádí pod obrázky.
+ 
+\begin_inset LatexCommand label
+name "fig:LevII"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Standard
+Plovoucí neobtékaný obrázek: Vložit -> plovoucí objekt -> obrázek
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Marginal
+status open
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+raggedright{}
+\end_layout
+
+\end_inset
+
+Poznámka na okraji.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Jak se vkládá obrázek obtékaný textem už umíme (obr.
+\begin_inset Note Note
+status open
+
+\begin_layout Standard
+Příklad odkazu na obrázek (rovnici, tabulku)
+\end_layout
+
+\end_inset
+
+\InsetSpace ~
+
+\begin_inset LatexCommand vref
+reference "fig:Lev"
+
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Standard
+Toto je příklad křížového odkazu na obrázek (tabulku, rovnici, kapitolu...).
+ Odkaz může ale nemusí obsahovat informaci, na které stránce objekt je.
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Standard
+Vložit -> Poznámka pod čarou
+\end_layout
+
+\end_inset
+
+.), obrázek\InsetSpace ~
+
+\begin_inset LatexCommand vpageref
+reference "fig:LevII"
+
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Standard
+Jiný příklad křížového odkazu na obrázek - tentokrát je uvedena pouze strana,
+ na které obrázek je.
+\end_layout
+
+\end_inset
+
+) je příkladem klasického neobtékaného plovoucího obrázku.
+ LaTeX plovoucí obrázky umisťuje přednostně na horní okraj stránky -- toto
+ nastavení lze změnit po kliknutí prsteníčkovým uchem na rámeček plovoucího
+ objektu (tedy vedle samotného obrázku) a umístit obrázek třeba na spodek
+ stránky nebo až na konec kapitoly.
+\end_layout
+
+\begin_layout Section
+\begin_inset OptArg
+status collapsed
+
+\begin_layout Standard
+Test Lyxu 
+\end_layout
+
+\end_inset
+
+Test LyXu se zaměřením na češtinu
+\end_layout
+
+\begin_layout Standard
+O tom, že český text musí být především gramaticky absolutně správně se
+ málokdo odváží pochybovat
+\begin_inset Foot
+status open
+
+\begin_layout Standard
+\begin_inset LatexCommand label
+name "fn:Pocit"
+
+\end_inset
+
+I když se nemohu zbavit naléhavého pocitu, že ta složitá a nelogická gramatická
+ pravidla se spoustou výjimek vymyslel někdo jen proto, aby bylo na základní
+ škole co zkoušet\SpecialChar \ldots{}
+ Kdyby byla česká gramatika jednodušší, mohly by se ty
+ stovky vyučovacích hodin věnovat něčemu užitečnému.
+ Třeba fyzice, matematice, nebo vycházkám do přírody.
+\end_layout
+
+\end_inset
+
+, ale stejnou (možná větší) pozornost si zaslouží i ostatní 
+\begin_inset Quotes gld
+\end_inset
+
+české
+\begin_inset Quotes grd
+\end_inset
+
+ prvky tištěného textu.
+ Mám na mysli kvalitu českého písma, dělení slov podle českých pravidel,
+ případně typicky česká pravidla sázení textu\InsetSpace ~
+
+\begin_inset LatexCommand cite
+key "Jirkovy-stranky,Menousek,Polach"
+
+\end_inset
+
+, na která jsou čeští čtenáři zvyklí.
+ Všechny tyto prvky totiž významným způsobem ovlivňují čitelnost textu.
+ Provedeme tedy malý test, zda je vše jak má být.
+\end_layout
+
+\begin_layout Subsection
+Test českého písma
+\end_layout
+
+\begin_layout Standard
+Na mizernou kvalitu českých písem jsme si díky počítačům už téměř všichni
+ zvykli, takže to chce příklad, aby bylo zřejmé, o co v testu jde.
+ V tabulce\InsetSpace ~
+
+\begin_inset LatexCommand ref
+reference "tab:Priklad-pisem"
+
+\end_inset
+
+ jsou špatná a dobrá písma
+\begin_inset Foot
+status open
+
+\begin_layout Standard
+Návod na zavedení českých fontů do 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+LyX 
+\end_layout
+
+\end_inset
+
+u napsal 
+\noun on
+Vydra
+\noun default
+\InsetSpace ~
+
+\begin_inset LatexCommand cite
+key "Lyx-cesky"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+ pěkně nad sebou.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+\noindent
+Příklad dobře a špatně počeštěných písem.
+ Na prvním řádku je vždy špatně počeštěné písmo, na druhém to lepší.
+ 
+\begin_inset LatexCommand label
+name "tab:Priklad-pisem"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="left" valignment="top" leftline="true" width="48text%">
+<column alignment="left" valignment="top" leftline="true" rightline="true" width="47text%">
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Times 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+ 
+\backslash
+usefont{T1}{ptm}{m}{n}{Příliš žluťoučký kůň pěl ďábelské ódy.} 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Standard
+
+ 
+\backslash
+usefont{T1}{qtm}{m}{n}{Příliš žluťoučký kůň pěl ďábelské ódy.} 
+\end_layout
+
+\begin_layout Standard
+
+
+\backslash
+normalfont
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Computer (Latin) Modern
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+ 
+\backslash
+usefont{T1}{ccmr}{m}{n}{Příliš žluťoučký kůň pěl ďábelské ódy.} 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Standard
+
+ 
+\backslash
+usefont{T1}{lmr}{m}{n}{Příliš žluťoučký kůň pěl ďábelské ódy.} 
+\end_layout
+
+\begin_layout Standard
+
+
+\backslash
+normalfont
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Palatino
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+ 
+\backslash
+usefont{T1}{ppl}{m}{n}{Příliš žluťoučký kůň pěl ďábelské ódy.} 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Standard
+
+ 
+\backslash
+usefont{T1}{qpl}{m}{n}{Příliš žluťoučký kůň pěl ďábelské ódy.} 
+\end_layout
+
+\begin_layout Standard
+
+
+\backslash
+normalfont
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Helvetika
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+ 
+\backslash
+usefont{T1}{phv}{m}{n}{Příliš žluťoučký kůň pěl ďábelské ódy.} 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Standard
+
+ 
+\backslash
+usefont{T1}{qhv}{m}{n}{Příliš žluťoučký kůň pěl ďábelské ódy.} 
+\end_layout
+
+\begin_layout Standard
+
+
+\backslash
+normalfont
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Subsubsection
+Test fontů použitých v tomto dokumentu
+\end_layout
+
+\begin_layout Standard
+Všímejte si, zda háčky a čárky jsou dobře umístěny a zda v\InsetSpace ~
+párech ďa, ťo
+ není příliš velká mezera mezi písmeny a také samozřejmě toho, zda daný
+ font existuje -- tedy například zda to, co je označeno jako kurzíva není
+ ve skutečnosti stojaté písmo atp.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Základní písmo -- obvykle patkové, používá se pro psaní textu
+\end_layout
+
+\begin_layout Description
+
+\family roman
+Stojaté: 
+\family default
+Příliš žluťoučký kůň pěl ďábelské ódy.
+\end_layout
+
+\begin_layout Description
+
+\family roman
+\emph on
+Kurzíva: 
+\family default
+Příliš žluťoučký kůň pěl ďábelské ódy.
+\end_layout
+
+\begin_layout Description
+
+\family roman
+Tučné: 
+\family default
+\series bold
+Příliš žluťoučký kůň pěl ďábelské ódy.
+\end_layout
+
+\begin_layout Description
+
+\family roman
+\shape smallcaps
+\noun on
+Kapitálky: 
+\family default
+Příliš žluťoučký kůň pěl ďábelské ódy.
+\end_layout
+
+\begin_layout Paragraph
+Vedlejší písmo -- obvykle bezpatkové, často se používá pro nadpisy
+\end_layout
+
+\begin_layout Description
+Stojaté: 
+\family sans
+Příliš žluťoučký kůň pěl ďábelské ódy.
+\end_layout
+
+\begin_layout Description
+
+\emph on
+Kurzíva: 
+\family sans
+Příliš žluťoučký kůň pěl ďábelské ódy.
+\end_layout
+
+\begin_layout Description
+Tučné: 
+\family sans
+\series bold
+Příliš žluťoučký kůň pěl ďábelské ódy.
+\end_layout
+
+\begin_layout Description
+
+\family sans
+\noun on
+Kapitálky: Příliš žluťoučký kůň pěl ďábelské ódy.
+\end_layout
+
+\begin_layout Paragraph
+Strojopis
+\end_layout
+
+\begin_layout Description
+
+\family typewriter
+Strojopis: Příliš žluťoučký kůň pěl ďábelské ódy.
+\end_layout
+
+\begin_layout Subsection
+Test českého dělení slov
+\end_layout
+
+\begin_layout Standard
+Dělení otestujeme na textu rozděleném do úzkých odstavců.
+ Doufám, že si ze školy pamatujete pravidla pro dělení :).
+ Pokud nejste spokojeni s výsledkem, postupujte dle návodu\InsetSpace ~
+
+\begin_inset LatexCommand cite
+key "Lyx-cesky"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+begin{multicols}{3} %
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Červená karkulka
+\end_layout
+
+\begin_layout Standard
+Příběh vypráví o dívce přezdívané Červená karkulka, podle karkulky (karkule
+ byla druh čepce), kterou stále nosí.
+ V některých verzích jde o kapuci nebo kápi.
+ Dívka jde lesem za svou babičkou, které nese něco k jídlu.
+ Vlk chce dívku sežrat, ale bojí se to udělat přímo v lese (v některých
+ verzích přihlížejí setkání dřevorubci).
+ Dá se proto s dívkou do řeči a ta mu naivně prozradí, kam má namířeno.
+ Navrhne jí tedy, aby nasbírala kytici květin, což udělá.
+ Mezitím vlk přiběhne k domu babičky, předstírá, že je Karkulka a vloudí
+ se dovnitř.
+ Babičku sežere, oblékne se do jejích šatů a čeká na dívku.
+ Když Karkulka přijde, sežere ji také.
+ Poté přichází dřevorubec, rozřízne vlkovi břicho a babičku s Karkulkou,
+ obě zcela v pořádku, zachrání.
+ Poté naplní vlkovo břicho těžkými kameny, čímž ho zabijí.
+ Podle jiných verzí příběhu vlk babičku nesežere, ale zavře ji do komory,
+ v některých je zase Karkulka zachráněna dřevorubcem ještě před snědením.
+ Příběh vytváří jasný kontrast mezi bezpečným světem vesnice a nebezpečným
+ temným lesem, což je pojetí v zásadě středověké, ačkoliv nejsou známé žádné
+ tak staré verze.
+ Zřejmý je také morální důraz – jak je důležité nesejít ze stezky.
+\end_layout
+
+\begin_layout Standard
+Motiv vlka, který svou kořist spolkne, ale ta pak vyvázne z jeho břicha
+ nezraněna, se objevuje také v ruském příběhu Petr a vlk a v dalším příběhu
+ bratří Grimmů O vlku a sedmi kůzlátkách, v podstatě jde o téma staré nejméně
+ jako Jonáš a velryba.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+end{multicols}%
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Test matematiky
+\end_layout
+
+\begin_layout Standard
+V matematických výrazech a rovnicích by měla být použita kurzíva základního
+ písma pro označení proměnných (
+\begin_inset Formula $x,y,z$
+\end_inset
+
+), normální stojaté písmo pro konstanty (
+\begin_inset Formula $\mathrm{k}$
+\end_inset
+
+), názvy funcí (
+\begin_inset Formula $\sin,\exp$
+\end_inset
+
+) a názvy operátorů (
+\begin_inset Formula $\mathrm{rot,div,d}$
+\end_inset
+
+)
+\begin_inset Foot
+status open
+
+\begin_layout Standard
+Velmi pěkný článek o psaní matematických výrazů sepsala 
+\noun on
+Juláková
+\noun default
+\InsetSpace ~
+
+\begin_inset LatexCommand cite
+key "Julakova"
+
+\end_inset
+
+.
+ Je-li ve vaší práci více matematiky, určitě si jej prostudujte!
+\end_layout
+
+\end_inset
+
+.
+ Otestujeme si to na rovnici\InsetSpace ~
+
+\begin_inset LatexCommand ref
+reference "eq:work"
+
+\end_inset
+
+.
+ Porovnejte 
+\emph on
+W\InsetSpace ~
+=\InsetSpace ~
+F
+\emph default
+d
+\emph on
+x
+\emph default
+ a 
+\begin_inset Note Note
+status open
+
+\begin_layout Standard
+citovat číslovanou rovnici: vložit -> křížový odkaz
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula \begin{equation}
+W=\intop_{a}^{b}F\mathrm{d}x.\label{eq:work}\end{equation}
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Standard
+Vložte rovnici (Ctrl+SHIFT+m), rovnici označte: vložit -> značka
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Též řecké písmo by mělo ladit se základním písmem: 
+\begin_inset Formula $\alpha,\beta,\gamma,\pi,\psi.$
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

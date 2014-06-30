@@ -1,0 +1,1017 @@
+#LyX 1.5.5 created this file. For more info see http://www.lyx.org/
+\lyxformat 276
+\begin_document
+\begin_header
+\textclass scrreprt
+\begin_preamble
+
+%<-------------------------------společná nastavení------------------------------>
+\usepackage[czech]{babel}%počeštění názvů (Obsah, Kapitola, Literatura atp.)
+\usepackage[]{hyperref} %odkazy v  pdf jsou klikací s barevnými rámečky
+\hypersetup{   % Nastaven\'{\i} pol\'{\i} PDF dokumentu 
+pdftitle={Sablona pro psani zaverecnych praci v LyXu},%   
+pdfauthor={Vitezslav Vydra},%  
+pdfsubject={},%   
+pdfkeywords={\v{s}ablona,LaTeX,LyX}%                             
+}
+\usepackage{multicol}
+
+
+
+%<-----------------------------volání stylů----------------------------------------->
+% (znak % je označení komentáře: co je za ním, není aktivní)
+%<------------------------------------písmo----------------------------------------->
+%\usepackage{packages/bc-latinmodern} % zavádí písmo  a matematiku latin modern
+%\usepackage{packages/bc-times} % zavádí písma times, helvetika, curier. Matematika ala times
+\usepackage{packages/bc-palatino}% zavádí písma palatino, helvetika, curier. Matematika ala palatino
+%\usepackage{packages/bc-iwona}%zavádí písmo a matematiku  iwona
+
+%<------------------------------záhlaví stránek------------------------------------>
+\usepackage{packages/bc-headings}
+%\usepackage{packages/bc-fancyheaders}% pestré záhlaví
+
+%<------------------------------hlavičky kapitol------------------------------------>
+\usepackage{packages/bc-neueskapitel}
+%\usepackage{packages/bc-fancychap}
+\end_preamble
+\options openright,cleardoubleempty,BCOR10mm,div9
+\language czech
+\inputencoding utf8
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\paperfontsize default
+\spacing single
+\papersize a4paper
+\use_geometry false
+\use_amsmath 1
+\use_esint 0
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\defskip medskip
+\quotes_language german
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+\begin_inset OptArg
+status collapsed
+
+\begin_layout Standard
+Šablona pro závěrečné práce 
+\end_layout
+
+\end_inset
+
+Šablona závěrečné práce pro LyX a\InsetSpace ~
+LaTeX 
+\end_layout
+
+\begin_layout Standard
+Šablona
+\begin_inset Foot
+status open
+
+\begin_layout Standard
+Tato šablona (její zdrojové soubory) je ke stažení na 
+\family typewriter
+http://people.fsv.cvut.cz /www/vydra/files/diplomka-bakalarka-lyx-sablona.zip
+\family default
+.
+ Další skvělé šablony pro závěrečné práce viz\InsetSpace ~
+
+\begin_inset LatexCommand cite
+key "Thesis-templates,Diplomka-v-LaTeXu,Jirkovy-stranky,diplPraceSLU,Vavreckova"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_inset
+
+ 
+\family typewriter
+bakalarka.lyx
+\family default
+ je vytvořena v editoru LyX
+\begin_inset Foot
+status open
+
+\begin_layout Standard
+Což je
+\emph on
+ frontend
+\emph default
+ LaTeXu.
+\end_layout
+
+\end_inset
+
+, je určena pro editor LyX, ale byla též vyexportována pro použití v jiných
+ editorech pro LaTeX jako 
+\family typewriter
+bakalarka.tex
+\family default
+.
+ Od ostatních 
+\emph on
+LaTeXových
+\emph default
+ šablon se odlišuje především tím, že se zaměřuje na kvalitu použitého písma.
+ 
+\end_layout
+
+\begin_layout Standard
+Šablona je založena na výborné LaTeXové  třídě 
+\emph on
+KOMA-Script report (scrrpt)
+\emph default
+, vycházející z evropských (zvláště německých) typografických zvyklostí,
+ které se od českých odlišují jen minimálně
+\emph on
+.
+ 
+\emph default
+Byla by škoda neuměle zasahovat do typograficky dokonalého díla, a proto
+ v základním nastavení třídy nebyly provedeny téměř žádné změny.
+ Šablona zavádí kvalitní
+\emph on
+ česká
+\emph default
+ písma
+\emph on
+
+\begin_inset Foot
+status open
+
+\begin_layout Standard
+Tím jsou míněna písma s kvalitní českou diakritikou, nikoliv českého původu.
+ Většina použitých písem je polské provenience.
+
+\emph on
+ 
+\end_layout
+
+\end_inset
+
+
+\emph default
+ a s nimi sladěné matematické symboly, pestřejší záhlaví stránek a pestřejší
+ hlavičky kapitol.
+ Podrobněji u jednotlivých balíčků (část\InsetSpace ~
+
+\begin_inset LatexCommand ref
+reference "sec:Změna-vzhledu"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Description
+Důležité\InsetSpace ~
+upozornění: Šablona je určena pro 
+\emph on
+oboustranné
+\emph default
+ vytištění!
+\begin_inset Marginal
+status open
+
+\begin_layout Standard
+
+\series bold
+\size giant
+\begin_inset Box ovalbox
+position "t"
+hor_pos "c"
+has_inner_box 0
+inner_pos "t"
+use_parbox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Standard
+
+\series bold
+\size giant
+!
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Struktura šablony
+\end_layout
+
+\begin_layout Standard
+Šablona je vytvořena tak, abyste se v ní při psaní rozsáhlé práce mohli
+ pokud možno dobře orientovat.
+ Každá jednotlivá kapitola je proto uložena ve zvláštním souboru pojmenovaném
+ podle názvu kapitoly.
+ Hlavní soubor, který vše zastřešuje a spojuje do jednoho celku je 
+\family typewriter
+bakalarka.lyx
+\family default
+.
+ Jednotlivé kapitoly je možné editovat samostatně a z každé z nich je možné
+ vytvořit pdf náhled (nelekněte se, že místo odkazů směřujících na jiné
+ kapitoly budou otazníky).
+ Celou práci zkompilujete vytvořením pdf ze souboru 
+\family typewriter
+bakalarka.lyx.
+ 
+\family default
+Další kapitoly lze přidat z hlavního menu LyXu: 
+\family typewriter
+Vložit 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ Soubor 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ Dokument potomka
+\family default
+.
+\end_layout
+
+\begin_layout Section
+Změna vzhledu 
+\begin_inset LatexCommand label
+name "sec:Změna-vzhledu"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Tuto část doporučuji číst až po dopsání práce anebo ji raději nečíst vůbec.
+ Dočtete se v ní pouze jak změnit celkový vzhled práce, tj.
+ jak změnit písmo, záhlaví stránek a hlavičky kapitol.
+ Pokud vám vzhled práce vyhovuje, tak jak je nastaven, nemusíte měnit ani
+ nastavovat vůbec nic! Změna vzhledu se provádí v preambuli LaTeXu pomocí
+ tzv.
+ balíčků (viz\InsetSpace ~
+
+\begin_inset LatexCommand ref
+reference "sub:Zavedeni"
+
+\end_inset
+
+), a je pro začátečníka poněkud nezvyklá .
+\end_layout
+
+\begin_layout Subsection
+Písma
+\end_layout
+
+\begin_layout Standard
+Balíčky (z anglického packages) s písmy jsou pojmenovány podle typu základního
+ písma, i když zavádí i písmo vedlejší.
+ Vedlejší písmo je obvykle písmo bezpatkové (bezšerifové), které se většinou
+ používá na nadpisy všech úrovní.
+ Další vedlejší písmo je strojopis, který se používá při výpisech kódu programů,
+ ke zvýraznění internetových adres, názvů počítačových souborů atp.
+ Každý balíček též zavádí matematické symboly sladěné se základním písmem.
+\end_layout
+
+\begin_layout Description
+bc-times -- písma z balíčku 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+TeX
+\end_layout
+
+\end_inset
+
+-Gyre.
+ Základní Termes, vedlejší Heros, strojopis Cursor.
+ Matematika 
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+`a
+\end_layout
+
+\end_inset
+
+la times.
+ 
+\end_layout
+
+\begin_layout Description
+bc-latinmodern -- standardní LaTeXová písma Latin Modern.
+ Matematické symboly 
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+`a
+\end_layout
+
+\end_inset
+
+la Latin Modern.
+\end_layout
+
+\begin_layout Description
+bc-palatino -- písma z balíčku 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+TeX
+\end_layout
+
+\end_inset
+
+-Gyre.
+ Základní: Pagella, vedlejší Heros, strojopis Cursor.
+ Matematika: 
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+`a
+\end_layout
+
+\end_inset
+
+la palatino
+\end_layout
+
+\begin_layout Description
+bc-iwona -- základní i vedlejší písmo bezpatkové písmo Iwona, strojopis
+  Cursor.
+ Matematika: 
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+`a
+\end_layout
+
+\end_inset
+
+la Iwona.
+\end_layout
+
+\begin_layout Description
+bc-helvetika -- základní i vedlejší písmo bezpatkové písmo 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+TeX
+\end_layout
+
+\end_inset
+
+-Gyre Heros, strojopis Cursor.
+ Matematika: 
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+`a
+\end_layout
+
+\end_inset
+
+la helvetika.
+\end_layout
+
+\begin_layout Subsection
+Záhlaví stránek
+\end_layout
+
+\begin_layout Description
+bc-headings -- záhlaví základním písmem, bez linky.
+\end_layout
+
+\begin_layout Description
+bc-fancyheaders -- záhlaví stránek z LaTeXového balíčku 
+\emph on
+fancyhdr
+\emph default
+ -- pestré, kapitálky základního písma, s linkou.
+\end_layout
+
+\begin_layout Subsection
+Hlavičky kapitol
+\end_layout
+
+\begin_layout Description
+
+\series bold
+bc-neueskapitel
+\series default
+ -- hlavičky 
+\emph on
+Neues Kapitel
+\emph default
+\InsetSpace ~
+
+\begin_inset LatexCommand cite
+key "NeuesKapitel"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+
+\series bold
+bc-fancychap -- 
+\series default
+hlavičky kapitol z LaTeXového balíčku 
+\emph on
+fncychap
+\emph default
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Standard
+Editací souboru 
+\family typewriter
+bc-fancychap.sty 
+\family default
+lze vybrat ze
+\emph on
+ sedmi
+\emph default
+ různých  hlaviček kapitol.
+ Některé hlavičky si mění písmo -- je třeba zkontrolovat!
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection
+Zavedení balíčků pro změnu vzhledu
+\begin_inset LatexCommand label
+name "sub:Zavedeni"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Balíčky se zavádějí v preambuli 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+LaTeX 
+\end_layout
+
+\end_inset
+
+u (v dokumentu 
+\family typewriter
+bakalarka.lyx
+\family default
+!) v hlavním menu LyXu: 
+\family typewriter
+Dokument 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ Nastavení\SpecialChar \ldots{}
+ 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ Preabule LaTeXu
+\family default
+, v textovém poli napravo odstraníte znak % před příkazem volajícím příslušný
+ balíček.
+ Tedy před 
+\family typewriter
+
+\backslash
+usepackage
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+/
+\end_layout
+
+\end_inset
+
+{packages/bc-times}
+\family default
+, pokud chceme použít balíček bc-times (zavádí písma typu times + helvetika
+ + curier) .
+ Před ostatními příkazy musí znak % zůstat, nebo ho tam doplňte:
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+%<------------volání balíčků--------------------->
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+% (znak % je označení komentáře: co je za ním, není aktivní
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+%<-------------písmo---------------------------> 
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+%
+\backslash
+usepackage{packages/bc-latinmodern}% zavádí písmo  a mat
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+ 
+\backslash
+usepackage{packages/bc-times}% zavádí písma times, helve
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+%
+\backslash
+usepackage{packages/bc-palatino}% zavádí písma palatino, 
+\end_layout
+
+\begin_layout LyX-Code
+
+\size footnotesize
+%
+\backslash
+usepackage{packages/bc-iwona}%zavádí písmo  iwona
+\end_layout
+
+\begin_layout Standard
+Balíčky jsou definovány v\InsetSpace ~
+souborech s příponou 
+\family typewriter
+sty
+\family default
+, což jsou obyčejné textové soubory a lze je editovat
+\begin_inset Foot
+status open
+
+\begin_layout Standard
+Myslím, že pochopit, který příkaz co znamená, není tak těžké, takže lze
+ snadno vytvořit 
+\begin_inset Quotes gld
+\end_inset
+
+hybridní
+\begin_inset Quotes grd
+\end_inset
+
+ balíčky.
+\end_layout
+
+\end_inset
+
+ (jsou uloženy ve složce 
+\family typewriter
+packages
+\family default
+).
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout Subsection
+Jaký vzhled vybrat?
+\end_layout
+
+\begin_layout Standard
+V 
+\emph on
+Grafickém manuálu identity ČVUT v\InsetSpace ~
+Praze
+\emph default
+\InsetSpace ~
+
+\begin_inset LatexCommand cite
+key "graficky_manual_CVUT"
+
+\end_inset
+
+ je jako základní písmo uvedeno písmo helvetika (pro nadpisy a krátké texty)
+ a jako písmo doplňkové písmo times (pro delší odstavcové texty).
+ Tomuto doporučení odpovídá balíček bc-times\InsetSpace ~
+(viz tabulka\InsetSpace ~
+
+\begin_inset LatexCommand ref
+reference "tab:Porovnani_pisem"
+
+\end_inset
+
+), případně bc-helvetika.
+ Volba hlaviček je na vás.
+ Nechcete-li riskovat, volte konzervativní vzhled: bc-headings nebo bc-fancyhead
+ers, hlavičky kapitol žádné (základní).
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="1">
+<features>
+<column alignment="left" valignment="top" leftline="true" rightline="true" width="0">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Oficiální písma ČVUT v Praze (Helvetika a Times):
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename obrazky/pismo-cvut.pdf
+	width 86text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Písma z balíčku bc-times (TeX-Gyre Heros a Termes):
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+Large
+\backslash
+usefont{T1}{qhv}{b}{n}{
+\end_layout
+
+\end_inset
+
+ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
+\end_layout
+
+\begin_layout Standard
+abcdefghijklmnopqrstuvwxyz
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+fontsize{15.5}{16} 
+\backslash
+usefont{T1}{qtm}{}{n}{
+\end_layout
+
+\end_inset
+
+ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
+\end_layout
+
+\begin_layout Standard
+abcdefghijklmnopqrstuvwxyz
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+Porovnání oficiálních písem ČVUT v Praze a podobných písem z balíčku bc-times
+\begin_inset LatexCommand label
+name "tab:Porovnani_pisem"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Příklady
+\end_layout
+
+\begin_layout Itemize
+Zkompilujete-li tlačítkem 
+\begin_inset Graphics
+	filename obrazky/pdf.png
+
+\end_inset
+
+ 
+\emph on
+celý tento dokument
+\emph default
+ (tj.
+ originální soubor 
+\family typewriter
+bakalarka.lyx
+\family default
+), bude text vysázen písmem TeX-Gyre Thermes, hlavičky písmem TeX-Gyre Heros,
+ záhlaví bude 
+\emph on
+bc-fancyhdr 
+\emph default
+a
+\emph on
+ 
+\emph default
+hlavičky kapitol 
+\emph on
+Fancychap
+\emph default
+ (Bjarne).
+\end_layout
+
+\begin_layout Itemize
+Zkompilujete-li samostatně 
+\emph on
+tuto 
+\emph default
+kapitolu (originální soubor 
+\family typewriter
+sablona.lyx
+\family default
+) bude text vysázen písmem TeX-Gyre Pagella, hlavičky, hlavičky písmem TeX-Gyre
+ Heros, záhlaví bude 
+\emph on
+fancyhdr.
+ 
+\emph default
+Hlavička kapitoly je 
+\emph on
+Neues Kapitel
+\emph default
+.
+\end_layout
+
+\begin_layout Itemize
+Zkompilujete-li samostatně
+\emph on
+ 
+\emph default
+kapitolu 
+\emph on
+Úvod
+\emph default
+ (originální soubor 
+\family typewriter
+uvod.lyx
+\family default
+) budou text i hlavičky vysázeny písmem Iwona.
+
+\emph on
+ 
+\emph default
+Hlavičky kapitol jsou 
+\emph on
+základní
+\emph default
+.
+\end_layout
+
+\begin_layout Itemize
+Zkompilujete-li samostatně
+\emph on
+ 
+\emph default
+kapitolu 
+\emph on
+Úvod do LyXu
+\emph default
+ (originální soubor 
+\family typewriter
+uvod_L
+\family default
+\SpecialChar \-
+
+\family typewriter
+yX.lyx
+\family default
+) budou text i hlavičky vysázeny písmem Latin Modern.
+
+\emph on
+ 
+\emph default
+Hlavičky kapitol jsou 
+\emph on
+základní
+\emph default
+.
+\end_layout
+
+\begin_layout Itemize
+Zkompilujete-li samostatně
+\emph on
+ 
+\emph default
+kapitolu 
+\emph on
+Závěr
+\emph default
+ (originální soubor 
+\family typewriter
+zaver.lyx
+\family default
+) budou text i hlavičky vysázeny písmem TeX-Gyre Heros.
+
+\emph on
+ 
+\emph default
+Hlavička kapitoly je 
+\emph on
+Fancychap
+\emph default
+ (Bjarne).
+\end_layout
+
+\end_body
+\end_document

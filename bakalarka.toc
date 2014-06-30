@@ -1,0 +1,26 @@
+\select@language {czech}
+\contentsline {chapter}{Abstrakt}{ii}{Doc-Start}
+\contentsline {chapter}{Zad\IeC {\'a}n\IeC {\'\i } pr\IeC {\'a}ce}{iii}{Doc-Start}
+\contentsline {chapter}{\numberline {1}\IeC {\'U}vod}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}C\IeC {\'\i }l a metodika pr\IeC {\'a}ce}{1}{section.1.1}
+\contentsline {section}{\numberline {1.2}Postup a p\IeC {\v r}edpoklady pr\IeC {\'a}ce}{1}{section.1.2}
+\contentsline {chapter}{\numberline {2}Platforma Vert.x}{1}{chapter.2}
+\contentsline {section}{\numberline {2.1}Architektura}{1}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}J\IeC {\'a}dro}{1}{subsection.2.1.1}
+\contentsline {subsubsection}{z\IeC {\'a}kladn\IeC {\'\i } API}{3}{section*.1}
+\contentsline {subsubsection}{Multi-reactor pattern}{4}{section*.2}
+\contentsline {subsubsection}{Hybridn\IeC {\'\i } model vl\IeC {\'a}ken}{4}{section*.3}
+\contentsline {subsection}{\numberline {2.1.2}Vert.x instance}{5}{subsection.2.1.2}
+\contentsline {subsubsection}{Verticle}{5}{section*.4}
+\contentsline {subsubsection}{Moduly}{6}{section*.5}
+\contentsline {subsubsection}{Worker Verticle}{7}{section*.6}
+\contentsline {subsection}{\numberline {2.1.3}Event Bus}{7}{subsection.2.1.3}
+\contentsline {subsection}{\numberline {2.1.4}Hazelcast}{8}{subsection.2.1.4}
+\contentsline {section}{\numberline {2.2}Test}{9}{section.2.2}
+\contentsline {chapter}{\numberline {3}Praktick\IeC {\'a} \IeC {\v c}\IeC {\'a}st}{1}{chapter.3}
+\contentsline {section}{\numberline {3.1}N\IeC {\'a}vrh}{1}{section.3.1}
+\contentsline {section}{\numberline {3.2}Realizace}{1}{section.3.2}
+\contentsline {chapter}{\numberline {4}Z\IeC {\'a}v\IeC {\v e}r}{2}{chapter.4}
+\contentsline {chapter}{Literatura}{4}{chapter.4}
+\contentsline {part}{P\IeC {\v r}\IeC {\'\i }lohy}{I}{chapter.4}
+\contentsline {chapter}{\numberline {A}\noindent P\IeC {\v r}ehled kl\IeC {\'a}vesov\IeC {\'y}ch zkratek v Lyxu}{II}{chapter.1}
