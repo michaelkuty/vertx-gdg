@@ -3,7 +3,7 @@
 
 \chapter{Úvod}
 
-V současné době existuje nespočet frameworků pro vývoj webových aplikací ve spoustě programovacích jazycích. Vývojář tak nemá vůbec lehké, vybrat ten správný nástroj, který by mu zaručil, že se jeho aplikace dostane na hranici možností, které mu daný nástroj poskytuje. 
+V současné době existuje nespočet frameworků\footnote{Cílem frameworku je převzetí typických problémů dané oblasti, čímž se usnadní vývoj tak, aby se návrháři a vývojáři mohli soustředit pouze na své zadání} pro vývoj webových aplikací ve spoustě programovacích jazycích. Vývojář tak nemá vůbec lehké, vybrat ten správný nástroj, který by mu zaručil, že se jeho aplikace dostane na hranici možností, které mu daný nástroj poskytuje. 
 
 Většina webových aplikací ovšem dříve nebo později narazí na na problematiku škálování, kdy je třeba rozložit aplikaci na vice serverů ať už pro zajištění vysoké dostupnosti nebo co nejnižší odezvy. Dnes také není nic neobvyklého, že aplikaci najednou začnou navštěvovat tisíce klientů za minutu a rázem se tak může stát, že z jinak rychlé aplikace se stane často padající aplikace s nepřiměřenou odezvou.
 
@@ -16,7 +16,7 @@ Na této jednoduché aplikaci bude demonstrován proces vývoje webové aplikace
 
 Je nutné uchopit problematiku platformy Vert.x v širších souvislostech, proto se práce snaží neopomenout všechny technologie, které s Vert.x souvisí, z kterých Vert.x vychází nebo které přímo integruje. V teoretické části bude čtenář seznámen s důležitými filozofiemi, které platforma nabízí. A to jak událostmi řízenou architekturou, kterou platforma převzala z dnes již dobře známého frameworku Node.js. Tak především polygnot programování s jednoduchým konkurenčním modelem a možnost sdílet data mezi jednotlivými vlákny bez nutnosti zámků.
 
-Cílem teoretické části je tedy popsat jednotlivé části platformy a jejich účel či problém, který řeší. V závěru teoretické části bude platforma srovnána s již zmíněným nástrojem Node.js to v několika důležitých aspektech rychlosti, která je v dnešním světě neustálého růstu počtu zařízení, to co trápí webové aplikace s desítkami tisíc dlouho trvajících připojení.
+Cílem teoretické části je tedy popsat jednotlivé části platformy a jejich účel či problém, který řeší. V závěru teoretické části bude platforma srovnána s již zmíněným nástrojem Node.js\footnote{Serverový framework, postavený na modelu událostmi řízeného programování} to v několika důležitých aspektech rychlosti, která je v dnešním světě neustálého růstu počtu zařízení, to co trápí webové aplikace s desítkami tisíc dlouho trvajících připojení.
 
 V praktické části bude vytvořen editor pro jednoduchou správu a tvorbu mindmap. Tyto mindmapy bude moct upravovat více uživatelů najednou v reálném čase. Budou popsány a vysvětleny jednotlivé kroky vývoje až po úplné nasazení webové aplikace na jednotlivé servery, kde bude prověřena funkčnost distribuovaného provozu aplikace. Pro nasazení aplikace na více serverů bude použit nástroj konfiguračního managementu Salt Stack.
 
