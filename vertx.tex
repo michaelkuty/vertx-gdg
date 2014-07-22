@@ -56,37 +56,6 @@ Jak již bylo zmíněno jádro Vert.x je implementováno v jazyce Java a pro Ver
 
 Ed Gardoh v roce 2011 ve svém jednoduchém testu\cite{serialTest} prověřil práci s paralelizací úkonů. Z jeho testů vyplývá, že Java 1.7 je až o 40\% rychlejší při práci s vlákny díky nové metodě Fork/Join\footnote{http://www.oracle.com/technetwork/articles/java/fork-join-422606.html}.
 
-\subsection{API}\label{sub:API}
-
-Vert.x poskytuje malou sadu metod, kterou lze volat na přímo z jednotlivých Verticlů.
-Funkcionalitu platformy lze jednoduše rozšířit pomocí modulů, které po zveřejnění do centrálního repozitáře může využívat kdokoliv a pomáhá tak znovu použitelnosti kódu. Samotné jádro Vert.x je tak velice malé a kompaktní. Vert.x API se dělí na \emph{Základní API} a \emph{Kontainer API}.
-
-\subsubsection{Základní API}\label{sub:coreAPI}
-
-Základní API, které Vert.x poskytuje programátorovi je poněkud strohé a obdobné jako u frameworku Node.js. Platforma tak poskytuje stabilní základ, který se v praxi neobejde bez modulů o kterých pojednává kapitola \ref{sub:moduly}.
-
-\begin{itemize}
-\item{TCP/SSL server/klient}
-\item{HTTP/HTTPS server/klient}
-\item{Websockets server/klient, SockJS}
-\item{Distribuovaný Event Bus}
-\item{Časovače}
-\item{Práce s buffery}
-\item{Přístup k souborovému systému}
-\item{Přístup ke konfiguraci}
-\end{itemize}
-
-\subsubsection{Kontainer API}
-
-Díky této části API může programátor řídit spouštění a vypínání nových modulů a verticlů za běhu aplikace. V praxi jsme tak schopní škálovat aplikaci za běhu či měnit funkcionalitu celé aplikace aniž by to někdo mohl zaregistrovat. Tuto API můžeme také volat přímo z příkazové řádky dále jen CLI\footnote{Command Line Interface}.
-
-\begin{itemize}
-\item{Nasazení a zrušení nasazení Verticlů}
-\item{Nasazení a zrušení nasazení Modulů}
-\item{Získání konfigurace jednotlivých Verticlů}
-\item{Logování}
-\end{itemize}
-
 \subsection{Multi-reactor pattern}
 
 Základ jádra je postaven na tzv. Multi-reactor pattern\cite{eventLoops}, který vychází z Reactor patternu\cite{reactorPattern}, ten lze charakterizovat několika body:
@@ -207,7 +176,8 @@ typy zpráv:
 \item{org.vertx.java.core.buffer.Buffer}
 \end{itemize}
 
-Toto jsou pouze základní typy zpráv, které Vert.x podporuje v základu. Není ale vůbec problém výčet stávájících typů rozšířit(doimplementovat). Například modul bson.vertx.eventbus\footnote{https://github.com/pmlopes/mod-bson-io} rozšíří aplikaci o možnost používat mnohem komplexnější typy zpráv. Mezi doporučené se ovšem řadí JSON, protože je jednoduše serializovatelný mezi jednotlivými programovacími jazyky.
+Toto je výčet pouze základních typů zpráv, které Vert.x podporuje v jádře. Není ale vůbec problém výčet stávájících typů rozšířit(doimplementovat). Například modul bson.vertx.eventbus\footnote{https://github.com/pmlopes/mod-bson-io} rozšíří aplikaci o možnost používat mnohem komplexnější typy zpráv jejichž výčet se nachází níže.
+
 \begin{itemize}
 \item{java.util.UUID}
 \item{java.util.List}
@@ -217,11 +187,13 @@ Toto jsou pouze základní typy zpráv, které Vert.x podporuje v základu. Nen�
 \item{java.sql.Timestamp}
 \end{itemize}
 
-\subsection{Hazelcast}
+Mezi doporučené se ovšem řadí JSON, protože je jednoduše serializovatelný mezi jednotlivými programovacími jazyky.
 
-Jednou z nejdůležitějších architektonických součástí Vert.x je knihovna Hazelcast\footnote{okolo 2.6MB kódu v jazyce Java, In-Memory Data Grid (IMDG)}, Hlavní výhody In-memory data grid\cite{inMemoryDataGrid} lze podle Ki Sun Song sumarizovat:
+\subsubsection{Hazelcast}
+
+Jednou z nejdůležitějších architektonických součástí Vert.x je knihovna Hazelcast, kterou tvoří jenom neuvěřitelných 2,6MB kódu v jazyce Java. Hlavní výhody In-memory data grid\cite{inMemoryDataGrid} lze podle Ki Sun Song sumarizovat:
 \begin{itemize}
-\item{Data jsou distribuovaná a uložená na více servrech }
+\item{Data jsou distribuovaná a uložená na více serverech ve více geografických lokacích}
 \item{Datový model je většinou objektově orientovaný a ne-relační}
 \item{Každý server pracuje v aktivním režimu}
 \item{Dle potřeby lze přidávat a odebírat servery}
@@ -232,16 +204,43 @@ Hazelcast lze využít v několika rolích:
 \item{In-memory NoSQL\footnote{databázový koncept, ve kterém datové úložiště i zpracování dat používají jiné prostředky než tabulková schémata tradiční relační databáze}}
 \item{Caching\footnote{specializovaný typ paměti pro krátkodobé ukládání}}
 \item{Data grid}
-\item{Messaging}
-\item{Application Scaling}
-\item{Clustering}
+\item{Zasílání zpráv}
+\item{Aplikační škálování}
+\item{Clustrování aplikací}
 \end{itemize}
 
-Hazelcast je tedy typ distribuovaného úložiště, které běží jako embedded a lze díky němu distribuovat celou aplikaci. Hazelcast API je využíváno přes API Vert.x. Když je Vert.x spuštěn, Hazelcast je spuštěn v embedded\footnote{Hazelcast server je spuštěn jádrem Vert.x} módu. 
-Jako nejčastější příklad bývá uváděno ukládání uživatelské session\footnote{Session v protokolu HTTP dává webovému serveru možnost uložit si libovolné (většinou však ne příliš obsáhlé) informace o uživatelích, kteří k němu přistupují, a to o každém zvlášť. Protokol HTTP ze svého principu (a způsobu komunikace stylem požadavek - odpověď) postrádá kontext o jednotlivých klientech, a právě session ho webovým aplikacím dokáže dát.} Hazelcast tedy usnadní práci v situaci, kdy budeme potřebovat uložit uživatelskou session například pro eshop. Mohli bychom využít využit externí RDBMS\footnote{Databázový server, který spravuje databáze, komunikaci s klienty (lokálními nebo vzdálenými), vstupy a výstupy dat a jejich integritu.} díky, kterému by jsme dosáhli stejného výsledku. Hazelcast nám ovšem zaručí replikování mezi jednotlivými servery, fail-over S využitím embedded Hazelcast ovšem odpadá nezbytná režie a monitoring, nemluvě o serverových prostředcích.
+Hazelcast je tedy typ distribuovaného úložiště, které běží jako vestavěný systém a lze díky němu distribuovat celou aplikaci do více geografických lokací nebo zasílat zprávy mezi jednotlivými komponentami. Vert.x API využívá Hazelcast API a odstiňuje tak programátora od poměrně nízko úrovňové API Hazelcastu.Když je Vert.x spuštěn, Hazelcast je spuštěn v módu vestavěného systému. Odpadá tak režie další služby. Jako nejčastější příklad užití samotného Hazelcastu bývá uváděno ukládání uživatelské session\cite{session}. Hazelcast tedy usnadní práci v situaci, kdy budeme potřebovat uložit uživatelskou session například pro eshop. Mohli bychom využít využit externí RDBMS\footnote{Databázový server, který spravuje databáze, komunikaci s klienty (lokálními nebo vzdálenými), vstupy a výstupy dat a jejich integritu.} díky, kterému by jsme dosáhli stejného výsledku. S využitím knihovny Hazelcast ovšem odpadá nezbytná režie a monitoring, nemluvě o serverových prostředcích.
 
-Proto ty, kteří potřebují ukládat uživatelské session pro E-commercy či chat-servery toho mohou jednoduše dosáhnout skrz konfiguraci samotného Vert.x.
+\section{API}\label{sub:API}
 
+Vert.x poskytuje malou sadu metod, kterou lze volat na přímo z jednotlivých Verticlů.
+Funkcionalitu platformy lze jednoduše rozšířit pomocí modulů, které po zveřejnění do centrálního repozitáře může využívat kdokoliv a pomáhá tak znovu použitelnosti kódu. Samotné jádro Vert.x je tak velice malé a kompaktní. Vert.x API se dělí na \emph{Základní API} a \emph{Kontainer API}.
+
+\subsection{Základní API}\label{sub:coreAPI}
+
+Základní API, které Vert.x poskytuje programátorovi je poněkud strohé a obdobné jako u frameworku Node.js. Platforma tak poskytuje stabilní základ, který se v praxi neobejde bez modulů o kterých pojednává kapitola \ref{sub:moduly}.
+
+\begin{itemize}
+\item{TCP/SSL server/klient}
+\item{HTTP/HTTPS server/klient}
+\item{Websockets server/klient, SockJS}
+\item{Distribuovaný Event Bus}
+\item{Časovače}
+\item{Práce s buffery}
+\item{Přístup k souborovému systému}
+\item{Přístup ke konfiguraci}
+\end{itemize}
+
+\subsection{Kontainer API}
+
+Díky této části API může programátor řídit spouštění a vypínání nových modulů a verticlů za běhu aplikace. V praxi jsme tak schopní škálovat aplikaci za běhu či měnit funkcionalitu celé aplikace aniž by to někdo mohl zaregistrovat. Tuto API můžeme také volat přímo z příkazové řádky dále jen CLI\footnote{Command Line Interface}.
+
+\begin{itemize}
+\item{Nasazení a zrušení nasazení Verticlů}
+\item{Nasazení a zrušení nasazení Modulů}
+\item{Získání konfigurace jednotlivých Verticlů}
+\item{Logování}
+\end{itemize}
 
 \section{Test}
 Ed Gardoh v roce 2011 provedl test\cite{serialTest} pro porovnání paralelizace\footnote{Paralelizace procesů se skládá z rozložení jednoho velkého úkonu do několika menších úkolů, které mohou běžet paralelně.Výsledkem je provedení jednoho úkolu nebo procesu za pomocí více než jednoho procesoru nebo procesorů "Paralelní zpracování", nesmí být zaměňováno se souběžností.} v Javě 1.6 a 1.7.
