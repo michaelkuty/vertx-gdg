@@ -22,7 +22,7 @@
 \contentsline {section}{\numberline {2.4}V\IeC {\'y}konnostn\IeC {\'\i } testy a porovn\IeC {\'a}n\IeC {\'\i } s Node.js}{12}{section.2.4}
 \contentsline {subsection}{\numberline {2.4.1}Metoda testov\IeC {\'a}n\IeC {\'\i }}{12}{subsection.2.4.1}
 \contentsline {subsection}{\numberline {2.4.2}V\IeC {\'y}sledky}{12}{subsection.2.4.2}
-\contentsline {subsection}{\numberline {2.4.3}Srovn\IeC {\'a}n\IeC {\'\i } s Node.js}{12}{subsection.2.4.3}
+\contentsline {subsection}{\numberline {2.4.3}Srovn\IeC {\'a}n\IeC {\'\i } vlastnost\IeC {\'\i } s Node.js}{12}{subsection.2.4.3}
 \contentsline {chapter}{\numberline {3}Praktick\IeC {\'a} \IeC {\v c}\IeC {\'a}st}{15}{chapter.3}
 \contentsline {section}{\numberline {3.1}N\IeC {\'a}vrh}{15}{section.3.1}
 \contentsline {subsection}{\numberline {3.1.1}C\IeC {\'\i }le aplikace}{15}{subsection.3.1.1}
