@@ -159,8 +159,15 @@ vertx runmod com.mycompany~my-mod~1.0 -conf config.json
 
 \subsection{Event Bus}
 
-Nervový systém celého Vert.x. Cílem EventBusu je zpozdředkování komunikace mezi jednotlivými komponentami platformy. 
-Nespornou výhodou je fakt, že lze takovouto komunikaci přemostit ke klientovi na straně webového prolížeče.
+Nervový systém celého Vert.x, jehož název lze volně přeložit jako sběrnice událostí. Cílem EventBusu je zpozdředkování komunikace mezi jednotlivými komponentami a vlákny aplikace. Podobně jako při použití externí Message Queue\cite{mq} dále jen MQ. Díky faktu, že komponenta Event Bus je implementována přímo v jádru platformy odpadá nutnost používat další knihovny pro práci s MQ a v neposlední řadě také režijní náklady či výpočetní výkon. Jak je vidět na obrázku , komponenta Event Bus je distribuovaná přes všechny instance v clusteru. Obrovskou výhodou oproti externí MQ je fakt, že lze takovouto komunikaci snadno přemostit ke klientovi na straně webového prohlížeče což je detailněji popsáno v kapitole \ref{sec:realTimeCommunication}.
+
+\begin{figure}
+\begin{centering}
+\includegraphics[scale=0.5]{obrazky/2instance4_eventbus}
+\par\end{centering}
+\caption{Event Bus distribuovaný mezi dva Servery}
+\label{fig:2instance4_eventbus}
+\end{figure}
 
 Základní typy komunikace:
 \begin{itemize}
@@ -201,15 +208,15 @@ Jednou z nejdůležitějších architektonických součástí Vert.x je knihovna
 
 Hazelcast lze využít v několika rolích:
 \begin{itemize}
-\item{In-memory NoSQL\footnote{databázový koncept, ve kterém datové úložiště i zpracování dat používají jiné prostředky než tabulková schémata tradiční relační databáze}}
-\item{Caching\footnote{specializovaný typ paměti pro krátkodobé ukládání}}
+\item{NoSQL\footnote{databázový koncept, ve kterém datové úložiště i zpracování dat používají jiné prostředky než tabulková schémata tradiční relační databáze} databáze v paměti}
+\item{Cache\footnote{specializovaný typ paměti pro krátkodobé ukládání}}
 \item{Data grid}
 \item{Zasílání zpráv}
 \item{Aplikační škálování}
 \item{Clustrování aplikací}
 \end{itemize}
 
-Hazelcast je tedy typ distribuovaného úložiště, které běží jako vestavěný systém a lze díky němu distribuovat celou aplikaci do více geografických lokací nebo zasílat zprávy mezi jednotlivými komponentami. Vert.x API využívá Hazelcast API a odstiňuje tak programátora od poměrně nízko úrovňové API Hazelcastu.Když je Vert.x spuštěn, Hazelcast je spuštěn v módu vestavěného systému. Odpadá tak režie další služby. Jako nejčastější příklad užití samotného Hazelcastu bývá uváděno ukládání uživatelské session\cite{session}. Hazelcast tedy usnadní práci v situaci, kdy budeme potřebovat uložit uživatelskou session například pro eshop. Mohli bychom využít využit externí RDBMS\footnote{Databázový server, který spravuje databáze, komunikaci s klienty (lokálními nebo vzdálenými), vstupy a výstupy dat a jejich integritu.} díky, kterému by jsme dosáhli stejného výsledku. S využitím knihovny Hazelcast ovšem odpadá nezbytná režie a monitoring, nemluvě o serverových prostředcích.
+Hazelcast je tedy typ distribuovaného úložiště, které běží jako vestavěný systém a lze díky němu distribuovat celou aplikaci do více geografických lokací nebo zasílat zprávy mezi jednotlivými komponentami. Vert.x API využívá Hazelcast API a odstiňuje tak programátora od poměrně nízko úrovňové API Hazelcastu.Když je Vert.x spuštěn, Hazelcast je spuštěn v módu vestavěného systému. Odpadá tak režie další služby. Jako nejčastější příklad užití samotného Hazelcastu bývá uváděno ukládání uživatelské session\cite{session}. Hazelcast tedy usnadní práci v situaci, kdy budeme potřebovat uložit uživatelskou session například pro eshop. Mohli bychom využít externí RDBMS tedy databázový server, který by obstarával komunikaci s kleinty a udržoval integritu dat díky, kterému by jsme dosáhli stejného výsledku. S využitím knihovny Hazelcast ovšem odpadá nezbytná režie a monitoring, nemluvě o serverových prostředcích.
 
 \section{API}\label{sub:API}
 
@@ -242,7 +249,47 @@ Díky této části API může programátor řídit spouštění a vypínání n
 \item{Logování}
 \end{itemize}
 
-\section{Test}
+\section{Výkonnostní testy a porovnání s Node.js}
+
+\subsection{Metoda testování}
+
+\subsection{Výsledky}
+
+\subsection{Srovnání s Node.js}
+
+Následující tabulka ukazuje srovnání důležitých vlastností jednotlivých platforem, jejichž důležitost byla popsána v předchozích kapitolách.
+
+\begin{flushleft}
+\begin{longtable}{|c|c|c|}
+\hline 
+\multicolumn{3}{|c|}{\textsf{}\textsf{\textbf{S}}\textsf{rovnání vlastností }}\tabularnewline
+\hline
+\hline 
+\textsf{\textbf{Vlastnost}} & \textsf{\textbf{Node.js}} & \textsf{\textbf{Vert.x}}\tabularnewline
+\hline
+\hline
+CLI & Ano & Ano\tabularnewline
+\hline 
+Cluster & Ano & Ano\tabularnewline
+\hline
+Moduly & Ano & Ano\tabularnewline
+\hline 
+MQ & Ne & Ano\tabularnewline
+\hline 
+Hybridní model vláken & Ne & Ano\tabularnewline
+\hline 
+In-memory data grid & Ne & Ano\tabularnewline
+\hline 
+Polygnot & Ne & Ano\tabularnewline
+\hline
+
+\caption{Table Title}
+
+\end{longtable}
+\emph{* pouze za použití modulů}
+\par\end{flushleft}
+
+
 Ed Gardoh v roce 2011 provedl test\cite{serialTest} pro porovnání paralelizace\footnote{Paralelizace procesů se skládá z rozložení jednoho velkého úkonu do několika menších úkolů, které mohou běžet paralelně.Výsledkem je provedení jednoho úkolu nebo procesu za pomocí více než jednoho procesoru nebo procesorů "Paralelní zpracování", nesmí být zaměňováno se souběžností.} v Javě 1.6 a 1.7.
 Hlavní myšlenkou je aby testovací třída simulovala úkol, který jako první volá vzdálenou službu a čeká sekundu na výzvu k návratu(spánek) a pak simuluje nějaké zpracování s výsledkem, jako je formátování řetězce.
 \vref{fig:serialtestI} je vidět synchronní běh serializační třídy v Javě 1.6. Z \vref{fig:serialCputestI} je pak vidět využití potenciálů jednotlivých procesorů.
