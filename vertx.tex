@@ -21,7 +21,7 @@ Na tomto místě by bylo vhodné uvést, že platforma Vert.x letos vyhrála pre
 
 \section{Architektura}
 
-Ahosajdsadsa
+Na obrázku \ref{fig:vertxArchitectureDiagram} jsou znázorněny dvě nezávislé Vert.x instance, které spolu komunikují pomocí zpráv. V levé části je blíže zobrazena jedna Vert.x instance, která bude blíže rozebrána v následujících kapitolách.
 
 \begin{figure}
 \begin{centering}
@@ -37,12 +37,14 @@ Klíčové jsou aspekty jako událostmi řízené programování a neblokující
 tok programu řízen událostmi;
 události nastávají obvykle určitou uživatelskou akcí: klik či pohyb myši, stisk tlačítka
 událostmi řízené aplikace musí být většinou programovány jako vícevláknové (i když spouštění vláken obvykle explicitně programovat nemusíme)
-Asynchronní někdy také paralélní model je přímo závislý na způsobu implementace samotným programovacím jazykem. Základním pojmem je zde proces, který je vnímán jako jedna instance programu, který je plánován pro nezávislé vykonávání. Naproti tomu Vlákno\footnote{Označuje v informatice odlehčený proces, pomocí něhož se snižuje režie operačního systému při změně kontextu, které je nutné pro zajištění multitaskingu} je posloupnost po sobě jdoucích událostí.(vlákno). V dřívější době nebylo potřeba rozlišovat proces a vlákno, protože proces se dále v aplikaci nedělil. Základem Vert.x respektive Node.js je tedy vícevláknový model. V jedné aplikace tedy může běžet několik vláken. Vlákno je zde bráno jako základní plánovací jednotka pro běh na procesoru. 
+Asynchronní někdy také paralélní model je přímo závislý na způsobu implementace samotným programovacím jazykem. Základním pojmem je zde proces, který je vnímán jako jedna instance programu, který je plánován pro nezávislé vykonávání. Naproti tomu Vlákno\footnote{Označuje v informatice odlehčený proces, pomocí něhož se snižuje režie operačního systému při změně kontextu, které je nutné pro zajištění multitaskingu} je posloupnost po sobě jdoucích událostí.(vlákno). V dřívější době nebylo potřeba rozlišovat proces a vlákno, protože proces se dále v aplikaci nedělil. Vytvoření vlákna je poměrně drahá a pomalá operace. Což se často obchází vytvořením zásoby uspaných vláken dopředu s nějakým managementem, co vlákna přidává a ubírá dle potřeby. Základním principem Vert.x a jemu podobných frameworků je jedno hlavní vlákno, obvykle pro každý procesor jedno a jednotlivé úlohy co při běhu aplikace vznikají si řídí sám.
+
+%respektive Node.js je tedy jedno hlavní vlákno, které si dle potřeby vytváří vlákna další a řídí tak . V jedné aplikace tedy může běžet několik vláken. Vlákno je zde bráno jako základní plánovací jednotka pro běh na procesoru. 
 Existují dva druhy asynchronního modelu (multitaskingu):
 multiprocesorový: o běh, tvorbu a režii vláken se stará operační systém
 multivláknový: o běh, tvorbu a režii vláken se stará aplikace a předává je operačnímu systému
 Podle Lažanského\cite{vlaknaCvut} je sdílení paměti důsledkem nižší režie při přepínání (přepnutí vláken je výrazně rychlejší), obdobně i vytváření a rušení vlákna a samozřejmě i úspora paměti.
-Jak již bylo zmíněno jádro Vert.x je implementováno v jazyce Java a zajímá nás tedy jak moc je dobrá implementace paralélního modelu. Zde se dostáváme k jedinému požadavku pro běh Vert.x instancí a to je přítomnost Java development Kitu ve verzi 1.7. Tato verze přinesla nespočet vylepšení, pro jejichž výpis zde není místo. Došlo také na přepsání či úpravy v několika zásadních třídách z balíčku java.util.concurrent\footnote{Knihovna pro práci s multitaskingem}.
+Jak již bylo zmíněno jádro Vert.x je implementováno v jazyce Java a pro Vert.x je tedy důležité, jak moc je dobrá implementace paralélního modelu v jazyce JAVA. Zde se dostáváme k jedinému požadavku pro běh Vert.x instancí a to je přítomnost Java development Kitu ve verzi 1.7 a novější. Tato verze přinesla nespočet vylepšení, pro jejichž výpis zde není místo. Došlo také na přepsání či úpravy v několika zásadních třídách z balíčku java.util.concurrent\footnote{Knihovna pro práci s multitaskingem}.
 \begin{description}
 \item[ExecutorService]{z balíčku java.util.concurrent}
 \item[CyclicBarrier\footnote{Synchronizační bariéra. Využitelná pro konstantní skupinu vláken, které mají přistupovat ke stejné proměnné. Třída zajištuje, že na sebe vlákna musí čekat při přístupu k proměnným. (Cyklická, protože jakmile se uvolní první vlákno jede to samé od znova)}]{z balíčku java.util.concurrent}
@@ -54,19 +56,38 @@ Jak již bylo zmíněno jádro Vert.x je implementováno v jazyce Java a zajím�
 
 Ed Gardoh v roce 2011 ve svém jednoduchém testu\cite{serialTest} prověřil práci s paralelizací úkonů. Z jeho testů vyplývá, že Java 1.7 je až o 40\% rychlejší při práci s vlákny díky nové metodě Fork/Join\footnote{http://www.oracle.com/technetwork/articles/java/fork-join-422606.html}.
 
-\subsubsection{základní API}\label{sub:coreAPI}
+\subsection{API}\label{sub:API}
+
+Vert.x poskytuje malou sadu metod, kterou lze volat na přímo z jednotlivých Verticlů.
+Funkcionalitu platformy lze jednoduše rozšířit pomocí modulů, které po zveřejnění do centrálního repozitáře může využívat kdokoliv a pomáhá tak znovu použitelnosti kódu. Samotné jádro Vert.x je tak velice malé a kompaktní. Vert.x API se dělí na \emph{Základní API} a \emph{Kontainer API}.
+
+\subsubsection{Základní API}\label{sub:coreAPI}
+
+Základní API, které Vert.x poskytuje programátorovi je poněkud strohé a obdobné jako u frameworku Node.js. Platforma tak poskytuje stabilní základ, který se v praxi neobejde bez modulů o kterých pojednává kapitola \ref{sub:moduly}.
 
 \begin{itemize}
 \item{TCP/SSL server/klient}
+\item{HTTP/HTTPS server/klient}
 \item{Websockets server/klient, SockJS}
-\item{Event Bus / sdílená data}
-\item{časovače}
-\item{souborový systém}
-\item{konfigurace}
-\item{logování}
+\item{Distribuovaný Event Bus}
+\item{Časovače}
+\item{Práce s buffery}
+\item{Přístup k souborovému systému}
+\item{Přístup ke konfiguraci}
 \end{itemize}
 
-\subsubsection{Multi-reactor pattern}
+\subsubsection{Kontainer API}
+
+Díky této části API může programátor řídit spouštění a vypínání nových modulů a verticlů za běhu aplikace. V praxi jsme tak schopní škálovat aplikaci za běhu či měnit funkcionalitu celé aplikace aniž by to někdo mohl zaregistrovat. Tuto API můžeme také volat přímo z příkazové řádky dále jen CLI\footnote{Command Line Interface}.
+
+\begin{itemize}
+\item{Nasazení a zrušení nasazení Verticlů}
+\item{Nasazení a zrušení nasazení Modulů}
+\item{Získání konfigurace jednotlivých Verticlů}
+\item{Logování}
+\end{itemize}
+
+\subsection{Multi-reactor pattern}
 
 Základ jádra je postaven na tzv. Multi-reactor pattern\cite{eventLoops}, který vychází z Reactor patternu\cite{reactorPattern}, ten lze charakterizovat několika body:
 
@@ -77,7 +98,7 @@ Základ jádra je postaven na tzv. Multi-reactor pattern\cite{eventLoops}, kter�
 \item{toto vlákno nesmí být blokováno\footnote{pokud dojde k zablkování hlavního vlákna dojde k zablokování celé aplikace např.\emph{Thread.sleep(), a další z java.util.concurrent }}}
 \end{itemize}
 
-Multi-reactor pattern\cite{eventLoops} se od Reactor patternu liší pouze tím, že může mít více hlavních vláken. Hlavní vlákno, kterému se okolo Vert.x komunity říká \emph{Event Loop}. V komunitách Nginx nebo Node.js se ovšem setkáme s pojmem \emph{Run Loop}. Tento návrhový vzor tedy převzala platforma z Node.js, kde se takovýto model velice oblíbil. Nevýhoda tohoto modelu je, že nikdy nesmí dojít k blokování hlavního vlákna a také fakt, že platforma Node.js poskytovala jenom jedno vlákno, které šlo škálovat na jednotlivé procesory. Jak je vidět z obrázku \vref{fig:instance} Vert.x platforma poskytuje více hlavních vláken, zpravidla však jedno hlavní vlákno na jeden procesor. Toho lze snadno docílit pomocí \emph{Runtime.getRuntime().availableProcessors()} na obrázku \vref{fig:instance4} lze vidět příklad čtyř hlavních vláken na čtyři dostupné procesory.
+Multi-reactor pattern\cite{eventLoops} se od Reactor patternu liší pouze tím, že může mít více hlavních vláken. Tím přináší Vert.x možnost pohodlně škálovat instance na více procesorových jader. Takovému vláknu, se ve Vert.x komunitě říká \emph{Event Loop}. V komunitách Nginx nebo Node.js se ovšem setkáme spíše s pojmem \emph{Run Loop}. Nevýhoda tohoto modelu je, že nikdy nesmí dojít k blokování hlavního vlákna a také fakt, že platforma Node.js poskytovala jenom jedno vlákno, které šlo škálovat na jednotlivé procesory. Jak je vidět z obrázku \vref{fig:instance} Vert.x platforma poskytuje více hlavních vláken, zpravidla však jedno hlavní vlákno na jeden procesor. Toho lze snadno docílit pomocí \emph{Runtime.getRuntime().availableProcessors()} o kterém se dozvíte více v kapitole \ref{sub:Scaling}. Na obrázku \vref{fig:instance4} pak lze vidět situaci čtyř hlavních vláken na čtyři procesorové jádra.
 \vref
 Příklady blokujících volání:
 \begin{itemize}
