@@ -37,7 +37,9 @@ databaze
 
 komunikace
 
-\section{Polygnot vývoj a moduly}
+\section{Polygnot vývoj a moduly}\label{sec:praktickyModuly}
+
+ deskriptor\emph{toto je poze základní výčet parametrů všechny lze nalézt v dokumentaci Vert.x}
 
 \begin{lstlisting}
 {
@@ -47,6 +49,10 @@ komunikace
   "auto-redeploy": true
 }
 \end{lstlisting}
+
+Parametr \emph{auto-redeploy} mluví sám za sebe.
+
+Jak bylo řečeno v \ref{sub:hybrid} Vert.x instance má dvě sady vláken. Parametrem \emph{worker} v deskriptoru modulu, lze říci Vert.x jádru aby spustil modul v \emph{background worker poolu}. 
 
 Spuštění modulu programově v jazyce Java
 \begin{lstlisting}
@@ -87,5 +93,5 @@ možnosti škálování a HA
 \subsection{Počet Verticlů}
 verticle count
 
-\subsection{Vert.x v clusteru}
+\subsection{Vert.x v clusteru}\label{sub:praktCluster}
 HA
