@@ -64,11 +64,11 @@ Základ jádra je postaven na tzv. Multi-reactor pattern\cite{eventLoops}, kter�
 \item{aplikace je řízena událostmi}
 \item{na události se registrují handlery}
 \item{vlákno zpracovává události a spouští registrované handlery}
-\item{toto vlákno nesmí být blokováno\footnote{pokud dojde k zablkování hlavního vlákna dojde k zablokování celé aplikace např.\emph{Thread.sleep(), a další z java.util.concurrent }}}
+\item{toto vlákno nesmí být blokováno\footnote{pokud dojde k zablokování hlavního vlákna dojde k zablokování celé aplikace např.\emph{Thread.sleep(), a další z java.util.concurrent }}}
 \end{itemize}
 
 Multi-reactor pattern\cite{eventLoops} se od Reactor patternu liší pouze tím, že může mít více hlavních vláken. Tím přináší Vert.x možnost pohodlně škálovat instance na více procesorových jader. Takovému vláknu, se ve Vert.x komunitě říká \emph{Event Loop}. V komunitách Nginx nebo Node.js se ovšem setkáme spíše s pojmem \emph{Run Loop}. Nevýhoda tohoto modelu je, že nikdy nesmí dojít k blokování hlavního vlákna a také fakt, že platforma Node.js poskytovala jenom jedno vlákno, které šlo škálovat na jednotlivé procesory. Jak je vidět z obrázku \vref{fig:instance} Vert.x platforma poskytuje více hlavních vláken, zpravidla však jedno hlavní vlákno na jeden procesor. Toho lze snadno docílit pomocí \emph{Runtime.getRuntime().availableProcessors()} o kterém se dozvíte více v kapitole \ref{sub:Scaling}. Na obrázku \vref{fig:instance4} pak lze vidět situaci čtyř hlavních vláken na čtyři procesorové jádra.
-\vref
+
 Příklady blokujících volání:
 \begin{itemize}
 \item{tradiční API (JDBC, externí systémy)}
@@ -77,11 +77,15 @@ Příklady blokujících volání:
 
 \subsubsection{Hybridní model vláken}\label{sub:hybrid}
 
-Platforma Vert.x přišla s inovací v oblasti hlavních vláken a to takovou, že k hlavním \emph{Event loops} přidala další sadu vláken \emph{Background thread pool}, které jsou vyčleněny z hlavní architektury a poskytující samostatnou kapitolu pro škálování aplikace. To lze ostatně vidět na obrázku \vref{fig:vertxArchitectureDiagram}. Díky tomu, lze psát specializované moduly nebo verticle tzv. \emph{workery} pro blokující volání či dlouhotrvající operace aniž by nějak omezovaly běh celé aplikace. Více o \emph{workerech} v \ref{sub:moduly}
+Platforma Vert.x přišla s inovací v oblasti hlavních vláken a to takovou, že k hlavním \emph{Event loops} přidala další sadu vláken \emph{Background thread pool}, které jsou vyčleněny z hlavní architektury a poskytující samostatnou kapitolu pro škálování aplikace. To lze ostatně vidět na obrázku \vref{fig:vertxArchitectureDiagram}. Díky tomu, lze psát specializované moduly nebo verticle tzv. \emph{workery} pro blokující volání či dlouhotrvající operace aniž by nějak omezovaly běh celé aplikace. Více o \emph{workerech} v kapitole \ref{sub:moduly}.
 
-\subsection{Vert.x instance}
+\subsection{Terminologie}
 
-Verticle běží v jedné Vert.x instanci \vref{fig:instance}. Každá Vert.x instance běží ve vlastním JVM instanci. V jedné Vert.x instanci může najednou běžet X Vertclů. Na jednom fyzickém stroji může běžet více Vert.x instancí případně v cluster módu i na více fyzických strojích.
+Vert.x definuje svou vlastní terminologii, která je specifická jen pro tuhle platformu. Před dalším výkladem je tak nutné porozumět jednotlivým pojmům, které budou vysvětleny v následujících podkapitolách.
+
+\subsubsection{Verticle}
+
+Základní jednotka vývoje a nasazení. Verticle si lze představit jako kus kódu, třídu či metodu. Verticle je tak nejmenší funkční jednotkou Vert.x. Verticle lze spouštět samostatně přímo z příkazové řádky podobně jako skript. Každý Verticle běží ve vlastním vlákně z čehož plynou výhody, ale také nevýhody. Díky tomu, že každý Verticle běží ve vlastním vlákně odpadá nutnost zámků nad proměnnýma a nejrůznější synchronizace vláken či deadlocky\footnote{je odborný výraz pro situaci, kdy úspěšné dokončení první akce je podmíněno předchozím dokončením druhé akce, přičemž druhá akce může být dokončena až po dokončení první akce.} se tak stávájí minulostí. Vzhledem k tomu, že každý Verticle má svůj vlastní classloader nemůže tak sdílet statické metody ani hodnoty proměnných s ostatníma. Z toho vyplývá nutnost externí Message Queue\cite{mq} dále jen MQ pro komunikaci mezi jednotlivýma Verticlama. Ve Vert.x tomu není jinak a jednotlivé Verticly spolu komunikují zprávami, které si posílají přes Event Bus o kterém pojednává kapitola \ref{sub:eventBus}. Na obrázku \ref{fig:instance} je vidět jeden Verticle v kontextu jedné Vert.x instance.
 
 \begin{figure}
 \begin{centering}
@@ -90,6 +94,18 @@ Verticle běží v jedné Vert.x instanci \vref{fig:instance}. Každá Vert.x in
 \caption{Vert.x instance \label{fig:instance}}
 \end{figure}
 
+\begin{itemize}
+\item nejmenší spustitelná jednotka
+\item třída / skript
+\item vykonává neblokující operace
+\item konkurence - single-threaded\footnote{běží vždy pouze v jednom vlákně (odpadá synchronizace, zámky, ...), izolace (vlastní classloader)}
+\item přímý přístup k API\ref{sub:coreAPI}, registrace handlerů, deploy dalších verticlů
+\end{itemize}
+
+\subsubsection{Vert.x instance}
+
+Verticle běží v jedné Vert.x instanci \vref{fig:instance}. Každá Vert.x instance běží ve vlastním JVM instanci. V jedné Vert.x instanci může najednou běžet X Vertclů. Na jednom fyzickém stroji může běžet více Vert.x instancí případně v cluster módu i na více fyzických strojích.
+
 \begin{figure}
 \begin{centering}
 \includegraphics[scale=0.5]{obrazky/instance4}
@@ -97,44 +113,12 @@ Verticle běží v jedné Vert.x instanci \vref{fig:instance}. Každá Vert.x in
 \caption{Vert.x instance \emph{vertx run HelloWord -instances 4} \label{fig:instance4}}
 \end{figure}
 
-\subsubsection{Verticle}
 
-Základní jednotka vývoje a nasazení. Verticle může být skript nebo třída například v jazyce Java. Verticle lze spouštět samostatně\footnote{vertx run Verticle.js} v praxi se ovšem využívají pouze moduly, které obsahují zpravidla více Verticles popřípadě worker Verticles.
 
-\begin{itemize}
-\item nejmenší spustitelná jednotka
-\item třída / skript
-\item vykonává neblokující operace
-\item konkurence - single-threaded\footnote{běží vždy pouze v jednom vlákně (odpadá synchronizace, zámky, ...), izolace (vlastní classloader)}
-\item přístup ke Core API\ref{sub:coreAPI}, registrace handlerů, deploy dalších verticlů
-\end{itemize}
-
-Spuštění verticle programově
-\begin{lstlisting}
-JsonObject config = new JsonObject();
-config.putString("foo", "wibble");
-config.putBoolean("bar", false);
-container.deployVerticle("foo.ChildVerticle", config);
-\end{lstlisting}
-
-Spuštění verticle z příkazové řádky
-\begin{lstlisting}
-vertx run foo.js -conf myconf.json
-\end{lstlisting}
-
-\subsubsection{Moduly} \label{sub:moduly}
+\subsubsection{Moduly}\label{sub:moduly}
 
 Moduly poskytují větší míru zapouzdření a znovupoužitelnost funkcionality. V praxi se mohou moduly skládat z více modulů či verticlů a mohou být uloženy v centrálním repozitáři\footnote{http://modulereg.vertx.io/} nebo může být využit jakýkoliv jiný repozitář. Repozitáře v kterých hledá Vert.x při startu instance dostupné moduly lze definovat v hlavní konfiguraci Vert.x.
 Každý modul musí mít svůj deskriptor ve formátu JSON\footnote{JSON (JavaScript Object Notation) je odlehčený formát pro výměnu dat. Je jednoduše čitelný i zapisovatelný člověkem a snadno analyzovatelný i generovatelný strojově.}, tento deskriptor musí být v kořenovém adresáři modulu a může vypadat například takto. \emph{toto je poze základní výčet parametrů všechny lze nalézt v dokumentaci Vert.x}
-
-\begin{lstlisting}
-{
-  "main": "EchoServer.java",
-  "worker": true,
-  "includes": "io.vertx~some-module~1.1",
-  "auto-redeploy": true
-}
-\end{lstlisting}
 
 Typy modulů lze rozdělit do dvou základních skupin, které lze dál rozdělit podle typu určení modulu. 
 
@@ -145,21 +129,13 @@ Typy modulů lze rozdělit do dvou základních skupin, které lze dál rozděli
 
 Jak bylo řečeno v \ref{sub:hybrid} Vert.x instance má dvě sady vláken. Parametrem \emph{worker} v deskriptoru modulu, lze říci Vert.x jádru aby spustil modul v \emph{background worker poolu}. Parametr \emph{auto-redeploy} mluví sám za sebe.
 
-Spuštění modulu programově v jazyce Java
-\begin{lstlisting}
-container.deployModule("io.vertx~mod-mailer~2.0.0-beta1", JSONconfig);
-\end{lstlisting}
+\subsubsection{Worker moduly}
 
-Spuštění modulu z příkazové řádky
-\begin{lstlisting}
-vertx runmod com.mycompany~my-mod~1.0 -conf config.json
-\end{lstlisting}
+bla
 
-\subsubsection{Worker Verticle}
+\subsection{Event Bus}\label{sub:eventBus}
 
-\subsection{Event Bus}
-
-Nervový systém celého Vert.x, jehož název lze volně přeložit jako sběrnice událostí. Cílem EventBusu je zpozdředkování komunikace mezi jednotlivými komponentami a vlákny aplikace. Podobně jako při použití externí Message Queue\cite{mq} dále jen MQ. Díky faktu, že komponenta Event Bus je implementována přímo v jádru platformy odpadá nutnost používat další knihovny pro práci s MQ a v neposlední řadě také režijní náklady či výpočetní výkon. Jak je vidět na obrázku , komponenta Event Bus je distribuovaná přes všechny instance v clusteru. Obrovskou výhodou oproti externí MQ je fakt, že lze takovouto komunikaci snadno přemostit ke klientovi na straně webového prohlížeče což je detailněji popsáno v kapitole \ref{sec:realTimeCommunication}.
+Nervový systém celého Vert.x, jehož název lze volně přeložit jako sběrnice událostí. Cílem EventBusu je zpozdředkování komunikace mezi jednotlivými komponentami a vlákny aplikace. Podobně jako při použití externí MQ. Díky faktu, že komponenta Event Bus je implementována přímo v jádru platformy odpadá nutnost používat další knihovny pro práci s MQ a v neposlední řadě také režijní náklady či výpočetní výkon. Jak je vidět na obrázku , komponenta Event Bus je distribuovaná přes všechny instance v clusteru. Obrovskou výhodou oproti externí MQ je fakt, že lze takovouto komunikaci snadno přemostit ke klientovi na straně webového prohlížeče což je detailněji popsáno v kapitole \ref{sec:realTimeCommunication}.
 
 \begin{figure}
 \begin{centering}
@@ -308,7 +284,7 @@ Ruby on Rails & 1.8ms & 241.6\tabularnewline
 Node.js & 3.7ms & 12,5\tabularnewline
 \hline 
 
-\caption{Srovnání odezvy zdroj }
+\caption{Srovnání odezvy}
 \end{longtable}
 \par\end{flushleft}
 

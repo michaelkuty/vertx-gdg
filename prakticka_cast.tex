@@ -16,7 +16,18 @@ test
 
 \section{Základní aplikace}
 
-core
+Spuštění verticle programově
+\begin{lstlisting}
+JsonObject config = new JsonObject();
+config.putString("foo", "wibble");
+config.putBoolean("bar", false);
+container.deployVerticle("foo.ChildVerticle", config);
+\end{lstlisting}
+
+Spuštění verticle z příkazové řádky
+\begin{lstlisting}
+vertx run foo.js -conf myconf.json
+\end{lstlisting}
 
 \section{Integrace s databází MongoDB}
 
@@ -27,6 +38,25 @@ databaze
 komunikace
 
 \section{Polygnot vývoj a moduly}
+
+\begin{lstlisting}
+{
+  "main": "EchoServer.java",
+  "worker": true,
+  "includes": "io.vertx~some-module~1.1",
+  "auto-redeploy": true
+}
+\end{lstlisting}
+
+Spuštění modulu programově v jazyce Java
+\begin{lstlisting}
+container.deployModule("io.vertx~mod-mailer~2.0.0-beta1", JSONconfig);
+\end{lstlisting}
+
+Spuštění modulu z příkazové řádky
+\begin{lstlisting}
+vertx runmod com.mycompany~my-mod~1.0 -conf config.json
+\end{lstlisting}
 
 moduly vice jazyku
 
