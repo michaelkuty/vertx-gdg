@@ -249,13 +249,70 @@ Díky této části API může programátor řídit spouštění a vypínání n
 \item{Logování}
 \end{itemize}
 
-\section{Výkonnostní testy a porovnání s Node.js}
+\section{Porovnání s Node.js}
 
-\subsection{Metoda testování}
+V následující kapitole bude porovnána platforma Vert.x s již zmíněnou platformou Node.js. Výkonnostní test\cite{benchmarkTim} je převzat od samotného autora projektu jsou v něm zahrnuty jazyky, které v té době platforma podporovala. Na závěr kapitoly \ref{sub:performence} je pak tabulka srovnání\cite{benchmark} odezev s vybranými webovými platformami.
 
-\subsection{Výsledky}
+\subsection{Výkon}\label{sub:performence}
 
-\subsection{Srovnání vlastností s Node.js}
+Tato kapitola se zabývá výkonnostními testy jednotlivých platforem. V prvním testu je obsaženo více programovacích jazyků, ve kterých byla implementována stejná logika pod platformou Vert.x. Rychlost aplikace implementované v jiném jazyce než Javě je pak závislá na konkrétním adaptéru.
+
+\subsubsection{Metody testování}
+
+\begin{enumerate}
+\item{Triviální dotazování serveru a návrat statusu 200\footnote{HTTP status - OK}}
+\item{Dotaz na statický soubor o velikosti 72 bytů}
+\end{enumerate}
+
+\subsubsection{Hardware}
+
+V prvním testu od Tima Foxe je požit  AMD Phenom II X6, 8GB RAM a systém Ubuntu 11.04. Tento procesor se 6 jádry není úplně běžný proto je výklad doplněn o druhý test, který proběhl na Sandy Bridge Core i7-2600K, 8GB RAM a SSD disku a systému Ubuntu 12.04.
+
+\subsubsection{Výsledky}
+\begin{figure}
+\begin{centering}
+\includegraphics[scale=0.7]{obrazky/chart_1}
+\par\end{centering}
+\caption{Vert.x instance \emph{Jednoprocesorový test odpovědi serveru Tim Fox} \label{fig:test1}}
+
+V následujícím grafu je patrné, že
+
+\end{figure}
+
+asasas
+
+\begin{figure}
+\begin{centering}
+\includegraphics[scale=0.7]{obrazky/chart_3-5}
+\par\end{centering}
+\caption{Vert.x instance \emph{Výsledek druhého testu Tim Fox} \label{fig:test2}}
+\end{figure}
+
+sadasd
+
+\subsubsection{Srovnání s vybranými platformami}
+
+Metoda srovnání s ostatními platformami je založená na podobném principu jako předchozí testy s tím rozdílem, že místo statického souboru vrací odpověď ve formátu JSON. Na straně serveru tedy musí dojít k JSON serializaci.
+
+\begin{flushleft}
+\begin{longtable}{|c|c|c|}
+\hline
+\textsf{\textbf{Platforma}} & \textsf{\textbf{Průměrná odezva}} & \textsf{\textbf{Maximální}}\tabularnewline
+\hline
+Vert.x & 1,2ms & 18,7ms\tabularnewline
+\hline 
+Netty & 1,3ms & 24,0ms\tabularnewline
+\hline
+Ruby on Rails & 1.8ms & 241.6\tabularnewline
+\hline 
+Node.js & 3.7ms & 12,5\tabularnewline
+\hline 
+
+\caption{Srovnání odezvy zdroj }
+\end{longtable}
+\par\end{flushleft}
+
+\subsection{Vlastnosti}
 
 Následující tabulka ukazuje srovnání důležitých vlastností jednotlivých platforem, jejichž důležitost byla popsána v předchozích kapitolách.
 
@@ -284,41 +341,10 @@ Polygnot & Ne & Ano\tabularnewline
 \end{longtable}
 \par\end{flushleft}
 
+\subsection{Závěr srovnání}
 
-Ed Gardoh v roce 2011 provedl test\cite{serialTest} pro porovnání paralelizace\footnote{Paralelizace procesů se skládá z rozložení jednoho velkého úkonu do několika menších úkolů, které mohou běžet paralelně.Výsledkem je provedení jednoho úkolu nebo procesu za pomocí více než jednoho procesoru nebo procesorů "Paralelní zpracování", nesmí být zaměňováno se souběžností.} v Javě 1.6 a 1.7.
-Hlavní myšlenkou je aby testovací třída simulovala úkol, který jako první volá vzdálenou službu a čeká sekundu na výzvu k návratu(spánek) a pak simuluje nějaké zpracování s výsledkem, jako je formátování řetězce.
-\vref{fig:serialtestI} je vidět synchronní běh serializační třídy v Javě 1.6. Z \vref{fig:serialCputestI} je pak vidět využití potenciálů jednotlivých procesorů.
-Výsledek není žádné překvapení 50 úkolů s 1 sekundovým spánkem a spojováním řetězce trvalo něco málo přes 65 sekund. 
-Cílem jeho testu mělo být porovnání paralelizování úkonů. Výsledky testu ukázaly zlepšení až o 75\%. Z obrázků 1-4 zřetelně plyne, že nová Java je, pro single-thread\footnote{jedno vláknový} model aplikace ta nejlepší volba.
+blabla
 
-Jetnotlivé testy prokázaly, že za takovým rapidním zrychlením stojí metody Fork/Join. Při vhodném škálování bylo zrychlení až o 75\%. Z testů ovšem vyplívá také fakt, že při neúměrném počtu hlavních vláken na počet procesorů to má negativní dopady. Jedním z dopadů je 100\% vytížení a jednotlivých jader. Při vhodném určení počtu vláken, je vidět rapidní urychlení asynchronní paralelizace. Node.js i Vert.x však poskytuji informace o celkovém počtu fyzických jader procesoru a ta je tedy snadné určení optimálního počtu vláken pro ideální výsledky.(Více na?asi vysvětlit)
+\section{Vysoká dostupnost}
 
-\begin{figure}
-\begin{centering}
-\includegraphics[width=1\textwidth]{obrazky/serial_test_r1}
-\par\end{centering}
-\caption{První test běhu serializační třídy \label{fig:serialtestI}}
-\end{figure}
-
-\begin{figure}
-\begin{centering}
-\includegraphics[width=1\textwidth]{obrazky/serial_cpu_1}
-\par\end{centering}
-\caption{Využití jednotlivých procesorů při běhu \label{fig:serialCputestI}}
-\end{figure}
-
-\begin{figure}
-\begin{centering}
-\includegraphics[width=1\textwidth]{obrazky/executor_test_r1}
-\par\end{centering}
-\caption{První test běhu serializační třídy \label{fig:executorTestI}}
-
-\end{figure}
-
-\begin{figure}
-\begin{centering}
-\includegraphics[width=1\textwidth]{obrazky/executor_cpu_1}
-\par\end{centering}
-\caption{První test běhu serializační třídy \label{fig:executorCpuTestI}}
-
-\end{figure}
+blablaHA

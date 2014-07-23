@@ -216,7 +216,10 @@ práce} }{\small \par}
 %%%                                         *********
 }{\small \par}
 
-\cleardoublepage{}\thispagestyle{empty}{\small \tableofcontents{}% vkládá automaticky generovaný obsah dokumentu
+\cleardoublepage{}\thispagestyle{empty}{\small 
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}%hloubla obsahu
+\tableofcontents{}% vkládá automaticky generovaný obsah dokumentu
 \cleardoublepage{}}{\small \par}
 
 \include{uvod}
@@ -264,6 +267,12 @@ práce} }{\small \par}
 
 \bibitem{mq}Janssen, Cory\emph{ Message Queue } {[}online].
 {[}cit. 2014-03-22]. Dostupný z WWW: \url{http://www.techopedia.com/definition/25971/message-queue}
+
+\bibitem{benchmark}Froemke, Dina\emph{ Framework Benchmarks Round 8 } {[}online].
+{[}cit. 2014-03-22]. Dostupný z WWW: \url{http://www.techempower.com/blog/2013/12/17/framework-benchmarks-round-8/}
+
+\bibitem{benchmarkTim}Fox, Tim\emph{ Vert.x vs node.js simple HTTP benchmarks } {[}online].
+{[}cit. 2014-03-22]. Dostupný z WWW: \url{http://vertxproject.wordpress.com/2012/05/09/vert-x-vs-node-js-simple-http-benchmarks/}
 
 
 
