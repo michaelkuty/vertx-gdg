@@ -32,7 +32,9 @@ Na obrázku \ref{fig:vertxArchitectureDiagram} jsou znázorněny dvě nezávisl�
 
 \subsection{Jádro}
 
-Velikost samotného jádra aplikace nepřekračuje 10Mb kódu v jazyce java. V současné verzi je jádro platformy koherentní, dobře čitelné a poskytuje stabilní API. Lze jej následně rozšířit o novou funkčnost dokompilovaním balíčků, které lze naleznout v oficiálním repositáři. Pravděpodobnou inspirací byl již zmíněný Node.js respektive NPM\footnote{Node package manager} u kterého se takováto forma vývoje velice oblíbila. Od doby vzniku této platformy vzniklo nespočet rozšíření, které udělaly z Node.js silný násroj pro rychlý vývoj webových aplikací. 
+Velikost samotného jádra aplikace nepřekračuje 10Mb kódu v jazyce java. V současné verzi je jádro platformy koherentní, dobře čitelné a poskytuje málé, ale za to stabilní API. Jak je popsáno v kapitole \ref{sub:API}, Vert.x se nesnaží umět vše, ale specializuje se na určitou činnost. 
+
+Lze jej následně rozšířit o novou funkčnost dokompilovaním balíčků, které lze naleznout v oficiálním repositáři. Pravděpodobnou inspirací byl již zmíněný Node.js respektive NPM\footnote{Node package manager} u kterého se takováto forma vývoje velice oblíbila. Od doby vzniku této platformy vzniklo nespočet rozšíření, které udělaly z Node.js silný násroj pro rychlý vývoj webových aplikací. 
 Klíčové jsou aspekty jako událostmi řízené programování a neblokující asynchronní model.
 
 \subsubsection{Asynchronní model}
@@ -91,12 +93,12 @@ Vert.x definuje svou vlastní terminologii, která je specifická jen pro tuhle 
 
 \subsubsection{Verticle}
 
-Základní jednotka vývoje a nasazení. Verticle si lze představit jako kus kódu v jazyce Java pak jako třídu s hlavní metodou. Verticle je tak nejmenší funkční jednotkou Vert.x. Verticle lze spouštět samostatně přímo z příkazové řádky podobně jako skript. Každý Verticle běží ve vlastním vlákně z čehož plynou výhody, ale také nevýhody. Díky tomu, že každý Verticle běží ve vlastním vlákně odpadá nutnost zámků nad proměnnýma a nejrůznější synchronizace vláken či deadlocky se tak stávájí minulostí. Vzhledem k tomu, že každý Verticle má svůj vlastní classloader nemůže tak sdílet statické metody ani hodnoty proměnných s ostatníma. Sdílet data je tak možné pouze dvěma způsoby.
+Základní jednotka vývoje a nasazení. verticle si lze představit jako kus kódu v jazyce Java pak jako třídu s hlavní metodou. verticle je tak nejmenší funkční jednotkou Vert.x. verticle lze spouštět samostatně přímo z příkazové řádky podobně jako skript. Každý verticle běží ve vlastním vlákně z čehož plynou výhody, ale také nevýhody. Díky tomu, že každý verticle běží ve vlastním vlákně odpadá nutnost zámků nad proměnnýma a nejrůznější synchronizace vláken či deadlocky se tak stávájí minulostí. Vzhledem k tomu, že každý verticle má svůj vlastní classloader nemůže tak sdílet statické metody ani hodnoty proměnných s ostatníma. Sdílet data je tak možné pouze dvěma způsoby.
 \begin{itemize}
 \item{pomocí Message Queue\cite{mq} dále jen MQ}
 \item{SharedData object a SharedSet \emph{vertx.sharedData()}}
 \end{itemize}
-Objekty v SharedData musí být immutable\footnote{jakmile jednou takovýto objekt vznikne nejde dále měnit jeho proměnné}. V dnešní době je řada MQ frameworků přes které lze vést komunikaci u platformy Vert.x však není potřeba externí služba, protože má vlastní Event Bus o kterém pojednává kapitola \ref{sub:eventBus}. Na obrázku \ref{fig:instance} je vidět jeden Verticle v kontextu jedné Vert.x instance. Následuje sumarizace vlastností Verticle.
+Objekty v SharedData musí být immutable\footnote{jakmile jednou takovýto objekt vznikne nejde dále měnit jeho proměnné}. V dnešní době je řada MQ frameworků přes které lze vést komunikaci u platformy Vert.x však není potřeba externí služba, protože má vlastní Event Bus o kterém pojednává kapitola \ref{sub:eventBus}. Na obrázku \ref{fig:instance} je vidět jeden verticle v kontextu jedné Vert.x instance. Následuje sumarizace vlastností verticle.
 
 \begin{figure}
 \begin{centering}
@@ -113,13 +115,13 @@ Objekty v SharedData musí být immutable\footnote{jakmile jednou takovýto obje
 \item přímý přístup k API, registrace handlerů, nasazení dalších verticlů
 \end{itemize}
 
-\subsubsection{Worker Verticle}
+\subsubsection{Worker verticle}
 
-V standardním Verticlu by nemělo nikdy dojít k blokování hlavního vlákna. V dnešní době se bez klasického synchronního volání pravděpodobně neobejdeme, protože většina knihoven a modulů je napsána jako blokující kód. Z toho důvodu je v platformě Vert.x možnost označit Verticle jako workera. Tím dojde k vyčlenění Verticle z asociace na hlavní vlákna a takovému vláknu pak bude přiděleno vlákno z Background thread poolu. Uvnitř takového to Verticle lze pak vykonávat blokující volání bez blokování celé aplikace. To se v praxi ukázalo jako velice užitečná věc. Bohužel tímto ztrácíme efektivní možnost škálování pro velký počet konkurenčních vláken.
+V standardním verticlu by nemělo nikdy dojít k blokování hlavního vlákna. V dnešní době se bez klasického synchronního volání pravděpodobně neobejdeme, protože většina knihoven a modulů je napsána jako blokující kód. Z toho důvodu je v platformě Vert.x možnost označit verticle jako workera. Tím dojde k vyčlenění verticle z asociace na hlavní vlákna a takovému vláknu pak bude přiděleno vlákno z Background thread poolu. Uvnitř takového to verticle lze pak vykonávat blokující volání bez blokování celé aplikace. To se v praxi ukázalo jako velice užitečná věc. Bohužel tímto ztrácíme efektivní možnost škálování pro velký počet konkurenčních vláken.
 
 \subsubsection{Vert.x instance}
 
-Každý Verticle běží uvnitř Vert.x instance \vref{fig:instance} a každá instance běží ve vlastní JVM instanci. V jedné Vert.x instanci může najednou běžet nespočet Vertclů. Všechny Verticle můžou běžet souběžně na jednom serveru. Na jedno serveru může současně běžet mnoho Vert.x instancí v případě clusterování i na více serverech. Verticle spolu pak komunikuji pomocí distribuovaného EventBusu.
+Každý verticle běží uvnitř Vert.x instance \vref{fig:instance} a každá instance běží ve vlastní JVM instanci. V jedné Vert.x instanci může najednou běžet nespočet Vertclů. Všechny verticle můžou běžet souběžně na jednom serveru. Na jedno serveru může současně běžet mnoho Vert.x instancí v případě clusterování i na více serverech. verticle spolu pak komunikuji pomocí distribuovaného EventBusu.
 
 \begin{figure}
 \begin{centering}
@@ -130,7 +132,7 @@ Každý Verticle běží uvnitř Vert.x instance \vref{fig:instance} a každá i
 
 \subsubsection{Moduly}\label{sub:moduly}
 
-Moduly poskytují možnost zapouzdření a znovupoužitelnost funkcionality. V praxi se mohou moduly skládat z více modulů či verticlů a mohou být uloženy v centrálním repozitáři\footnote{http://modulereg.vertx.io/} nebo může být využit jakýkoliv jiný repozitář. Repozitáře v kterých hledá Vert.x při startu instance dostupné moduly lze definovat v hlavní konfiguraci Vert.x. Každý modul musí mít svůj deskriptor ve formátu JSON\footnote{je odlehčený formát pro výměnu dat}. Jak může vypadat deskriptor je více popsáno v \ref{sec:praktickyModuly}.
+Moduly poskytují možnost zapouzdření a znovupoužitelnost funkcionality. V praxi se mohou moduly skládat z více modulů či verticlů ve více programovacích jazycích. Modly mohou být uloženy v centrálním repozitáři\footnote{http://modulereg.vertx.io/} nebo může být využit jakýkoliv jiný repozitář. Repozitáře v kterých hledá Vert.x při startu instance dostupné moduly lze definovat v hlavní konfiguraci Vert.x. Každý modul musí mít svůj deskriptor ve formátu JSON\footnote{je odlehčený formát pro výměnu dat}. Jak může vypadat deskriptor je více popsáno v kapitole \ref{sec:praktickyModuly}.
 
 Výhody plynoucí z použití modulů:
 \begin{itemize}
@@ -155,7 +157,7 @@ Nervový systém celého Vert.x, jehož název lze volně přeložit jako sběrn
 \begin{centering}
 \includegraphics[scale=0.5]{obrazky/2instance4_eventbus}
 \par\end{centering}
-\caption{Event Bus distribuovaný mezi dva Servery}
+\caption{Event Bus distribuovaný mezi dva servery}
 \label{fig:2instance4_eventbus}
 \end{figure}
 
@@ -210,8 +212,8 @@ Hazelcast je tedy typ distribuovaného úložiště, které běží jako vestav�
 
 \section{API}\label{sub:API}
 
-Vert.x poskytuje malou sadu metod, kterou lze volat na přímo z jednotlivých Verticlů.
-Funkcionalitu platformy lze jednoduše rozšířit pomocí modulů, které po zveřejnění do centrálního repozitáře může využívat kdokoliv a pomáhá tak znovu použitelnosti kódu. Samotné jádro Vert.x je tak velice malé a kompaktní. Vert.x API se dělí na \emph{Základní API} a \emph{Kontainer API}.
+Vert.x poskytuje malou sadu metod, kterou lze volat na přímo z jednotlivých verticlů.
+Funkcionalitu platformy lze jednoduše rozšířit pomocí modulů, které po zveřejnění do centrálního repozitáře může využívat kdokoliv a pomáhá tak znovu použitelnosti kódu. Samotné jádro Vert.x je tak velice malé a kompaktní. Vert.x API je rozděleno na \emph{Základní API} a \emph{Kontainer API}.
 
 \subsection{Základní API}\label{sub:coreAPI}
 
@@ -233,9 +235,9 @@ Základní API, které Vert.x poskytuje programátorovi je poněkud strohé a ob
 Díky této části API může programátor řídit spouštění a vypínání nových modulů a verticlů za běhu aplikace. V praxi jsme tak schopní škálovat aplikaci za běhu či měnit funkcionalitu celé aplikace aniž by to někdo mohl zaregistrovat. Tuto API můžeme také volat přímo z příkazové řádky dále jen CLI\footnote{Command Line Interface}.
 
 \begin{itemize}
-\item{Nasazení a zrušení nasazení Verticlů}
+\item{Nasazení a zrušení nasazení verticlů}
 \item{Nasazení a zrušení nasazení Modulů}
-\item{Získání konfigurace jednotlivých Verticlů}
+\item{Získání konfigurace jednotlivých verticlů}
 \item{Logování}
 \end{itemize}
 
@@ -270,7 +272,7 @@ Samostatnou kapitolou v oblasti clusteringu je HA\footnote{HA - High Availabilit
 
 \subsubsection{Automatické zotavení z havárie}
 
-Pokud je modul spuštěn s argumentem \emph{-ha} a dojde k pádu Vert.x instance. Modul bude automaticky nasazen na jiné instanci v clusteru. V takovém případě již není potřeba spouštět modul s parametrem \emph{-cluster}. Jak je vidět na obrázku \ref{fig:instance4_eventbus_geolocation} v případě pádu Serveru 2 tedy i části aplikace, která komunikuje s databází dojde automaticky k novému nasazení této části do nové instance.
+Pokud je modul spuštěn s argumentem \emph{-ha} a dojde k pádu Vert.x instance. Modul bude automaticky nasazen na jiné instanci v clusteru. V takovém případě již není potřeba spouštět modul s parametrem \emph{-cluster}. Jak je vidět na obrázku \ref{fig:instance4_eventbus_geolocation} v případě pádu Serveru 2, tedy části aplikace, která komunikuje s databází dojde automaticky k novému nasazení této části do nové instance.
 
 \subsubsection{Skupiny HA}
 

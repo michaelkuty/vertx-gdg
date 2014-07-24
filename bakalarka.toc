@@ -11,7 +11,7 @@
 \contentsline {subsubsection}{Hybridn\IeC {\'\i } model vl\IeC {\'a}ken}{7}{section*.3}
 \contentsline {subsection}{\numberline {2.2.3}Terminologie}{7}{subsection.2.2.3}
 \contentsline {subsubsection}{Verticle}{7}{section*.4}
-\contentsline {subsubsection}{Worker Verticle}{8}{section*.5}
+\contentsline {subsubsection}{Worker verticle}{8}{section*.5}
 \contentsline {subsubsection}{Vert.x instance}{9}{section*.6}
 \contentsline {subsubsection}{Moduly}{9}{section*.7}
 \contentsline {subsection}{\numberline {2.2.4}Event Bus}{10}{subsection.2.2.4}
@@ -38,16 +38,16 @@
 \contentsline {subsection}{\numberline {3.1.1}C\IeC {\'\i }le aplikace}{20}{subsection.3.1.1}
 \contentsline {section}{\numberline {3.2}Z\IeC {\'a}kladn\IeC {\'\i } aplikace}{20}{section.3.2}
 \contentsline {section}{\numberline {3.3}Integrace s datab\IeC {\'a}z\IeC {\'\i } MongoDB}{20}{section.3.3}
-\contentsline {section}{\numberline {3.4}Real-time komunikace}{20}{section.3.4}
-\contentsline {section}{\numberline {3.5}Polyglot v\IeC {\'y}voj a moduly}{21}{section.3.5}
-\contentsline {section}{\numberline {3.6}Nasazen\IeC {\'\i }}{21}{section.3.6}
-\contentsline {subsection}{\numberline {3.6.1}Server}{21}{subsection.3.6.1}
-\contentsline {subsection}{\numberline {3.6.2}Java}{21}{subsection.3.6.2}
-\contentsline {subsection}{\numberline {3.6.3}Vert.x}{21}{subsection.3.6.3}
-\contentsline {subsection}{\numberline {3.6.4}MongoDB}{21}{subsection.3.6.4}
+\contentsline {section}{\numberline {3.4}Komunikace v re\IeC {\'a}ln\IeC {\'e}m \IeC {\v c}ase}{20}{section.3.4}
+\contentsline {section}{\numberline {3.5}Polyglot v\IeC {\'y}voj a moduly}{20}{section.3.5}
+\contentsline {section}{\numberline {3.6}Nasazen\IeC {\'\i }}{22}{section.3.6}
+\contentsline {subsection}{\numberline {3.6.1}Server}{22}{subsection.3.6.1}
+\contentsline {subsection}{\numberline {3.6.2}Java}{22}{subsection.3.6.2}
+\contentsline {subsection}{\numberline {3.6.3}Vert.x}{22}{subsection.3.6.3}
+\contentsline {subsection}{\numberline {3.6.4}MongoDB}{22}{subsection.3.6.4}
 \contentsline {section}{\numberline {3.7}\IeC {\v S}k\IeC {\'a}lov\IeC {\'a}n\IeC {\'\i } a vysok\IeC {\'a} dostupnost}{22}{section.3.7}
-\contentsline {subsection}{\numberline {3.7.1}Po\IeC {\v c}et Verticl\IeC {\r u}}{22}{subsection.3.7.1}
-\contentsline {subsection}{\numberline {3.7.2}Vert.x v clusteru}{22}{subsection.3.7.2}
-\contentsline {chapter}{\numberline {4}Z\IeC {\'a}v\IeC {\v e}r}{23}{chapter.4}
-\contentsline {chapter}{Literatura}{25}{chapter*.16}
+\contentsline {subsection}{\numberline {3.7.1}Po\IeC {\v c}et Verticl\IeC {\r u}}{23}{subsection.3.7.1}
+\contentsline {subsection}{\numberline {3.7.2}Vert.x v clusteru}{23}{subsection.3.7.2}
+\contentsline {chapter}{\numberline {4}Z\IeC {\'a}v\IeC {\v e}r}{24}{chapter.4}
+\contentsline {chapter}{Literatura}{26}{chapter*.16}
 \contentsline {part}{P\IeC {\v r}\IeC {\'\i }lohy}{I}{chapter*.16}
