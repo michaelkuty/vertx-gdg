@@ -158,14 +158,12 @@ pdfkeywords={\v{s}ablona,LaTeX,LyX}%
 }
 
 \begin{document}
-~\thispagestyle{empty}{\small ~\vfill{}
-}{\small \par}
+%~\thispagestyle{empty}{\small ~\vfill{}
+%}{\small \par}
 
-\noindent {\small Děkuji doc. Ing. Filip Malému, Ph.D. za odborné vedení práce, poskytování rad. \newpage{}}{\small \par}
-
-~\thispagestyle{empty}\vfill{}
-Tato stránka je tzv. protititul a je graficky součástí titulní stránky.
-Nechte ji prázdnou, nebo na ni umístěte vhodnou fotografii či ilustraci.
+%~\thispagestyle{empty}\vfill{}
+%Tato stránka je tzv. protititul a je graficky součástí titulní stránky.
+%Nechte ji prázdnou, nebo na ni umístěte vhodnou fotografii či ilustraci.
 
 \cleardoublepage{}~\thispagestyle{empty}\begin{center}\pagenumbering{roman}\vspace{10mm}
 
@@ -175,10 +173,6 @@ Nechte ji prázdnou, nebo na ni umístěte vhodnou fotografii či ilustraci.
 \textsc{\noun{\LARGE Fakulta informatiky a managementu}}\\
 \vspace*{1em}
 \textsf{\textsc{\noun{\Large katedra informatiky a kvantitativních metod }}}
-
-2014-06-29
-%%% Aby vložení loga  správně fungovalo, je třeba mít soubor uhk.png nahraný v adresáři logo,
-%%% tj. v adresáři, kde se nachází překládaný zdrojový soubor. 
 
 \vspace{15mm}
 
@@ -215,25 +209,25 @@ Nechte ji prázdnou, nebo na ni umístěte vhodnou fotografii či ilustraci.
 
 %{\small \thispagestyle{plain}\addcontentsline{toc}{chapter}{Abstrakt} }{\small \par}
 
-\noindent {\small ~\vfill{}
+\newpage{}\thispagestyle{plain}
+
+{\small %\setcounter{page}{3} % nastavení číslování stránek
+\ }{\small \par}
+
+\noindent {\small \vfill{}
+ % nastavuje dynamické umístění následujícího textu do spodní části stránky
+~}{\small \par}
+
+\subsubsection{Prohlášení}
+
+\noindent {\small Prohlašuji, že jsem bakalářskou práci vypracoval samostatně a uvedl jsem všechny použité prameny a literaturu.}{\small \par}
+
+{\small \bigskip{}
+}\noindent {\small{} V Kroměříži dne \today\hspace{\fill}Michael Kutý}\\
+{\small{} % doplňte patřičné datum, jméno a příjmení
 }{\small \par}
 
-\begin{description}
-\item [{{\small Anotace}}] \noindent {\small Bakalářská práce se zaměřuje na problematiku vývoje distribuovaných webových aplikací. Teoretická část práce popisuje architekturu platformy Vert.x a problémy, které tato platforma řeší. V praktické části bude implementovaná malá jednostránková kolaborativní aplikace jejíž jednotlivé části budou rozdistribuované na více instancí aby byla zajištěna vysoká dostupnost. Aplikace se nasadí do dvou referenčních instalací. První do prostředí VirtualBox a druhá v prostředí laboratoře CEPSOS při UHK.}{\small \par}
-{\small \lyxline{\small}}{\small \par}
-\item [{{\small Annotation}}] \noindent {\small English content }{\small \par}
-\end{description}
-
-\cleardoublepage{}
-
-%\thispagestyle{empty}~{\small \addcontentsline{toc}{chapter}{Zadání
-%práce} }{\small \par}
-
-
-
-\newpage{}\thispagestyle{empty}~
-
-
+\clearpage{}
 
 \newpage{}\thispagestyle{plain}
 
@@ -244,12 +238,38 @@ Nechte ji prázdnou, nebo na ni umístěte vhodnou fotografii či ilustraci.
  % nastavuje dynamické umístění následujícího textu do spodní části stránky
 ~}{\small \par}
 
-\noindent {\small Prohlašuji, že jsem bakalářskou práci vypracoval samostatně a uvedl jsem všechny použité prameny a literaturu.}{\small \par}
+\subsubsection{Poděkování}
 
-{\small \bigskip{}
-}\noindent {\small{} V Kroměříži dne \today\hspace{\fill}Michael Kutý}\\
-{\small{} % doplňte patřičné datum, jméno a příjmení
-}{\small \par}
+\noindent {\small Rád bych zde poděkoval doc. Ing. Filipu Malému, Ph.D. za odborné vedení práce, podnětné rady a čas, který mi věnoval. \newpage{}}{\small \par}
+
+\clearpage{}
+
+\newpage{}\thispagestyle{plain}
+
+{\small %\setcounter{page}{3} % nastavení číslování stránek
+\ }{\small \par}
+
+\noindent {\small \vfill{}
+ % nastavuje dynamické umístění následujícího textu do spodní části stránky
+~}{\small \par}
+
+\subsubsection{Anotace}
+
+Bakalářská práce se zaměřuje na problematiku vývoje distribuovaných webových aplikací. Teoretická část práce popisuje architekturu platformy Vert.x a problémy, které tato platforma řeší. V praktické části bude implementovaná malá jednostránková kolaborativní aplikace jejíž jednotlivé části budou rozdistribuované na více instancí aby byla zajištěna vysoká dostupnost. Aplikace se nasadí do dvou referenčních instalací. První do prostředí VirtualBox a druhá v prostředí laboratoře CEPSOS při UHK.
+
+\subsubsection{Annotation}
+
+EN verze
+
+\cleardoublepage{}
+
+%\thispagestyle{empty}~{\small \addcontentsline{toc}{chapter}{Zadání
+%práce} }{\small \par}
+
+
+
+\newpage{}\thispagestyle{empty}~
+
 
 {\small %%%   Výtisk pak na tomto míste nezapomeňte PODEPSAT!
 %%%                                         *********
