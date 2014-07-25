@@ -14,7 +14,7 @@ Právě proto, jsem se rozhodl k hlubšímu zkoumání v dané oblasti webových
 Hlavním cílem práce bude zjištění zda-li se  platforma Vert.x hodí pro vývoj distribuovaných jednostránkových aplikací dále jen SPA. Vytvoření jednoduchého webového editoru myšlenkových map dále jen mindmap. %Jednostránkové webové aplikace pro kolaborativní práci s mindmapami. % 
 Na této jednoduché aplikaci bude demonstrován proces vývoje webové aplikace pod platformou Vert.x. Při vývoji klientské části bude použit návrhový vzor MVVC.
 
-Je nutné uchopit problematiku platformy Vert.x v širších souvislostech, proto se práce snaží neopomenout všechny technologie, které s Vert.x souvisí, z kterých Vert.x vychází nebo které přímo integruje. V teoretické části bude čtenář seznámen s důležitými filozofiemi, které platforma nabízí. A to jak událostmi řízenou architekturou, kterou platforma převzala z dnes již dobře známého frameworku Node.js. Tak především polygnot programování s jednoduchým konkurenčním modelem a možnost sdílet data mezi jednotlivými vlákny bez nutnosti zámků.
+Je nutné uchopit problematiku platformy Vert.x v širších souvislostech, proto se práce snaží neopomenout všechny technologie, které s Vert.x souvisí, z kterých Vert.x vychází nebo které přímo integruje. V teoretické části bude čtenář seznámen s důležitými filozofiemi, které platforma nabízí. A to jak událostmi řízenou architekturou, kterou platforma převzala z dnes již dobře známého frameworku Node.js. Tak především polyglot programování s jednoduchým konkurenčním modelem a možnost sdílet data mezi jednotlivými vlákny bez nutnosti zámků.
 
 Cílem teoretické části je tedy popsat jednotlivé části platformy a jejich účel či problém, který řeší. V závěru teoretické části bude platforma srovnána s již zmíněným nástrojem Node.js\footnote{Serverový framework, postavený na modelu událostmi řízeného programování} to v několika důležitých aspektech rychlosti, která je v dnešním světě neustálého růstu počtu zařízení, to co trápí webové aplikace s desítkami tisíc dlouho trvajících připojení.
 
@@ -28,8 +28,7 @@ Při vývoji webové aplikace budou použity následující softwarové technolo
 \begin{itemize}
 \item Java Developement Kit 7: soubor základních nástrojů a knihoven pro běh a vývoj Java aplikací.
 \item Ubuntu 12.04: operační systém vhodný pro běh Vert.x aplikací
-\item Vert.x 2.1M3+: platforma pro vývoj real-time webových aplikací
-\item MongoDB: dokumentové orientovaná NoSQL databáze
-\item AngularJS: client side framework pro snadný a efektivní vývoj jednostránkových webových aplikací
+\item Vert.x 2.1M3+: platforma pro vývoj webových aplikací
+\item MongoDB: dokumentové orientovaná NoSQL\footnote{databázový koncept, ve kterém datové úložiště i zpracování dat používají jiné prostředky než tabulková schémata tradiční relační databáze} databáze
 \item D3.js: framework pro práci s grafy
 \end{itemize}

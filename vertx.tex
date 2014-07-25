@@ -200,7 +200,7 @@ Jednou z nejdůležitějších architektonických součástí Vert.x je knihovna
 
 Hazelcast lze využít v několika rolích:
 \begin{itemize}
-\item{NoSQL\footnote{databázový koncept, ve kterém datové úložiště i zpracování dat používají jiné prostředky než tabulková schémata tradiční relační databáze} databáze v paměti}
+\item{NoSQL databáze v paměti}
 \item{Cache\footnote{specializovaný typ paměti pro krátkodobé ukládání}}
 \item{Data grid}
 \item{Zasílání zpráv}
@@ -243,7 +243,7 @@ Díky této části API může programátor řídit spouštění a vypínání n
 
 \subsection{Polyglot}
 
-Polyglot je označován člověk, který ovládá více jazyků. V terminologii Vert.x to znamená, že API je dostupná ve více programovacích jazycích. Což v praxi znamená, že si programátor může sám zvolit v jakém jazyce bude implementovat svůj kód. Díky faktu, že spolu všechny verticly komunikují skrze zprávy je tak možné mít část aplikace napsanou například v jazyce Java a druhou část v jazyce Python apod. Tento fakt hodně napomáhá celé platformě nalákat nové programátory, protože ne každý na světě umí programovací jazyk Java. Výčet podporovaných jazyků ve verzi 2.0.
+Polyglot je označován člověk, který ovládá více jazyků. V terminologii Vert.x to znamená, že API je dostupná ve více programovacích jazycích. Což v praxi znamená, že si programátor může sám zvolit v jakém jazyce bude implementovat svůj kód. Díky faktu, že spolu všechny verticly komunikují skrze zprávy je tak možné mít část aplikace napsanou například v jazyce Java a druhou část v jazyce Python apod. Tento fakt hodně napomáhá celé platformě nalákat nové programátory, protože ne každý na světě umí programovací jazyk Java. Výčet podporovaných jazyků ve verzi 2.0. Do verze 3.0 se pak chystá automatické generování API pro každý jazyk.
 
 \begin{itemize}
 \item{Java}
@@ -263,7 +263,7 @@ Díky integraci Hazelcastu získala platforma Vert.x řadu zajímavých vlastnos
 \begin{centering}
 \includegraphics[scale=0.5]{obrazky/instance4_eventbus_geolocation}
 \par\end{centering}
-\caption{Clustering mezi dvěma Vert.x instancemi \label{fig:instance4_eventbus_geolocation}}
+\caption{Clustering mezi třemi Vert.x instancemi \label{fig:instance4_eventbus_geolocation}}
 \end{figure}
 
 \subsection{Vysoká dostupnost}
