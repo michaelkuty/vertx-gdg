@@ -37,6 +37,14 @@ Velikost samotného jádra aplikace nepřekračuje 10Mb kódu v jazyce Java. V s
 Lze jej následně rozšířit o novou funkčnost dokompilovaním balíčků, které lze naleznout v oficiálním repositáři. Pravděpodobnou inspirací byl již zmíněný Node.js respektive NPM\footnote{Node package manager} u kterého se takováto forma vývoje velice oblíbila. Od doby vzniku této platformy vzniklo nespočet rozšíření, které udělaly z Node.js silný násroj pro rychlý vývoj webových aplikací. 
 Klíčové jsou aspekty jako událostmi řízené programování a neblokující asynchronní model.
 
+\noindent Zásadní technologie, které integruje Vert.x.
+\begin{description}
+\item[Netty.io] framework pro práci se vstupy a výstupy
+\item[Hazelcast] In-memory data grid
+\end{description}
+
+Netty.io samotný, lze použít pro vývoj webových aplikací stejně dobře jako kterýkoliv jiný nástroj. Jeho specializací však je práce se vstupy a výstupy tzv. IO. V této oblasti poskytuje nízkoúrovňové API, nad kterým Vert.x přidává vyšší míru abstrakce. Druhou technologií, která je pro Vert.x klíčová je popsána v samostatné kapitole \ref{sub:hazelcast}.
+
 \subsection{Asynchronní model}
 
 Událostmi řízené programování je podle Tomáše Pitnera\cite{javaProgramovani} základním principem tvorby aplikací s GUI. Netýká se však pouze GUI, je to obecnější pojem označující typ asynchronního programování, kdy je tok programu řízen událostmi na které navěšuje tzv. event handlery\footnote{obslužná rutina události}.
@@ -192,7 +200,7 @@ Toto je výčet pouze základních typů zpráv, které Vert.x podporuje v jád�
 
 Mezi doporučené se ovšem řadí JSON, protože je jednoduše serializovatelný mezi jednotlivými programovacími jazyky.
 
-\subsubsection{Hazelcast}
+\subsubsection{Hazelcast}\label{sub:hazelcast}
 
 Jednou z nejdůležitějších architektonických součástí Vert.x je knihovna Hazelcast, kterou tvoří jenom neuvěřitelných 3,1MB kódu v jazyce Java. V platformě Vert.x zaujímá důležité postavení jako In-memory data grid jehož vlastnosti \cite{inMemoryDataGrid} lze podle Ki Sun Song sumarizovat:
 \begin{itemize}
