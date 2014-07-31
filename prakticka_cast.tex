@@ -50,7 +50,31 @@ Schéma myšlenkové mapy.
 
 \subsection{Architektura}
 
+\subsubsection{Adresářová struktura aplikace}
 
+\begin{lstlisting}
+README.md
+mods/neco
+
+vertx runmod io.majklk~mindmapeditor~0.0.1 -conf /srv/mindmap/conf/mindmajson -cluster-host 10.10.10.161 -ha
+
+[program:vertx_mindmap]
+directory=/srv/mindmap/app
+environment=PATH="/srv/vert.x-2.1RC3/bin/vertx"
+environment=JAVA_HOME="/usr/lib/jvm/java-7-openjdk-amd64/"
+
+command=vertx runmod io.majklk~mindmapeditor~0.0.1 -conf /srv/mindmap/conf/exporter.json -cluster-host 10.10.10.162 -ha
+
+user=root
+autostart=true
+autorestart=true
+redirect_stderr=true
+stdout_logfile=/srv/mindmap/app/app.log
+stderr_logfile=/srv/mindmap/app/error.log
+startsecs=10
+stopwaitsecs=600
+
+\end{lstlisting}
 
 \section{Řídící verticle}
 
@@ -167,6 +191,29 @@ vert.x
 \subsection{MongoDB}
 
 mongodb
+
+\subsection{Nasazení produkční služby}
+
+V současné verzi Vert.x nepodporuje běh v režimu daemon\footnote{je program, který běží v pozadí, čeká na události, které nastanou, reaguje na ně a poskytuje služby.}. Nasazení v režimu daemon je však nutnost pro běh v produkčním prostředí. Pro běh aplikace MindMap editoru byla využita systémová služba Supervisord\footnote{supervisord.org}, která běží jako linuxový daemon a stará se o běh aplikace, v případě pádu se ji pokusí znovu nasadit. Samotná konfigurace služby pro běh v Supervisordu pak obsahuje základní parametry. V verzi 3.0 je však plánovaná funkce běhu v režimu daemona a nebude tak tato berlička potřeba.
+
+\begin{lstlisting}
+
+[program:vertx_mindmap_editor]
+directory=/srv/mindmap/app
+environment=PATH="/srv/vert.x-2.1RC3/bin/vertx"
+environment=JAVA_HOME="/usr/lib/jvm/java-7-openjdk-amd64/"
+command=vertx runmod io.majklk~mindmapeditor~0.0.1 -conf /srv/mindmap/conf/exporter.json -cluster-host 10.10.10.162 -ha
+user=root
+autostart=true
+autorestart=true
+redirect_stderr=true
+stdout_logfile=/srv/mindmap/app/app.log
+stderr_logfile=/srv/mindmap/app/error.log
+startsecs=10
+stopwaitsecs=600
+
+\end{lstlisting}
+
 
 \section{Škálování a vysoká dostupnost}\label{sub:Scaling}
 

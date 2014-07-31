@@ -42,22 +42,24 @@
 \contentsline {section}{\numberline {3.1}N\IeC {\'a}vrh}{21}{section.3.1}
 \contentsline {subsection}{\numberline {3.1.1}C\IeC {\'\i }le aplikace}{22}{subsection.3.1.1}
 \contentsline {subsection}{\numberline {3.1.2}Architektura}{22}{subsection.3.1.2}
+\contentsline {subsubsection}{Adres\IeC {\'a}\IeC {\v r}ov\IeC {\'a} struktura aplikace}{22}{section*.21}
 \contentsline {section}{\numberline {3.2}\IeC {\v R}\IeC {\'\i }d\IeC {\'\i }c\IeC {\'\i } verticle}{22}{section.3.2}
-\contentsline {section}{\numberline {3.3}Integrace s datab\IeC {\'a}z\IeC {\'\i } MongoDB}{22}{section.3.3}
-\contentsline {section}{\numberline {3.4}Komunikace v re\IeC {\'a}ln\IeC {\'e}m \IeC {\v c}ase}{22}{section.3.4}
-\contentsline {subsection}{\numberline {3.4.1}Akce}{24}{subsection.3.4.1}
-\contentsline {subsection}{\numberline {3.4.2}Ud\IeC {\'a}losti}{24}{subsection.3.4.2}
-\contentsline {section}{\numberline {3.5}Polyglot v\IeC {\'y}voj a moduly}{24}{section.3.5}
-\contentsline {section}{\numberline {3.6}Nasazen\IeC {\'\i }}{26}{section.3.6}
-\contentsline {subsection}{\numberline {3.6.1}Server}{26}{subsection.3.6.1}
-\contentsline {subsection}{\numberline {3.6.2}Java}{26}{subsection.3.6.2}
-\contentsline {subsection}{\numberline {3.6.3}Vert.x}{26}{subsection.3.6.3}
-\contentsline {subsection}{\numberline {3.6.4}MongoDB}{26}{subsection.3.6.4}
-\contentsline {section}{\numberline {3.7}\IeC {\v S}k\IeC {\'a}lov\IeC {\'a}n\IeC {\'\i } a vysok\IeC {\'a} dostupnost}{26}{section.3.7}
-\contentsline {subsection}{\numberline {3.7.1}Po\IeC {\v c}et Verticl\IeC {\r u}}{26}{subsection.3.7.1}
-\contentsline {subsection}{\numberline {3.7.2}Interakce s Vert.x}{27}{subsection.3.7.2}
-\contentsline {subsection}{\numberline {3.7.3}Vert.x v clusteru}{27}{subsection.3.7.3}
-\contentsline {subsection}{\numberline {3.7.4}Vysok\IeC {\'a} dostupnost}{28}{subsection.3.7.4}
-\contentsline {chapter}{\numberline {4}Z\IeC {\'a}v\IeC {\v e}r}{30}{chapter.4}
-\contentsline {chapter}{Literatura}{32}{chapter*.21}
-\contentsline {part}{P\IeC {\v r}\IeC {\'\i }lohy}{I}{chapter*.21}
+\contentsline {section}{\numberline {3.3}Integrace s datab\IeC {\'a}z\IeC {\'\i } MongoDB}{23}{section.3.3}
+\contentsline {section}{\numberline {3.4}Komunikace v re\IeC {\'a}ln\IeC {\'e}m \IeC {\v c}ase}{23}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Akce}{23}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.4.2}Ud\IeC {\'a}losti}{25}{subsection.3.4.2}
+\contentsline {section}{\numberline {3.5}Polyglot v\IeC {\'y}voj a moduly}{25}{section.3.5}
+\contentsline {section}{\numberline {3.6}Nasazen\IeC {\'\i }}{27}{section.3.6}
+\contentsline {subsection}{\numberline {3.6.1}Server}{27}{subsection.3.6.1}
+\contentsline {subsection}{\numberline {3.6.2}Java}{27}{subsection.3.6.2}
+\contentsline {subsection}{\numberline {3.6.3}Vert.x}{27}{subsection.3.6.3}
+\contentsline {subsection}{\numberline {3.6.4}MongoDB}{27}{subsection.3.6.4}
+\contentsline {subsection}{\numberline {3.6.5}Nasazen\IeC {\'\i } produk\IeC {\v c}n\IeC {\'\i } slu\IeC {\v z}by}{27}{subsection.3.6.5}
+\contentsline {section}{\numberline {3.7}\IeC {\v S}k\IeC {\'a}lov\IeC {\'a}n\IeC {\'\i } a vysok\IeC {\'a} dostupnost}{28}{section.3.7}
+\contentsline {subsection}{\numberline {3.7.1}Po\IeC {\v c}et Verticl\IeC {\r u}}{28}{subsection.3.7.1}
+\contentsline {subsection}{\numberline {3.7.2}Interakce s Vert.x}{28}{subsection.3.7.2}
+\contentsline {subsection}{\numberline {3.7.3}Vert.x v clusteru}{28}{subsection.3.7.3}
+\contentsline {subsection}{\numberline {3.7.4}Vysok\IeC {\'a} dostupnost}{29}{subsection.3.7.4}
+\contentsline {chapter}{\numberline {4}Z\IeC {\'a}v\IeC {\v e}r}{31}{chapter.4}
+\contentsline {chapter}{Literatura}{33}{chapter*.22}
+\contentsline {part}{P\IeC {\v r}\IeC {\'\i }lohy}{I}{chapter*.22}
