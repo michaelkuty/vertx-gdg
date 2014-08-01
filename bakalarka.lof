@@ -3,18 +3,19 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Architektura Vert.x \emph {Jaehong Kim} \cite {vertxArchitectureDiagram} }}{4}{figure.2.1}
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Vert.x instance }}{8}{figure.2.2}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Vert.x instance \emph {vertx run HelloWord -instances 4} }}{9}{figure.2.3}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces P\IeC {\v r}\IeC {\'\i }klad vertik\IeC {\'a}ln\IeC {\'\i }ho \IeC {\v s}k\IeC {\'a}lov\IeC {\'a}n\IeC {\'\i } \emph {vertx run HelloWord -instances 4} }}{9}{figure.2.3}
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Event Bus distribuovan\IeC {\'y} mezi dva servery}}{11}{figure.2.4}
 \contentsline {figure}{\numberline {2.5}{\ignorespaces Clustering mezi t\IeC {\v r}emi Vert.x instancemi }}{16}{figure.2.5}
 \contentsline {figure}{\numberline {2.6}{\ignorespaces V\IeC {\'y}sledky prvn\IeC {\'\i }ho testu \emph {Tim Fox} \cite {benchmarkTim}}}{18}{figure.2.6}
-\contentsline {figure}{\numberline {2.7}{\ignorespaces V\IeC {\'y}sledek druh\IeC {\'e}ho testu \emph {Tim Fox} \cite {benchmarkTim}}}{18}{figure.2.7}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces V\IeC {\'y}sledek druh\IeC {\'e}ho testu \emph {Tim Fox} \cite {benchmarkTim}}}{20}{figure.2.7}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces P\IeC {\v r}\IeC {\'\i }pady u\IeC {\v z}it\IeC {\'\i }}}{22}{figure.3.1}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Komunikace v re\IeC {\'a}ln\IeC {\'e}m \IeC {\v c}ase}}{24}{figure.3.2}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Webov\IeC {\'a} aplikace}}{25}{figure.3.3}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Webov\IeC {\'a} aplikace - otev\IeC {\v r}en\IeC {\'\i } my\IeC {\v s}lenkov\IeC {\'e} mapy}}{26}{figure.3.4}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Webov\IeC {\'a} aplikace - akce - editace}}{26}{figure.3.5}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Modul CrasHub Shell}}{29}{figure.3.6}
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Architektura nasazen\IeC {\'e} aplikace}}{30}{figure.3.7}
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Ide\IeC {\'a}ln\IeC {\'\i } architekutra nasazen\IeC {\'\i } aplikace}}{30}{figure.3.8}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Architektura nasazen\IeC {\'e} aplikace}}{23}{figure.3.2}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Komunikace v re\IeC {\'a}ln\IeC {\'e}m \IeC {\v c}ase}}{25}{figure.3.3}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Webov\IeC {\'a} aplikace}}{27}{figure.3.4}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Webov\IeC {\'a} aplikace - otev\IeC {\v r}en\IeC {\'\i } my\IeC {\v s}lenkov\IeC {\'e} mapy}}{27}{figure.3.5}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Webov\IeC {\'a} aplikace - akce - editace}}{28}{figure.3.6}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Horizont\IeC {\'a}ln\IeC {\'\i } a vertik\IeC {\'a}ln\IeC {\'\i } \IeC {\v s}k\IeC {\'a}lov\IeC {\'a}n\IeC {\'\i }}}{30}{figure.3.7}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Modul CrasHub Shell}}{31}{figure.3.8}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Ide\IeC {\'a}ln\IeC {\'\i } architekutra nasazen\IeC {\'\i } aplikace}}{32}{figure.3.9}
 \addvspace {10\p@ }

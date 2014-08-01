@@ -82,7 +82,7 @@ Příklady blokujících volání:
 \item{dlouhotrvající operace (generování apod.)}
 \end{itemize}
 
-\subsubsection{Multi-reactor pattern}
+\subsubsection{Multi-reactor pattern}\label{sub:multireactor}
 
 Základ jádra je postaven na tzv. Multi-reactor pattern\cite{eventLoops}, který vychází z Reactor patternu\cite{reactorPattern}, ten lze charakterizovat několika body:
 
@@ -129,7 +129,7 @@ Objekty v SharedData musí být immutable\footnote{jakmile jednou takovýto obje
 
 \subsubsection{Worker verticle}
 
-V standardním verticlu by nemělo nikdy dojít k blokování hlavního vlákna. V dnešní době se bez klasického synchronního volání pravděpodobně neobejdeme, protože většina knihoven a modulů je napsána jako blokující kód. Z toho důvodu je v platformě Vert.x možnost označit verticle jako workera. Tím dojde k vyčlenění verticle z asociace na hlavní vlákna a takovému vláknu pak bude přiděleno vlákno z Background thread poolu. Uvnitř takového to verticle lze pak vykonávat blokující volání bez blokování celé aplikace. To se v praxi ukázalo jako velice užitečná věc. Bohužel tímto ztrácíme efektivní možnost škálování pro velký počet konkurenčních vláken.
+V standardním verticlu by nemělo nikdy dojít k blokování hlavního vlákna. V dnešní době se bez klasického synchronního volání pravděpodobně neobejdeme, protože většina knihoven a modulů je napsána jako blokující kód. Z toho důvodu je v platformě Vert.x možnost označit verticle jako workera respektive pustit je jako worker verticle. Tím dojde k vyčlenění verticle z asociace na hlavní vlákna a takovému vláknu pak bude přiděleno vlákno z Background thread poolu. Uvnitř takového verticle lze pak vykonávat blokující volání bez blokování celé aplikace. To se v praxi ukázalo jako velice užitečná věc. Bohužel tímto ztrácíme efektivní možnost škálování pro velký počet konkurenčních vláken. Velikost background thread poolu čítá na 20 před připravených vláken. Tento počet lze změnit v konfiguraci Vert.x.
 
 \subsubsection{Vert.x instance}
 
@@ -139,7 +139,7 @@ Každý verticle běží uvnitř Vert.x instance \vref{fig:instance} a každá i
 \begin{centering}
 \includegraphics[scale=0.5]{obrazky/instance4}
 \par\end{centering}
-\caption{Vert.x instance \emph{vertx run HelloWord -instances 4} \label{fig:instance4}}
+\caption{Příklad vertikálního škálování \emph{vertx run HelloWord -instances 4} \label{fig:instance4}}
 \end{figure}
 
 \subsubsection{Moduly}\label{sub:moduly}
@@ -160,6 +160,8 @@ Typy modulů lze rozdělit do dvou základních skupin, které lze dál rozděli
 \item[spustitelné]{mají definovanou hlavní verticle v deskriptoru, takovéto moduly je pak možné spustit jako samostatné jednotky pomocí parametru \emph{runmod} nebo programově \emph{deployModule} }
 \item[nespustitelné]{modul nemá specifikovaný hlavní verticle a lze jej použít v jiném modulu použitím metody \emph{includes}}
 \end{description}
+
+Pro vyčlenění modulu z asociace na event loop stačí přidat parametr \emph{worker: true} do deskriptoru modulu.	 
 
 \subsection{Event Bus}\label{sub:eventBus}
 
