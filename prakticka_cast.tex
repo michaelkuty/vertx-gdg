@@ -33,7 +33,7 @@ Hlavní částí aplikace budou tři verticly. Tyto verticly pak budou sloužit 
 
 \subsection{Architektura}
 
-Jak je vidět na obrázku \ref{fig:architecture_real} klienti se budou připojovat přes jeden webový server, který bude spojený clusterem se serverem druhým. Na tomto serveru pak poběží samotná databáze. 
+Jak je vidět na obrázku \ref{fig:architecture_real} klienti se budou připojovat přes jeden webový server, který viditelný pro webové klienty. S druhým serverem bude spojený na úrovni Hazelcast clusteru. Vzhledem k situaci, která je blíže popsaná v kapitole \ref{sub:praktCluster}, kdy je webový server připojen do dvou sítí není potřeba šifrování na úrovni clusteru. Pro demonstraci však dojde k nakonfigurování a otestování šifrování viz v kapitole \ref{sub:crypting}
 
 \begin{figure}
 \begin{centering}
@@ -57,13 +57,47 @@ vertx runmod io.majklk~mindmapeditor~0.0.1 -conf /srv/mindmap/conf/mindmajson -c
 
 \section{Řídící verticle}
 
-Vzhledem k tomu, že bude aplikace nasazená na více serverech ve více rolích bylo by potřeba napsat několik modulů podle zaměření, které tam startovat. To lze vyřešit napsáním ,,startéru", který dle konfigurace nastartuje příslušné moduly či verticly.
+Vzhledem k tomu, že bude aplikace nasazená na více serverech ve více rolích bylo by také zapotřebí více specializovaných modulů. Mnohdy je výhodnější implementovat řídící třídu, který bude mít na starost nasazovat moduly, dle dané konfigurace. Část kódu takového startéru by potom mohla vypadat následovně:
 
 \begin{lstlisting}
-JsonObject config = new JsonObject();
-config.putString("foo", "wibble");
-config.putBoolean("bar", false);
-container.deployVerticle("foo.ChildVerticle", config);
+var container = require('vertx/container');
+var console = require('vertx/console');
+
+var config = container.config;
+
+if("webserver" in config) {
+	container.deployModule('io.vertx~mod-web-server~2.0.0-final', config.webserver, config.webserver.workers, function(err, ID){
+		if (err) {
+			console.log(err)
+		}
+	});
+}
+\end{lstlisting}
+
+Z třídy \emph{container} si vytáhne config celého modulu a zeptá se jestli se v něm nenachází daná role.
+Potom už jen stačí aby daný konfigurační soubor obsahoval klíč \emph{webserver} s danou konfigurací, která se nachází níže. 
+
+\begin{lstlisting}
+{
+   "name": "MindMap editor server 1 - HTTP + WebSocket",
+    "webserver": {
+        "workers": 3,
+        "web_root": "web",
+        "host": "0.0.0.0",
+        "port": 80,
+        "bridge": true,
+        "inbound_permitted": [
+          { "address": "mindMaps.list" },
+          { "address": "mindMaps.save" },
+          { "address": "mindMaps.delete"},
+          { "address": "mindMaps.exporter.svg2png" },
+          { "address_re": "mindMaps\\.editor\\..+" }
+        ],
+        "outbound_permitted": [
+          { "address_re": "mindMaps\\.events\\..+" }
+        ]
+    }
+}
 \end{lstlisting}
 
 Spuštění verticle z příkazové řádky
@@ -208,7 +242,7 @@ Pro ukládání myšlenkových map je použita NoSQl databáze MongoDB ve verzi 
 
 \subsection{Nasazení produkční služby}\label{sub:service}
 
-V současné verzi(2.1.2) Vert.x nepodporuje běh v režimu daemon\footnote{je program, který běží v pozadí, čeká na události, které nastanou, reaguje na ně a poskytuje služby.}. Nasazení v režimu daemon je však nutnost pro běh v produkčním prostředí. Pro běh aplikace MindMap editoru byla využita systémová služba Supervisord\footnote{supervisord.org}, která běží jako linuxový daemon a stará se o běh aplikace, v případě pádu se ji pokusí znovu nasadit. Samotná konfigurace služby pro běh v Supervisordu pak obsahuje základní parametry. V verzi 3.0 je však plánovaná funkce běhu v režimu daemona a nebude tak tato berlička potřeba.
+V současné verzi(2.1.2) Vert.x nepodporuje běh v režimu daemon\footnote{je program, který běží v pozadí, čeká na události, které nastanou, reaguje na ně a poskytuje služby.}. Nasazení v režimu daemon je však nutnost pro běh v produkčním prostředí. Pro běh aplikace MindMap editoru byla využita systémová služba Supervisord\footnote{supervisord.org}, která běží jako linuxový daemon a stará se o běh aplikace, v případě pádu se ji pokusí znovu nasadit. Samotná konfigurace služby pro běh v Supervisordu pak obsahuje základní parametry. Ve verzi 3.0 je však plánovaná funkce běhu v režimu daemona a nebude tak tato berlička potřeba.
 
 \begin{lstlisting}
 [program:vertx_mindmap_editor]
@@ -229,15 +263,24 @@ stopwaitsecs=600
 
 \section{Horizontální a vertikální škálování}\label{sub:Scaling}
 
-sadsadasdds
+Škálování je nedílnou součástí životního cyklu aplikace. Ne zřídka dojde aplikace do situace, kdy začne být pomalá či často padat pod velkým náporem klientů. Následující kapitola rozebírá možnosti škálování Vert.x aplikací.
 \begin{figure}
 \begin{centering}
 \includegraphics[scale=0.5]{obrazky/scaling_example}
 \par\end{centering}
 \caption{Horizontální a vertikální škálování\label{fig:scaling_example}}
 \end{figure}
-
 \FloatBarrier
+
+\subsection{Vertikální}
+
+Samotné vertikální škálování lze efektivně řešit až na aplikační úrovni. Jak již bylo zmíněno v kapitole \ref{sub:multireactor} voláním \emph{Runtime.getRuntime().availableProcessors()} lze získat počet procesorových jader a s tím dále pracovat. Upravením předchozích příkazů však docílíme shodného výsledku.
+
+\begin{lstlisting}
+command=vertx runmod io.majklk~mindmapeditor~0.0.1 -instances 4 -conf
+\end{lstlisting}
+
+\subsection{Horizontální}
 
 scaling
 
@@ -251,14 +294,6 @@ command=vertx runmod io.majklk~mindmapeditor~0.0.1 -conf /srv/mindmap/conf/webse
 Server 2
 \begin{lstlisting}
 command=vertx runmod io.majklk~mindmapeditor~0.0.1 -conf /srv/mindmap/conf/dbserver.json -cluster-host 10.10.10.162 -ha
-\end{lstlisting}
-
-\subsection{Vertikální}
-
-Samotné vertikální škálování lze efektivně řešit na aplikační úrovni. Jak již bylo zmíněno v kapitole \ref{sub:multireactor} voláním \emph{Runtime.getRuntime().availableProcessors()} lze získat počet procesorových jader a s tím dále pracovat. Upravením předchozích příkazů však docílíme shodného výsledku.
-
-\begin{lstlisting}
-command=vertx runmod io.majklk~mindmapeditor~0.0.1 -instances 4 -conf /srv/mindmap/conf/dbserver.json -cluster-host 10.10.10.162 -ha
 \end{lstlisting}
 
 \subsection{Interakce s Vert.x}\label{sub:interaction}
