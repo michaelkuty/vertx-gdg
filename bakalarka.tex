@@ -13,7 +13,7 @@
 \usepackage{url}
 \usepackage{graphicx}
 \usepackage{placeins} %floatbarrier \FloatBarrier
-
+%\usepackage{listing}
 \makeatletter
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX coěmmands.
@@ -98,12 +98,16 @@ pdfkeywords={\v{s}ablona,LaTeX,LyX}%
 
 %java code block%
 
+\usepackage{listing}
 \usepackage{listings}
 \usepackage{color}
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\renewcommand*{\lstlistingname}{Ukázka kódu} %prejmenovani lstlisting
+\renewcommand*{\lstlistlistingname}{Seznam ukázek kódu}
 
 % syntax highlight pro jazyk Java %
 \lstset{
@@ -347,6 +351,8 @@ EN verze
 \bibitem{ubuntu}Canonical Ltd.\emph{ Ubuntu Server Edition } {[}online].
 {[}cit. 2014-08-01]. Dostupný z WWW \url{http://www.ubuntu.com/server}
 
+\bibitem{mongodb}Williams, Alex\emph{ MongoDB Raises 150M For NoSQL Database Technology With Salesforce Joining As Investor } {[}online].
+{[}cit. 2014-08-02]. Dostupný z WWW \url{http://techcrunch.com/2013/10/04/mongodb-raises-150m-for-nosql-database-technology-with-salesforce-joining-as-investor/}
 
 
 

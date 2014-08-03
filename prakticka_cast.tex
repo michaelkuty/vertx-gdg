@@ -2,24 +2,18 @@
 
 \chapter{Praktická část}
 
-V této kapitole je popsán software a postupy použité při implementaci a nasazení Vert.x aplikací.
+V této kapitole je popsán software a postupy použité při implementaci a nasazení malé Vert.x aplikace pro správu myšlenkových map.
 
 \section{Návrh}
 
 Hlavní částí aplikace budou tři verticly. Tyto verticly pak budou sloužit jako základ pro jeden z modulů.
 
-\begin{description}
-\item[main.js] stará se o spouštění celé aplikace v několika rolích
-\item[editor.js] obsluha editoru
-\item[database.js] obsluha událostí 
-\end{description}
-
 \subsection{Cíle aplikace}\label{sub:use_case}
 
 \begin{itemize}
-\item Přidání a odstranění myšlenkových map
-\item Přidání a odstranění jednotlivých bodů v myšlenkové mapě
-\item Přejmenování bodů v myšlenkové mapě
+\item Přidání a odstranění myšlenkové mapy
+\item Přidání a odstranění bodu v myšlenkové mapě
+\item Přejmenování bodu v myšlenkové mapě
 \end{itemize}
 
 \begin{figure}
@@ -33,7 +27,7 @@ Hlavní částí aplikace budou tři verticly. Tyto verticly pak budou sloužit 
 
 \subsection{Architektura}
 
-Jak je vidět na obrázku \ref{fig:architecture_real} klienti se budou připojovat přes jeden webový server, který viditelný pro webové klienty. S druhým serverem bude spojený na úrovni Hazelcast clusteru. Vzhledem k situaci, která je blíže popsaná v kapitole \ref{sub:praktCluster}, kdy je webový server připojen do dvou sítí není potřeba šifrování na úrovni clusteru. Pro demonstraci však dojde k nakonfigurování a otestování šifrování viz v kapitole \ref{sub:crypting}
+Jak je vidět na obrázku \ref{fig:architecture_real} klienti se budou připojovat přes jeden webový server, který viditelný pro webové klienty. S druhým serverem bude spojený na úrovni Hazelcast clusteru. Vzhledem k situaci, která je blíže popsaná v kapitole \ref{sub:praktCluster}, kdy je webový server připojen do dvou sítí není potřeba šifrování na úrovni clusteru.
 
 \begin{figure}
 \begin{centering}
@@ -108,6 +102,12 @@ vertx runmod io.majklk~mindmapeditor~0.0.1 -conf /srv/mindmap/conf/webserver.jso
 
 \section{Vlastní implementace}
 
+\begin{description}
+\item[main.js] stará se o spouštění celé aplikace v několika rolích
+\item[editor.js] obsluha editoru
+\item[database.js] obsluha událostí 
+\end{description}
+
 \subsection{Editor}
 
 \subsection{Databázová vrstva}
@@ -148,7 +148,7 @@ eventBus.registerHandler('mindMaps.save', function(mindMap,responder) {
 
 Vzhledem k jednoduchosti aplikace nebyl vytvořen diagram tříd. V aplikaci budou pouze dva modely a to mapa a její potomek, který se od mapy liší pouze tím, že má místo globálního unikátního identifikátoru pouze unikátní identifikátor v rámci jedné mapy.
 
-\begin{lstlisting}
+\begin{lstlisting}[caption={Konfigurace serveru 2},label=confServ2]
 {
     "name": "MindMap editor server 2 databázový modul, obrazkový exporter",
     "exporter": {
@@ -286,7 +286,7 @@ vertx runmod com.mycompany~my-mod~1.0 -conf config.json
 
 moduly vice jazyku
 
-\section{Základní služby}
+\section{Základní software}
 
 Jádrem serveru je operační systém Ubuntu\cite{ubuntu} 14.04 LTS\footnote{dlouhodobá podpora} Server Edition s kódovým označením 
 Trusty Tahr. Je to osvědčený systém, který bude mít podporu do roku 2019. Systém má aplikaci pro správu softwarových balíků 
@@ -298,11 +298,15 @@ Jako hlavní přísadou celého prostředí je otevřená implementace Java Plat
 
 \subsection{Vert.x}
 
-Jediná služba, která se zatím nenachází jako systémový balíček je samotný Vert.x. Pro jeho instalaci je nutné stáhnout distribuci ze stránek platformy. Tento archiv potom rozbalit do požadované lokace. Následně stačí v závislosti na konkrétním systému přidat soubor \emph{vertx/bin/vertx} do systémové proměnné \emph{PATH}. Následně by měla být funkční interakce s platformou skrz příkazovou řádku. Příklad proměnné \emph{PATH} lze vidět v kapitole \ref{sub:service}. Správné nastavení lze otestovat napsáním \emph{vertx} do příkazové řádky. Správný výstup jsou pak pomocné informace pro komunikaci s platformou tzv. help.
+Jediná služba, která se zatím nenachází jako systémový balíček je samotný Vert.x. Pro jeho instalaci je nutné stáhnout distribuci ze stránek platformy. Tento archiv potom rozbalit do požadované lokace. Následně stačí v závislosti na konkrétním systému přidat soubor \emph{vertx/bin/vertx} do systémové proměnné \emph{PATH}. Poté by měla být funkční interakce s platformou pomocí příkazové řádky. Příklad proměnné \emph{PATH} lze vidět v kapitole \ref{sub:service}. Správné nastavení lze otestovat napsáním \emph{vertx} do příkazové řádky. Správný výstup jsou pak pomocné informace pro komunikaci s platformou tzv. help.
 
 \subsection{Databázový server}
 
-Pro ukládání myšlenkových map je použita NoSQl databáze MongoDB ve verzi 2.6. MongoDb má za sebou více než pět let vývoje a několik obřích investicí. Vzhledem k tomu, že již existuje Vert.x modul pro pohodlnou spolupráci s touto databází byla vybrána pravě tato NoSQL databáze.
+Pro ukládání myšlenkových map je použita NoSQl databáze MongoDB ve verzi 2.6. MongoDB má za sebou více než pět let vývoje a několik obřích investicí\cite{mongodb} do dalšího vývoje. V dnešní době existuje nespočet NoSQL databází, vzhledem k tomu, že již existuje Vert.x modul pro pohodlnou asynchronní spolupráci s touto databází byla vybrána pravě tato NoSQL databáze. Pro instalaci stačí využít balíčkovací systém aptitude. Pro samotné nastavení databáze, zde není prostor a postačí tak výchozí stav, kdy databáze naslouchá na portu 27017 což lze vidět i z konfigurace aplikace v ukázce kódu \ref{confServ2}
+
+\begin{lstlisting}
+apt-get install mongodb-server -y
+\end{lstlisting}
 
 \subsection{Nasazení produkční služby}\label{sub:service}
 

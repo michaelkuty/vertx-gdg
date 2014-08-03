@@ -25,9 +25,9 @@ Na obrázku \ref{fig:vertxArchitectureDiagram} jsou znázorněny dvě nezávisl�
 
 \begin{figure}
 \begin{centering}
-\includegraphics[width	=1\textwidth]{obrazky/vertx-architecture-diagram}
+\includegraphics[scale=0.55]{obrazky/architecture_vertx}
 \par\end{centering}
-\caption{Architektura Vert.x \emph{Jaehong Kim} \cite{vertxArchitectureDiagram} \label{fig:vertxArchitectureDiagram}}
+\caption{Architektura Vert.x převzato a upraveno z \cite{vertxArchitectureDiagram} \label{fig:vertxArchitectureDiagram}}
 \end{figure}
 
 \subsection{Jádro}
@@ -73,6 +73,8 @@ Samotné jádro Vert.x je implementováno v jazyce Java a pro Vert.x je tedy dů
 Ed Gardoh v roce 2011 ve svém jednoduchém testu\cite{serialTest} prověřil práci s paralelizací úkonů. Z jeho testů vyplývá, že Java 1.7 je až o 40\% rychlejší při práci s vlákny nejenom díky nové metodě Fork/Join\cite{forkJoin}.
 
 \subsubsection{Event loop}
+
+Event Loops can be described as follows in a detailed way. Event Loops use Netty NioWorkder as it is. All handlers specified by verticles run on Event Loops. Each verticle instance has its specified NioWorker. As such, it is guaranteed that a verticle instance is always executed on an identical thread. Therefore, verticles can be written in a thread-safe manner.
 
 Základem asynchronního modelu je vlákno, které se stará o všechny události. Když událost dorazí vlákno se postará o to aby byla zavolána ta správná obslužná rutina. Každá Vert.x instance interně obsluhuje malý počet těchto vláken, zpravidla pak jedno na každé procesorové jádro. Těmto vláknům se ve Vert.x komunitě říká \emph{Event Loop}. V komunitách Nginx nebo Node.js se ovšem setkáme spíše s pojmem \emph{Run Loop}. Přeloženo volně do češtiny pak ,,událostní smyčka". Obrovská nevýhoda takového přístupu je, že nikdy nesmí dojít k blokování takového vlákna. Jakmile k tomu dojde, celá aplikace tzv. zamrzne. Při startu verticlu \ref{sub:verticle} je pak vybrán jeden event loop, který ho obsluhuje po celý životní cyklus. Event loop je schopný obsloužit tisíce vertclů v ten samý čas.
 
@@ -129,7 +131,7 @@ Objekty v SharedData musí být immutable\footnote{jakmile jednou takovýto obje
 
 \subsubsection{Worker verticle}
 
-V standardním verticlu by nemělo nikdy dojít k blokování hlavního vlákna. V dnešní době se bez klasického synchronního volání pravděpodobně neobejdeme, protože většina knihoven a modulů je napsána jako blokující kód. Z toho důvodu je v platformě Vert.x možnost označit verticle jako workera respektive pustit je jako worker verticle. Tím dojde k vyčlenění verticle z asociace na hlavní vlákna a takovému vláknu pak bude přiděleno vlákno z Background thread poolu. Uvnitř takového verticle lze pak vykonávat blokující volání bez blokování celé aplikace. To se v praxi ukázalo jako velice užitečná věc. Bohužel tímto ztrácíme efektivní možnost škálování pro velký počet konkurenčních vláken. Velikost background thread poolu čítá na 20 před připravených vláken. Tento počet lze změnit v konfiguraci Vert.x.
+V standardním verticlu by nemělo nikdy dojít k blokování hlavního vlákna. V dnešní době se bez klasického synchronního volání pravděpodobně neobejdeme, protože většina knihoven a modulů je napsána jako blokující kód. Z toho důvodu je v platformě Vert.x možnost označit verticle jako workera respektive pustit jej jako worker verticle metodou \emph{deployWorkerVerticle} namísto \emph{deployVerticle}. Tím dojde k vyčlenění verticle z asociace na hlavní vlákna a takovému vláknu pak bude přiděleno vlákno z Background thread poolu. Uvnitř takového verticle lze pak vykonávat blokující volání bez blokování celé aplikace. To v praxi nebývale rozšířilo možnosti uplatnění celé platformy. Bohužel tímto ztrácíme efektivní možnost škálování pro velký počet konkurenčních vláken je tedy vhodné situovat náročné výpočty na speciálně vyčleně servery. Velikost background thread poolu čítá na 20 před připravených vláken. Tento počet lze změnit v konfiguraci Vert.x.
 
 \subsubsection{Vert.x instance}
 
@@ -161,7 +163,7 @@ Typy modulů lze rozdělit do dvou základních skupin, které lze dál rozděli
 \item[nespustitelné]{modul nemá specifikovaný hlavní verticle a lze jej použít v jiném modulu použitím metody \emph{includes}}
 \end{description}
 
-Pro vyčlenění modulu z asociace na event loop stačí přidat parametr \emph{worker: true} do deskriptoru modulu.	 
+Pro vyčlenění modulu z asociace na event loop stačí přidat parametr \emph{worker: true} do deskriptoru modulu.
 
 \subsection{Event Bus}\label{sub:eventBus}
 
@@ -257,7 +259,7 @@ Díky této části API může programátor řídit spouštění a vypínání n
 
 \subsection{Polyglot}
 
-Polyglot je označován člověk, který ovládá více jazyků. V terminologii Vert.x to znamená, že API je dostupná ve více programovacích jazycích. Což v praxi znamená, že si programátor může sám zvolit v jakém jazyce bude implementovat svůj kód. Díky faktu, že spolu všechny verticly komunikují skrze zprávy je tak možné mít část aplikace napsanou například v jazyce Java a druhou část v jazyce Python apod. Tento fakt hodně napomáhá celé platformě nalákat nové programátory, protože ne každý na světě umí programovací jazyk Java. Výčet podporovaných jazyků ve verzi 2.0. Do verze 3.0 se pak chystá automatické generování API pro každý jazyk.
+Polyglot je označován člověk, který ovládá více jazyků. V terminologii Vert.x to znamená, že API je dostupná ve více programovacích jazycích. Což v praxi znamená, že si programátor může sám zvolit v jakém jazyce bude implementovat svůj kód. Díky faktu, že spolu všechny verticly komunikují skrze zprávy je tak možné mít část aplikace napsanou například v jazyce Java a druhou část v jazyce Python apod. Tento fakt hodně napomáhá celé platformě nalákat nové programátory, protože ne každý, umí programovací jazyk Java. Výčet podporovaných jazyků ve verzi 2.0. Do verze 3.0 se pak chystá automatické generování API pro každý jazyk. 
 
 \begin{itemize}
 \item{Java}

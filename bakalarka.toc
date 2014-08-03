@@ -18,7 +18,7 @@
 \contentsline {subsubsection}{Verticle}{8}{section*.9}
 \contentsline {subsubsection}{Worker verticle}{9}{section*.10}
 \contentsline {subsubsection}{Vert.x instance}{9}{section*.11}
-\contentsline {subsubsection}{Moduly}{10}{section*.12}
+\contentsline {subsubsection}{Moduly}{9}{section*.12}
 \contentsline {subsection}{\numberline {2.2.4}Event Bus}{10}{subsection.2.2.4}
 \contentsline {subsubsection}{Hazelcast}{12}{section*.13}
 \contentsline {section}{\numberline {2.3}API}{13}{section.2.3}
@@ -52,21 +52,22 @@
 \contentsline {section}{\numberline {3.4}Integrace s datab\IeC {\'a}z\IeC {\'\i } MongoDB}{25}{section.3.4}
 \contentsline {section}{\numberline {3.5}Komunikace v re\IeC {\'a}ln\IeC {\'e}m \IeC {\v c}ase}{27}{section.3.5}
 \contentsline {subsection}{\numberline {3.5.1}Akce}{27}{subsection.3.5.1}
-\contentsline {subsection}{\numberline {3.5.2}Ud\IeC {\'a}losti}{27}{subsection.3.5.2}
+\contentsline {subsection}{\numberline {3.5.2}Ud\IeC {\'a}losti}{29}{subsection.3.5.2}
 \contentsline {section}{\numberline {3.6}Polyglot v\IeC {\'y}voj a moduly}{29}{section.3.6}
-\contentsline {section}{\numberline {3.7}Z\IeC {\'a}kladn\IeC {\'\i } slu\IeC {\v z}by}{31}{section.3.7}
+\contentsline {section}{\numberline {3.7}Z\IeC {\'a}kladn\IeC {\'\i } software}{31}{section.3.7}
 \contentsline {subsection}{\numberline {3.7.1}Java}{31}{subsection.3.7.1}
 \contentsline {subsection}{\numberline {3.7.2}Vert.x}{31}{subsection.3.7.2}
 \contentsline {subsection}{\numberline {3.7.3}Datab\IeC {\'a}zov\IeC {\'y} server}{31}{subsection.3.7.3}
-\contentsline {subsection}{\numberline {3.7.4}Nasazen\IeC {\'\i } produk\IeC {\v c}n\IeC {\'\i } slu\IeC {\v z}by}{31}{subsection.3.7.4}
+\contentsline {subsection}{\numberline {3.7.4}Nasazen\IeC {\'\i } produk\IeC {\v c}n\IeC {\'\i } slu\IeC {\v z}by}{32}{subsection.3.7.4}
 \contentsline {section}{\numberline {3.8}Horizont\IeC {\'a}ln\IeC {\'\i } a vertik\IeC {\'a}ln\IeC {\'\i } \IeC {\v s}k\IeC {\'a}lov\IeC {\'a}n\IeC {\'\i }}{32}{section.3.8}
 \contentsline {subsection}{\numberline {3.8.1}Vertik\IeC {\'a}ln\IeC {\'\i }}{33}{subsection.3.8.1}
 \contentsline {subsection}{\numberline {3.8.2}Horizont\IeC {\'a}ln\IeC {\'\i }}{33}{subsection.3.8.2}
-\contentsline {subsection}{\numberline {3.8.3}Interakce s Vert.x}{33}{subsection.3.8.3}
-\contentsline {subsection}{\numberline {3.8.4}Vert.x v clusteru}{33}{subsection.3.8.4}
-\contentsline {section}{\numberline {3.9}Vysok\IeC {\'a} dostupnost}{34}{section.3.9}
+\contentsline {subsection}{\numberline {3.8.3}Interakce s Vert.x}{34}{subsection.3.8.3}
+\contentsline {subsection}{\numberline {3.8.4}Vert.x v clusteru}{34}{subsection.3.8.4}
+\contentsline {section}{\numberline {3.9}Vysok\IeC {\'a} dostupnost}{35}{section.3.9}
 \contentsline {chapter}{\numberline {4}Z\IeC {\'a}v\IeC {\v e}r}{36}{chapter.4}
-\contentsline {section}{\numberline {4.1}Mo\IeC {\v z}nosti dal\IeC {\v s}\IeC {\'\i }ho v\IeC {\'y}zkumu}{36}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Distribuovan\IeC {\'e} v\IeC {\'y}po\IeC {\v c}ty}{36}{subsection.4.1.1}
-\contentsline {chapter}{Literatura}{38}{chapter*.23}
+\contentsline {section}{\numberline {4.1}Mo\IeC {\v z}nosti dal\IeC {\v s}\IeC {\'\i }ho v\IeC {\'y}zkumu}{37}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Distribuovan\IeC {\'e} v\IeC {\'y}po\IeC {\v c}ty}{37}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Srovn\IeC {\'a}n\IeC {\'\i }}{37}{subsection.4.1.2}
+\contentsline {chapter}{Literatura}{39}{chapter*.23}
 \contentsline {part}{P\IeC {\v r}\IeC {\'\i }lohy}{I}{chapter*.23}
