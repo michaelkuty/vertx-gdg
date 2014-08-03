@@ -75,7 +75,7 @@ if("webserver" in config) {
 \end{lstlisting}
 
 Z třídy \emph{container} si vytáhne config celého modulu a zeptá se jestli se v něm nenachází daná role.
-Potom už jen stačí aby daný konfigurační soubor obsahoval klíč \emph{webserver} s danou konfigurací, která se nachází níže. 
+Potom už jen stačí aby daný konfigurační soubor obsahoval klíč \emph{webserver} s danou konfigurací, která se nachází níže.
 
 \begin{lstlisting}
 {
@@ -100,20 +100,84 @@ Potom už jen stačí aby daný konfigurační soubor obsahoval klíč \emph{web
 }
 \end{lstlisting}
 
-Spuštění verticle z příkazové řádky
+Spuštěním modulu z příkazové řádky se Vert.x podívá do deskriptoru modulu a měl by v něm najít cestu k hlavní třídě nebo též verticlu. Ten následně spustí a předá mu danou konfiguraci. V současné době běží server na všech rozhraních a podává obsah složky \emph{web} což je kořen webové  části aplikace.
+
 \begin{lstlisting}
-vertx run foo.js -conf myconf.json
+vertx runmod io.majklk~mindmapeditor~0.0.1 -conf /srv/mindmap/conf/webserver.json
 \end{lstlisting}
+
+\section{Vlastní implementace}
+
+\subsection{Editor}
+
+\subsection{Databázová vrstva}
+
+V centrálním repozitáři již existuje modul pro komunikaci s MongoDB\footnote{https://github.com/vert-x/mod-mongo-persistor}, který poskytuje jednoduchou API pro asynchronní komunikaci s databází. Zaregistrujeme tedy obslužnou rutinu pro uložení myšlenkové mapy. 
+
+\begin{lstlisting}
+var eventBus = require('vertx/event_bus');
+var mindMapUtils = require('web/js/mindmap_utils');
+var console = require('vertx/console');
+
+var mindMaps = {};
+
+function sendPersistorEvent(command, callback) {
+	eventBus.send('vertx.mongopersistor', command, function(reply) {
+		if (reply.status === "ok") {
+			callback(reply);
+		} else {
+			console.log(reply.message);
+		}
+	});
+}
+
+eventBus.registerHandler('mindMaps.save', function(mindMap,responder) {
+	sendPersistorEvent(	{action: "save", collection: "mindMaps", document: mindMap},function(reply) {
+		mindMap._id = reply._id;
+		responder(mindMap);
+	});
+});
+
+\end{lstlisting}
+
+\subsection{Klientská aplikace}
+
+\subsubsection{D3.js}
 
 \section{Integrace s databází MongoDB}
 
 Vzhledem k jednoduchosti aplikace nebyl vytvořen diagram tříd. V aplikaci budou pouze dva modely a to mapa a její potomek, který se od mapy liší pouze tím, že má místo globálního unikátního identifikátoru pouze unikátní identifikátor v rámci jedné mapy.
+
+\begin{lstlisting}
+{
+    "name": "MindMap editor server 2 databázový modul, obrazkový exporter",
+    "exporter": {
+        "workers": 5
+    },
+    "mongodb": {
+        "address": "vertx.mongopersistor",
+        "host": "localhost",
+        "port": 27017,
+        "db_name": "mindmap_editor",
+        "pool_size": 20
+    },
+    "shell": {
+      "crash.auth": "simple",
+      "crash.auth.simple.username": "admin",
+      "crash.auth.simple.password": "heslo",
+      "crash.ssh.port": 2000
+    }
+}
+\end{lstlisting}
 
 \begin{description}
 \item[\_id] unikátní identifikátor\footnote{podtržítkem se běžně označující neměnné proměnné}
 \item[name] název samotné mapy
 \item[children] potomci
 \end{description}
+
+\begin{lstlisting}
+\end{lstlisting}
 
 \begin{lstlisting}
 {
