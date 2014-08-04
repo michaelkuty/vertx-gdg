@@ -6,7 +6,7 @@ V této kapitole je popsán software a postupy použité při implementaci a nas
 
 \section{Návrh}
 
-Hlavní částí aplikace budou tři verticly. Tyto verticly pak budou sloužit jako základ pro jeden z modulů.
+Aplikace bude složena ze dvou částí. První bude serverová část, která bude pracovat s mapami a bude obsluhovat klienty, kteří budou provádět jednotlivé akce. Druhá část potom bude na straně webového klienta, tedy část realizovaná pomocí D3.js, která bude mít na starosti vykreslování a reagování na uživatelské akce.	
 
 \subsection{Cíle aplikace}\label{sub:use_case}
 
@@ -23,11 +23,11 @@ Hlavní částí aplikace budou tři verticly. Tyto verticly pak budou sloužit 
 \caption{Případy užití\label{fig:use_case}}
 \end{figure}
 
-\FloatBarrier
+%\FloatBarrier
 
 \subsection{Architektura}
 
-Jak je vidět na obrázku \ref{fig:architecture_real} klienti se budou připojovat přes jeden webový server, který viditelný pro webové klienty. S druhým serverem bude spojený na úrovni Hazelcast clusteru. Vzhledem k situaci, která je blíže popsaná v kapitole \ref{sub:praktCluster}, kdy je webový server připojen do dvou sítí není potřeba šifrování na úrovni clusteru.
+Jak je vidět na obrázku \ref{fig:architecture_real} klienti se budou připojovat přes jeden webový server, který bude mít otevřené porty 80. S druhým serverem bude spojený na úrovni Hazelcast clusteru. Vzhledem k situaci, která je blíže popsaná v kapitole \ref{sub:praktCluster}, kdy je webový server připojen do dvou sítí není potřeba šifrování ani nejrůznějších tunelů. Druhý server bude sloužit pro komunikaci s databází a také jako \emph{exporter} myšlenkových map do obrázků ve formátu PNG.
 
 \begin{figure}
 \begin{centering}
@@ -36,22 +36,41 @@ Jak je vidět na obrázku \ref{fig:architecture_real} klienti se budou připojov
 \caption{Architektura nasazené aplikace\label{fig:architecture_real}}
 \end{figure}
 
-\subsubsection{Adresářová struktura aplikace}
+%\FloatBarrier
 
-\begin{lstlisting}
-main.js
-editor.js
-web
-utils
+\section{Vlastní implementace}
 
-vertx runmod io.majklk~mindmapeditor~0.0.1 -conf /srv/mindmap/conf/mindmajson -cluster-host 10.10.10.161 -ha
+Vzhledem k rozsahu práce bude v následující kapitole ukázána a popsána většina implementačních částí.
+
+\subsection{Editor}
+
+\begin{lstlisting}[caption=Zaregistrování obslužné rutiny v jazyce JavaScript]
+var eb = vertx.eventBus;
+
+var mujHandler = function(zprava) {
+  console.log('Přišla zpráva ' + zprava);
+}
+
+eb.registerHandler('test.tisk', mujHandler);
 \end{lstlisting}
 
+Obdobně to pak lze v jazyce Java, Ruby atd.
 
+\begin{lstlisting}[caption=Zaregistrování obslužné rutiny v jazyce Java]
+EventBus eb = vertx.eventBus();
 
-\section{Řídící verticle}
+Handler<Message> mujHandler = new Handler<Message>() {
+    public void handle(Message zprava) {
+        System.out.println("Přišla zpráva " + zprava.body);
+    }
+};
 
-Vzhledem k tomu, že bude aplikace nasazená na více serverech ve více rolích bylo by také zapotřebí více specializovaných modulů. Mnohdy je výhodnější implementovat řídící třídu, který bude mít na starost nasazovat moduly, dle dané konfigurace. Část kódu takového startéru by potom mohla vypadat následovně:
+eb.registerHandler("test.tisk", mujHandler);
+\end{lstlisting}
+
+\subsection{Řídící verticle}
+
+Vzhledem k tomu, že bude aplikace nasazená na více serverech ve více rolích bylo by také zapotřebí více specializovaných modulů. Mnohdy je výhodnější implementovat řídící verticl, který bude mít na starost nasazovat moduly, dle dané konfigurace. Část kódu takového startéru vypadá následovně:
 
 \begin{lstlisting}
 var container = require('vertx/container');
@@ -68,16 +87,18 @@ if("webserver" in config) {
 }
 \end{lstlisting}
 
-Z třídy \emph{container} si vytáhne config celého modulu a zeptá se jestli se v něm nenachází daná role.
+Každá metoda nasazení má jako poslední parametr obslužnou rutinu pro případ selhání. Výhodné je také ID nasazení, díky němuž lze později toto nasazení zrušit.
+
+Samotný kód vytáhne z třídy \emph{container} konfiguraci celého modulu a zeptá se jestli se v něm nenachází daná role.
 Potom už jen stačí aby daný konfigurační soubor obsahoval klíč \emph{webserver} s danou konfigurací, která se nachází níže.
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=Konfigurace serveru 1]
 {
    "name": "MindMap editor server 1 - HTTP + WebSocket",
     "webserver": {
         "workers": 3,
         "web_root": "web",
-        "host": "0.0.0.0",
+        "host": "10.10.10.161",
         "port": 80,
         "bridge": true,
         "inbound_permitted": [
@@ -94,21 +115,28 @@ Potom už jen stačí aby daný konfigurační soubor obsahoval klíč \emph{web
 }
 \end{lstlisting}
 
-Spuštěním modulu z příkazové řádky se Vert.x podívá do deskriptoru modulu a měl by v něm najít cestu k hlavní třídě nebo též verticlu. Ten následně spustí a předá mu danou konfiguraci. V současné době běží server na všech rozhraních a podává obsah složky \emph{web} což je kořen webové  části aplikace.
-
-\begin{lstlisting}
+\begin{lstlisting}[caption=Spuštění modulu z příkazové řádky]
 vertx runmod io.majklk~mindmapeditor~0.0.1 -conf /srv/mindmap/conf/webserver.json
 \end{lstlisting}
 
-\section{Vlastní implementace}
+Spuštěním modulu z příkazové řádky se Vert.x podívá do deskriptoru modulu, v kterém by měl najít cestu k hlavnímu verticlu. Ten následně spustí a předá mu danou konfiguraci. Samotný verticle pak může pracovat s Vert.x instancí. Většina jména parametrů mluví sami za sebe, kromě \emph{bridge, inbound permitted a outbound permitted}. Pokud je první z nich nastaven na hodnotu \emph{true} tak začnou platit pravidla, která jsou nadefinována v \emph{inbound permitted, outbound permitted}. Jde o tzv. bridge mezi webovým prohlížečem a Event busem jako takovým. \emph{Inbound permitted} říká jaké adresy se mají pustit dovnitř, analogicky potom \emph{outbound permitted} říká, co může jít ven. Výhodou je pak možnost specifikovat adresu pomocí regulárních výrazů.
+
+\subsubsection{Adresářová struktura aplikace}
+
+\begin{lstlisting}
+main.js
+editor.js
+web
+utils
+
+vertx runmod io.majklk~mindmapeditor~0.0.1 -conf /srv/mindmap/conf/mindmajson -cluster-host 10.10.10.161 -ha
+\end{lstlisting}
 
 \begin{description}
 \item[main.js] stará se o spouštění celé aplikace v několika rolích
 \item[editor.js] obsluha editoru
 \item[database.js] obsluha událostí 
 \end{description}
-
-\subsection{Editor}
 
 \subsection{Databázová vrstva}
 
@@ -332,12 +360,7 @@ stopwaitsecs=600
 \section{Horizontální a vertikální škálování}\label{sub:Scaling}
 
 Škálování je nedílnou součástí životního cyklu aplikace. Ne zřídka dojde aplikace do situace, kdy začne být pomalá či často padat pod velkým náporem klientů. Následující kapitola rozebírá možnosti škálování Vert.x aplikací.
-\begin{figure}
-\begin{centering}
-\includegraphics[scale=0.5]{obrazky/scaling_example}
-\par\end{centering}
-\caption{Horizontální a vertikální škálování\label{fig:scaling_example}}
-\end{figure}
+
 \FloatBarrier
 
 \subsection{Vertikální}
