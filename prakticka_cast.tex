@@ -42,35 +42,9 @@ Jak je vidět na obrázku \ref{fig:architecture_real} klienti se budou připojov
 
 Vzhledem k rozsahu práce bude v následující kapitole ukázána a popsána většina implementačních částí.
 
-\subsection{Editor}
-
-\begin{lstlisting}[caption=Zaregistrování obslužné rutiny v jazyce JavaScript]
-var eb = vertx.eventBus;
-
-var mujHandler = function(zprava) {
-  console.log('Přišla zpráva ' + zprava);
-}
-
-eb.registerHandler('test.tisk', mujHandler);
-\end{lstlisting}
-
-Obdobně to pak lze v jazyce Java, Ruby atd.
-
-\begin{lstlisting}[caption=Zaregistrování obslužné rutiny v jazyce Java]
-EventBus eb = vertx.eventBus();
-
-Handler<Message> mujHandler = new Handler<Message>() {
-    public void handle(Message zprava) {
-        System.out.println("Přišla zpráva " + zprava.body);
-    }
-};
-
-eb.registerHandler("test.tisk", mujHandler);
-\end{lstlisting}
-
 \subsection{Řídící verticle}
 
-Vzhledem k tomu, že bude aplikace nasazená na více serverech ve více rolích bylo by také zapotřebí více specializovaných modulů. Mnohdy je výhodnější implementovat řídící verticl, který bude mít na starost nasazovat moduly, dle dané konfigurace. Část kódu takového startéru vypadá následovně:
+Vzhledem k tomu, že bude aplikace nasazená na více serverech ve více rolích bylo by také zapotřebí více specializovaných modulů. Mnohdy je výhodnější implementovat řídící verticle, který bude mít na starost nasazovat moduly, dle dané konfigurace. Část kódu takového startéru vypadá následovně:
 
 \begin{lstlisting}
 var container = require('vertx/container');
@@ -87,10 +61,15 @@ if("webserver" in config) {
 }
 \end{lstlisting}
 
-Každá metoda nasazení má jako poslední parametr obslužnou rutinu pro případ selhání. Výhodné je také ID nasazení, díky němuž lze později toto nasazení zrušit.
+Každá metoda \emph{deploy} má jako poslední parametr obslužnou rutinu pro případ selhání. V mnoha případech se také hodí ID nasazení, díky němuž lze později toto nasazení zrušit.
 
-Samotný kód vytáhne z třídy \emph{container} konfiguraci celého modulu a zeptá se jestli se v něm nenachází daná role.
-Potom už jen stačí aby daný konfigurační soubor obsahoval klíč \emph{webserver} s danou konfigurací, která se nachází níže.
+Samotný kód vytáhne z třídy \emph{container} konfiguraci celého modulu a zeptá se jestli se v něm nenachází daná role. Potom už jen stačí aby daný konfigurační soubor obsahoval klíč \emph{webserver} s danou konfigurací, která se nachází níže. Obdobně je implementováno startování editoru, databázového modulu a exportéru. Spuštění modulu či verticle jde samozřejmě i ručně z příkazové řádky.
+
+\begin{lstlisting}[caption=Spuštění modulu z příkazové řádky]
+vertx runmod io.majklk~mindmapeditor~0.0.1 -conf /srv/mindmap/conf/webserver.json -instances 3
+\end{lstlisting}
+
+Spuštěním modulu z příkazové řádky se Vert.x podívá do deskriptoru modulu, v kterém by měl najít cestu k hlavnímu verticlu. Ten následně spustí a předá mu danou konfiguraci. Samotný verticle pak může pracovat s Vert.x instancí.
 
 \begin{lstlisting}[caption=Konfigurace serveru 1]
 {
@@ -115,66 +94,73 @@ Potom už jen stačí aby daný konfigurační soubor obsahoval klíč \emph{web
 }
 \end{lstlisting}
 
-\begin{lstlisting}[caption=Spuštění modulu z příkazové řádky]
-vertx runmod io.majklk~mindmapeditor~0.0.1 -conf /srv/mindmap/conf/webserver.json
-\end{lstlisting}
+Většina jména parametrů mluví sami za sebe, kromě \emph{bridge, inbound permitted a outbound permitted}. Pokud je první z nich nastaven na hodnotu \emph{true} tak začnou platit pravidla, která jsou nadefinována v \emph{inbound permitted, outbound permitted}. Jde o tzv. bridge mezi webovým prohlížečem a Event busem jako takovým. \emph{Inbound permitted} říká jaké adresy se mají pustit dovnitř, analogicky potom \emph{outbound permitted} říká, co může jít ven. Výhodou je pak možnost specifikovat adresu pomocí regulárních výrazů.
 
-Spuštěním modulu z příkazové řádky se Vert.x podívá do deskriptoru modulu, v kterém by měl najít cestu k hlavnímu verticlu. Ten následně spustí a předá mu danou konfiguraci. Samotný verticle pak může pracovat s Vert.x instancí. Většina jména parametrů mluví sami za sebe, kromě \emph{bridge, inbound permitted a outbound permitted}. Pokud je první z nich nastaven na hodnotu \emph{true} tak začnou platit pravidla, která jsou nadefinována v \emph{inbound permitted, outbound permitted}. Jde o tzv. bridge mezi webovým prohlížečem a Event busem jako takovým. \emph{Inbound permitted} říká jaké adresy se mají pustit dovnitř, analogicky potom \emph{outbound permitted} říká, co může jít ven. Výhodou je pak možnost specifikovat adresu pomocí regulárních výrazů.
-
-\subsubsection{Adresářová struktura aplikace}
+\subsubsection{Základní adresářová struktura}
 
 \begin{lstlisting}
-main.js
-editor.js
-web
-utils
-
-vertx runmod io.majklk~mindmapeditor~0.0.1 -conf /srv/mindmap/conf/mindmajson -cluster-host 10.10.10.161 -ha
+main.js //stará se o spouštění celé aplikace v několika rolích
+editor.js //obsluha editoru
+database.js //obsluha událostí 
+web //kořenová složka webové části
 \end{lstlisting}
 
-\begin{description}
-\item[main.js] stará se o spouštění celé aplikace v několika rolích
-\item[editor.js] obsluha editoru
-\item[database.js] obsluha událostí 
-\end{description}
+\subsection{Editor}
 
-\subsection{Databázová vrstva}
+\begin{lstlisting}[caption=Zaregistrování obslužné rutiny v jazyce JavaScript]
+var eb = vertx.eventBus;
 
-V centrálním repozitáři již existuje modul pro komunikaci s MongoDB\footnote{https://github.com/vert-x/mod-mongo-persistor}, který poskytuje jednoduchou API pro asynchronní komunikaci s databází. Zaregistrujeme tedy obslužnou rutinu pro uložení myšlenkové mapy. 
+var mujHandler = function(zprava) {
+  console.log('Přišla zpráva ' + zprava);
+}
 
-\begin{lstlisting}
+eb.registerHandler('test.tisk', mujHandler);
+\end{lstlisting}
+
+Obdobně to pak vypadá v ostatních jazycích. 
+
+\begin{lstlisting}[caption=Zaregistrování obslužné rutiny v jazyce Java]
+EventBus eb = vertx.eventBus();
+
+Handler<Message> mujHandler = new Handler<Message>() {
+    public void handle(Message zprava) {
+        System.out.println("Přišla zpráva " + zprava.body);
+    }
+};
+
+eb.registerHandler("test.tisk", mujHandler);
+\end{lstlisting}
+
+Na podobném principu je pak postaven zbytek serverové části. Na jednotlivé události jsou zaregistrovány podobné obslužné rutiny, které většinou dohledají konkrétní mapu a provedou nad ní nějakou změnu. Výslednou mapu uloží a pošlou událost všem klientům jako je vidět na diagramu \ref{fig:realtime_communication}.
+
+\begin{lstlisting}[caption=Publikování zprávy v jazyce JavaScript]
+eventBus.publish('editor.udalosti.'+mindMap._id, {"udalost": "bodPridan", parentKey: args.parentKey, node: newNode})
+\end{lstlisting}
+
+Díky metodě \emph{publish}, která je samozřejmě dostupná ve všech jazycích můžeme publikovat událost všem klientům, kteří mají zaregistrovanou obslužnou rutinu na identickou adresu, která je unikátní pro každou mapu.
+
+\subsection{Integrace s databází MongoDB}
+
+Vzhledem k jednoduchosti aplikace nebyl vytvořen diagram tříd. V aplikaci budou pouze dva modely a to mapa a její potomek, který se od mapy liší pouze tím, že má místo globálního unikátního identifikátoru pouze unikátní identifikátor v rámci jedné mapy.
+
+V centrálním repozitáři již existuje modul pro komunikaci s MongoDB\footnote{https://github.com/vert-x/mod-mongo-persistor}, který poskytuje jednoduchou API pro asynchronní komunikaci s databází. Zaregistrujeme tedy obslužnou rutinu pro uložení myšlenkové mapy. Obdobně pak pro každou akci z definovaných cílů.
+
+\begin{lstlisting}[caption=Uložení myšlenkové mapy do databáze]
 var eventBus = require('vertx/event_bus');
-var mindMapUtils = require('web/js/mindmap_utils');
 var console = require('vertx/console');
 
-var mindMaps = {};
-
-function sendPersistorEvent(command, callback) {
-	eventBus.send('vertx.mongopersistor', command, function(reply) {
+eventBus.registerHandler('mindMaps.save', function(mindMap) {
+	dotaz_do_databaze = {action: "save", collection: "mindMaps", document: mindMap}
+	eventBus.send('vertx.mongopersistor', dotaz_do_databaze, function(reply) {
 		if (reply.status === "ok") {
-			callback(reply);
+			// vše v pořádku
 		} else {
 			console.log(reply.message);
 		}
 	});
-}
-
-eventBus.registerHandler('mindMaps.save', function(mindMap,responder) {
-	sendPersistorEvent(	{action: "save", collection: "mindMaps", document: mindMap},function(reply) {
-		mindMap._id = reply._id;
-		responder(mindMap);
-	});
 });
 
 \end{lstlisting}
-
-\subsection{Klientská aplikace}
-
-\subsubsection{D3.js}
-
-\section{Integrace s databází MongoDB}
-
-Vzhledem k jednoduchosti aplikace nebyl vytvořen diagram tříd. V aplikaci budou pouze dva modely a to mapa a její potomek, který se od mapy liší pouze tím, že má místo globálního unikátního identifikátoru pouze unikátní identifikátor v rámci jedné mapy.
 
 \begin{lstlisting}[caption={Konfigurace serveru 2},label=confServ2]
 {
@@ -259,6 +245,43 @@ Když bude uživatel chtít změnit myšlenkovou mapu (přidat objekt, odebrat o
 
 Pokud uživatel otevře webový prohlížeč s konkrétní myšlenkovou mapou, dojde tak k přihlášení odběru událostí nad touto myšlenkovou mapou. Pokud ji někdo změní tento uživatel dostane stejnou událost s informací o změně jako každý jiný uživatel přihlášený k odběru událostí.
 Na straně klienta tak budou implementovány metody, které budou mít definované chování pro každou z definovaných událostí: přidání, odebrání a přejmenování objektu v myšlenkové mapě.
+
+\subsection{Klientská aplikace}
+
+V následující kapitole budou objasněny technologie použité na straně webového prohlížeče.
+
+\subsubsection{Struktura webové části}
+
+\begin{lstlisting}
+index.html
+editor.js //obsluha editoru
+database.js //obsluha událostí 
+web //kořenová složka webové části
+\end{lstlisting}
+
+
+\subsubsection{Event Bus v prohlížeči}
+
+Nejdůležitější částí klientské aplikace je Vert.x vrstva nad SockJS\cite{sockjs}, která zabaluje komunikaci se serverem na protokolu WebSocket\cite{webSockets}. Knihovna naváže spojení a udržuje neustálé spojení se serverem. Implementací metod \emph{eb.onopen a eb.onclose} může patřičně reagovat na otevření a uzavření spojení. Jediným parametrem samotného EventBusu je pak URL adresa na kterou se má připojit.
+
+\begin{lstlisting}[caption=Připojení Event busu z prohlížeče a inicializace editoru]
+var eb = new vertx.EventBus(window.location.protocol + '//' + window.location.hostname + ':' + window.location.port + '/eventbus');
+
+eb.onopen = function() {
+	//tato metoda se volá po úspěšném navázání komunikace
+	//zde již můžeme posílat zprávy
+	eb.send("mindMaps.save", mapa, function(reply){
+		eb.send("mindMaps.find", mapa._id, function(mindMap){
+			new MindMapEditor(mindMap, eb); //inicializace editoru
+		});	
+	});
+}
+\end{lstlisting}
+
+\subsubsection{D3.js}
+
+
+
 
 \section{Polyglot vývoj a moduly}\label{sec:praktickyModuly}
 
@@ -356,8 +379,34 @@ startsecs=10
 stopwaitsecs=600
 \end{lstlisting}
 
+\subsection{Interakce s Vert.x}\label{sub:interaction}
 
-\section{Horizontální a vertikální škálování}\label{sub:Scaling}
+Díky modulu CrasHub Shell\footnote{https://github.com/crashub/mod-shell} se lze protokolem SSH\footnote{Secure Shell} přihlásit přímo do Vert.x. Modul pak nabízí možnost interakce s jednotlivými komponentami samotného Vert.x. Lze například posílat zprávy přes Event Bus nebo nasazovat nové moduly za běhu celé aplikace.
+
+Pro nasazení modulu stačí přidání klíče \emph{shell} do konfigurace server 2. Po nasazení aplikace začne tento server poslouchat na portu 2000.
+
+\begin{lstlisting}[caption={Konfigurace modulu CrasHub Shell},label=confServ2]
+{
+    "name": "MindMap editor server 2 databázový modul, obrazkový exporter",
+    "shell": {
+      "crash.auth": "simple",
+      "crash.auth.simple.username": "admin",
+      "crash.auth.simple.password": "heslo",
+      "crash.ssh.port": 2000
+    }
+}
+\end{lstlisting}
+
+Samotný modul nabízí nepřeberné množství možností jak spravovat aplikace nebo ji naživo škálovat. Lze také jednoduše přidat vlastní příkazy a rozšířit tak možnosti tohoto modulu. Na obrázku \ref{fig:real_interaction} je hlavní přehledová stránka na které lze vidět činnost, vytížení a status všech vláken v celém clusteru. Dostupné jsou také informace o velikosti zásobníku, paměti či verze Javy. 
+
+\begin{figure}
+\begin{centering}
+\includegraphics[scale=0.21]{obrazky/real_interaction}
+\par\end{centering}
+\caption{Modul CrasHub Shell\label{fig:real_interaction}}
+\end{figure}
+
+\section{Škálování}\label{sub:Scaling}
 
 Škálování je nedílnou součástí životního cyklu aplikace. Ne zřídka dojde aplikace do situace, kdy začne být pomalá či často padat pod velkým náporem klientů. Následující kapitola rozebírá možnosti škálování Vert.x aplikací.
 
@@ -371,47 +420,27 @@ Samotné vertikální škálování lze efektivně řešit až na aplikační ú
 command=vertx runmod io.majklk~mindmapeditor~0.0.1 -instances 4 -conf
 \end{lstlisting}
 
-\subsection{Horizontální}
-
-scaling
-
-možnosti škálování a HA
-
-Server 1
-\begin{lstlisting}
-command=vertx runmod io.majklk~mindmapeditor~0.0.1 -conf /srv/mindmap/conf/webserver.json -cluster-host 10.10.10.162 -ha
-\end{lstlisting}
-
-Server 2
-\begin{lstlisting}
-command=vertx runmod io.majklk~mindmapeditor~0.0.1 -conf /srv/mindmap/conf/dbserver.json -cluster-host 10.10.10.162 -ha
-\end{lstlisting}
-
-\subsection{Interakce s Vert.x}\label{sub:interaction}
-
-Díky modulu CrasHub Shell\footnote{https://github.com/crashub/mod-shell} se lze protokolem SSH\footnote{Secure Shell} přihlásit přímo do Vert.x. Modul pak nabízí možnost interakce s jednotlivými komponentami samotného Vert.x. Lze například posílat zprávy přes Event Bus nebo nasazovat nové moduly za běhu celé aplikace. Samotný modul pak nabízí jednoduchou možnost přidání vlastním příkazů. Na obrázku je pak vidět přehledová obrazovka. Na obrázku \ref{fig:real_interaction} pak je hlavní přehledová stránka na které lze vidět činnost, vytížení a status všech vláken v celém clusteru. Dostupné jsou také informace o velikosti zásobníku, paměti či verze Javy. 
-
-\begin{figure}
-\begin{centering}
-\includegraphics[scale=0.21]{obrazky/real_interaction}
-\par\end{centering}
-\caption{Modul CrasHub Shell\label{fig:real_interaction}}
-\end{figure}
-
 \subsection{Vert.x v clusteru}\label{sub:praktCluster}
 
-Pro zajištění bezpečnosti databázového serveru, kde běží také služba pro vzdálený přístup k Vert.x instanci bude aplikace nasazena v clusteru. Webový server(HTTP Server) na obrázku \ref{fig:architecture_real} je připojen do dvou sítí.
+Dle návrhu architektury na obrázku \ref{fig:architecture_real} bude aplikace nasazena na dva servery. První bude naslouchat na port 80 a poběží zde Webový server(HTTP Server). Tento server má vnitřní IP adresu \emph{10.10.10.161}. Druhé rozhraní má připojené do internetu. Na druhém serveru je část aplikace, která komunikuje s databází a modul pro vzdálenou interakci s Vert.x. Jeho IP adresa je \emph{10.10.10.162}. Pro propojení obou instancí je potřeba upravit spouštěcí příkaz v konfiguraci Supervisoru.
 
-\begin{description}
-\item[Internet] pouze webový server
-\item[Síť clusteru] všechny servery
-\end{description}
+\begin{lstlisting}[caption=Spuštění clusteru na Serveru 1]
+command=vertx runmod io.majklk~mindmapeditor~0.0.1 -conf /srv/mindmap/conf/webserver.json -cluster -cluster-host 10.10.10.161
+\end{lstlisting}
 
-Pro maximální bezpečnost budou na webovém serveru otevřeny pouze porty 80 a 443. Na druhém serveru pak poběží samotná databáze a druhá část aplikace, která v sobě bude zahrnovat modul zajištující komunikaci s databází a modul pro vzdálenou správu Vert.x instancí, který byl představen v kapitole \ref{sub:interaction}.
+\begin{lstlisting}[caption=Spuštění clusteru na Serveru 2]
+command=vertx runmod io.majklk~mindmapeditor~0.0.1 -conf /srv/mindmap/conf/dbserver.json -cluster -cluster-host 10.10.10.162
+\end{lstlisting}
 
 \section{Vysoká dostupnost}
 
-Pro zajištění vysoké dostupnosti klíčových prvků aplikace, je potřeba upravit architekturu clusteru. Před webový server je postavená HA proxy\footnote{služba zajištující vyrovnávání zatížení}, která při úpadku jednoho z webových serverů přesměruje komunikaci na server druhý. Vert.x cluster je pak rozdělený na dvě HA skupiny(obr.\ref{fig:architecture_ideal}), které se liší svým zaměřením. První dva servery slouží jako webové a jsou napojeny na HA proxy. Další dva pak slouží pro komunikaci s databází, která na nich ležet nemusí.
+Pro zajištění vysoké dostupnosti klíčových prvků aplikace, je potřeba upravit architekturu clusteru. Před webový server je postaven load balancer\footnote{služba zajištující vyrovnávání zatížení} v tomto případě HA proxy, která při úpadku jednoho z webových serverů přesměruje komunikaci na server druhý. Vert.x cluster je pak rozdělený na dvě HA skupiny(obr.\ref{fig:architecture_ideal}), které se liší svým zaměřením. První dva servery slouží jako webové a jsou napojeny na HA proxy. Další dva pak slouží pro komunikaci s databází, která na nich, přímo běžet nemusí. V této HA skupině je pak dále modul pro interakci s Vert.x. Díky specifikování HA skupiny nikdy nedojde k nasazení modulu na webovém serveru a tedy otevření SSH na portu 2000.
+
+\begin{lstlisting}[caption=Vysoká dostupnost na databázovém serveru 2]
+command=vertx runmod io.majklk~mindmapeditor~0.0.1 -conf /srv/mindmap/conf/dbserver.json -cluster-host 10.10.10.162 -ha -hagroup skupina-1
+\end{lstlisting}
+
+Když je specifikován parametr \emph{-ha} lze automaticky vypustit parametr \emph{-cluster}.
 
 \begin{figure}
 \begin{centering}
