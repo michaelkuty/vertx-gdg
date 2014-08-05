@@ -8,9 +8,9 @@
 \contentsline {figure}{\numberline {2.5}{\ignorespaces P\IeC {\v r}\IeC {\'\i }klad vertik\IeC {\'a}ln\IeC {\'\i }ho \IeC {\v s}k\IeC {\'a}lov\IeC {\'a}n\IeC {\'\i } \emph {vertx run HelloWord -instances 4} }}{11}{figure.2.5}
 \contentsline {figure}{\numberline {2.6}{\ignorespaces Event Bus distribuovan\IeC {\'y} mezi dva servery}}{12}{figure.2.6}
 \contentsline {figure}{\numberline {2.7}{\ignorespaces Horizont\IeC {\'a}ln\IeC {\'\i } a vertik\IeC {\'a}ln\IeC {\'\i } \IeC {\v s}k\IeC {\'a}lov\IeC {\'a}n\IeC {\'\i }}}{16}{figure.2.7}
-\contentsline {figure}{\numberline {2.8}{\ignorespaces Clustering mezi t\IeC {\v r}emi Vert.x instancemi }}{17}{figure.2.8}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Clustering mezi t\IeC {\v r}emi Vert.x instancemi }}{18}{figure.2.8}
 \contentsline {figure}{\numberline {2.9}{\ignorespaces V\IeC {\'y}sledky prvn\IeC {\'\i }ho testu \emph {Tim Fox} \cite {benchmarkTim}}}{20}{figure.2.9}
-\contentsline {figure}{\numberline {2.10}{\ignorespaces V\IeC {\'y}sledek druh\IeC {\'e}ho testu \emph {Tim Fox} \cite {benchmarkTim}}}{20}{figure.2.10}
+\contentsline {figure}{\numberline {2.10}{\ignorespaces V\IeC {\'y}sledek druh\IeC {\'e}ho testu \emph {Tim Fox} \cite {benchmarkTim}}}{22}{figure.2.10}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces P\IeC {\v r}\IeC {\'\i }pady u\IeC {\v z}it\IeC {\'\i }}}{24}{figure.3.1}
 \contentsline {figure}{\numberline {3.2}{\ignorespaces Architektura nasazen\IeC {\'e} aplikace}}{24}{figure.3.2}

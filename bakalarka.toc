@@ -27,17 +27,17 @@
 \contentsline {subsection}{\numberline {2.3.2}Kontainer API}{15}{subsection.2.3.2}
 \contentsline {subsection}{\numberline {2.3.3}Polyglot}{15}{subsection.2.3.3}
 \contentsline {section}{\numberline {2.4}Clustering}{16}{section.2.4}
-\contentsline {subsection}{\numberline {2.4.1}Vysok\IeC {\'a} dostupnost}{18}{subsection.2.4.1}
-\contentsline {subsubsection}{Automatick\IeC {\'e} zotaven\IeC {\'\i } z hav\IeC {\'a}rie}{18}{section*.15}
-\contentsline {subsubsection}{HA skupiny}{18}{section*.16}
-\contentsline {subsubsection}{Kv\IeC {\'o}rum}{18}{section*.17}
-\contentsline {subsubsection}{Vertigo cluster}{18}{section*.18}
+\contentsline {subsection}{\numberline {2.4.1}Vysok\IeC {\'a} dostupnost}{17}{subsection.2.4.1}
+\contentsline {subsubsection}{Automatick\IeC {\'e} zotaven\IeC {\'\i } z hav\IeC {\'a}rie}{17}{section*.15}
+\contentsline {subsubsection}{HA skupiny}{17}{section*.16}
+\contentsline {subsubsection}{Kv\IeC {\'o}rum}{17}{section*.17}
+\contentsline {subsubsection}{Vertigo cluster}{19}{section*.18}
 \contentsline {section}{\numberline {2.5}Porovn\IeC {\'a}n\IeC {\'\i } s Node.js}{19}{section.2.5}
 \contentsline {subsection}{\numberline {2.5.1}V\IeC {\'y}kon}{19}{subsection.2.5.1}
 \contentsline {subsubsection}{Metody testov\IeC {\'a}n\IeC {\'\i }}{19}{section*.19}
 \contentsline {subsubsection}{Hardware}{19}{section*.20}
-\contentsline {subsubsection}{V\IeC {\'y}sledky}{19}{section*.21}
-\contentsline {subsubsection}{Srovn\IeC {\'a}n\IeC {\'\i } s vybran\IeC {\'y}mi platformami}{21}{section*.22}
+\contentsline {subsubsection}{V\IeC {\'y}sledky}{20}{section*.21}
+\contentsline {subsubsection}{Srovn\IeC {\'a}n\IeC {\'\i } s vybran\IeC {\'y}mi platformami}{20}{section*.22}
 \contentsline {subsection}{\numberline {2.5.2}Vlastnosti}{21}{subsection.2.5.2}
 \contentsline {subsection}{\numberline {2.5.3}Z\IeC {\'a}v\IeC {\v e}r srovn\IeC {\'a}n\IeC {\'\i }}{21}{subsection.2.5.3}
 \contentsline {chapter}{\numberline {3}Praktick\IeC {\'a} \IeC {\v c}\IeC {\'a}st}{23}{chapter.3}
