@@ -319,7 +319,7 @@ Classloader při startu modulu automaticky načte všechny knihovny nacházejíc
 }
 \end{lstlisting}
 
-Jmenná konvence modulů vychází ze Java konvence\cite{javaPKG} pro pojmenování balíčků ke které přidává akorát číslo verze \emph{com.mycompany~my-mod~1.0}.
+Jmenná konvence modulů vychází ze Java konvence\cite{javaPKG} pro pojmenování balíčků kterou rozšiřuje o číslo verze \emph{com.mycompany~my-mod~1.0}.
 Pro publikování modulu jsou pak důležité nejrůznější metadata, které je dobré specifikovat.
 \begin{lstlisting}
 {
@@ -389,7 +389,7 @@ public class ImageExporter extends Verticle {
 
 Jádrem serveru je operační systém Ubuntu\cite{ubuntu} 14.04 LTS\footnote{dlouhodobá podpora} Server Edition s kódovým označením 
 Trusty Tahr. Je to osvědčený systém, který bude mít podporu do roku 2019. Systém má aplikaci pro správu softwarových balíků 
-aptitude. Všechny aplikace kromě samotného Vert.x šli hravě nainstalovat.
+aptitude. Všechny aplikace kromě samotného Vert.x jdou hravě nainstalovat pře tento systém.
 
 \subsection{Java}
 
@@ -401,7 +401,7 @@ Jediná služba, která se zatím nenachází jako systémový balíček je samo
 
 \subsection{Databázový server}
 
-Pro ukládání myšlenkových map je použita NoSQl databáze MongoDB ve verzi 2.6. MongoDB má za sebou více než pět let vývoje a několik obřích investicí\cite{mongodb} do dalšího vývoje. V dnešní době existuje nespočet NoSQL databází, vzhledem k tomu, že již existuje Vert.x modul pro pohodlnou asynchronní spolupráci s touto databází byla vybrána pravě tato NoSQL databáze. Pro instalaci stačí využít balíčkovací systém aptitude. Pro samotné nastavení databáze, zde není prostor a postačí tak výchozí stav, kdy databáze naslouchá na portu 27017 což lze vidět i z konfigurace aplikace v ukázce kódu \ref{confServ2}
+Pro ukládání myšlenkových map je použita NoSQl databáze MongoDB ve verzi 2.6. MongoDB má za sebou více než pět let vývoje a několik obřích investicí\cite{mongodb} do dalšího vývoje. V dnešní době existuje nespočet NoSQL databází, vzhledem k tomu, že již existuje Vert.x modul pro pohodlnou asynchronní spolupráci s touto databází byla vybrána pravě tato NoSQL databáze. Pro instalaci stačí využít balíčkovací systém aptitude. Nastavení databáze lze ponechat ve výchozím stavu, kdy databáze naslouchá na portu 27017 což lze vidět i z konfigurace aplikace v ukázce kódu \ref{confServ2}.
 
 \begin{lstlisting}
 apt-get install mongodb-server -y
@@ -488,7 +488,7 @@ Hlavní sada vláken, tedy event loopů je ve výchozím nastavení na hodnotě 
 
 \section{Vysoká dostupnost}
 
-Pro zajištění vysoké dostupnosti klíčových prvků aplikace, je potřeba upravit architekturu clusteru. Před webový server je postaven load balancer\footnote{služba zajištující vyrovnávání zatížení} v tomto případě HA proxy, která při úpadku jednoho z webových serverů přesměruje komunikaci na server druhý. Vert.x cluster je pak rozdělený na dvě HA skupiny(obr.\ref{fig:architecture_ideal}), které se liší svým zaměřením. První dva servery slouží jako webové a jsou napojeny na HA proxy. Další dva pak slouží pro komunikaci s databází, která na nich, přímo běžet nemusí. V této HA skupině je pak dále modul pro interakci s Vert.x. Díky specifikování HA skupiny nikdy nedojde k nasazení modulu na webovém serveru a tedy otevření SSH na portu 2000.
+Pro zajištění vysoké dostupnosti klíčových prvků aplikace, je potřeba upravit architekturu clusteru. Před webový server je postaven load balancer\footnote{služba zajištující vyrovnávání zatížení} v tomto případě HA proxy, která při úpadku jednoho z webových serverů přesměruje komunikaci na server druhý. Vert.x cluster je rozdělený na dvě HA skupiny(obr.\ref{fig:architecture_ideal}), které se liší svým zaměřením. První dva servery slouží jako webové a jsou napojeny na HA proxy. Další dva slouží pro komunikaci s databází, která na nich, přímo běžet nemusí. V této HA skupině je dále modul pro interakci s Vert.x. Díky specifikování HA skupiny nikdy nedojde k nasazení modulu na webovém serveru a tedy otevření SSH na portu 2000.
 
 \begin{lstlisting}[caption=Vysoká dostupnost na databázovém serveru 2]
 command=vertx runmod io.majklk~mindmapeditor~0.0.1 -conf /srv/mindmap/conf/dbserver.json -cluster-host 10.10.10.162 -ha -hagroup skupina-1

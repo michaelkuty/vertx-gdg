@@ -1,18 +1,18 @@
 
 \chapter[Závěr]{Závěr}
 
-Vert.x je vysoce modifikovatelný webový framework založený na komunikaci v reálném čase napříč všemi částmi aplikace. Vysoká modularita a otevřenost platformy Vert.x přináší značné výhody. Již od počátku si kladl za cíl zjednodušit dosavadní možnosti vývoje a představit tak alternativu ke standardním nástrojům vývoje webových aplikací. Je to právě jednoduchost, univerzálnost a komplexnost řešení této platformy, které zláká nejednoho programátora aby minimálně zaexperimentoval s tímto nástrojem. V současné době se velmi progresivně rozšiřuje celý ekosystém okolo Vert.x novými nástroji a možnostmi. 
+Práce představila unikátní filosofii a principy frameworku Vert.x. Práce obsahuje také srovnání platformy s jejím nejčastěji zmiňovaným protikandidátem Node.js. V testu výkonů se ukázalo, že framework Node.js nemůže Vert.x konkurovat. A to bez ohledu na jazyk v kterém byly testy implementovány. Srovnání možností ukázalo, že platforma Vert.x toho může nabídnout mnohem více než její předchůdce. 
 
-Práce představila unikátní filosofii a principy frameworku Vert.x a snažila se do jisté 
-míry provést začínajícího uživatele hlavními aspekty vývoje s poukázáním na další související 
-problematiku. Přitom se maximálně snažila omezit pouze na oblast vývoje webových aplikací, 
-přestože někdy nebylo možné opomenout elementární souvislosti s vývojem distribuovaných webových aplikací. V práci byla představena platforma Vert.x jako nástroj pro distribuované webové aplikace. Byla popsána unikátní filozofie a terminologie této platformy.
+V praktické části se podařilo vytvořit webovou aplikaci, která splňuje všechny aspekty moderní webové aplikace. Především pak komunikace v reálném čase bez náročných implementací či použití mnoha služeb a nástrojů. V aplikaci je možné jednoduchým a intuitivním způsobem přidávat, přejmenovávat a odebírat její jednotlivé body. Pokud má stejnou myšlenkovou mapu otevřeno více lidí, okamžitě vidí změny, ostatních uživatelů. Aplikace používá volně šiřitelný software, který je ve většině případů špičkové úrovně. % Tento postup dovoluje, s relativně nízkými náklady, řešit velmi komplikované problémy. 
+Možnosti pro vylepšení aplikace jsou na straně funkcionální. Bylo by vhodné rozšířit aplikaci o možnost přihlášení a správy pouze svých myšlenkových map nebo případné sdílení jednotlivých map s ostatními uživateli.
 
-V praktické části se podařilo vytvořit webovou aplikaci, která splňuje všechny aspekty moderní webové aplikace. Především pak komunikace v reálném čase bez náročných implementací či použití mnoha služeb a nástrojů. V aplikaci je možné jednoduchým a intuitivním způsobem přidávat, přejmenovávat a odebírat její jednotlivé body. Pokud má stejnou myšlenkovou mapu otevřeno více lidí, okamžitě vidí všechny změny, ostatních klientů. Aplikace používá volně šiřitelný software, který je ve většině případů špičkové úrovně. % Tento postup dovoluje, s relativně nízkými náklady, řešit velmi komplikované problémy. 
-Možnosti pro vylepšení aplikace jsou jak na straně vizuální tak na straně funkcionální. Bylo by vhodné rozšířit aplikaci o možnost přihlášení a správy pouze svých myšlenkových či případné sdílení jednotlivých map s ostatními uživateli.
+Z práce vyplývá, že Vert.x je vysoce modifikovatelný webový framework založený na komunikaci v reálném čase napříč všemi částmi aplikace. Vysoká modularita a otevřenost platformy Vert.x přináší značné výhody pro vývoj webových aplikací, především s dalšími nástroji usnadňujícími vývoj MVC nebo MVVM aplikací, například AngularJS. Již od počátku si kladl za cíl zjednodušit dosavadní možnosti vývoje a představit tak alternativu ke standardním nástrojům vývoje webových aplikací. Je to právě jednoduchost, univerzálnost a komplexnost řešení této platformy, které zlákalo společnost RedHat, která adoptovala tuto platformu. V současné době se velmi progresivně rozšiřuje celý ekosystém okolo Vert.x novými nástroji a možnostmi. 
 
- 
-Z práce vyplývá, že se platforma Vert.x hodí pro vývoj webových aplikací, výhradně pak za použití s dalšími nástroji usnadňující vývoj MVC případně MVVM aplikací, například Spring frameworkem.
+Díky originálnímu spojení několika klíčových komponent přišla platforma s možností jednoduchého škálování napříč servery. Knihovna Hazelcast představuje klíčovou komponentu pro horizontální škálování. Do již běžícího clusteru lze přidávat nové servery. V režimu HA, lze zajistit vysokou dostupnost na míru celé aplikaci bez nutnosti běhu dalších služeb a pracné konfigurace.
+
+\section{Budoucnost projektu}
+
+Tim Fox hlavní vedoucí projektu představil plán\cite{plan} pro budoucí rozvoj platformy. Nově tak bude šifrovaná veškerá komunikace na Event busu. API bude definováno pomocí vysoce abstraktního programovacího jazyka díky čemuž bude možné generovat API v jiných programovacích jazycích. Zveřejnění jednoduché protokolu pro napojení na Event Bus což de v současné době pouze přes WebSocket a SockJS most. Objevit by se měla také nativní podpora pro Android a IoS.
 
 \section{Možnosti dalšího výzkumu}
 
@@ -23,4 +23,8 @@ nezbyl prostor a rozhodně si zaslouží podrobnější analýzu.
  
 \subsection{Distribuované výpočty}
 
+V dnešní době Big Data\footnote{velká data} je zapotřebí tyto data efektivně a rychle zpracovávat. 
+
 \subsection{Srovnání}
+
+Není

@@ -70,8 +70,9 @@
 \contentsline {section}{\numberline {3.7}Vysok\IeC {\'a} dostupnost}{40}{section.3.7}
 \contentsline {section}{\numberline {3.8}Integrace do st\IeC {\'a}v\IeC {\'a}j\IeC {\'\i }c\IeC {\'\i } Java aplikace}{40}{section.3.8}
 \contentsline {chapter}{\numberline {4}Z\IeC {\'a}v\IeC {\v e}r}{43}{chapter.4}
-\contentsline {section}{\numberline {4.1}Mo\IeC {\v z}nosti dal\IeC {\v s}\IeC {\'\i }ho v\IeC {\'y}zkumu}{44}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Distribuovan\IeC {\'e} v\IeC {\'y}po\IeC {\v c}ty}{44}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}Srovn\IeC {\'a}n\IeC {\'\i }}{44}{subsection.4.1.2}
+\contentsline {section}{\numberline {4.1}Budoucnost projektu}{44}{section.4.1}
+\contentsline {section}{\numberline {4.2}Mo\IeC {\v z}nosti dal\IeC {\v s}\IeC {\'\i }ho v\IeC {\'y}zkumu}{44}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Distribuovan\IeC {\'e} v\IeC {\'y}po\IeC {\v c}ty}{44}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Srovn\IeC {\'a}n\IeC {\'\i }}{44}{subsection.4.2.2}
 \contentsline {chapter}{Literatura}{47}{chapter*.27}
 \contentsline {part}{P\IeC {\v r}\IeC {\'\i }lohy}{I}{chapter*.27}
