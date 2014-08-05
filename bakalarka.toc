@@ -58,14 +58,14 @@
 \contentsline {subsubsection}{D3.js}{32}{section*.26}
 \contentsline {section}{\numberline {3.4}Polyglot v\IeC {\'y}voj a moduly}{32}{section.3.4}
 \contentsline {section}{\numberline {3.5}Z\IeC {\'a}kladn\IeC {\'\i } software}{34}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}Java}{34}{subsection.3.5.1}
+\contentsline {subsection}{\numberline {3.5.1}Java}{36}{subsection.3.5.1}
 \contentsline {subsection}{\numberline {3.5.2}Vert.x}{36}{subsection.3.5.2}
 \contentsline {subsection}{\numberline {3.5.3}Datab\IeC {\'a}zov\IeC {\'y} server}{36}{subsection.3.5.3}
 \contentsline {subsection}{\numberline {3.5.4}Nasazen\IeC {\'\i } produk\IeC {\v c}n\IeC {\'\i } slu\IeC {\v z}by}{36}{subsection.3.5.4}
 \contentsline {subsection}{\numberline {3.5.5}Interakce s Vert.x}{37}{subsection.3.5.5}
 \contentsline {section}{\numberline {3.6}\IeC {\v S}k\IeC {\'a}lov\IeC {\'a}n\IeC {\'\i }}{38}{section.3.6}
 \contentsline {subsection}{\numberline {3.6.1}Vertik\IeC {\'a}ln\IeC {\'\i }}{38}{subsection.3.6.1}
-\contentsline {subsection}{\numberline {3.6.2}Horizont\IeC {\'a}ln\IeC {\'\i }}{38}{subsection.3.6.2}
+\contentsline {subsection}{\numberline {3.6.2}Horizont\IeC {\'a}ln\IeC {\'\i }}{39}{subsection.3.6.2}
 \contentsline {subsection}{\numberline {3.6.3}Lad\IeC {\v e}n\IeC {\'\i } v\IeC {\'y}konnosti}{39}{subsection.3.6.3}
 \contentsline {section}{\numberline {3.7}Vysok\IeC {\'a} dostupnost}{39}{section.3.7}
 \contentsline {section}{\numberline {3.8}Integrace do st\IeC {\'a}v\IeC {\'a}j\IeC {\'\i }c\IeC {\'\i } Java aplikace}{40}{section.3.8}

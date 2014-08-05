@@ -37,7 +37,7 @@ Vzhledem k rozsahu práce bude v následující kapitole ukázána a popsána v�
 
 \subsection{Řídící verticle}
 
-Vzhledem k tomu, že bude aplikace nasazená na více serverech ve více rolích bylo by také zapotřebí více specializovaných modulů. Mnohdy je výhodnější implementovat řídící verticle, který bude mít na starost nasazovat moduly, dle dané konfigurace. Část kódu takového startéru vypadá následovně:
+Nasazená na více serverů ve více rolích s sebou přináší malé rozhodnutí. Jestli aplikaci rozdělíme do více menších modulů nebo jednu větší pustíme na více serverech ve více rolích. S přihlédnutím na rozsah aplikace je výhodnější implementovat řídící verticle, který bude mít na starost nasazovat moduly, dle dané konfigurace. Část kódu takového startéru vypadá následovně:
 
 \begin{lstlisting}
 var container = require('vertx/container');
