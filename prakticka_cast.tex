@@ -27,14 +27,7 @@ Aplikace bude složena ze dvou částí. Serverová část, která bude pracovat
 
 \subsection{Architektura}
 
-Jak je vidět na obrázku \ref{fig:architecture_real} klienti se budou připojovat přes jeden webový server, který bude mít otevřené porty 80. S druhým serverem bude spojený na úrovni Hazelcast clusteru. Vzhledem k situaci, která je blíže popsaná v kapitole \ref{sub:praktCluster}, kdy je webový server připojen do dvou sítí není potřeba šifrování ani nejrůznějších tunelů. Druhý server bude sloužit pro komunikaci s databází a také jako \emph{exporter} myšlenkových map do obrázků ve formátu PNG.
-
-\begin{figure}
-\begin{centering}
-\includegraphics[scale=0.5]{obrazky/architecture_real}
-\par\end{centering}
-\caption{Architektura nasazené aplikace\label{fig:architecture_real}}
-\end{figure}
+Jak je vidět na obrázku \ref{fig:architecture_real} klienti se budou připojovat přes jeden webový server, který bude mít otevřený port 80. S druhým serverem bude spojený na úrovni Hazelcast clusteru. Vzhledem k situaci, která je blíže popsaná v kapitole \ref{sub:praktCluster}, kdy je webový server připojen do dvou sítí není potřeba šifrování ani nejrůznějších tunelů. Druhý server bude sloužit pro komunikaci s databází a také jako \emph{exporter} myšlenkových map do obrázků ve formátu PNG. Modul \emph{exporter} bude implementován v jazyce Java jako demonstrace polyglot vývoje.
 
 %\FloatBarrier
 
@@ -60,6 +53,13 @@ if("webserver" in config) {
 	});
 }
 \end{lstlisting}
+
+\begin{figure}
+\begin{centering}
+\includegraphics[scale=0.5]{obrazky/architecture_real}
+\par\end{centering}
+\caption{Architektura nasazené aplikace\label{fig:architecture_real}}
+\end{figure}
 
 Každá metoda \emph{deploy} má jako poslední parametr obslužnou rutinu pro případ selhání. V mnoha případech se také hodí ID nasazení, díky němuž lze později toto nasazení zrušit.
 
