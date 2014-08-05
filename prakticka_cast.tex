@@ -31,6 +31,44 @@ Jak je vidět na obrázku \ref{fig:architecture_real} klienti se budou připojov
 
 %\FloatBarrier
 
+\section{Komunikace v reálném čase}\label{sec:realTimeCommunication}
+
+Po načtení myšlenkové mapy přichází na řadu aspekty komunikace v reálném čase. V rámci editoru myšlenkových map budou implementovány tři základní operace.
+\begin{itemize}
+\item Přidání objektu do myšlenkové mapy
+\item Odstranění objektu z myšlenkové mapy
+\item Přejmenování objektu v myšlenkové mapě
+\end{itemize}
+V tradiční webové aplikaci by to znamenalo implementaci těchto metod typem požadavek-odpověď jako operací konkrétní API. Při přidání objektu by se zavolala API a nazpět by přišla odpověď zda-li byla akce úspěšná. Pokud bychom však chtěli mít editor, který by propagoval změny ke všem, kdo mají myšlenkovou mapu otevřenou museli bychom znát přihlášené uživatele, kterým by server poslal notifikaci o změně. Mnohem jednoduší cesta je rozdělení požadavku a odpovědi do dvou částí což odpovídá návrhovému vzoru Command. V takovém případě při otevření webového prohlížeče s danou myšlenkovou mapou dojde k zaregistrování klienta na určitou adresu. V případě jakékoli změny, kterou provede jiný uživatel nebo kdokoliv jiný, dojde k odeslání události všem zaregistrovaným klientům okamžitě v době vykonání události. Tuto situaci lze vidět na obrázku \ref{fig:realtime_communication}. V případě, kdy u uživatele dojde k vyvolání akce, ostatním uživatelům bude zaslána událost, která s sebou nese všechny informace o změně. Všem klientům zaregistrovaným na stejnou adresu přijde stejná událost. Tento typ zasílání zpráv je znám jako návrhový vzor Publish/Subscribe.
+
+\begin{figure}
+\begin{centering}
+\includegraphics[scale=0.5]{obrazky/architecture_real}
+\par\end{centering}
+\caption{Architektura nasazené aplikace\label{fig:architecture_real}}
+\end{figure}
+
+\begin{figure}
+\begin{centering}
+\includegraphics[width	=1\textwidth]{obrazky/realtime_communication}
+\par\end{centering}
+\caption{Komunikace v reálném čase\label{fig:realtime_communication}}
+\end{figure}
+
+\subsection{Akce}
+
+Když bude uživatel chtít změnit myšlenkovou mapu (přidat objekt, odebrat objekt nebo přejmenovat objekt), vyšle akci na server. Tato akce bude poslána přes přemostěný event bus, který byl představen v kapitole \ref{sub:eventBus}. Na straně serveru je pak verticle, který má zaregistrovány metody na příchozí akce. Samotná akce nemá žádnou návratovou hodnotu, pokud tak dojde k chybě nedojde k vyslání události, která s sebou nese změny myšlenkové mapy.
+
+\subsection{Události}
+
+Pokud uživatel otevře webový prohlížeč s konkrétní myšlenkovou mapou, dojde tak k přihlášení odběru událostí nad touto myšlenkovou mapou. Pokud ji někdo změní tento uživatel dostane stejnou událost s informací o změně jako každý jiný uživatel přihlášený k odběru událostí.
+Na straně klienta tak budou implementovány metody, které budou mít definované chování pro každou z definovaných událostí: přidání, odebrání a přejmenování objektu v myšlenkové mapě.
+
+\subsection{Klientská aplikace}
+
+V následující kapitole budou objasněny technologie použité na straně webového prohlížeče.
+
+
 \section{Vlastní implementace}
 
 Vzhledem k rozsahu práce bude v následující kapitole ukázána a popsána většina implementačních částí.
@@ -53,13 +91,6 @@ if("webserver" in config) {
 	});
 }
 \end{lstlisting}
-
-\begin{figure}
-\begin{centering}
-\includegraphics[scale=0.5]{obrazky/architecture_real}
-\par\end{centering}
-\caption{Architektura nasazené aplikace\label{fig:architecture_real}}
-\end{figure}
 
 Každá metoda \emph{deploy} má jako poslední parametr obslužnou rutinu pro případ selhání. V mnoha případech se také hodí ID nasazení, díky němuž lze později toto nasazení zrušit.
 
@@ -94,7 +125,7 @@ Spuštěním modulu z příkazové řádky se Vert.x podívá do deskriptoru mod
 }
 \end{lstlisting}
 
-Většina jména parametrů mluví sami za sebe, kromě \emph{bridge, inbound permitted a outbound permitted}. Pokud je první z nich nastaven na hodnotu \emph{true} tak začnou platit pravidla, která jsou nadefinována v \emph{inbound permitted, outbound permitted}. Jde o tzv. bridge mezi webovým prohlížečem a Event busem jako takovým. \emph{Inbound permitted} říká jaké adresy se mají pustit dovnitř, analogicky potom \emph{outbound permitted} říká, co může jít ven. Výhodou je pak možnost specifikovat adresu pomocí regulárních výrazů.
+Většina jmen parametrů mluví sami za sebe, kromě \emph{bridge, inbound permitted a outbound permitted}. Pokud je první z nich nastaven na hodnotu \emph{true} tak začnou platit pravidla, která jsou nadefinována v \emph{inbound permitted, outbound permitted}. Jde o tzv. bridge mezi webovým prohlížečem a Event busem jako takovým. \emph{Inbound permitted} říká jaké adresy se mají pustit dovnitř, analogicky potom \emph{outbound permitted} říká, co může jít ven. Výhodou je pak možnost specifikovat adresu pomocí regulárních výrazů.
 
 \subsubsection{Základní adresářová struktura}
 
@@ -219,36 +250,6 @@ eventBus.registerHandler('mindMaps.save', function(mindMap) {
 	]
 }
 \end{lstlisting}
-
-\section{Komunikace v reálném čase}\label{sec:realTimeCommunication}
-
-Po načtení myšlenkové mapy přichází na řadu aspekty komunikace v reálném čase. V rámci editoru myšlenkových map budou implementovány tři základní operace.
-\begin{itemize}
-\item Přidání objektu do myšlenkové mapy
-\item Odstranění objektu z myšlenkové mapy
-\item Přejmenování objektu v myšlenkové mapě
-\end{itemize}
-V tradiční webové aplikaci by to znamenalo implementaci těchto metod typem požadavek-odpověď jako operací konkrétní API. Při přidání objektu by se zavolala API a nazpět by přišla odpověď zda-li byla akce úspěšná. Pokud bychom však chtěli mít editor, který by propagoval změny ke všem, kdo mají myšlenkovou mapu otevřenou museli bychom znát přihlášené uživatele, kterým by server poslal notifikaci o změně. Mnohem jednoduší cesta je rozdělení požadavku a odpovědi do dvou částí což odpovídá návrhovému vzoru Command. V takovém případě při otevření webového prohlížeče s danou myšlenkovou mapou dojde k zaregistrování klienta na určitou adresu. V případě jakékoli změny, kterou provede jiný uživatel nebo kdokoliv jiný, dojde k odeslání události všem zaregistrovaným klientům okamžitě v době vykonání události. Tuto situaci lze vidět na obrázku \ref{fig:realtime_communication}. V případě, kdy u uživatele dojde k vyvolání akce, ostatním uživatelům bude zaslána událost, která s sebou nese všechny informace o změně. Všem klientům zaregistrovaným na stejnou adresu přijde stejná událost. Tento typ zasílání zpráv je znám jako návrhový vzor Publish/Subscribe.
-
-\begin{figure}
-\begin{centering}
-\includegraphics[width	=1\textwidth]{obrazky/realtime_communication}
-\par\end{centering}
-\caption{Komunikace v reálném čase\label{fig:realtime_communication}}
-\end{figure}
-
-\subsection{Akce}
-
-Když bude uživatel chtít změnit myšlenkovou mapu (přidat objekt, odebrat objekt nebo přejmenovat objekt), vyšle akci na server. Tato akce bude poslána přes přemostěný event bus, který byl představen v kapitole \ref{sub:eventBus}. Na straně serveru je pak verticle, který má zaregistrovány metody na příchozí akce. Samotná akce nemá žádnou návratovou hodnotu, pokud tak dojde k chybě nedojde k vyslání události, která s sebou nese změny myšlenkové mapy.
-
-\subsection{Události}
-
-Pokud uživatel otevře webový prohlížeč s konkrétní myšlenkovou mapou, dojde tak k přihlášení odběru událostí nad touto myšlenkovou mapou. Pokud ji někdo změní tento uživatel dostane stejnou událost s informací o změně jako každý jiný uživatel přihlášený k odběru událostí.
-Na straně klienta tak budou implementovány metody, které budou mít definované chování pro každou z definovaných událostí: přidání, odebrání a přejmenování objektu v myšlenkové mapě.
-
-\subsection{Klientská aplikace}
-
-V následující kapitole budou objasněny technologie použité na straně webového prohlížeče.
 
 \subsubsection{Struktura webové části}
 
