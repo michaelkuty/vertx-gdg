@@ -244,7 +244,7 @@ Funkcionalitu platformy lze jednoduše rozšířit pomocí modulů, které po zv
 
 \subsection{Základní API}\label{sub:coreAPI}
 
-Základní API, které Vert.x poskytuje programátorovi je poněkud strohé a obdobné jako u frameworku Node.js. Platforma tak poskytuje stabilní základ, který se v praxi neobejde bez modulů o kterých pojednává kapitola \ref{sub:moduly}.
+Oproti většině nástrojů se může na první pohled zdát, že je Vert.x API strohé. Při hlubším zkoumání se ukáže pravý opak.
 
 \begin{itemize}
 \item{TCP/SSL server/klient}
@@ -255,6 +255,7 @@ Základní API, které Vert.x poskytuje programátorovi je poněkud strohé a ob
 \item{Práce s buffery}
 \item{Přístup k souborovému systému}
 \item{Přístup ke konfiguraci}
+\item{DNS Klient}
 \end{itemize}
 
 \subsection{Kontainer API}
@@ -270,7 +271,7 @@ Díky této části API může programátor řídit spouštění a vypínání n
 
 \subsection{Polyglot}
 
-Polyglot je označován člověk, který ovládá více jazyků. V terminologii Vert.x to znamená, že API je dostupná ve více programovacích jazycích. Což v praxi znamená, že si programátor může sám zvolit v jakém jazyce bude implementovat svůj kód. Díky faktu, že spolu všechny verticly komunikují skrze zprávy je tak možné mít část aplikace napsanou například v jazyce Java a druhou část v jazyce Python. Tento fakt hodně napomáhá celé platformě nalákat větší množství nových programátorů. Takový vývojář klientské části aplikace většinou píše v jazyce JavaScript, naproti tomu vývojář serverové části určitě píše spíše v jazyce Java nebo Scala\footnote{programovací jazyk, který běží na JVM}. Výčet podporovaných jazyků ve verzi 2.0. Do verze 3.0 se pak chystá automatické generování API pro každý jazyk. 
+Polyglot je označován člověk, který ovládá více jazyků. V terminologii Vert.x to znamená, že API je dostupná ve více programovacích jazycích. Což v praxi znamená, že si programátor může sám zvolit v jakém jazyce bude implementovat svůj kód. Díky faktu, že spolu všechny verticly komunikují skrze zprávy je tak možné mít část aplikace napsanou například v jazyce Java a druhou část v jazyce Python. Tento fakt hodně napomáhá celé platformě nalákat větší množství nových programátorů. Takový vývojář klientské části aplikace většinou píše v jazyce JavaScript, naproti tomu vývojář serverové části určitě píše spíše v jazyce Java nebo Scala\footnote{programovací jazyk, který běží na JVM}. Výčet podporovaných jazyků ve verzi 2.0. Do verze 3.0 se pak chystá automatické generování API pro každý jazyk.
 
 \begin{itemize}
 \item{Java, Scala, Groovy}
@@ -290,7 +291,7 @@ Polyglot je označován člověk, který ovládá více jazyků. V terminologii 
 \caption{Horizontální a vertikální škálování\label{fig:scaling_example}}
 \end{figure}
 
-Díky integraci Hazelcastu získala platforma Vert.x řadu zajímavých vlastností mezi které patří také možnost horizontálního škálování. Jak je vidět z obrázku \ref{fig:scaling_example}, jde o typ škálování do šířky, propojováním více serverových instancí dohromady. Na těchto instancích pak běží Vert.x platforma respektive Hazelcast, který spojuje všechny klienty dohromady. To v praxi znamená, že můžeme aplikace jednoduše škálovat přes více serverů bez nutnosti běhu dalších služeb a režijních nákladů. Přímo za běhu aplikace lze přidávat další Vert.x instance do clusterů. Samotná konfigurace clusteru není pak nic složitého a odehrává se v souboru \emph{conf/cluster.xml} a spočívá v nastavení členů clusteru nebo specifikování multicastové\footnote{logický identifikátor skupiny sítových hostů} adresy a portu na které bude Hazelcast po startu vyhledávat členy clusteru. Pro spuštění aplikace v režimu cluster ji stačí spustit s parametrem \emph{-cluster}. Pokud se na daném serveru nachází více síťových rozhraní je potřeba specifikovat \emph{-cluster-host}. Na tomto rozhraní pak bude komunikovat Hazelcast. V kapitole \ref{sub:praktCluster} je pak tato možnost využita pro běh Vert.x clusteru na odlišném rozhraní něž je běží webový server.
+Díky integraci Hazelcastu získala platforma Vert.x řadu zajímavých vlastností mezi které patří také možnost horizontálního škálování. Jak je vidět z obrázku \ref{fig:scaling_example}, jde o typ škálování do šířky, propojováním více serverových instancí dohromady. Na těchto instancích pak běží Vert.x platforma respektive Hazelcast, který spojuje všechny klienty dohromady. To v praxi znamená, že můžeme aplikace jednoduše škálovat přes více serverů bez nutnosti běhu dalších služeb a režijních nákladů. Přímo za běhu aplikace lze přidávat další Vert.x instance do clusterů. Samotná konfigurace clusteru není pak nic složitého a odehrává se v souboru \emph{conf/cluster.xml} a spočívá v nastavení členů clusteru nebo specifikování multicastové\footnote{logický identifikátor skupiny sítových hostů} adresy a portu na které bude Hazelcast po startu vyhledávat členy clusteru. Pro spuštění aplikace v režimu cluster ji stačí spustit s parametrem \emph{-cluster}. Pokud se na daném serveru nachází více síťových rozhraní je potřeba specifikovat \emph{-cluster-host}. Na tomto rozhraní pak bude komunikovat Hazelcast. V kapitole \ref{sub:praktCluster} je pak tato možnost využita pro běh Vert.x clusteru na odlišném rozhraní něž běží webový server.
 Velkou nevýhodou je pak nemožnost nasadit cluster na veřejné síti. V současné době Event Bus nepodporuje šifrované zprávy a jediná možnost jak toho dosáhnout, je pomocí nejrůznějších privátních tunelů. Ve verzi 3.0 má být plně implementována šifrovaná komunikace a nebude tak nic bránit nasazení na veřejné síti.
 %Velkou výhodou je pak možnost šifrované komunikace, díky čemuž odpadá nutnost použití nejrůznějších služeb zajištující šifrování komunikace na sítové vrstvě v případě nasazení na veřejné síti nebo ve více geografických lokacích. 
 
