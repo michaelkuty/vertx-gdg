@@ -30,7 +30,7 @@
 \contentsline {subsection}{\numberline {2.4.1}Vysok\IeC {\'a} dostupnost}{17}{subsection.2.4.1}
 \contentsline {subsubsection}{Automatick\IeC {\'e} zotaven\IeC {\'\i } z hav\IeC {\'a}rie}{17}{section*.15}
 \contentsline {subsubsection}{HA skupiny}{17}{section*.16}
-\contentsline {subsubsection}{Kv\IeC {\'o}rum}{17}{section*.17}
+\contentsline {subsubsection}{Kvorum}{17}{section*.17}
 \contentsline {subsubsection}{Vertigo cluster}{19}{section*.18}
 \contentsline {section}{\numberline {2.5}Porovn\IeC {\'a}n\IeC {\'\i } s Node.js}{19}{section.2.5}
 \contentsline {subsection}{\numberline {2.5.1}V\IeC {\'y}kon}{19}{subsection.2.5.1}

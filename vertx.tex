@@ -314,13 +314,13 @@ Pokud je modul spuštěn s argumentem \emph{-ha} a dojde k pádu Vert.x instance
 
 V případě spuštění modulů v režimu HA lze pak specifikovat logické skupiny. Pro spuštění instance v určité HA skupině stačí přidat parametr \emph{-hagroup <jméno skupiny>}. Díky tomu lze přesně určit, kde se mají moduly v případě pádu nasadit. To je v praxi vhodné především v situacích, kdy je do internetu vystavena pouze část clusteru. Například jako na obrázku \ref{fig:architecture_ideal}.
 
-\subsubsection{Kvórum}
+\subsubsection{Kvorum}
 
 Při spuštění Vert.x instance lze specifikovat kvorum\footnote{minimální počet serverů pro zajištění vysoké dostupnosti}. Pokud nebude splněno kvorum nebude instance nasazena v režimu HA. Kvorum lze pak snadno spočítat ze vzorce \emph{Q = 1 + N/2}, kde N je počet serverů. Pokud dojde při běhu aplikace k porušení kvora bude režim HA automaticky vysazen.
 
 \subsubsection{Vertigo cluster}
 
-Důkazem jak dobrá je architektura je rozšíření samotné funkcionality clusteru. Rozšíření Vertigo\cite{vertigo}, díky kterému je platforma obohacena o značné možnosti v oblasti clusterování. Jak píše sám autor projektu \emph{,,Verigo kombinuje koncept real-time systémů a Flow-based programování."}. Architektura Vertigo by vydala sama na celou bakalářskou práci. Proto jen ve stručnosti Vertigo podporuje dávkování zpráv mezi komponentami. Umožňuje vytváření a monitorování sítí mezi clustery a podporuje živou změnu bez restartu těchto sítí. Usnadňuje distribuci modulů přes celý cluster pro snadné nasazení v kterémkoliv jeho koutě z kteréhokoliv jeho místa.
+Důkazem, jak dobrá je architektura je rozšíření samotné funkcionality clusteru. Modul Vertigo\cite{vertigo}, obohacuje platformu o značné možnosti v oblasti clusterování. Jak píše sám autor projektu \emph{,,Verigo kombinuje koncept real-time systémů a Flow-based programování."}. Architektura Vertigo by vydala sama na celou bakalářskou práci. Proto jen ve stručnosti Vertigo podporuje dávkování zpráv mezi komponentami. Umožňuje vytváření a monitorování sítí mezi clustery a podporuje živou změnu bez restartu těchto sítí. Usnadňuje distribuci modulů přes celý cluster pro snadné nasazení v kterémkoliv jeho koutě z kteréhokoliv jeho místa.
 
 \section{Porovnání s Node.js}
 
@@ -345,7 +345,7 @@ V prvním testu od Tima Foxe je požit  AMD Phenom II X6, 8GB RAM a systém Ubun
 
 \subsubsection{Výsledky}
 
-Jak lze vidět na obrázku \ref{fig:test1} a \ref{fig:test2} výsledky obou testů lze shrnout do jedné věty. Vert.x zvládá řádově o desítky tisíc více odpovědí než platforma Node.js a i v případě režimu clusteru.
+Jak lze vidět na obrázku \ref{fig:test1} a \ref{fig:test2} výsledky obou testů lze shrnout do jedné věty. Vert.x zvládá řádově o desítky tisíc více odpovědí než platforma Node.js a to i v případě režimu clusteru.
 
 \begin{figure}
 \begin{centering}
