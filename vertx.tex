@@ -181,7 +181,11 @@ Pro vyčlenění modulu z asociace na event loop stačí přidat parametr \emph{
 
 \subsection{Event Bus}\label{sub:eventBus}
 
-Nervový systém celého Vert.x, jehož název lze volně přeložit jako sběrnice událostí. Cílem EventBusu je zpozdředkování komunikace mezi jednotlivými komponentami a vlákny aplikace. Podobně jako při použití externí MQ. Díky faktu, že komponenta Event Bus je implementována přímo v jádru platformy odpadá nutnost používat další knihovny pro práci s MQ a v neposlední řadě také režijní náklady či výpočetní výkon. Jak je vidět na obrázku , komponenta Event Bus je distribuovaná přes všechny instance v clusteru. Samozřejmostí je pak možnost přemostění této komunikace do webového prohlížeče což je detailněji popsáno v kapitole \ref{sec:realTimeCommunication}. Event bus nepřináší takové možnosti v porovnání s profesionálními MQ systémy, jako například transakční zpracování, ale již existuje modul pro přemostění komunikace například do RabbitMQ\footnote{MQ napsaná v ERlangu}. S vývojáři z týmu vyvíjejí RabbitMQ je Tim Fox v úzkém kontaktu\cite{vertxNodejs}.
+Nervový systém celého Vert.x, jehož název lze volně přeložit jako sběrnice událostí. Cílem EventBusu je zpozdředkování komunikace mezi jednotlivými komponentami a vlákny aplikace. Podobně jako při použití externí MQ. Díky faktu, že komponenta Event Bus je implementována přímo v jádru platformy odpadá nutnost používat další knihovny pro práci s MQ a v neposlední řadě také režijní náklady či výpočetní výkon. Jak je vidět na obrázku , komponenta Event Bus je distribuovaná přes všechny instance v clusteru. Samozřejmostí je pak možnost přemostění této komunikace do webového prohlížeče což je detailněji popsáno v kapitole \ref{sec:realTimeCommunication}. Event bus nepřináší takové možnosti v porovnání s profesionálními MQ systémy, jako například transakční zpracování, ale již existuje modul pro přemostění komunikace například do RabbitMQ\footnote{MQ napsaná v ERlangu}. S vývojáři z týmu vyvíjejí RabbitMQ je Tim Fox v úzkém kontaktu\cite{vertxNodejs}. Základní typy komunikace:
+\begin{itemize}
+\item{Point to Point}
+\item{Publish/Subscribe}
+\end{itemize}
 
 \begin{figure}
 \begin{centering}
@@ -190,12 +194,6 @@ Nervový systém celého Vert.x, jehož název lze volně přeložit jako sběrn
 \caption{Event Bus distribuovaný mezi dva servery}
 \label{fig:2instance4_eventbus}
 \end{figure}
-
-Základní typy komunikace:
-\begin{itemize}
-\item{Point to Point}
-\item{Publish/Subscribe}
-\end{itemize}
 
 typy zpráv:
 \begin{itemize}
@@ -228,6 +226,7 @@ Jednou z nejdůležitějších architektonických součástí Vert.x je knihovna
 \item{Dle potřeby lze přidávat a odebírat servery}
 \end{itemize}
 
+Hazelcast je tedy typ distribuovaného úložiště, které běží jako vestavěný systém, lze díky němu distribuovat celou aplikaci a zasílat zprávy mezi jednotlivými komponentami. Vert.x API využívá Hazelcast API a odstiňuje tak programátora od poměrně nízko úrovňové API Hazelcastu.Když je Vert.x spuštěn, Hazelcast je spuštěn v módu vestavěného systému. Jako nejčastější příklad užití samotného Hazelcastu bývá uváděno ukládání uživatelské session\cite{session}. Hazelcast tedy usnadní práci v situaci, kdy budeme potřebovat uložit uživatelskou session například pro eshop. Mohli bychom využít externí RDBMS tedy databázový server, který by obstarával komunikaci s kleinty a udržoval integritu dat díky, kterému by jsme dosáhli stejného výsledku. S využitím knihovny Hazelcast ovšem odpadá nezbytná režie a monitoring, nemluvě o serverových prostředcích.
 Knihovnu Hazelcast lze využít v několika rolích:
 \begin{itemize}
 \item{NoSQL databáze v paměti}
@@ -237,8 +236,6 @@ Knihovnu Hazelcast lze využít v několika rolích:
 \item{Aplikační škálování}
 \item{Clustrování aplikací}
 \end{itemize}
-
-Hazelcast je tedy typ distribuovaného úložiště, které běží jako vestavěný systém, lze díky němu distribuovat celou aplikaci a zasílat zprávy mezi jednotlivými komponentami. Vert.x API využívá Hazelcast API a odstiňuje tak programátora od poměrně nízko úrovňové API Hazelcastu.Když je Vert.x spuštěn, Hazelcast je spuštěn v módu vestavěného systému. Jako nejčastější příklad užití samotného Hazelcastu bývá uváděno ukládání uživatelské session\cite{session}. Hazelcast tedy usnadní práci v situaci, kdy budeme potřebovat uložit uživatelskou session například pro eshop. Mohli bychom využít externí RDBMS tedy databázový server, který by obstarával komunikaci s kleinty a udržoval integritu dat díky, kterému by jsme dosáhli stejného výsledku. S využitím knihovny Hazelcast ovšem odpadá nezbytná režie a monitoring, nemluvě o serverových prostředcích.
 
 \section{API}\label{sub:API}
 
