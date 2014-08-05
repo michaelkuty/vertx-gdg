@@ -469,7 +469,7 @@ Samotné vertikální škálování lze efektivně řešit až na aplikační ú
 command=vertx runmod io.majklk~mindmapeditor~0.0.1 -instances 4 -conf
 \end{lstlisting}
 
-\subsection{Vert.x v clusteru}\label{sub:praktCluster}
+\subsection{Horizontální}\label{sub:praktCluster}
 
 Dle návrhu architektury na obrázku \ref{fig:architecture_real} bude aplikace nasazena na dva servery. První bude naslouchat na port 80 a poběží zde Webový server(HTTP Server). Tento server má vnitřní IP adresu \emph{10.10.10.161}. Druhé rozhraní má připojené do internetu. Na druhém serveru je část aplikace, která komunikuje s databází a modul pro vzdálenou interakci s Vert.x. Jeho IP adresa je \emph{10.10.10.162}. Pro propojení obou instancí je potřeba upravit spouštěcí příkaz v konfiguraci Supervisoru.
 
@@ -480,6 +480,10 @@ command=vertx runmod io.majklk~mindmapeditor~0.0.1 -conf /srv/mindmap/conf/webse
 \begin{lstlisting}[caption=Spuštění clusteru na Serveru 2]
 command=vertx runmod io.majklk~mindmapeditor~0.0.1 -conf /srv/mindmap/conf/dbserver.json -cluster -cluster-host 10.10.10.162
 \end{lstlisting}
+
+\subsection{Ladění výkonnosti}\label{sub:performenceScale}
+
+Hlavní sada vláken, tedy event loopů je ve výchozím nastavení na hodnotě odpovídající volání funkce \emph{Runtime.getRuntime().availableProcessors()}. Tuto hodnotu lze změnit nastavením systémové proměnné \emph{vertx.pool.eventloop.size}. Nastavením \emph{vertx.pool.worker.size} pak lze změnit velikost poolu pro dlouhotrvající operace, která je ve výchozím nastavení na hodnotě 20.
 
 \section{Vysoká dostupnost}
 
@@ -497,3 +501,33 @@ Když je specifikován parametr \emph{-ha} lze automaticky vypustit parametr \em
 \par\end{centering}
 \caption{Ideální architekutra nasazení aplikace\label{fig:architecture_ideal}}
 \end{figure}
+
+\section{Integrace do stávájící Java aplikace}
+
+Pokud je to jakkoliv jen možné je vhodné se integraci vyhnout. Pokud však nejde jinak, jsou zde dvě varianty jak integrovat platformu.
+
+\begin{enumerate}
+\item PlatformManager
+\item Pomocí jar souboru
+\end{enumerate}
+
+\begin{lstlisting}[caption=Integrace do stávající Java aplikace]
+
+//díky platform managerovi lze provádět stejné úkony jako v příkazové řádce
+PlatformManager pm = null;
+pm = PlatformLocator.factory.createPlatformManager();
+
+JsonObject conf = new JsonObject().putString("foo", "wibble");
+
+pm.deployModule("com.mycompany~my-module~1.0", conf, 10, new AsyncResultHandler<String>() {
+    public void handle(AsyncResult<String> asyncResult) {
+        if (asyncResult.succeeded()) {
+            System.out.println("Deployment ID is " + asyncResult.result());
+        } else {
+            asyncResult.cause().printStackTrace();
+        }
+    }
+});
+\end{lstlisting}
+
+V takovém případě bude platforma hledat \emph{cluster.xml} a \emph{repos.txt} v proměnné classpath.

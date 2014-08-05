@@ -534,10 +534,10 @@ Verticle<y:LabelModel>
     <node id="n27">
       <data key="d6">
         <y:ShapeNode>
-          <y:Geometry height="86.50926768502319" width="37.63475546141569" x="-273.6347554614157" y="178.5"/>
+          <y:Geometry height="86.50926768502319" width="15.466102158416732" x="-259.63350074373216" y="178.5"/>
           <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="43.662109375" x="-3.0136769567921533" y="-35.9375">Most
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.9375" modelName="custom" textColor="#000000" visible="true" width="43.662109375" x="-14.098003608291663" y="-35.9375">Most
 SockJS<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
