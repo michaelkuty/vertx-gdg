@@ -51,9 +51,9 @@ Událostmi řízené programování je podle Tomáše Pitnera\cite{javaProgramov
 
 Události nastávají obvykle určitou uživatelskou akcí(klik či pohyb myši, stisk tlačítka).
 Událostmi řízené aplikace musí být většinou programovány jako vícevláknové (i když spouštění vláken obvykle explicitně programovat nemusíme).
-Asynchronní někdy také paralelní model je přímo závislý na způsobu implementace samotným programovacím jazykem. Základním pojmem je zde proces, který je vnímán jako jedna instance programu, který je plánován pro nezávislé vykonávání. Naproti tomu Vlákno\footnote{Označuje v informatice odlehčený proces, pomocí něhož se snižuje režie operačního systému při změně kontextu, které je nutné pro zajištění multitaskingu} je posloupnost po sobě jdoucích událostí. V dřívější době nebylo potřeba rozlišovat proces a vlákno, protože proces se dále v aplikaci nedělil. Vytvoření vlákna je poměrně drahá a pomalá operace. Což se často obchází vytvořením zásoby uspaných vláken dopředu s nějakým managementem, co vlákna přidává a ubírá dle potřeby. Základním principem Vert.x a jemu podobných frameworků je jedno hlavní vlákno, obvykle pro každý procesor jedno. Takovéto vlákno si pak samo řídí vytváření a přidělování vláken.
+Asynchronní někdy také paralelní model je přímo závislý na způsobu implementace samotným programovacím jazykem. Základním pojmem je zde proces, který je vnímán jako jedna instance programu, který je plánován pro nezávislé vykonávání. Naproti tomu Vlákno\footnote{Označuje v informatice odlehčený proces, pomocí něhož se snižuje režie operačního systému při změně kontextu, které je nutné pro zajištění multitaskingu} je posloupnost po sobě jdoucích událostí. V dřívější době nebylo potřeba rozlišovat proces a vlákno, protože proces se dále v aplikaci nedělil. Vytvoření vlákna je poměrně drahá a pomalá operace. Což se často obchází vytvořením zásoby uspaných vláken dopředu s nějakým managementem, co vlákna přidává a ubírá dle potřeby. Základním principem Vert.x a jemu podobných frameworků je jedno hlavní vlákno, obvykle pro každý procesor jedno. Takovéto vlákno si samo řídí vytváření a přidělování vláken.
 
-Tento model bývá často kritizován, že nutí programátory psát špatně udržovatelný kód, především pak v situacích, kdy je potřeba koordinovat výsledky mezi více handlery. Pro tyhle situace ovšem vznikla řada nástrojů, které se liší podle použitého jazyka.
+Tento model bývá často kritizován, že nutí programátory psát špatně udržovatelný kód, především v situacích, kdy je potřeba koordinovat výsledky mezi více handlery. Pro tyhle situace ovšem vznikla řada nástrojů, které se liší podle použitého jazyka.
 
 %respektive Node.js je tedy jedno hlavní vlákno, které si dle potřeby vytváří vlákna další a řídí tak . V jedné aplikace tedy může běžet několik vláken. Vlákno je zde bráno jako základní plánovací jednotka pro běh na procesoru. 
 %Existují dva druhy asynchronního modelu (multitaskingu):
@@ -74,7 +74,7 @@ Ed Gardoh v roce 2011 ve svém jednoduchém testu\cite{serialTest} prověřil pr
 
 \subsubsection{Návrhový vzor Reactor}
 
-,,Tradiční" aplikační serverové kontainery rezervují jedno vlákno pro každou I/O operaci. To v praxi znamená jedno vlákno pro jedno spojení, jak je vidět z obrázku \ref{fig:blocking_pattern}. takové vlákno pak čeká na odpověď každého řádku volání a prakticky využívá zdroje, které k ničemu nepotřebuje což je velice neefektivní přístup. Vert.x využívá návrhového vzoru \emph{Reactor}, který implementuje Netty.io. Vert.x tuto knihovnu využívá jako vestavěný systém. Jeden z hlavních vývojařů Netty.io, Norman Maurer a autor knihy Netty in action\cite{nettyInAction} pracuje na integraci s Vert.x platformou. Z obrázku \ref{fig:vertx_pattern} je patrné, že vzor spočívá v běhu jednoho vlákna, kterému tzv. ,,Selector" podává požadavky.
+,,Tradiční" aplikační serverové kontainery rezervují jedno vlákno pro každou I/O operaci. To v praxi znamená jedno vlákno pro jedno spojení, jak je vidět z obrázku \ref{fig:blocking_pattern}. takové vlákno čeká na odpověď každého řádku volání a prakticky využívá zdroje, které k ničemu nepotřebuje což je velice neefektivní přístup. Vert.x využívá návrhového vzoru \emph{Reactor}, který implementuje Netty.io. Vert.x tuto knihovnu využívá jako vestavěný systém. Jeden z hlavních vývojařů Netty.io, Norman Maurer a autor knihy Netty in action\cite{nettyInAction} pracuje na integraci s Vert.x platformou. Z obrázku \ref{fig:vertx_pattern} je patrné, že vzor spočívá v běhu jednoho vlákna, kterému tzv. ,,Selector" podává požadavky.
 
 \begin{figure}
 \begin{centering}
@@ -85,7 +85,7 @@ Ed Gardoh v roce 2011 ve svém jednoduchém testu\cite{serialTest} prověřil pr
 
 \subsubsection{Event loop}
 
-Event loop využívá Netty.io NioWorkery. Každý verticle\footnote{nejmenší jednotka Vert.x více v kapitole Terminologie \ref{sub:verticle}} má vlastního NioWorkera, díky tomu je zaručeno, že každé verticle je jedno vláknové. Základem asynchronního modelu je vlákno, které se stará o všechny události. Když událost dorazí vlákno se postará o to aby byla zavolána ta správná obslužná rutina. Každá Vert.x instance interně obsluhuje malý počet těchto vláken, zpravidla pak jedno na každé procesorové jádro. Těmto vláknům se ve Vert.x komunitě říká \emph{Event Loop}. V komunitách Nginx nebo Node.js se ovšem setkáme spíše s pojmem \emph{Run Loop}. Přeloženo volně do češtiny pak ,,událostní smyčka". Obrovská nevýhoda takového přístupu je, že nikdy nesmí dojít k blokování hlavního vlákna. Jakmile k tomu dojde, celá aplikace tzv. zamrzne. Při startu verticlu \ref{sub:verticle} je pak vybrán jeden event loop, který ho obsluhuje po celý životní cyklus. Event loop je schopný obsloužit tisíce vertclů v ten samý čas. Příklady blokujících volání:
+Event loop využívá Netty.io NioWorkery. Každý verticle\footnote{nejmenší jednotka Vert.x více v kapitole Terminologie \ref{sub:verticle}} má vlastního NioWorkera, díky tomu je zaručeno, že každé verticle je jedno vláknové. Základem asynchronního modelu je vlákno, které se stará o všechny události. Když událost dorazí vlákno se postará o to aby byla zavolána ta správná obslužná rutina. Každá Vert.x instance interně obsluhuje malý počet těchto vláken, zpravidla jedno na každé procesorové jádro. Těmto vláknům se ve Vert.x komunitě říká \emph{Event Loop}. V komunitách Nginx nebo Node.js se ovšem setkáme spíše s pojmem \emph{Run Loop}. Přeloženo volně do češtiny ,,událostní smyčka". Obrovská nevýhoda takového přístupu je, že nikdy nesmí dojít k blokování hlavního vlákna. Jakmile k tomu dojde, celá aplikace tzv. zamrzne. Při startu verticlu \ref{sub:verticle} je vybrán jeden event loop, který ho obsluhuje po celý životní cyklus. Event loop je schopný obsloužit tisíce vertclů v ten samý čas. Příklady blokujících volání:
 \begin{itemize}
 \item{tradiční API (JDBC, externí systémy)}
 \item{dlouhotrvající operace (generování apod.)}
@@ -110,7 +110,7 @@ který vychází z Reactor patternu\cite{reactorPattern}, ten lze charakterizova
 \item{toto vlákno nesmí být blokováno\footnote{pokud dojde k zablokování hlavního vlákna dojde k zablokování celé aplikace např.\emph{Thread.sleep(), a další z java.util.concurrent }}}
 \end{itemize}
 
-Multi-reactor pattern\cite{eventLoops} se od Reactor patternu liší pouze tím, že může mít více hlavních vláken. Tím přináší Vert.x možnost pohodlně škálovat instance na více procesorových jader. Jak je vidět z obrázku \vref{fig:instance} Vert.x platforma poskytuje více hlavních vláken, zpravidla však jedno hlavní vlákno na jeden procesor. Toho lze snadno docílit pomocí \emph{Runtime.getRuntime().availableProcessors()} o kterém se dozvíte více v kapitole \ref{sub:Scaling}. Na obrázku \vref{fig:instance4} pak lze vidět situaci čtyř hlavních vláken na čtyři procesorové jádra.
+Multi-reactor pattern\cite{eventLoops} se od Reactor patternu liší pouze tím, že může mít více hlavních vláken. Tím přináší Vert.x možnost pohodlně škálovat instance na více procesorových jader. Jak je vidět z obrázku \vref{fig:instance} Vert.x platforma poskytuje více hlavních vláken, zpravidla však jedno hlavní vlákno na jeden procesor. Toho lze snadno docílit pomocí \emph{Runtime.getRuntime().availableProcessors()} o kterém se dozvíte více v kapitole \ref{sub:Scaling}. Na obrázku \vref{fig:instance4} lze vidět situaci čtyř hlavních vláken na čtyři procesorové jádra.
 
 \subsubsection{Hybridní model vláken}\label{sub:hybrid}
 
@@ -122,7 +122,7 @@ Vert.x definuje svou vlastní terminologii, která je specifická jen pro tuhle 
 
 \subsubsection{Verticle}\label{sub:verticle}
 
-Základní jednotka vývoje a nasazení. verticle si lze představit jako kus kódu nebo třídu s hlavní metodou. Verticle je tak nejmenší funkční jednotkou Vert.x. Verticle lze spouštět samostatně přímo z příkazové řádky podobně jako skript. Každý verticle běží ve vlastním vlákně z čehož plynou výhody, ale také nevýhody. Vzhledem k tomu, že každý verticle má svůj vlastní classloader nemůže tak sdílet statické metody ani hodnoty proměnných s ostatníma. Naopak výhodou je, že programátorovi odpadnou starosti s nejrůznější synchronizací vláken či zámky nad proměnnýma. V případě jedno vláknového modelu také odpadají nepříjemné deadlocky. Výzvou je pak sdílení dat mezi jednotlivými komponentami aplikace, které lze v případě Vert.x dvěma způsoby:
+Základní jednotka vývoje a nasazení. verticle si lze představit jako kus kódu nebo třídu s hlavní metodou. Verticle je tak nejmenší funkční jednotkou Vert.x. Verticle lze spouštět samostatně přímo z příkazové řádky podobně jako skript. Každý verticle běží ve vlastním vlákně z čehož plynou výhody, ale také nevýhody. Vzhledem k tomu, že každý verticle má svůj vlastní classloader nemůže tak sdílet statické metody ani hodnoty proměnných s ostatníma. Naopak výhodou je, že programátorovi odpadnou starosti s nejrůznější synchronizací vláken či zámky nad proměnnýma. V případě jedno vláknového modelu také odpadají nepříjemné deadlocky. Výzvou je sdílení dat mezi jednotlivými komponentami aplikace, které lze v případě Vert.x dvěma způsoby:
 \begin{itemize}
 \item{pomocí Message Queue\cite{mq} dále jen MQ}
 \item{SharedData object a SharedSet \emph{vertx.sharedData()}}
@@ -145,7 +145,7 @@ Objekty v SharedData musí být immutable\footnote{jakmile jednou takovýto obje
 
 \subsubsection{Worker verticle}
 
-V standardním verticlu by nemělo nikdy dojít k blokování hlavního vlákna. V dnešní době se bez klasického synchronního volání pravděpodobně neobejdeme, protože většina knihoven a modulů je napsána jako blokující kód. Z toho důvodu je v platformě Vert.x možnost označit verticle jako workera respektive pustit jej jako worker verticle metodou \emph{deployWorkerVerticle} namísto \emph{deployVerticle}. Tím dojde k vyčlenění verticle z asociace na hlavní vlákna a takovému vláknu pak bude přiděleno vlákno z Background thread poolu. Uvnitř takového verticle lze pak vykonávat blokující volání bez blokování celé aplikace. To v praxi rozšířilo možnosti uplatnění celé platformy. Bohužel tímto ztrácíme efektivní možnost škálování pro velký počet konkurenčních vláken je tedy vhodné situovat náročné výpočty na speciálně vyčleně servery. Velikost background thread poolu ve výchozím nastavení čítá 20 vláken. Jak tento počet změnit je popsáno v kapitole \ref{sub:performenceScale}.
+V standardním verticlu by nemělo nikdy dojít k blokování hlavního vlákna. V dnešní době se bez klasického synchronního volání pravděpodobně neobejdeme, protože většina knihoven a modulů je napsána jako blokující kód. Z toho důvodu je v platformě Vert.x možnost označit verticle jako workera respektive pustit jej jako worker verticle metodou \emph{deployWorkerVerticle} namísto \emph{deployVerticle}. Tím dojde k vyčlenění verticle z asociace na hlavní vlákna a takovému vláknu bude přiděleno vlákno z Background thread poolu. Uvnitř takového verticle lze vykonávat blokující volání bez blokování celé aplikace. To v praxi rozšířilo možnosti uplatnění celé platformy. Bohužel tímto ztrácíme efektivní možnost škálování pro velký počet konkurenčních vláken je tedy vhodné situovat náročné výpočty na speciálně vyčleně servery. Velikost background thread poolu ve výchozím nastavení čítá 20 vláken. Jak tento počet změnit je popsáno v kapitole \ref{sub:performenceScale}.
 
 \subsubsection{Vert.x instance}
 
@@ -173,7 +173,7 @@ Výhody plynoucí z použití modulů:
 Typy modulů lze rozdělit do dvou základních skupin, které lze dál rozdělit podle typu určení modulu.
 
 \begin{description}
-\item[spustitelné]{mají definovanou hlavní verticle v deskriptoru, takovéto moduly je pak možné spustit jako samostatné jednotky pomocí parametru \emph{runmod} nebo programově \emph{deployModule} }
+\item[spustitelné]{mají definovanou hlavní verticle v deskriptoru, takovéto moduly je možné spustit jako samostatné jednotky pomocí parametru \emph{runmod} nebo programově \emph{deployModule} }
 \item[nespustitelné]{modul nemá specifikovaný hlavní verticle a lze jej použít v jiném modulu  metody \emph{includes}}
 \end{description}
 
@@ -181,7 +181,7 @@ Pro vyčlenění modulu z asociace na event loop stačí přidat parametr \emph{
 
 \subsection{Event Bus}\label{sub:eventBus}
 
-Nervový systém celého Vert.x, jehož název lze volně přeložit jako sběrnice událostí. Cílem EventBusu je zpozdředkování komunikace mezi jednotlivými komponentami a vlákny aplikace. Podobně jako při použití externí MQ. Díky faktu, že komponenta Event Bus je implementována přímo v jádru platformy odpadá nutnost používat další knihovny pro práci s MQ a v neposlední řadě také režijní náklady či výpočetní výkon. Jak je vidět na obrázku , komponenta Event Bus je distribuovaná přes všechny instance v clusteru. Samozřejmostí je pak možnost přemostění této komunikace do webového prohlížeče což je detailněji popsáno v kapitole \ref{sec:realTimeCommunication}. Event bus nepřináší takové možnosti v porovnání s profesionálními MQ systémy, jako například transakční zpracování, ale již existuje modul pro přemostění komunikace například do RabbitMQ\footnote{MQ napsaná v ERlangu}. S vývojáři z týmu vyvíjejí RabbitMQ je Tim Fox v úzkém kontaktu\cite{vertxNodejs}. Základní typy komunikace:
+Nervový systém celého Vert.x, jehož název lze volně přeložit jako sběrnice událostí. Cílem EventBusu je zpozdředkování komunikace mezi jednotlivými komponentami a vlákny aplikace. Podobně jako při použití externí MQ. Díky faktu, že komponenta Event Bus je implementována přímo v jádru platformy odpadá nutnost používat další knihovny pro práci s MQ a v neposlední řadě také režijní náklady či výpočetní výkon. Jak je vidět na obrázku , komponenta Event Bus je distribuovaná přes všechny instance v clusteru. Samozřejmostí je možnost přemostění této komunikace do webového prohlížeče což je detailněji popsáno v kapitole \ref{sec:realTimeCommunication}. Event bus nepřináší takové možnosti v porovnání s profesionálními MQ systémy, jako například transakční zpracování, ale již existuje modul pro přemostění komunikace například do RabbitMQ\footnote{MQ napsaná v ERlangu}. S vývojáři z týmu vyvíjejí RabbitMQ je Tim Fox v úzkém kontaktu\cite{vertxNodejs}. Základní typy komunikace:
 \begin{itemize}
 \item{Point to Point}
 \item{Publish/Subscribe}
@@ -271,7 +271,7 @@ Díky této části API může programátor řídit spouštění a vypínání n
 
 \subsection{Polyglot}
 
-Polyglot je označován člověk, který ovládá více jazyků. V terminologii Vert.x to znamená, že API je dostupná ve více programovacích jazycích. Což v praxi znamená, že si programátor může sám zvolit v jakém jazyce bude implementovat svůj kód. Díky faktu, že spolu všechny verticly komunikují skrze zprávy je tak možné mít část aplikace napsanou například v jazyce Java a druhou část v jazyce Python. Tento fakt hodně napomáhá celé platformě nalákat větší množství nových programátorů. Takový vývojář klientské části aplikace většinou píše v jazyce JavaScript, naproti tomu vývojář serverové části určitě píše spíše v jazyce Java nebo Scala\footnote{programovací jazyk, který běží na JVM}. Výčet podporovaných jazyků ve verzi 2.0. Do verze 3.0 se pak chystá automatické generování API pro každý jazyk.
+Polyglot je označován člověk, který ovládá více jazyků. V terminologii Vert.x to znamená, že API je dostupná ve více programovacích jazycích. Což v praxi znamená, že si programátor může sám zvolit v jakém jazyce bude implementovat svůj kód. Díky faktu, že spolu všechny verticly komunikují skrze zprávy je tak možné mít část aplikace napsanou například v jazyce Java a druhou část v jazyce Python. Tento fakt hodně napomáhá celé platformě nalákat větší množství nových programátorů. Takový vývojář klientské části aplikace většinou píše v jazyce JavaScript, naproti tomu vývojář serverové části určitě píše spíše v jazyce Java nebo Scala\footnote{programovací jazyk, který běží na JVM}. Výčet podporovaných jazyků ve verzi 2.0. Do verze 3.0 se chystá automatické generování API pro každý jazyk.
 
 \begin{itemize}
 \item{Java, Scala, Groovy}
@@ -291,8 +291,8 @@ Polyglot je označován člověk, který ovládá více jazyků. V terminologii 
 \caption{Horizontální a vertikální škálování\label{fig:scaling_example}}
 \end{figure}
 
-Díky integraci Hazelcastu získala platforma Vert.x řadu zajímavých vlastností mezi které patří také možnost horizontálního škálování. Jak je vidět z obrázku \ref{fig:scaling_example}, jde o typ škálování do šířky, propojováním více serverových instancí dohromady. Na těchto instancích pak běží Vert.x platforma respektive Hazelcast, který spojuje všechny klienty dohromady. To v praxi znamená, že můžeme aplikace jednoduše škálovat přes více serverů bez nutnosti běhu dalších služeb a režijních nákladů. Přímo za běhu aplikace lze přidávat další Vert.x instance do clusterů. Samotná konfigurace clusteru není pak nic složitého a odehrává se v souboru \emph{conf/cluster.xml} a spočívá v nastavení členů clusteru nebo specifikování multicastové\footnote{logický identifikátor skupiny sítových hostů} adresy a portu na které bude Hazelcast po startu vyhledávat členy clusteru. Pro spuštění aplikace v režimu cluster ji stačí spustit s parametrem \emph{-cluster}. Pokud se na daném serveru nachází více síťových rozhraní je potřeba specifikovat \emph{-cluster-host}. Na tomto rozhraní pak bude komunikovat Hazelcast. V kapitole \ref{sub:praktCluster} je pak tato možnost využita pro běh Vert.x clusteru na odlišném rozhraní něž běží webový server.
-Velkou nevýhodou je pak nemožnost nasadit cluster na veřejné síti. V současné době Event Bus nepodporuje šifrované zprávy a jediná možnost jak toho dosáhnout, je pomocí nejrůznějších privátních tunelů. Ve verzi 3.0 má být plně implementována šifrovaná komunikace a nebude tak nic bránit nasazení na veřejné síti.
+Díky integraci Hazelcastu získala platforma Vert.x řadu zajímavých vlastností mezi které patří také možnost horizontálního škálování. Jak je vidět z obrázku \ref{fig:scaling_example}, jde o typ škálování do šířky, propojováním více serverových instancí dohromady. Na těchto instancích běží Vert.x platforma respektive Hazelcast, který spojuje všechny klienty dohromady. To v praxi znamená, že můžeme aplikace jednoduše škálovat přes více serverů bez nutnosti běhu dalších služeb a režijních nákladů. Přímo za běhu aplikace lze přidávat další Vert.x instance do clusterů. Samotná konfigurace clusteru není nic složitého a odehrává se v souboru \emph{conf/cluster.xml} a spočívá v nastavení členů clusteru nebo specifikování multicastové\footnote{logický identifikátor skupiny sítových hostů} adresy a portu na které bude Hazelcast po startu vyhledávat členy clusteru. Pro spuštění aplikace v režimu cluster ji stačí spustit s parametrem \emph{-cluster}. Pokud se na daném serveru nachází více síťových rozhraní je potřeba specifikovat \emph{-cluster-host}. Na tomto rozhraní bude komunikovat Hazelcast. V kapitole \ref{sub:praktCluster} je tato možnost využita pro běh Vert.x clusteru na odlišném rozhraní něž běží webový server.
+Velkou nevýhodou je nemožnost nasadit cluster na veřejné síti. V současné době Event Bus nepodporuje šifrované zprávy a jediná možnost jak toho dosáhnout, je pomocí nejrůznějších privátních tunelů. Ve verzi 3.0 má být plně implementována šifrovaná komunikace a nebude tak nic bránit nasazení na veřejné síti.
 %Velkou výhodou je pak možnost šifrované komunikace, díky čemuž odpadá nutnost použití nejrůznějších služeb zajištující šifrování komunikace na sítové vrstvě v případě nasazení na veřejné síti nebo ve více geografických lokacích. 
 
 \begin{figure}
@@ -312,11 +312,11 @@ Pokud je modul spuštěn s argumentem \emph{-ha} a dojde k pádu Vert.x instance
 
 \subsubsection{HA skupiny}
 
-V případě spuštění modulů v režimu HA lze pak specifikovat logické skupiny. Pro spuštění instance v určité HA skupině stačí přidat parametr \emph{-hagroup <jméno skupiny>}. Díky tomu lze přesně určit, kde se mají moduly v případě pádu nasadit. To je v praxi vhodné především v situacích, kdy je do internetu vystavena pouze část clusteru. Například jako na obrázku \ref{fig:architecture_ideal}.
+V případě spuštění modulů v režimu HA lze specifikovat logické skupiny. Pro spuštění instance v určité HA skupině stačí přidat parametr \emph{-hagroup <jméno skupiny>}. Díky tomu lze přesně určit, kde se mají moduly v případě pádu nasadit. To je v praxi vhodné především v situacích, kdy je do internetu vystavena pouze část clusteru. Například jako na obrázku \ref{fig:architecture_ideal}.
 
 \subsubsection{Kvorum}
 
-Při spuštění Vert.x instance lze specifikovat kvorum\footnote{minimální počet serverů pro zajištění vysoké dostupnosti}. Pokud nebude splněno kvorum nebude instance nasazena v režimu HA. Kvorum lze pak snadno spočítat ze vzorce \emph{Q = 1 + N/2}, kde N je počet serverů. Pokud dojde při běhu aplikace k porušení kvora bude režim HA automaticky vysazen.
+Při spuštění Vert.x instance lze specifikovat kvorum\footnote{minimální počet serverů pro zajištění vysoké dostupnosti}. Pokud nebude splněno kvorum nebude instance nasazena v režimu HA. Kvorum lze snadno spočítat ze vzorce \emph{Q = 1 + N/2}, kde N je počet serverů. Pokud dojde při běhu aplikace k porušení kvora bude režim HA automaticky vysazen.
 
 \subsubsection{Vertigo cluster}
 
@@ -324,11 +324,11 @@ Důkazem, jak dobrá je architektura je rozšíření samotné funkcionality clu
 
 \section{Porovnání s Node.js}
 
-V následující kapitole bude porovnána platforma Vert.x s již zmíněnou platformou Node.js. Výkonnostní test\cite{benchmarkTim} je převzat od samotného autora projektu a jsou v něm zahrnuty jazyky, které v té době platforma podporovala. V druhé části kapitoly \ref{sub:performence} je pak tabulka\ref{table:odezvy} srovnání odezev s vybranými webovými platformami z daty ze zdroje\cite{benchmark}.
+V následující kapitole bude porovnána platforma Vert.x s již zmíněnou platformou Node.js. Výkonnostní test\cite{benchmarkTim} je převzat od samotného autora projektu a jsou v něm zahrnuty jazyky, které v té době platforma podporovala. V druhé části kapitoly \ref{sub:performence} je tabulka\ref{table:odezvy} srovnání odezev s vybranými webovými platformami z daty ze zdroje\cite{benchmark}.
 
 \subsection{Výkon}\label{sub:performence}
 
-Tato kapitola se zabývá výkonnostními testy jednotlivých platforem. V prvním testu je obsaženo více programovacích jazyků, ve kterých byla implementována stejná logika pod platformou Vert.x. Rychlost aplikace implementované v jiném jazyce než Javě je pak závislá na konkrétním adaptéru.
+Tato kapitola se zabývá výkonnostními testy jednotlivých platforem. V prvním testu je obsaženo více programovacích jazyků, ve kterých byla implementována stejná logika pod platformou Vert.x. Rychlost aplikace implementované v jiném jazyce než Javě je závislá na konkrétním adaptéru.
 
 \subsubsection{Metody testování}
 
