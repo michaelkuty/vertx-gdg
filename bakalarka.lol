@@ -1,7 +1,7 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {lstlisting}{\numberline {3.1}\IeC {\v R}\IeC {\'\i }d\IeC {\'\i }c\IeC {\'\i } verticle}{26}{lstlisting.3.1}
+\contentsline {lstlisting}{\numberline {3.1}\IeC {\v R}\IeC {\'\i }d\IeC {\'\i }c\IeC {\'\i } verticle}{27}{lstlisting.3.1}
 \contentsline {lstlisting}{\numberline {3.2}Spu\IeC {\v s}t\IeC {\v e}n\IeC {\'\i } modulu z p\IeC {\v r}\IeC {\'\i }kazov\IeC {\'e} \IeC {\v r}\IeC {\'a}dky}{27}{lstlisting.3.2}
 \contentsline {lstlisting}{\numberline {3.3}Konfigurace serveru 1}{27}{lstlisting.3.3}
 \contentsline {lstlisting}{\numberline {3.4}Zaregistrov\IeC {\'a}n\IeC {\'\i } obslu\IeC {\v z}n\IeC {\'e} rutiny v jazyce JavaScript}{28}{lstlisting.3.4}
