@@ -2,7 +2,7 @@
 
 \chapter{Praktická část}
 
-V této kapitole je popisuji software a postupy použité při implementaci a distribuovaném nasazení malé Vert.x aplikace pro správu myšlenkových map.
+V této kapitole je popsán software a postupy použité při implementaci a distribuovaném nasazení malé Vert.x aplikace pro správu myšlenkových map.
 
 \section{Návrh}
 
@@ -28,7 +28,7 @@ Hlavní cíle aplikace jsou:
 
 \subsection{Architektura}
 
-Jak je vidět na obrázku \ref{fig:architecture_real}, klienti se budou připojovat přes jeden webový server s otevřeným portem 80. S druhým serverem bude komunikovat na úrovni Hazelcast clusteru. Vzhledem k situaci, která je blíže popsaná v kapitole \ref{sub:praktCluster}, kdy je webový server připojen do dvou sítí není potřeba šifrování ani nejrůznějších tunelů. Druhý server bude sloužit pro komunikaci s databází a také jako \emph{exporter} myšlenkových map do obrázků ve formátu PNG. Modul \emph{exporter} bude implementován v jazyce Java jako demonstrace polyglot vývoje.
+Jak je vidět na obrázku \ref{fig:architecture_real}, klienti se budou připojovat přes jeden webový server, který bude mít otevřený port 80. S druhým serverem bude spojený na úrovni Hazelcast clusteru. Vzhledem k situaci, která je blíže popsaná v kapitole \ref{sub:praktCluster}, kdy je webový server připojen do dvou sítí není potřeba šifrování ani nejrůznějších tunelů. Druhý server bude sloužit pro komunikaci s databází a také jako \emph{exporter} myšlenkových map do obrázků ve formátu PNG. Modul \emph{exporter} bude implementován v jazyce Java jako demonstrace polyglot vývoje.
 
 \begin{figure}[h]
 \begin{centering}
@@ -68,12 +68,12 @@ Na straně klienta tak budou implementovány metody, které budou mít definovan
 
 \subsection{Klientská aplikace}
 
-V následující kapitole objasním technologie použité na straně webového prohlížeče.
+V následující kapitole jsou objasněny technologie použité na straně webového prohlížeče.
 
 
 \section{Vlastní implementace}
 
-Vzhledem k rozsahu práce v následující kapitole ukáži a popíši většinu implementačních částí.
+Vzhledem k rozsahu práce je v následující kapitole ukázán a popsána většina implementačních částí.
 
 \subsection{Řídící verticle}
 
@@ -127,7 +127,7 @@ Spuštěním modulu z příkazového řádku se Vert.x podívá do deskriptoru m
 }
 \end{lstlisting}
 
-Většina názvů parametrů je výstižných, kromě \emph{bridge, inbound permitted a outbound permitted}. Pokud je první z nich nastaven na hodnotu \emph{true}, tak začnou platit pravidla, která jsou nadefinována v \emph{inbound permitted, outbound permitted}. Jde o tzv. bridge mezi webovým prohlížečem a Event busem jako takovým. \emph{Inbound permitted} říká jaké adresy se mají pustit dovnitř, analogicky potom \emph{outbound permitted} říká, co může jít ven. Výhodou je pak možnost specifikovat adresu pomocí regulárních výrazů.
+Většina jmen parametrů mluví sami za sebe, kromě \emph{bridge, inbound permitted a outbound permitted}. Pokud je první z nich nastaven na hodnotu \emph{true}, tak začnou platit pravidla, která jsou nadefinována v \emph{inbound permitted, outbound permitted}. Jde o tzv. bridge mezi webovým prohlížečem a Event busem jako takovým. \emph{Inbound permitted} říká jaké adresy se mají pustit dovnitř, analogicky potom \emph{outbound permitted} říká, co může jít ven. Výhodou je pak možnost specifikovat adresu pomocí regulárních výrazů.
 
 \subsubsection{Základní adresářová struktura}
 
@@ -176,7 +176,7 @@ Díky metodě \emph{publish}, která je samozřejmě dostupná ve všech jazycí
 
 \subsection{Integrace s databází MongoDB}
 
-Vzhledem k jednoduchosti aplikace nebyl vytvořen diagram tříd. V aplikaci budou pouze dva modely. Těmi josu Mapa a její Potomek, který se od Mapy liší pouze tím, že má místo globálního unikátního identifikátoru pouze unikátní identifikátor v rámci jedné Mapy.
+Vzhledem k jednoduchosti aplikace nebyl vytvořen diagram tříd. V aplikaci budou pouze dva modely, a to mapa a její potomek, který se od mapy liší pouze tím, že má místo globálního unikátního identifikátoru pouze unikátní identifikátor v rámci jedné mapy.
 
 V centrálním repozitáři již existuje modul pro komunikaci s MongoDB\footnote{https://github.com/vert-x/mod-mongo-persistor}, který poskytuje jednoduchou API pro asynchronní komunikaci s databází. Zaregistrujeme tedy obslužnou rutinu pro uložení myšlenkové mapy. Obdobně pak pro každou akci z definovaných cílů.
 
@@ -286,7 +286,7 @@ eb.onopen = function() {
 
 \subsubsection{D3.js}
 
-Vynikající knihovnou pro práci s grafy je D3.js, napsaná v jazyce JavaScript. Díky stovkám již hotových ukázek si stačí jen vybrat, kterou použít. Všechny jsou volně dostupné. Pro vykreslení myšlenkových map tak poslouží Collapsible Tree\cite{d3js}, který se výborně hodí právě pro stromové struktury. Implementace webového editoru je v souboru \emph{editor.js}
+Vynikající knihovnou pro práci s grafy je D3.js, napsaná v jazyce JavaScript. Díky stovkám již hotových ukázek si stačí jen vybrat, kterou použít. Všechny jsou totiž volně dostupné. Pro vykreslení myšlenkových map tak poslouží Collapsible Tree\cite{d3js}, který se výborně hodí právě pro stromové struktury. Implementace webového editoru je v souboru \emph{editor.js}
 
 \begin{lstlisting}[caption=D3.js nicializace dat]
 var tree = d3.layout.tree()
@@ -413,7 +413,7 @@ apt-get install mongodb-server -y
 
 \subsection{Nasazení produkční služby}\label{sub:service}
 
-V současné verzi, (2.1.2) Vert.x nepodporuje běh v režimu daemon\footnote{je program, který běží v pozadí, čeká na události, které nastanou, reaguje na ně a poskytuje služby.}. Nasazení v režimu daemon je však nutnost pro běh v produkčním prostředí. Pro běh aplikace MindMap editoru byla využita systémová služba Supervisord\footnote{supervisord.org}, která běží jako linuxová služba a stará se o běh dalších aplikací, v případě pádu se je snaží znovu spustit. Samotná konfigurace služby pro běh v Supervisordu pak obsahuje základní parametry. Ve verzi 3.0 je však plánovaná funkce běhu v režimu daemona a nebude tak tato berlička potřeba.
+V současné verzi, (2.1.2) Vert.x nepodporuje běh v režimu daemon\footnote{je program, který běží v pozadí, čeká na události, které nastanou, reaguje na ně a poskytuje služby.}. Nasazení v režimu daemon je však nutnost pro běh v produkčním prostředí. Pro běh aplikace MindMap editoru byla využita systémová služba Supervisord\footnote{supervisord.org}, která běží jako linuxový daemon a stará se o běh aplikace, v případě pádu se ji pokusí znovu nasadit. Samotná konfigurace služby pro běh v Supervisordu pak obsahuje základní parametry. Ve verzi 3.0 je však plánovaná funkce běhu v režimu daemona a nebude tak tato berlička potřeba.
 
 \begin{lstlisting}[caption=Konfigurace produkční služby]
 [program:vertx_mindmap_editor]
@@ -475,7 +475,7 @@ command=vertx runmod io.majklk~mindmapeditor~0.0.1 -instances 4 -conf
 
 \subsection{Horizontální}\label{sub:praktCluster}
 
-Dle návrhu architektury na obrázku \ref{fig:architecture_real} bude aplikace nasazena na dva servery. První bude naslouchat na portu 80, kde běží Webový server (HTTP Server). Tento server má vnitřní IP adresu \emph{10.10.10.161}. Druhé rozhraní má připojené do internetu. Na druhém serveru je část aplikace, která komunikuje s databází a modul pro vzdálenou interakci s Vert.x. Jeho IP adresa je \emph{10.10.10.162}. Pro propojení obou instancí je potřeba upravit spouštěcí příkaz v konfiguraci Supervisordu.
+Dle návrhu architektury na obrázku \ref{fig:architecture_real} bude aplikace nasazena na dva servery. První bude naslouchat na port 80 a poběží zde Webový server(HTTP Server). Tento server má vnitřní IP adresu \emph{10.10.10.161}. Druhé rozhraní má připojené do internetu. Na druhém serveru je část aplikace, která komunikuje s databází a modul pro vzdálenou interakci s Vert.x. Jeho IP adresa je \emph{10.10.10.162}. Pro propojení obou instancí je potřeba upravit spouštěcí příkaz v konfiguraci Supervisoru.
 
 \begin{lstlisting}[caption=Spuštění clusteru na Serveru 1]
 command=vertx runmod io.majklk~mindmapeditor~0.0.1 -conf /srv/mindmap/conf/webserver.json -cluster -cluster-host 10.10.10.161
@@ -508,7 +508,7 @@ Když je specifikován parametr \emph{-ha}, lze automaticky vypustit parametr \e
 
 \section{Integrace do stávájící Java aplikace}
 
-Pokud je to možné, je lepší se integraci vyhnout. Pokud to však nejde jinak, existují dvě varianty jak integrovat platformu:
+Pokud je to jakkoliv jen možné, je vhodné se integraci vyhnout. Pokud však nejde jinak, existují dvě varianty jak integrovat platformu:
 
 \begin{enumerate}
 \item PlatformManager
