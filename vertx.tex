@@ -2,11 +2,10 @@
 
 \chapter{Platforma Vert.x}
 
-Dnešním trendem internetu jsou aplikace, kde klienti komunikují v reálném čase, proto se také často označují jako kolaborativní aplikace. Tyto aplikace s sebou přinesly drastickou změnu potřeb programátorů na jednotlivé nástroje. Často programátor zjistí, zda-li se mu výběr podařil až v pokročilé fázi vývoje, kdy už nevede cesta zpět. Objevilo se několik nástrojů, které přinesli revoluci na poli webových aplikací. Mezi ně patří například Node.js, Akka nebo Ruby Event Machine.  
-
+Dnešním trendem internetu jsou aplikace, kde klienti komunikují v reálném čase, proto se také často označují jako kolaborativní aplikace. Tyto aplikace s sebou přinesly drastickou změnu potřeb programátorů na jednotlivé nástroje. Často programátor zjistí, zda-li se mu výběr podařil až v pokročilé fázi vývoje, kdy už nevede cesta zpět. Objevilo se několik nástrojů, které přinesli revoluci na poli webových aplikací. Mezi ně patří například Node.js, Akka nebo Ruby Event Machine. 
 Tyto nástroje si vydobyly své místo nejen pro možnost škálování na desítky tisíc klientů, což není v dnešní době nic neobvyklého. 
 
-Vert.x je projekt vycházející z Node.js, který podnítil závod o pokoření C10K\footnote{C10K problém řeší otázku: „Jak je možné obsloužit deset tisíc klientů za pomocí jednoho serveru, a to s co možná nejnižším zatížením serveru} problému. Obě platformy poskytují asynchronní API, které si je co do zaměření velice podobné. Node.js, jak již název napovídá je napsán v jazyce JavaScript, zatímco Vert.x je implementován v Javě. Vert.x ale není pouhá reimplementace Node.js do jazyka Java. Platforma má svou vlastní unikátní filozofii a terminologii, která se diametrálně liší od Node.js.
+Vert.x je projekt vycházející z Node.js, který podnítil závod o pokoření C10K\footnote{C10K problém řeší otázku: „Jak je možné obsloužit deset tisíc klientů za pomocí jednoho serveru, a to s co možná nejnižším zatížením serveru} problému. Obě platformy poskytují asynchronní API, které si je co do zaměření velice podobné. Node.js, jak již název napovídá je napsán v jazyce JavaScript, zatímco Vert.x je implementován v Javě. Vert.x ale není pouhá reimplementace Node.js do jazyka Java. Platforma má svou vlastní unikátní filozofii a terminologii, která je diametrálně odlišná od Node.js.
 
 \section{Historie}
 
@@ -102,7 +101,8 @@ Event loop využívá Netty.io NioWorkery. Každý verticle\footnote{nejmenší 
 \subsubsection{Návrhový vzor Multi-reactor}\label{sub:multireactor}
 
 Základ jádra je postaven na tzv.
-Multi-reactor pattern\cite{eventLoops}, který vychází ze vzoru Reactor \cite{reactorPattern}. Ten lze charakterizovat několika body:
+Multi-reactor pattern\cite{eventLoops}, který vychází z Reactor 
+patt-ernu\cite{reactorPattern}. Ten lze charakterizovat několika body:
 
 \begin{itemize}
 \item{aplikace je řízena událostmi}
@@ -111,7 +111,7 @@ Multi-reactor pattern\cite{eventLoops}, který vychází ze vzoru Reactor \cite{
 \item{toto vlákno nesmí být blokováno\footnote{pokud dojde k zablokování hlavního vlákna dojde k zablokování celé aplikace např.\emph{Thread.sleep(), a další z java.util.concurrent }}}
 \end{itemize}
 
-Vzor Multi-reactor \cite{eventLoops} se od vzoru Reactor liší pouze tím, že může mít více hlavních vláken. Tím přináší Vert.x možnost pohodlně škálovat instance na více procesorových jader. Jak je vidět z obrázku \vref{fig:instance} Vert.x platforma poskytuje více hlavních vláken, zpravidla však jedno hlavní vlákno na jeden procesor. Toho lze snadno docílit pomocí \emph{Runtime.getRuntime().availableProcessors()}, o kterém se dozvíte více v kapitole \ref{sub:Scaling}. Na obrázku \vref{fig:instance4} lze vidět situaci čtyř hlavních vláken na čtyři procesorová jádra.
+Multi-reactor pattern\cite{eventLoops} se od Reactor patternu liší pouze tím, že může mít více hlavních vláken. Tím přináší Vert.x možnost pohodlně škálovat instance na více procesorových jader. Jak je vidět z obrázku \vref{fig:instance} Vert.x platforma poskytuje více hlavních vláken, zpravidla však jedno hlavní vlákno na jeden procesor. Toho lze snadno docílit pomocí \emph{Runtime.getRuntime().availableProcessors()}, o kterém se dozvíte více v kapitole \ref{sub:Scaling}. Na obrázku \vref{fig:instance4} lze vidět situaci čtyř hlavních vláken na čtyři procesorová jádra.
 
 \subsubsection{Hybridní model vláken}\label{sub:hybrid}
 
@@ -190,7 +190,7 @@ Pro vyčlenění modulu z asociace na event loop stačí přidat parametr \emph{
 \label{fig:2instance4_eventbus}
 \end{figure}
 
-EventBus je nervový systém celého Vert.x. Název lze volně přeložit jako sběrnice událostí. Cílem EventBusu je zprostředkování komunikace mezi jednotlivými komponentami a vlákny aplikace. Podobně jako při použití externí MQ. Díky faktu, že komponenta Event Bus je implementována přímo v jádru platformy, odpadá nutnost používat další knihovny pro práci s MQ a v neposlední řadě také režijní náklady či výpočetní výkon. Jak je vidět na obrázku , komponenta Event Bus je distribuovaná přes všechny instance v clusteru. Samozřejmostí je možnost přemostění této komunikace do webového prohlížeče což je detailněji popsáno v kapitole \ref{sec:realTimeCommunication}. Event bus nepřináší v porovnání s profesionální MQ systémy takové možnosti jako například transakční zpracování, ale již existuje modul pro přemostění komunikace například do RabbitMQ\footnote{MQ napsaná v ERlangu}. S vývojáři z týmu vyvíjejí, RabbitMQ je Tim Fox v úzkém kontaktu\cite{vertxNodejs}. Základní typy komunikace:
+Nervový systém celého Vert.x, jehož název lze volně přeložit jako sběrnice událostí. Cílem EventBusu je zprostředkování komunikace mezi jednotlivými komponentami a vlákny aplikace. Podobně jako při použití externí MQ. Díky faktu, že komponenta Event Bus je implementována přímo v jádru platformy, odpadá nutnost používat další knihovny pro práci s MQ a v neposlední řadě také režijní náklady či výpočetní výkon. Jak je vidět na obrázku , komponenta Event Bus je distribuovaná přes všechny instance v clusteru. Samozřejmostí je možnost přemostění této komunikace do webového prohlížeče což je detailněji popsáno v kapitole \ref{sec:realTimeCommunication}. Event bus nepřináší v porovnání s profesionální MQ systémy takové možnosti jako například transakční zpracování, ale již existuje modul pro přemostění komunikace například do RabbitMQ\footnote{MQ napsaná v ERlangu}. S vývojáři z týmu vyvíjejí, RabbitMQ je Tim Fox v úzkém kontaktu\cite{vertxNodejs}. Základní typy komunikace:
 \begin{itemize}
 \item{Point to Point}
 \item{Publish/Subscribe}
@@ -272,7 +272,7 @@ Díky této části API může programátor řídit spouštění a vypínání n
 
 \subsection{Polyglot}
 
-Polyglot je označován člověk, který ovládá více jazyků. V terminologii Vert.x to znamená, že API je dostupná ve více programovacích jazycích. Což v praxi znamená, že si programátor může sám zvolit v jakém jazyce bude implementovat svůj kód. Díky faktu, že spolu všechny verticly komunikují skrze zprávy, je tak možné mít část aplikace napsanou například v jazyce Java a druhou část v jazyce Python. Tento fakt velmi pomáhá celé platformě cílit na větší množství programátorů. Vývojář klientské části aplikace většinou píše v jazyce JavaScript, naproti tomu vývojář serverové části spíše píše v jazyce Java nebo Scala\footnote{programovací jazyk, který běží na JVM}. Výčet podporovaných jazyků ve verzi 2.0. Do verze 3.0 se chystá automatické generování API pro každý jazyk.
+Polyglot je označován člověk, který ovládá více jazyků. V terminologii Vert.x to znamená, že API je dostupná ve více programovacích jazycích. Což v praxi znamená, že si programátor může sám zvolit v jakém jazyce bude implementovat svůj kód. Díky faktu, že spolu všechny verticly komunikují skrze zprávy, je tak možné mít část aplikace napsanou například v jazyce Java a druhou část v jazyce Python. Tento fakt hodně pomáhá celé platformě nalákat větší množství nových programátorů. Takový vývojář klientské části aplikace většinou píše v jazyce JavaScript, naproti tomu vývojář serverové části určitě píše spíše v jazyce Java nebo Scala\footnote{programovací jazyk, který běží na JVM}. Výčet podporovaných jazyků ve verzi 2.0. Do verze 3.0 se chystá automatické generování API pro každý jazyk.
 
 \begin{itemize}
 \item{Java, Scala, Groovy}
@@ -355,7 +355,7 @@ Jak lze vidět na obrázku \ref{fig:test1} a \ref{fig:test2} výsledky obou test
 \caption{Výsledky prvního testu \emph{Tim Fox} \cite{benchmarkTim}\label{fig:test1}}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[t]
 \begin{centering}
 \includegraphics[scale=0.7]{obrazky/chart_3-5}
 \par\end{centering}
