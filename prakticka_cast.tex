@@ -2,7 +2,7 @@
 
 \chapter{Praktická část}
 
-V této kapitole je popsán software a postupy použité při implementaci a nasazení malé Vert.x aplikace pro správu myšlenkových map.
+V této kapitole je popisuji software a postupy použité při implementaci a distribuovaném nasazení malé Vert.x aplikace pro správu myšlenkových map.
 
 \section{Návrh}
 
@@ -10,24 +10,32 @@ Aplikace bude složena ze dvou částí. Serverová část, která bude pracovat
 
 \subsection{Cíle aplikace}\label{sub:use_case}
 
-\begin{itemize}
-\item Přidání a odstranění myšlenkové mapy
-\item Přidání a odstranění bodu v myšlenkové mapě
-\item Přejmenování bodu v myšlenkové mapě
-\end{itemize}
-
-\begin{figure}
+\begin{figure}[h]
 \begin{centering}
 \includegraphics[scale=0.5]{obrazky/use_case}
 \par\end{centering}
 \caption{Případy užití\label{fig:use_case}}
 \end{figure}
 
+Hlavní cíle aplikace jsou:
+\begin{itemize}
+\item Přidání a odstranění myšlenkové mapy
+\item Přidání a odstranění bodu v myšlenkové mapě
+\item Přejmenování bodu v myšlenkové mapě
+\end{itemize}
+
 %\FloatBarrier
 
 \subsection{Architektura}
 
-Jak je vidět na obrázku \ref{fig:architecture_real} klienti se budou připojovat přes jeden webový server, který bude mít otevřený port 80. S druhým serverem bude spojený na úrovni Hazelcast clusteru. Vzhledem k situaci, která je blíže popsaná v kapitole \ref{sub:praktCluster}, kdy je webový server připojen do dvou sítí není potřeba šifrování ani nejrůznějších tunelů. Druhý server bude sloužit pro komunikaci s databází a také jako \emph{exporter} myšlenkových map do obrázků ve formátu PNG. Modul \emph{exporter} bude implementován v jazyce Java jako demonstrace polyglot vývoje.
+Jak je vidět na obrázku \ref{fig:architecture_real}, klienti se budou připojovat přes jeden webový server, který bude mít otevřený port 80. S druhým serverem bude spojený na úrovni Hazelcast clusteru. Vzhledem k situaci, která je blíže popsaná v kapitole \ref{sub:praktCluster}, kdy je webový server připojen do dvou sítí není potřeba šifrování ani nejrůznějších tunelů. Druhý server bude sloužit pro komunikaci s databází a také jako \emph{exporter} myšlenkových map do obrázků ve formátu PNG. Modul \emph{exporter} bude implementován v jazyce Java jako demonstrace polyglot vývoje.
+
+\begin{figure}[h]
+\begin{centering}
+\includegraphics[scale=0.5]{obrazky/architecture_real}
+\par\end{centering}
+\caption{Architektura nasazené aplikace\label{fig:architecture_real}}
+\end{figure}
 
 %\FloatBarrier
 
@@ -39,25 +47,19 @@ Po načtení myšlenkové mapy přichází na řadu aspekty komunikace v reáln�
 \item Odstranění objektu z myšlenkové mapy
 \item Přejmenování objektu v myšlenkové mapě
 \end{itemize}
-V tradiční webové aplikaci by to znamenalo implementaci těchto metod typem požadavek-odpověď jako operací konkrétní API. Při přidání objektu by se zavolala API a nazpět by přišla odpověď zda-li byla akce úspěšná. Pokud bychom však chtěli mít editor, který by propagoval změny ke všem, kdo mají myšlenkovou mapu otevřenou museli bychom znát přihlášené uživatele, kterým by server poslal notifikaci o změně. Mnohem jednoduší cesta je rozdělení požadavku a odpovědi do dvou částí což odpovídá návrhovému vzoru Command. V takovém případě při otevření webového prohlížeče s danou myšlenkovou mapou dojde k zaregistrování klienta na určitou adresu. V případě jakékoli změny, kterou provede jiný uživatel nebo kdokoliv jiný, dojde k odeslání události všem zaregistrovaným klientům okamžitě v době vykonání události. Tuto situaci lze vidět na obrázku \ref{fig:realtime_communication}. V případě, kdy u uživatele dojde k vyvolání akce, ostatním uživatelům bude zaslána událost, která s sebou nese všechny informace o změně. Všem klientům zaregistrovaným na stejnou adresu přijde stejná událost. Tento typ zasílání zpráv je znám jako návrhový vzor Publish/Subscribe.
 
-\begin{figure}
-\begin{centering}
-\includegraphics[scale=0.5]{obrazky/architecture_real}
-\par\end{centering}
-\caption{Architektura nasazené aplikace\label{fig:architecture_real}}
-\end{figure}
-
-\begin{figure}
+\begin{figure}[h]
 \begin{centering}
 \includegraphics[width	=1\textwidth]{obrazky/realtime_communication}
 \par\end{centering}
 \caption{Komunikace v reálném čase\label{fig:realtime_communication}}
 \end{figure}
 
+V tradiční webové aplikaci by to znamenalo implementaci těchto metod typem požadavek-odpověď jako operací konkrétní API. Při přidání objektu by se zavolala API a nazpět by přišla odpověď, zda-li byla akce úspěšná. Pokud bychom však chtěli mít editor, který by propagoval změny ke všem, kdo mají myšlenkovou mapu otevřenou museli bychom znát přihlášené uživatele, kterým by server poslal notifikaci o změně. Mnohem jednoduší cesta je rozdělení požadavku a odpovědi do dvou částí což odpovídá návrhovému vzoru Command. V takovém případě při otevření webového prohlížeče s danou myšlenkovou mapou dojde k zaregistrování klienta na určitou adresu. V případě jakékoli změny, kterou provede jiný uživatel nebo kdokoliv jiný, dojde k odeslání události všem zaregistrovaným klientům okamžitě v době vykonání události. Tuto situaci lze vidět na obrázku \ref{fig:realtime_communication}. V případě, kdy u uživatele dojde k vyvolání akce, ostatním uživatelům bude zaslána událost, která s sebou nese všechny informace o změně. Všem klientům zaregistrovaným na stejnou adresu přijde stejná událost. Tento typ zasílání zpráv je znám jako návrhový vzor Publish/Subscribe.
+
 \subsection{Akce}
 
-Když bude uživatel chtít změnit myšlenkovou mapu (přidat objekt, odebrat objekt nebo přejmenovat objekt), vyšle akci na server. Tato akce bude poslána přes přemostěný event bus, který byl představen v kapitole \ref{sub:eventBus}. Na straně serveru je pak verticle, který má zaregistrovány metody na příchozí akce. Samotná akce nemá žádnou návratovou hodnotu, pokud tak dojde k chybě nedojde k vyslání události, která s sebou nese změny myšlenkové mapy.
+Když bude uživatel chtít změnit myšlenkovou mapu (přidat objekt, odebrat objekt nebo přejmenovat objekt), vyšle akci na server. Tato akce bude poslána přes přemostěný event bus, které jsem představil v kapitole \ref{sub:eventBus}. Na straně serveru je pak verticle, který má zaregistrovány metody na příchozí akce. Samotná akce nemá žádnou návratovou hodnotu, pokud tak dojde k chybě nedojde k vyslání události, která s sebou nese změny myšlenkové mapy.
 
 \subsection{Události}
 
@@ -66,18 +68,18 @@ Na straně klienta tak budou implementovány metody, které budou mít definovan
 
 \subsection{Klientská aplikace}
 
-V následující kapitole budou objasněny technologie použité na straně webového prohlížeče.
+V následující kapitole objasním technologie použité na straně webového prohlížeče.
 
 
 \section{Vlastní implementace}
 
-Vzhledem k rozsahu práce bude v následující kapitole ukázána a popsána většina implementačních částí.
+Vzhledem k rozsahu práce v následující kapitole ukáži a popíši většinu implementačních částí.
 
 \subsection{Řídící verticle}
 
-Nasazená na více serverů ve více rolích s sebou přináší malé rozhodnutí. Jestli aplikaci rozdělíme do více menších modulů nebo jednu větší pustíme na více serverech ve více rolích. S přihlédnutím na rozsah aplikace je výhodnější implementovat řídící verticle, který bude mít na starost nasazovat moduly, dle dané konfigurace. Část kódu takového startéru vypadá následovně:
+Nasazení aplikace na více serverů s sebou přináší malé rozhodnutí. Jestli aplikaci rozdělíme do více menších modulů nebo jednu větší pustíme na více serverech ve více rolích. S přihlédnutím na rozsah aplikace je výhodnější implementovat řídící verticle, který bude mít na starost nasazovat moduly, dle dané konfigurace. Část kódu takového startéru vypadá následovně:
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=Řídící verticle]
 var container = require('vertx/container');
 var console = require('vertx/console');
 
@@ -94,13 +96,13 @@ if("webserver" in config) {
 
 Každá metoda \emph{deploy} má jako poslední parametr obslužnou rutinu pro případ selhání. V mnoha případech se také hodí ID nasazení, díky němuž lze později toto nasazení zrušit.
 
-Samotný kód vytáhne z třídy \emph{container} konfiguraci celého modulu a zeptá se jestli se v něm nenachází daná role. Potom už jen stačí aby daný konfigurační soubor obsahoval klíč \emph{webserver} s danou konfigurací, která se nachází níže. Obdobně je implementováno startování editoru, databázového modulu a exportéru. Spuštění modulu či verticle jde samozřejmě i ručně z příkazové řádky.
+Samotný kód vytáhne z třídy \emph{container} konfiguraci celého modulu a zeptá se jestli se v něm nenachází daná role. Potom už jen stačí, aby daný konfigurační soubor obsahoval klíč \emph{webserver} s danou konfigurací, která se nachází níže. Obdobně je implementováno startování editoru, databázového modulu a exportéru. Spuštění modulu či verticle jde samozřejmě i ručně z příkazové řádky.
 
 \begin{lstlisting}[caption=Spuštění modulu z příkazové řádky]
 vertx runmod io.majklk~mindmapeditor~0.0.1 -conf /srv/mindmap/conf/webserver.json -instances 3
 \end{lstlisting}
 
-Spuštěním modulu z příkazové řádky se Vert.x podívá do deskriptoru modulu, v kterém by měl najít cestu k hlavnímu verticlu. Ten následně spustí a předá mu danou konfiguraci. Samotný verticle pak může pracovat s Vert.x instancí.
+Spuštěním modulu z příkazového řádku se Vert.x podívá do deskriptoru modulu, v kterém by měl najít cestu k hlavnímu verticlu. Ten následně spustí a předá mu danou konfiguraci. Samotný verticle pak může pracovat s Vert.x instancí.
 
 \begin{lstlisting}[caption=Konfigurace serveru 1]
 {
@@ -125,7 +127,7 @@ Spuštěním modulu z příkazové řádky se Vert.x podívá do deskriptoru mod
 }
 \end{lstlisting}
 
-Většina jmen parametrů mluví sami za sebe, kromě \emph{bridge, inbound permitted a outbound permitted}. Pokud je první z nich nastaven na hodnotu \emph{true} tak začnou platit pravidla, která jsou nadefinována v \emph{inbound permitted, outbound permitted}. Jde o tzv. bridge mezi webovým prohlížečem a Event busem jako takovým. \emph{Inbound permitted} říká jaké adresy se mají pustit dovnitř, analogicky potom \emph{outbound permitted} říká, co může jít ven. Výhodou je pak možnost specifikovat adresu pomocí regulárních výrazů.
+Většina jmen parametrů mluví sami za sebe, kromě \emph{bridge, inbound permitted a outbound permitted}. Pokud je první z nich nastaven na hodnotu \emph{true}, tak začnou platit pravidla, která jsou nadefinována v \emph{inbound permitted, outbound permitted}. Jde o tzv. bridge mezi webovým prohlížečem a Event busem jako takovým. \emph{Inbound permitted} říká jaké adresy se mají pustit dovnitř, analogicky potom \emph{outbound permitted} říká, co může jít ven. Výhodou je pak možnost specifikovat adresu pomocí regulárních výrazů.
 
 \subsubsection{Základní adresářová struktura}
 
@@ -170,9 +172,11 @@ eventBus.publish('editor.udalosti.'+mindMap._id, {"udalost": "bodPridan", parent
 
 Díky metodě \emph{publish}, která je samozřejmě dostupná ve všech jazycích můžeme publikovat událost všem klientům, kteří mají zaregistrovanou obslužnou rutinu na identickou adresu, která je unikátní pro každou mapu.
 
+\vspace{0.5cm} % fix
+
 \subsection{Integrace s databází MongoDB}
 
-Vzhledem k jednoduchosti aplikace nebyl vytvořen diagram tříd. V aplikaci budou pouze dva modely a to mapa a její potomek, který se od mapy liší pouze tím, že má místo globálního unikátního identifikátoru pouze unikátní identifikátor v rámci jedné mapy.
+Vzhledem k jednoduchosti aplikace nebyl vytvořen diagram tříd. V aplikaci budou pouze dva modely, a to mapa a její potomek, který se od mapy liší pouze tím, že má místo globálního unikátního identifikátoru pouze unikátní identifikátor v rámci jedné mapy.
 
 V centrálním repozitáři již existuje modul pro komunikaci s MongoDB\footnote{https://github.com/vert-x/mod-mongo-persistor}, který poskytuje jednoduchou API pro asynchronní komunikaci s databází. Zaregistrujeme tedy obslužnou rutinu pro uložení myšlenkové mapy. Obdobně pak pro každou akci z definovaných cílů.
 
@@ -264,7 +268,7 @@ css //složka pro kaskádové styly
 
 \subsubsection{Event Bus v prohlížeči}
 
-Nejdůležitější částí klientské aplikace je Vert.x vrstva nad SockJS\cite{sockjs}, která zabaluje komunikaci se serverem na protokolu WebSocket\cite{webSockets}. Knihovna naváže a udržuje neustálé spojení se serverem. Implementací metod \emph{eb.onopen a eb.onclose} může patřičně reagovat na otevření a uzavření spojení. Jediným parametrem samotného EventBusu je pak URL adresa na kterou se má připojit.
+Dle mého názoru nejdůležitější částí klientské aplikace je Vert.x vrstva nad SockJS\cite{sockjs}, která zabaluje komunikaci se serverem na protokolu WebSocket\cite{webSockets}. Knihovna naváže a udržuje neustálé spojení se serverem. Implementací metod \emph{eb.onopen a eb.onclose} může patřičně reagovat na otevření a uzavření spojení. Jediným parametrem samotného EventBusu je pak URL adresa na kterou se má připojit.
 
 \begin{lstlisting}[caption=Připojení Event busu z prohlížeče a inicializace editoru]
 var eb = new vertx.EventBus(window.location.protocol + '//' + window.location.hostname + ':' + window.location.port + '/eventbus');
@@ -297,7 +301,7 @@ d3.json(mindMap);
 
 \section{Polyglot vývoj a moduly}\label{sec:praktickyModuly}
 
-Pro větší znovupoužitelnost je vhodné své aplikace balit do modulů, které pak lze snadno distribuovat v různých formátech. Aby se z editoru stal modul musí být adresářová struktura upravena následovně.
+Pro větší znovupoužitelnost je vhodné své aplikace balit do modulů, které pak lze snadno distribuovat v různých formátech. Aby se z editoru stal modul, musí být adresářová struktura upravena následovně.
 
 \begin{lstlisting}
 mods //složka pro další moduly
@@ -309,7 +313,7 @@ web //kořenová složka webové části
 mod.json //deskriptor modulu
 \end{lstlisting}
 
-Classloader při startu modulu automaticky načte všechny knihovny nacházející se ve složce \emph{lib}. Ručně to lze pak přes parametr \emph{-cp}\footnote{ClassPath}. Pokud je modul spustitelný, musí deskriptor modulu obsahovat parametr \emph{main}. Což je cesta a jméno hlavního verticle. Modul, který nemá specifikovaný parametr \emph{main} lze pak snadno použít v jiném modulu pomocí parametru \emph{includes}. Modul se pak musí nacházet ve složce \emph{mods}. Nastavením parametru \emph{worker} na \emph{true} docílíme vyčlenění všech verticlů z asociace na Event loop jak bylo řečeno v \ref{sub:hybrid}. Parametr \emph{auto-redeploy} se hodí především v časech vývoje, při každé změně kódu dojdu k novému nasazení modulu. 
+Classloader při startu modulu automaticky načte všechny knihovny nacházející se ve složce \emph{lib}. Ručně to lze pak přes parametr \emph{-cp}\footnote{ClassPath}. Aby byl modul spustitelný, musí deskriptor modulu obsahovat parametr \emph{main}. Což je cesta a jméno hlavního verticle. Modul, který nemá specifikovaný parametr \emph{main} lze pak snadno použít v jiném modulu pomocí parametru \emph{includes}. Modul se pak musí nacházet ve složce \emph{mods}. Nastavením parametru \emph{worker} na \emph{true} docílíme vyčlenění všech verticlů z asociace na Event loop jak bylo řečeno v \ref{sub:hybrid}. Parametr \emph{auto-redeploy} se hodí především v časech vývoje, při každé změně kódu dojdu k novému nasazení modulu. 
 \begin{lstlisting}
 {
   "main": "main.js",
@@ -388,7 +392,7 @@ public class ImageExporter extends Verticle {
 \section{Základní software}
 
 Jádrem serveru je operační systém Ubuntu\cite{ubuntu} 14.04 LTS\footnote{dlouhodobá podpora} Server Edition s kódovým označením 
-Trusty Tahr. Je to osvědčený systém, který bude mít podporu do roku 2019. Systém má aplikaci pro správu softwarových balíků 
+Trusty Tahr. Je to osvědčený systém, který bude má zaručenou podporu do roku 2019. Systém má aplikaci pro správu softwarových balíků 
 aptitude. Všechny aplikace kromě samotného Vert.x jdou hravě nainstalovat pře tento systém.
 
 \subsection{Java}
@@ -401,7 +405,7 @@ Jediná služba, která se zatím nenachází jako systémový balíček je samo
 
 \subsection{Databázový server}
 
-Pro ukládání myšlenkových map je použita NoSQl databáze MongoDB ve verzi 2.6. MongoDB má za sebou více než pět let vývoje a několik obřích investicí\cite{mongodb} do dalšího vývoje. V dnešní době existuje nespočet NoSQL databází, vzhledem k tomu, že již existuje Vert.x modul pro pohodlnou asynchronní spolupráci s touto databází byla vybrána pravě tato NoSQL databáze. Pro instalaci stačí využít balíčkovací systém aptitude. Nastavení databáze lze ponechat ve výchozím stavu, kdy databáze naslouchá na portu 27017 což lze vidět i z konfigurace aplikace v ukázce kódu \ref{confServ2}.
+Pro ukládání myšlenkových map je použita NoSQl databáze MongoDB ve verzi 2.6. MongoDB má za sebou více než pět let vývoje a několik obřích investic\cite{mongodb} do dalšího vývoje. V dnešní době existuje nespočet NoSQL databází, vzhledem k tomu, že již existuje Vert.x modul pro pohodlnou asynchronní spolupráci s touto databází, byla vybrána pravě tato NoSQL databáze. Pro instalaci stačí využít balíčkovací systém aptitude. Nastavení databáze lze ponechat ve výchozím stavu, kdy databáze naslouchá na portu 27017. Což lze vidět i z konfigurace aplikace v ukázce kódu \ref{confServ2}.
 
 \begin{lstlisting}
 apt-get install mongodb-server -y
@@ -409,7 +413,7 @@ apt-get install mongodb-server -y
 
 \subsection{Nasazení produkční služby}\label{sub:service}
 
-V současné verzi(2.1.2) Vert.x nepodporuje běh v režimu daemon\footnote{je program, který běží v pozadí, čeká na události, které nastanou, reaguje na ně a poskytuje služby.}. Nasazení v režimu daemon je však nutnost pro běh v produkčním prostředí. Pro běh aplikace MindMap editoru byla využita systémová služba Supervisord\footnote{supervisord.org}, která běží jako linuxový daemon a stará se o běh aplikace, v případě pádu se ji pokusí znovu nasadit. Samotná konfigurace služby pro běh v Supervisordu pak obsahuje základní parametry. Ve verzi 3.0 je však plánovaná funkce běhu v režimu daemona a nebude tak tato berlička potřeba.
+V současné verzi, (2.1.2) Vert.x nepodporuje běh v režimu daemon\footnote{je program, který běží v pozadí, čeká na události, které nastanou, reaguje na ně a poskytuje služby.}. Nasazení v režimu daemon je však nutnost pro běh v produkčním prostředí. Pro běh aplikace MindMap editoru byla využita systémová služba Supervisord\footnote{supervisord.org}, která běží jako linuxový daemon a stará se o běh aplikace, v případě pádu se ji pokusí znovu nasadit. Samotná konfigurace služby pro běh v Supervisordu pak obsahuje základní parametry. Ve verzi 3.0 je však plánovaná funkce běhu v režimu daemona a nebude tak tato berlička potřeba.
 
 \begin{lstlisting}[caption=Konfigurace produkční služby]
 [program:vertx_mindmap_editor]
@@ -432,6 +436,12 @@ Nejdůležitější parametry jsou \emph{environment} a \emph{command}, které u
 \subsection{Interakce s Vert.x}\label{sub:interaction}
 
 Díky modulu CrasHub Shell\footnote{https://github.com/crashub/mod-shell} se lze protokolem SSH\footnote{Secure Shell} přihlásit přímo do Vert.x. Modul pak nabízí možnost interakce s jednotlivými komponentami samotného Vert.x. Lze například posílat zprávy přes Event Bus nebo nasazovat nové moduly za běhu celé aplikace.
+\begin{figure}[h]
+\begin{centering}
+\includegraphics[scale=0.21]{obrazky/real_interaction}
+\par\end{centering}
+\caption{Modul CrasHub Shell\label{fig:real_interaction}}
+\end{figure}
 
 Pro nasazení modulu stačí přidání klíče \emph{shell} do konfigurace server 2. Po nasazení aplikace začne tento server poslouchat na portu 2000.
 
@@ -447,24 +457,17 @@ Pro nasazení modulu stačí přidání klíče \emph{shell} do konfigurace serv
 }
 \end{lstlisting}
 
-Samotný modul nabízí nepřeberné množství možností jak spravovat aplikace nebo ji naživo škálovat. Lze také jednoduše přidat vlastní příkazy a rozšířit tak možnosti tohoto modulu. Na obrázku \ref{fig:real_interaction} je hlavní přehledová stránka na které lze vidět činnost, vytížení a status všech vláken v celém clusteru. Dostupné jsou také informace o velikosti zásobníku, paměti či verze Javy. 
-
-\begin{figure}
-\begin{centering}
-\includegraphics[scale=0.21]{obrazky/real_interaction}
-\par\end{centering}
-\caption{Modul CrasHub Shell\label{fig:real_interaction}}
-\end{figure}
+Samotný modul nabízí nepřeberné množství možností jak spravovat aplikace nebo ji naživo škálovat. Lze také jednoduše přidat vlastní příkazy a rozšířit tak možnosti tohoto modulu. Na obrázku \ref{fig:real_interaction} je hlavní přehledová stránka, na které lze vidět činnost vytížení a status všech vláken v celém clusteru. Dostupné jsou také informace o velikosti zásobníku, paměti či verze Javy. 
 
 \section{Škálování}\label{sub:Scaling}
 
-Škálování je nedílnou součástí životního cyklu aplikace. Ne zřídka dojde aplikace do situace, kdy začne být pomalá či často padat pod velkým náporem klientů. Následující kapitola rozebírá možnosti škálování Vert.x aplikací.
+Škálování je nedílnou součástí životního cyklu aplikace. Ne zřídka dojde aplikace do situace, kdy začne být pomalá či často padat pod velkým náporem klientů. V následující kapitole proto rozebírám možnosti škálování Vert.x aplikací.
 
 \FloatBarrier
 
 \subsection{Vertikální}
 
-Samotné vertikální škálování lze efektivně řešit až na aplikační úrovni. Jak již bylo zmíněno v kapitole \ref{sub:multireactor} voláním \emph{Runtime.getRuntime().availableProcessors()} lze získat počet procesorových jader a s tím dále pracovat. Upravením předchozích příkazů však docílíme shodného výsledku.
+Samotné vertikální škálování lze efektivně řešit až na aplikační úrovni. Jak již bylo zmíněno v kapitole \ref{sub:multireactor} voláním \emph{Runtime.getRuntime().availableProcessors()}, lze získat počet procesorových jader a s tím dále pracovat. Upravením předchozích příkazů však docílíme shodného výsledku.
 
 \begin{lstlisting}
 command=vertx runmod io.majklk~mindmapeditor~0.0.1 -instances 4 -conf
@@ -488,13 +491,13 @@ Hlavní sada vláken, tedy event loopů je ve výchozím nastavení na hodnotě 
 
 \section{Vysoká dostupnost}
 
-Pro zajištění vysoké dostupnosti klíčových prvků aplikace, je potřeba upravit architekturu clusteru. Před webový server je postaven load balancer\footnote{služba zajištující vyrovnávání zatížení} v tomto případě HA proxy, která při úpadku jednoho z webových serverů přesměruje komunikaci na server druhý. Vert.x cluster je rozdělený na dvě HA skupiny(obr.\ref{fig:architecture_ideal}), které se liší svým zaměřením. První dva servery slouží jako webové a jsou napojeny na HA proxy. Další dva slouží pro komunikaci s databází, která na nich, přímo běžet nemusí. V této HA skupině je dále modul pro interakci s Vert.x. Díky specifikování HA skupiny nikdy nedojde k nasazení modulu na webovém serveru a tedy otevření SSH na portu 2000.
+Pro zajištění vysoké dostupnosti klíčových prvků aplikace, je potřeba upravit architekturu clusteru. Před webový server je postaven load balancer\footnote{služba zajištující vyrovnávání zatížení} v tomto případě HA proxy, která při úpadku jednoho z webových serverů přesměruje komunikaci na server druhý. Vert.x cluster je rozdělený na dvě HA skupiny (obr.\ref{fig:architecture_ideal}), které se liší svým zaměřením. První dva servery slouží jako webové a jsou napojeny na HA proxy. Další dva slouží pro komunikaci s databází, která na nich, přímo běžet nemusí. V této HA skupině je dále modul pro interakci s Vert.x. Díky specifikaci HA skupiny nikdy nedojde k nasazení modulu na webovém serveru a tedy otevření SSH na portu 2000.
 
 \begin{lstlisting}[caption=Vysoká dostupnost na databázovém serveru 2]
 command=vertx runmod io.majklk~mindmapeditor~0.0.1 -conf /srv/mindmap/conf/dbserver.json -cluster-host 10.10.10.162 -ha -hagroup skupina-1
 \end{lstlisting}
 
-Když je specifikován parametr \emph{-ha} lze automaticky vypustit parametr \emph{-cluster}.
+Když je specifikován parametr \emph{-ha}, lze automaticky vypustit parametr \emph{-cluster}.
 
 \begin{figure}
 \begin{centering}
@@ -505,7 +508,7 @@ Když je specifikován parametr \emph{-ha} lze automaticky vypustit parametr \em
 
 \section{Integrace do stávájící Java aplikace}
 
-Pokud je to jakkoliv jen možné je vhodné se integraci vyhnout. Pokud však nejde jinak, jsou zde dvě varianty jak integrovat platformu.
+Pokud je to jakkoliv jen možné, je vhodné se integraci vyhnout. Pokud však nejde jinak, existují dvě varianty jak integrovat platformu:
 
 \begin{enumerate}
 \item PlatformManager
