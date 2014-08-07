@@ -1,0 +1,27 @@
+
+\chapter[Závěr]{Závěr}
+
+Má práce představila unikátní filosofii a principy frameworku Vert.x. V práci jsem se pokusil o srovnání platformy s jejím nejčastěji zmiňovaným protikandidátem Node.js. V testu výkonů se dle mého názoru ukázalo, že framework Node.js nemůže platformě Vert.x konkurovat. A to bez ohledu na jazyk, ve kterém byly testy implementovány. Srovnání možností ukázalo, že platforma Vert.x toho může nabídnout mnohem více než její předchůdce. 
+
+V praktické části se  mi podařilo vytvořit webovou aplikaci, která splňuje všechny aspekty moderní webové aplikace. Především pak komunikace v reálném čase bez náročných implementací či použití mnoha služeb a nástrojů, které by se projevily nejen zvýšením nákladů. Výhodou je, že v aplikaci je možné jednoduchým a intuitivním způsobem přidávat, přejmenovávat a odebírat její jednotlivé body. Pokud má stejnou myšlenkovou mapu otevřeno více lidí, okamžitě vidí změny, ostatních uživatelů. To zvyšuje rychlost kolaborace. Aplikace používá volně šiřitelný software, který je ve většině případů špičkové úrovně. % Tento postup dovoluje, s relativně nízkými náklady, řešit velmi komplikované problémy. 
+Dle mého názoru vidím možnosti pro vylepšení aplikace na straně funkcionální. Bylo by vhodné rozšířit aplikaci o možnost přihlášení a správy pouze svých myšlenkových map nebo případné sdílení jednotlivých map s ostatními uživateli.
+
+Z práce vyplývá, že Vert.x je vysoce modifikovatelný webový framework založený na komunikaci v reálném čase napříč všemi částmi aplikace. Vysoká modularita a otevřenost platformy Vert.x přináší značné výhody pro vývoj webových aplikací, především s dalšími nástroji usnadňujícími vývoj MVC nebo MVVM aplikací, například AngularJS. Již od počátku si kladl za cíl zjednodušit dosavadní možnosti vývoje a představit tak alternativu ke standardním nástrojům vývoje webových aplikací. Je to právě jednoduchost, univerzálnost a komplexnost řešení této platformy, které zlákalo společnost RedHat, která adoptovala tuto platformu. V současné době se velmi progresivně rozšiřuje celý ekosystém okolo Vert.x novými nástroji a možnostmi. A to je dobře. Zvyšují se tím mimo jiné i možnosti jejich využití.
+
+Díky originálnímu spojení několika klíčových komponent přišla platforma s možností jednoduchého škálování napříč servery. Knihovna Hazelcast představuje klíčovou komponentu pro horizontální škálování. Do již běžícího clusteru lze přidávat nové servery. V režimu HA, lze zajistit vysokou dostupnost na míru celé aplikaci bez nutnosti běhu dalších služeb a pracné konfigurace.
+
+\section{Budoucnost projektu}
+
+Tim Fox hlavní vedoucí projektu představil plán\cite{plan} pro budoucí rozvoj platformy. Nově tak bude šifrovaná veškerá komunikace na Event busu. API bude definováno pomocí vysoce abstraktního programovacího jazyka díky čemuž bude možné generovat API v jiných programovacích jazycích. Zveřejnění jednoduchého protokolu pro napojení na Event Bus což de v současné době pouze přes WebSocket a SockJS most. Objevit by se měla také nativní podpora pro Android a IoS. Je dobře, že vývoj jde stále dopředu a umožňuje tím rozšířit okruh programátorů.
+
+\section{Možnosti dalšího výzkumu}
+
+Tak rozsáhlé téma jako jsou distribuované webové aplikace rozhodně nelze podrobně popsat v rámci jedné bakalářské práce. Na tuto práci proto mohou navazovat kolegové z fakulty či jiných vysokých škol. V závěru si dovoluji pro ně navrhuji dvě zajímavá témata, na které již v této práci nezbyl prostor a rozhodně si zaslouží podrobnější analýzu. Já osobně se hodlám touhle problematikou dále zabývat, protože mě možnosti jejich využití doslova nadchly. Jsem rád, že existují lidé, kteří se nespokojí tzv. s málem.
+ 
+\subsection{Distribuované výpočty}
+
+V dnešní době Big Data\footnote{velká data} je zapotřebí tyto data efektivně a rychle zpracovávat. Velké společnosti proto investují nemále peníze do vývoje sotfwaru, který by efektivně zpracovával data napříč data centry. Představit možnosti spojení výhod platformy Vert.x s již hotovými a specializovanými nástroji.
+
+\subsection{Srovnání}
+
+Prostor vidím v možnosti srovnání s konkurenčními platformami, především s Akka a Jetty. Navrhnout a implementovat test, který by demonstroval deset tisíc spojení. Bylo by zajímavé vidět chování a spotřebu zdrojů aplikací pod takovým zatížením. Jak to vidím já, svět IT technologií a aplikací je jednou velkou množinou nekonečných možností a jsem velice rád, že jsem si tento obor studia vybral.
