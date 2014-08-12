@@ -11,13 +11,14 @@
 \contentsline {lstlisting}{\numberline {3.8}Konfigurace serveru 2}{29}{lstlisting.3.8}
 \contentsline {lstlisting}{\numberline {3.9}P\IeC {\v r}ipojen\IeC {\'\i } Event busu z prohl\IeC {\'\i }\IeC {\v z}e\IeC {\v c}e a inicializace editoru}{30}{lstlisting.3.9}
 \contentsline {lstlisting}{\numberline {3.10}D3.js nicializace dat}{31}{lstlisting.3.10}
-\contentsline {lstlisting}{\numberline {3.11}Spu\IeC {\v s}t\IeC {\v e}n\IeC {\'\i } modulu v jazyce Java}{32}{lstlisting.3.11}
-\contentsline {lstlisting}{\numberline {3.12}Verticle v jazyce Java}{32}{lstlisting.3.12}
-\contentsline {lstlisting}{\numberline {3.13}Konfigurace produk\IeC {\v c}n\IeC {\'\i } slu\IeC {\v z}by}{35}{lstlisting.3.13}
-\contentsline {lstlisting}{\numberline {3.14}Konfigurace modulu CrasHub Shell}{36}{lstlisting.3.14}
-\contentsline {lstlisting}{\numberline {3.15}Spu\IeC {\v s}t\IeC {\v e}n\IeC {\'\i } clusteru na Serveru 1}{38}{lstlisting.3.15}
-\contentsline {lstlisting}{\numberline {3.16}Spu\IeC {\v s}t\IeC {\v e}n\IeC {\'\i } clusteru na Serveru 2}{38}{lstlisting.3.16}
-\contentsline {lstlisting}{\numberline {3.17}Vysok\IeC {\'a} dostupnost na datab\IeC {\'a}zov\IeC {\'e}m serveru 2}{38}{lstlisting.3.17}
-\contentsline {lstlisting}{\numberline {3.18}Integrace do st\IeC {\'a}vaj\IeC {\'\i }c\IeC {\'\i } Java aplikace}{40}{lstlisting.3.18}
+\contentsline {lstlisting}{\numberline {3.11}Deskriptor modulu}{32}{lstlisting.3.11}
+\contentsline {lstlisting}{\numberline {3.12}Spu\IeC {\v s}t\IeC {\v e}n\IeC {\'\i } modulu v jazyce Java}{32}{lstlisting.3.12}
+\contentsline {lstlisting}{\numberline {3.13}Verticle v jazyce Java}{32}{lstlisting.3.13}
+\contentsline {lstlisting}{\numberline {3.14}Konfigurace produk\IeC {\v c}n\IeC {\'\i } slu\IeC {\v z}by}{35}{lstlisting.3.14}
+\contentsline {lstlisting}{\numberline {3.15}Konfigurace modulu CrasHub Shell}{37}{lstlisting.3.15}
+\contentsline {lstlisting}{\numberline {3.16}Spu\IeC {\v s}t\IeC {\v e}n\IeC {\'\i } clusteru na Serveru 1}{38}{lstlisting.3.16}
+\contentsline {lstlisting}{\numberline {3.17}Spu\IeC {\v s}t\IeC {\v e}n\IeC {\'\i } clusteru na Serveru 2}{38}{lstlisting.3.17}
+\contentsline {lstlisting}{\numberline {3.18}Vysok\IeC {\'a} dostupnost na datab\IeC {\'a}zov\IeC {\'e}m serveru 2}{38}{lstlisting.3.18}
+\contentsline {lstlisting}{\numberline {3.19}Integrace do st\IeC {\'a}vaj\IeC {\'\i }c\IeC {\'\i } Java aplikace}{39}{lstlisting.3.19}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

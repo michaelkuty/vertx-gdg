@@ -58,7 +58,7 @@
 \contentsline {subsubsection}{D3.js}{31}{section*.41}
 \contentsline {section}{\numberline {3.4}Polyglot v\IeC {\'y}voj a moduly}{31}{section.3.4}
 \contentsline {section}{\numberline {3.5}Z\IeC {\'a}kladn\IeC {\'\i } software}{33}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}Java}{33}{subsection.3.5.1}
+\contentsline {subsection}{\numberline {3.5.1}Java}{35}{subsection.3.5.1}
 \contentsline {subsection}{\numberline {3.5.2}Vert.x}{35}{subsection.3.5.2}
 \contentsline {subsection}{\numberline {3.5.3}Datab\IeC {\'a}zov\IeC {\'y} server}{35}{subsection.3.5.3}
 \contentsline {subsection}{\numberline {3.5.4}Nasazen\IeC {\'\i } produk\IeC {\v c}n\IeC {\'\i } slu\IeC {\v z}by}{35}{subsection.3.5.4}
@@ -68,7 +68,7 @@
 \contentsline {subsection}{\numberline {3.6.2}Horizont\IeC {\'a}ln\IeC {\'\i }}{37}{subsection.3.6.2}
 \contentsline {subsection}{\numberline {3.6.3}Lad\IeC {\v e}n\IeC {\'\i } v\IeC {\'y}konnosti}{38}{subsection.3.6.3}
 \contentsline {section}{\numberline {3.7}Vysok\IeC {\'a} dostupnost}{38}{section.3.7}
-\contentsline {section}{\numberline {3.8}Integrace do st\IeC {\'a}v\IeC {\'a}j\IeC {\'\i }c\IeC {\'\i } Java aplikace}{40}{section.3.8}
+\contentsline {section}{\numberline {3.8}Integrace do st\IeC {\'a}v\IeC {\'a}j\IeC {\'\i }c\IeC {\'\i } Java aplikace}{39}{section.3.8}
 \contentsline {chapter}{\numberline {4}Shrnut\IeC {\'\i } v\IeC {\'y}sledk\IeC {\r u}}{41}{chapter.4}
 \contentsline {chapter}{\numberline {5}Z\IeC {\'a}v\IeC {\v e}r}{42}{chapter.5}
 \contentsline {section}{\numberline {5.1}Budoucnost projektu}{43}{section.5.1}
