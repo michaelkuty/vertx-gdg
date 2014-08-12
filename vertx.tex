@@ -366,8 +366,10 @@ Jak lze vidět na obrázku \ref{fig:test1} a \ref{fig:test2} výsledky obou test
 
 Metoda srovnání s ostatními platformami je založená na podobném principu jako předchozí testy, s tím rozdílem, že místo statického souboru vrací odpověď ve formátu JSON. Na straně serveru tedy musí dojít k JSON serializaci.
 
-\begin{flushleft}
-\begin{longtable}{|c|c|c|}
+\begin{table}[h]
+\centering
+\caption{Srovnání odezvy, \emph{převzato a upraveno z} \cite{benchmark}}
+\begin{tabular}{ |c|c|c| }
 \hline
 \textsf{\textbf{Platforma}} & \textsf{\textbf{Průměrná odezva}} & \textsf{\textbf{Maximální}}\tabularnewline
 \hline
@@ -378,19 +380,18 @@ Netty & 1,3ms & 24,0ms\tabularnewline
 Ruby on Rails & 1.8ms & 241.6\tabularnewline
 \hline 
 Node.js & 3.7ms & 12,5\tabularnewline
-\hline 
-
-\caption{Srovnání odezvy, \emph{převzato a upraveno z} \cite{benchmark}}
+\hline
+\end{tabular}
 \label{table:odezvy}
-\end{longtable}
-\end{flushleft}
+\end{table}
 
 \subsection{Vlastnosti}
 
 Následující tabulka ukazuje srovnání důležitých vlastností jednotlivých platforem, jejichž důležitost byla popsána v předchozích kapitolách.
-
-\begin{flushleft}
-\begin{longtable}{|c|c|c|}
+\begin{table}[h]
+\centering
+\caption{Srovnání vlastností s Node.js}
+\begin{tabular}{ |c|c|c| }
 \hline
 \textsf{\textbf{Vlastnost}} & \textsf{\textbf{Node.js}} & \textsf{\textbf{Vert.x}}\tabularnewline
 \hline
@@ -410,9 +411,8 @@ In-memory data grid & Ne & Ano\tabularnewline
 \hline 
 Polyglot & Ne & Ano\tabularnewline
 \hline
-\caption{Srovnání vlastností s Node.js}
-\end{longtable}
-\par\end{flushleft}
+\end{tabular}
+\end{table}
 
 \subsection{Závěr srovnání}
 

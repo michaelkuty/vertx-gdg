@@ -1,7 +1,7 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {lstlisting}{\numberline {3.1}\IeC {\v R}\IeC {\'\i }d\IeC {\'\i }c\IeC {\'\i } verticle}{27}{lstlisting.3.1}
+\contentsline {lstlisting}{\numberline {3.1}\IeC {\v R}\IeC {\'\i }d\IeC {\'\i }c\IeC {\'\i } verticle}{26}{lstlisting.3.1}
 \contentsline {lstlisting}{\numberline {3.2}Spu\IeC {\v s}t\IeC {\v e}n\IeC {\'\i } modulu z p\IeC {\v r}\IeC {\'\i }kazov\IeC {\'e} \IeC {\v r}\IeC {\'a}dky}{27}{lstlisting.3.2}
 \contentsline {lstlisting}{\numberline {3.3}Konfigurace serveru 1}{27}{lstlisting.3.3}
 \contentsline {lstlisting}{\numberline {3.4}Zaregistrov\IeC {\'a}n\IeC {\'\i } obslu\IeC {\v z}n\IeC {\'e} rutiny v jazyce JavaScript}{28}{lstlisting.3.4}
@@ -14,9 +14,9 @@
 \contentsline {lstlisting}{\numberline {3.11}Spu\IeC {\v s}t\IeC {\v e}n\IeC {\'\i } modulu v jazyce Java}{33}{lstlisting.3.11}
 \contentsline {lstlisting}{\numberline {3.12}Verticle v jazyce Java}{33}{lstlisting.3.12}
 \contentsline {lstlisting}{\numberline {3.13}Konfigurace produk\IeC {\v c}n\IeC {\'\i } slu\IeC {\v z}by}{36}{lstlisting.3.13}
-\contentsline {lstlisting}{\numberline {3.14}Konfigurace modulu CrasHub Shell}{38}{lstlisting.3.14}
+\contentsline {lstlisting}{\numberline {3.14}Konfigurace modulu CrasHub Shell}{37}{lstlisting.3.14}
 \contentsline {lstlisting}{\numberline {3.15}Spu\IeC {\v s}t\IeC {\v e}n\IeC {\'\i } clusteru na Serveru 1}{39}{lstlisting.3.15}
 \contentsline {lstlisting}{\numberline {3.16}Spu\IeC {\v s}t\IeC {\v e}n\IeC {\'\i } clusteru na Serveru 2}{39}{lstlisting.3.16}
 \contentsline {lstlisting}{\numberline {3.17}Vysok\IeC {\'a} dostupnost na datab\IeC {\'a}zov\IeC {\'e}m serveru 2}{39}{lstlisting.3.17}
-\contentsline {lstlisting}{\numberline {3.18}Integrace do st\IeC {\'a}vaj\IeC {\'\i }c\IeC {\'\i } Java aplikace}{40}{lstlisting.3.18}
+\contentsline {lstlisting}{\numberline {3.18}Integrace do st\IeC {\'a}vaj\IeC {\'\i }c\IeC {\'\i } Java aplikace}{41}{lstlisting.3.18}
 \addvspace {10\p@ }
