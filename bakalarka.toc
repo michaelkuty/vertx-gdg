@@ -19,61 +19,60 @@
 \contentsline {subsubsection}{Verticle}{9}{section*.13}
 \contentsline {subsubsection}{Worker verticle}{10}{section*.15}
 \contentsline {subsubsection}{Vert.x instance}{10}{section*.16}
-\contentsline {subsubsection}{Moduly}{10}{section*.18}
+\contentsline {subsubsection}{Moduly}{11}{section*.18}
 \contentsline {subsection}{\numberline {2.2.4}Event Bus}{11}{subsection.2.2.4}
 \contentsline {subsubsection}{Hazelcast}{13}{section*.20}
 \contentsline {section}{\numberline {2.3}API}{14}{section.2.3}
 \contentsline {subsection}{\numberline {2.3.1}Z\IeC {\'a}kladn\IeC {\'\i } API}{14}{subsection.2.3.1}
 \contentsline {subsection}{\numberline {2.3.2}Kontainer API}{15}{subsection.2.3.2}
 \contentsline {subsection}{\numberline {2.3.3}Polyglot}{15}{subsection.2.3.3}
-\contentsline {section}{\numberline {2.4}Clustering}{15}{section.2.4}
-\contentsline {subsection}{\numberline {2.4.1}Vysok\IeC {\'a} dostupnost}{18}{subsection.2.4.1}
-\contentsline {subsubsection}{Automatick\IeC {\'e} zotaven\IeC {\'\i } z hav\IeC {\'a}rie}{18}{section*.23}
-\contentsline {subsubsection}{HA skupiny}{18}{section*.24}
-\contentsline {subsubsection}{Kvorum}{18}{section*.25}
-\contentsline {subsubsection}{Vertigo cluster}{18}{section*.26}
+\contentsline {section}{\numberline {2.4}Clustering}{16}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}Vysok\IeC {\'a} dostupnost}{17}{subsection.2.4.1}
+\contentsline {subsubsection}{Automatick\IeC {\'e} zotaven\IeC {\'\i } z hav\IeC {\'a}rie}{17}{section*.23}
+\contentsline {subsubsection}{HA skupiny}{17}{section*.24}
+\contentsline {subsubsection}{Kvorum}{17}{section*.25}
+\contentsline {subsection}{\numberline {2.4.2}Vertigo cluster}{19}{subsection.2.4.2}
 \contentsline {section}{\numberline {2.5}Porovn\IeC {\'a}n\IeC {\'\i } s Node.js}{19}{section.2.5}
 \contentsline {subsection}{\numberline {2.5.1}V\IeC {\'y}kon}{19}{subsection.2.5.1}
-\contentsline {subsubsection}{Metody testov\IeC {\'a}n\IeC {\'\i }}{19}{section*.27}
-\contentsline {subsubsection}{Hardware}{19}{section*.28}
-\contentsline {subsubsection}{V\IeC {\'y}sledky}{19}{section*.29}
-\contentsline {subsubsection}{Srovn\IeC {\'a}n\IeC {\'\i } s vybran\IeC {\'y}mi platformami}{20}{section*.31}
-\contentsline {subsection}{\numberline {2.5.2}Vlastnosti}{20}{subsection.2.5.2}
-\contentsline {subsection}{\numberline {2.5.3}Z\IeC {\'a}v\IeC {\v e}r srovn\IeC {\'a}n\IeC {\'\i }}{21}{subsection.2.5.3}
-\contentsline {chapter}{\numberline {3}Praktick\IeC {\'a} \IeC {\v c}\IeC {\'a}st}{22}{chapter.3}
-\contentsline {section}{\numberline {3.1}N\IeC {\'a}vrh}{22}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}C\IeC {\'\i }le aplikace}{22}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}Architektura}{23}{subsection.3.1.2}
-\contentsline {section}{\numberline {3.2}Komunikace v re\IeC {\'a}ln\IeC {\'e}m \IeC {\v c}ase}{23}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Akce}{25}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Ud\IeC {\'a}losti}{25}{subsection.3.2.2}
-\contentsline {subsection}{\numberline {3.2.3}Klientsk\IeC {\'a} aplikace}{25}{subsection.3.2.3}
-\contentsline {section}{\numberline {3.3}Vlastn\IeC {\'\i } implementace}{25}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}\IeC {\v R}\IeC {\'\i }d\IeC {\'\i }c\IeC {\'\i } verticle}{25}{subsection.3.3.1}
-\contentsline {subsubsection}{Z\IeC {\'a}kladn\IeC {\'\i } adres\IeC {\'a}\IeC {\v r}ov\IeC {\'a} struktura}{27}{section*.38}
-\contentsline {subsection}{\numberline {3.3.2}Editor}{27}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}Integrace s datab\IeC {\'a}z\IeC {\'\i } MongoDB}{28}{subsection.3.3.3}
-\contentsline {subsubsection}{Struktura webov\IeC {\'e} \IeC {\v c}\IeC {\'a}sti}{30}{section*.39}
-\contentsline {subsubsection}{Event Bus v prohl\IeC {\'\i }\IeC {\v z}e\IeC {\v c}i}{30}{section*.40}
-\contentsline {subsubsection}{D3.js}{31}{section*.41}
-\contentsline {section}{\numberline {3.4}Polyglot v\IeC {\'y}voj a moduly}{31}{section.3.4}
-\contentsline {section}{\numberline {3.5}Z\IeC {\'a}kladn\IeC {\'\i } software}{33}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}Java}{35}{subsection.3.5.1}
-\contentsline {subsection}{\numberline {3.5.2}Vert.x}{35}{subsection.3.5.2}
-\contentsline {subsection}{\numberline {3.5.3}Datab\IeC {\'a}zov\IeC {\'y} server}{35}{subsection.3.5.3}
-\contentsline {subsection}{\numberline {3.5.4}Nasazen\IeC {\'\i } produk\IeC {\v c}n\IeC {\'\i } slu\IeC {\v z}by}{35}{subsection.3.5.4}
-\contentsline {subsection}{\numberline {3.5.5}Interakce s Vert.x}{36}{subsection.3.5.5}
-\contentsline {section}{\numberline {3.6}\IeC {\v S}k\IeC {\'a}lov\IeC {\'a}n\IeC {\'\i }}{37}{section.3.6}
-\contentsline {subsection}{\numberline {3.6.1}Vertik\IeC {\'a}ln\IeC {\'\i }}{37}{subsection.3.6.1}
-\contentsline {subsection}{\numberline {3.6.2}Horizont\IeC {\'a}ln\IeC {\'\i }}{37}{subsection.3.6.2}
-\contentsline {subsection}{\numberline {3.6.3}Lad\IeC {\v e}n\IeC {\'\i } v\IeC {\'y}konnosti}{38}{subsection.3.6.3}
-\contentsline {section}{\numberline {3.7}Vysok\IeC {\'a} dostupnost}{38}{section.3.7}
-\contentsline {section}{\numberline {3.8}Integrace do st\IeC {\'a}v\IeC {\'a}j\IeC {\'\i }c\IeC {\'\i } Java aplikace}{39}{section.3.8}
-\contentsline {chapter}{\numberline {4}Shrnut\IeC {\'\i } v\IeC {\'y}sledk\IeC {\r u}}{41}{chapter.4}
-\contentsline {chapter}{\numberline {5}Z\IeC {\'a}v\IeC {\v e}r}{42}{chapter.5}
-\contentsline {section}{\numberline {5.1}Budoucnost projektu}{43}{section.5.1}
-\contentsline {section}{\numberline {5.2}Mo\IeC {\v z}nosti dal\IeC {\v s}\IeC {\'\i }ho v\IeC {\'y}zkumu}{43}{section.5.2}
-\contentsline {subsection}{\numberline {5.2.1}Distribuovan\IeC {\'e} v\IeC {\'y}po\IeC {\v c}ty}{43}{subsection.5.2.1}
-\contentsline {subsection}{\numberline {5.2.2}Srovn\IeC {\'a}n\IeC {\'\i }}{43}{subsection.5.2.2}
-\contentsline {chapter}{Literatura}{46}{chapter*.47}
-\contentsline {part}{P\IeC {\v r}\IeC {\'\i }lohy}{I}{chapter*.47}
+\contentsline {subsubsection}{Metody testov\IeC {\'a}n\IeC {\'\i }}{19}{section*.26}
+\contentsline {subsubsection}{Hardware}{19}{section*.27}
+\contentsline {subsubsection}{V\IeC {\'y}sledky}{20}{section*.28}
+\contentsline {subsubsection}{Srovn\IeC {\'a}n\IeC {\'\i } s vybran\IeC {\'y}mi platformami}{21}{section*.31}
+\contentsline {subsection}{\numberline {2.5.2}Vlastnosti}{22}{subsection.2.5.2}
+\contentsline {subsection}{\numberline {2.5.3}Z\IeC {\'a}v\IeC {\v e}r srovn\IeC {\'a}n\IeC {\'\i }}{22}{subsection.2.5.3}
+\contentsline {section}{\numberline {2.6}Budoucnost projektu}{22}{section.2.6}
+\contentsline {chapter}{\numberline {3}Praktick\IeC {\'a} \IeC {\v c}\IeC {\'a}st}{23}{chapter.3}
+\contentsline {section}{\numberline {3.1}N\IeC {\'a}vrh}{23}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}C\IeC {\'\i }le aplikace}{23}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Architektura}{24}{subsection.3.1.2}
+\contentsline {section}{\numberline {3.2}Komunikace v re\IeC {\'a}ln\IeC {\'e}m \IeC {\v c}ase}{24}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Akce}{26}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Ud\IeC {\'a}losti}{26}{subsection.3.2.2}
+\contentsline {section}{\numberline {3.3}Vlastn\IeC {\'\i } implementace}{26}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}\IeC {\v R}\IeC {\'\i }d\IeC {\'\i }c\IeC {\'\i } verticle}{26}{subsection.3.3.1}
+\contentsline {subsubsection}{Z\IeC {\'a}kladn\IeC {\'\i } adres\IeC {\'a}\IeC {\v r}ov\IeC {\'a} struktura}{28}{section*.37}
+\contentsline {subsection}{\numberline {3.3.2}Editor}{28}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Integrace s datab\IeC {\'a}z\IeC {\'\i } MongoDB}{29}{subsection.3.3.3}
+\contentsline {subsubsection}{Struktura webov\IeC {\'e} \IeC {\v c}\IeC {\'a}sti}{31}{section*.38}
+\contentsline {subsubsection}{Event Bus v prohl\IeC {\'\i }\IeC {\v z}e\IeC {\v c}i}{31}{section*.39}
+\contentsline {subsubsection}{D3.js}{32}{section*.40}
+\contentsline {section}{\numberline {3.4}Polyglot v\IeC {\'y}voj a moduly}{32}{section.3.4}
+\contentsline {section}{\numberline {3.5}Z\IeC {\'a}kladn\IeC {\'\i } software}{34}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}Java}{34}{subsection.3.5.1}
+\contentsline {subsection}{\numberline {3.5.2}Vert.x}{36}{subsection.3.5.2}
+\contentsline {subsection}{\numberline {3.5.3}Datab\IeC {\'a}zov\IeC {\'y} server}{36}{subsection.3.5.3}
+\contentsline {subsection}{\numberline {3.5.4}Nasazen\IeC {\'\i } produk\IeC {\v c}n\IeC {\'\i } slu\IeC {\v z}by}{36}{subsection.3.5.4}
+\contentsline {subsection}{\numberline {3.5.5}Interakce s Vert.x}{37}{subsection.3.5.5}
+\contentsline {section}{\numberline {3.6}\IeC {\v S}k\IeC {\'a}lov\IeC {\'a}n\IeC {\'\i }}{38}{section.3.6}
+\contentsline {subsection}{\numberline {3.6.1}Vertik\IeC {\'a}ln\IeC {\'\i }}{38}{subsection.3.6.1}
+\contentsline {subsection}{\numberline {3.6.2}Horizont\IeC {\'a}ln\IeC {\'\i }}{38}{subsection.3.6.2}
+\contentsline {subsection}{\numberline {3.6.3}Lad\IeC {\v e}n\IeC {\'\i } v\IeC {\'y}konnosti}{39}{subsection.3.6.3}
+\contentsline {section}{\numberline {3.7}Vysok\IeC {\'a} dostupnost}{39}{section.3.7}
+\contentsline {section}{\numberline {3.8}Integrace do st\IeC {\'a}v\IeC {\'a}j\IeC {\'\i }c\IeC {\'\i } Java aplikace}{41}{section.3.8}
+\contentsline {chapter}{\numberline {4}Shrnut\IeC {\'\i } v\IeC {\'y}sledk\IeC {\r u}}{42}{chapter.4}
+\contentsline {chapter}{\numberline {5}Z\IeC {\'a}v\IeC {\v e}r}{43}{chapter.5}
+\contentsline {section}{\numberline {5.1}Mo\IeC {\v z}nosti dal\IeC {\v s}\IeC {\'\i }ho v\IeC {\'y}zkumu}{44}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}Distribuovan\IeC {\'e} v\IeC {\'y}po\IeC {\v c}ty}{44}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.2}Srovn\IeC {\'a}n\IeC {\'\i }}{44}{subsection.5.1.2}
+\contentsline {chapter}{Literatura}{47}{chapter*.46}
+\contentsline {part}{P\IeC {\v r}\IeC {\'\i }lohy}{I}{chapter*.46}
