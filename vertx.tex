@@ -11,10 +11,10 @@ Vert.x je projekt vycházející z Node.js, který podnítil závod o pokoření
 
 Začátek vývoje projektu Vert.x je datován do roku 2011. Tedy rok poté co spatřil světlo světa framework Node.js. Vert.x si za pouhý rok vydobyl své místo u komunity, která si jej velmi oblíbila. 
 
-Hlavním autorem platformy je Tim Fox, který v době začátku vývoje platformy pracoval ve společnosti VMWare. Tato společnost si vzápětí nárokovala všechny zásluhy Tima Foxe na Vert.x platformu. Právníci společnosti vydaly výzvu, ve které požadovali mimo jiné doménu, veškerý zdrojový kód a účet Tima Foxe na Githubu. Z toho důvodu Tim Fox odešel od společnosti v roce 2012. V témže roce projevila o platformu zájem firma RedHat, která nabídla Timovi nejen pracovní místo, ale i absolutně volnou ruku ve vývoji a vedení projektu\citep{whoControlVertx}. 
+Hlavním autorem platformy je Tim Fox, který v době začátku vývoje platformy pracoval ve společnosti VMWare. Tato společnost si vzápětí nárokovala všechny zásluhy Tima Foxe na Vert.x platformu. Právníci společnosti vydaly výzvu, ve které požadovali mimo jiné doménu, veškerý zdrojový kód a účet Tima Foxe na Githubu. Z toho důvodu Tim Fox odešel od společnosti v roce 2012. V témže roce projevila o platformu zájem firma RedHat, která nabídla Timovi nejen pracovní místo, ale i absolutně volnou ruku ve vývoji a vedení projektu \cite{whoControlVertx}. 
 
-Po několika debatách jak s představiteli společnosti RedHat tak i komunitou, došel Tim Fox k názoru, že nejlepší pro budoucnost a zdravý rozvoj platformy bude přesunutí celé platformy pod nadaci Eclipse Foundation, k čemuž došlo na konci roku 2013. V dnešní době se platforma těší velkému vývoji, který čítá desítky  pravidelných přispěvatelů mezi něž patří mimo Tima například Norman Maurer, který se řadí mezi přední inženýry vyvíjející framework Netty.io\footnote{framework pro práci se vstupy a výstupy} a zodpovídá za integraci Netty.io frameworku do platformy Vert.x\cite{vertxNodejs}.
-Letos Vert.x vyhrál prestižní cenu "Most Innovative Java Technology" v soutěži JAX Innovation awards\citep{JAX}.
+Po několika debatách jak s představiteli společnosti RedHat tak i komunitou, došel Tim Fox k názoru, že nejlepší pro budoucnost a zdravý rozvoj platformy bude přesunutí celé platformy pod nadaci Eclipse Foundation, k čemuž došlo na konci roku 2013. V dnešní době se platforma těší velkému vývoji, který čítá desítky  pravidelných přispěvatelů mezi něž patří mimo Tima například Norman Maurer, který se řadí mezi přední inženýry vyvíjející framework Netty.io\footnote{framework pro práci se vstupy a výstupy} a zodpovídá za integraci Netty.io frameworku do platformy Vert.x \cite{vertxNodejs}.
+Letos Vert.x vyhrál prestižní cenu "Most Innovative Java Technology" v soutěži JAX Innovation awards \citep{JAX}.
 
 \section{Architektura}
 
@@ -29,19 +29,19 @@ Na obrázku \ref{fig:vertxArchitectureDiagram} jsou znázorněny dvě nezávisl�
 
 \subsection{Jádro}
 
-Velikost samotného jádra aplikace nepřekračuje 10Mb kódu v jazyce Java. V současné verzi je jádro platformy koherentní, dobře čitelné a poskytuje malé, ale za to stabilní API. Jak je popsáno v kapitole \ref{sub:API}, Vert.x se nesnaží umět vše, ale specializuje se na určitou oblast. Díky těmto faktům je snadno rozšiřitelný a integrovatelný. Lze jej rozšířit o novou funkčnost pomocí balíčků, které lze naleznout v oficiálním repozitáři. Pravděpodobnou inspirací byl již zmíněný Node.js, který se svým výkonem vydobyl své místo. Samotnou inspirací byly podle Tima Foxe Node.js a ERLang\cite{vertxNodejs}.
+Velikost samotného jádra aplikace nepřekračuje 10Mb kódu v jazyce Java. V současné verzi je jádro platformy koherentní, dobře čitelné a poskytuje malé, ale za to stabilní API. Jak je popsáno v kapitole \ref{sub:API}, Vert.x se nesnaží umět vše, ale specializuje se na určitou oblast. Díky těmto faktům je snadno rozšiřitelný a integrovatelný. Lze jej rozšířit o novou funkčnost pomocí balíčků, které lze naleznout v oficiálním repozitáři. Pravděpodobnou inspirací byl již zmíněný Node.js, který se svým výkonem vydobyl své místo. Samotnou inspirací byly podle Tima Foxe Node.js a ERLang \cite{vertxNodejs}.
 
 \noindent Zásadní technologie, které integruje Vert.x.
 \begin{description}
 \item[Netty.io] framework pro práci se vstupy a výstupy
-\item[Hazelcast] In-memory data grid\cite{inMemoryDataGrid}
+\item[Hazelcast] In-memory data grid \cite{inMemoryDataGrid}
 \end{description}
 
 Netty.io samotný, lze použít pro vývoj webových aplikací stejně dobře jako kterýkoliv jiný nástroj. Jeho specializací však je práce se vstupy a výstupy tzv. IO. V této oblasti poskytuje nízkoúrovňové API, nad kterým Vert.x přidává vyšší míru abstrakce. Druhou technologií, která je pro Vert.x klíčová je popsána v samostatné kapitole \ref{sub:hazelcast}.
 
 \subsection{Asynchronní model}
 
-Událostmi řízené programování je podle Tomáše Pitnera\cite{javaProgramovani} základním principem \\tvorby aplikací s GUI. Netýká se však pouze GUI, je to obecnější pojem označující typ asynchronního programování, kdy je tok programu řízen událostmi, na které navěšuje tzv. event handlery\footnote{obslužná rutina události}. Typy událostí na které lze reagovat:
+Událostmi řízené programování je podle Tomáše Pitnera \cite{javaProgramovani} základním principem \\tvorby aplikací s GUI. Netýká se však pouze GUI, je to obecnější pojem označující typ asynchronního programování, kdy je tok programu řízen událostmi, na které navěšuje tzv. event handlery\footnote{obslužná rutina události}. Typy událostí na které lze reagovat:
 
 \begin{itemize}
 \item Událost přes GUI
@@ -68,9 +68,9 @@ Samotné jádro Vert.x je implementováno v jazyce Java a pro Vert.x je tedy dů
 \item[File]{z balíčku java.nio}
 \item[Vylepšený ClassLoader\footnote{objekt zajištující načítání tříd}]{lepší odolnost vůči deadlockům\footnote{ je odborný výraz pro situaci, kdy úspěšné dokončení první akce je podmíněno předchozím dokončením druhé akce, přičemž druhá akce může být dokončena až po dokončení první akce.}}
 \end{description}
-\emph{Více o java.concurrent\cite{javaChangelog}}
+\emph{Více o java.concurrent \cite{javaChangelog}}
 
-Ed Gardoh v roce 2011 ve svém jednoduchém testu\cite{serialTest} prověřil práci s paralelizací úkonů. Z jeho testů vyplývá, že Java 1.7 je až o 40\% rychlejší při práci s vlákny nejenom díky nové metodě Fork/Join\cite{forkJoin}.
+Ed Gardoh v roce 2011 ve svém jednoduchém testu \cite{serialTest} prověřil práci s paralelizací úkonů. Z jeho testů vyplývá, že Java 1.7 je až o 40\% rychlejší při práci s vlákny nejenom díky nové metodě Fork/Join \cite{forkJoin}.
 
 \subsubsection{Návrhový vzor Reactor}
 
@@ -81,7 +81,7 @@ Ed Gardoh v roce 2011 ve svém jednoduchém testu\cite{serialTest} prověřil pr
 \caption{Blokující přístup \emph{převzato a upraveno z \cite{nettyInAction}}\label{fig:blocking_pattern}}
 \end{figure}
 
-,,Tradiční" aplikační serverové kontainery rezervují jedno vlákno pro každou I/O operaci. To v praxi znamená jedno vlákno pro jedno spojení. Jak je vidět z obrázku \ref{fig:blocking_pattern}, takové vlákno čeká na odpověď každého řádku volání a prakticky využívá zdroje, které k ničemu nepotřebuje. Což je velice neefektivní přístup. Vert.x využívá návrhového vzoru \emph{Reactor}, který implementuje Netty.io. Vert.x tuto knihovnu využívá jako vestavěný systém. Jeden z hlavních vývojařů Netty.io, Norman Maurer a autor knihy Netty in action\cite{nettyInAction} pracuje na integraci s Vert.x platformou. Z obrázku \ref{fig:vertx_pattern} je patrné, že vzor spočívá v běhu jednoho vlákna, kterému tzv. ,,Selector" podává požadavky.
+,,Tradiční" aplikační serverové kontainery rezervují jedno vlákno pro každou I/O operaci. To v praxi znamená jedno vlákno pro jedno spojení. Jak je vidět z obrázku \ref{fig:blocking_pattern}, takové vlákno čeká na odpověď každého řádku volání a prakticky využívá zdroje, které k ničemu nepotřebuje. Což je velice neefektivní přístup. Vert.x využívá návrhového vzoru \emph{Reactor}, který implementuje Netty.io. Vert.x tuto knihovnu využívá jako vestavěný systém. Jeden z hlavních vývojařů Netty.io, Norman Maurer a autor knihy Netty in action \cite{nettyInAction} pracuje na integraci s Vert.x platformou. Z obrázku \ref{fig:vertx_pattern} je patrné, že vzor spočívá v běhu jednoho vlákna, kterému tzv. ,,Selector" podává požadavky.
 
 \begin{figure}[h]
 \begin{centering}
@@ -101,8 +101,8 @@ Event loop využívá Netty.io NioWorkery. Každý verticle\footnote{nejmenší 
 \subsubsection{Návrhový vzor Multi-reactor}\label{sub:multireactor}
 
 Základ jádra je postaven na tzv.
-Multi-reactor pattern\cite{eventLoops}, který vychází z Reactor 
-patt-ernu\cite{reactorPattern}. Ten lze charakterizovat několika body:
+Multi-reactor pattern \cite{eventLoops}, který vychází z Reactor 
+patt-ernu \cite{reactorPattern}. Ten lze charakterizovat několika body:
 
 \begin{itemize}
 \item{aplikace je řízena událostmi}
@@ -111,7 +111,7 @@ patt-ernu\cite{reactorPattern}. Ten lze charakterizovat několika body:
 \item{toto vlákno nesmí být blokováno\footnote{pokud dojde k zablokování hlavního vlákna dojde k zablokování celé aplikace např.\emph{Thread.sleep(), a další z java.util.concurrent }}}
 \end{itemize}
 
-Multi-reactor pattern\cite{eventLoops} se od Reactor patternu liší pouze tím, že může mít více hlavních vláken. Tím přináší Vert.x možnost pohodlně škálovat instance na více procesorových jader. Jak je vidět z obrázku \vref{fig:instance} Vert.x platforma poskytuje více hlavních vláken, zpravidla však jedno hlavní vlákno na jeden procesor. Toho lze snadno docílit pomocí \emph{Runtime.getRuntime().availableProcessors()}, o kterém se dozvíte více v kapitole \ref{sub:Scaling}. Na obrázku \vref{fig:instance4} lze vidět situaci čtyř hlavních vláken na čtyři procesorová jádra.
+Multi-reactor pattern \cite{eventLoops} se od Reactor patternu liší pouze tím, že může mít více hlavních vláken. Tím přináší Vert.x možnost pohodlně škálovat instance na více procesorových jader. Jak je vidět z obrázku \vref{fig:instance} Vert.x platforma poskytuje více hlavních vláken, zpravidla však jedno hlavní vlákno na jeden procesor. Toho lze snadno docílit pomocí \emph{Runtime.getRuntime().availableProcessors()}, o kterém se dozvíte více v kapitole \ref{sub:Scaling}. Na obrázku \vref{fig:instance4} lze vidět situaci čtyř hlavních vláken na čtyři procesorová jádra.
 
 \subsubsection{Hybridní model vláken}\label{sub:hybrid}
 
@@ -125,7 +125,7 @@ Vert.x definuje svou vlastní terminologii, která je specifická jen pro tuto p
 
 Verticle je základní jednotka vývoje a nasazení, lze si ji představit jako kus kódu nebo třídu s hlavní metodou. Verticle je tak nejmenší funkční jednotkou Vert.x. Verticle lze spouštět samostatně přímo z příkazové řádky podobně jako skript. Každý verticle běží ve vlastním vlákně z čehož plynou výhody, ale také nevýhody. Vzhledem k tomu, že každý verticle má svůj vlastní classloader nemůže, tak sdílet statické metody ani hodnoty proměnných s ostatními. Naopak výhodou je, že programátorovi odpadnou starosti s nejrůznější synchronizací vláken či zámky nad proměnnýma. V případě jedno vláknového modelu také odpadají nepříjemné deadlocky. Výzvou je sdílení dat mezi jednotlivými komponentami aplikace, které lze v případě Vert.x sdílet dvěma způsoby:
 \begin{itemize}
-\item{pomocí Message Queue\cite{mq} dále jen MQ}
+\item{pomocí Message Queue \cite{mq} dále jen MQ}
 \item{SharedData object a SharedSet \emph{vertx.sharedData()}}
 \end{itemize}
 Objekty v SharedData musí být immutable\footnote{jakmile jednou takovýto objekt vznikne nejde dále měnit jeho proměnné}. V dnešní době je řada MQ frameworků přes které lze vést komunikaci. U platformy Vert.x však není potřeba externí služba, protože má vlastní Event Bus, o kterém pojednává kapitola \ref{sub:eventBus}. Na obrázku \ref{fig:instance} je vidět jeden verticle v kontextu jedné Vert.x instance. Následuje sumarizace vlastností verticlu:
@@ -190,7 +190,7 @@ Pro vyčlenění modulu z asociace na event loop stačí přidat parametr \emph{
 \label{fig:2instance4_eventbus}
 \end{figure}
 
-Nervový systém celého Vert.x, jehož název lze volně přeložit jako sběrnice událostí. Cílem EventBusu je zprostředkování komunikace mezi jednotlivými komponentami a vlákny aplikace. Podobně jako při použití externí MQ. Díky faktu, že komponenta Event Bus je implementována přímo v jádru platformy, odpadá nutnost používat další knihovny pro práci s MQ a v neposlední řadě také režijní náklady či výpočetní výkon. Jak je vidět na obrázku \ref{fig:2instance4_eventbus}, komponenta Event Bus je distribuovaná přes všechny instance v clusteru. Samozřejmostí je možnost přemostění této komunikace do webového prohlížeče, což je detailněji popsáno v kapitole \ref{sec:realTimeCommunication}. Event bus nepřináší v porovnání s profesionální MQ systémy takové možnosti, jako například transakční zpracování, ale již existuje modul pro přemostění komunikace například do RabbitMQ\footnote{MQ napsaná v ERlangu}. S vývojáři RabbitMQ je Tim Fox v úzkém kontaktu\cite{vertxNodejs}. Základní typy komunikace:
+Nervový systém celého Vert.x, jehož název lze volně přeložit jako sběrnice událostí. Cílem EventBusu je zprostředkování komunikace mezi jednotlivými komponentami a vlákny aplikace. Podobně jako při použití externí MQ. Díky faktu, že komponenta Event Bus je implementována přímo v jádru platformy, odpadá nutnost používat další knihovny pro práci s MQ a v neposlední řadě také režijní náklady či výpočetní výkon. Jak je vidět na obrázku \ref{fig:2instance4_eventbus}, komponenta Event Bus je distribuovaná přes všechny instance v clusteru. Samozřejmostí je možnost přemostění této komunikace do webového prohlížeče, což je detailněji popsáno v kapitole \ref{sec:realTimeCommunication}. Event bus nepřináší v porovnání s profesionální MQ systémy takové možnosti, jako například transakční zpracování, ale již existuje modul pro přemostění komunikace například do RabbitMQ\footnote{MQ napsaná v ERlangu}. S vývojáři RabbitMQ je Tim Fox v úzkém kontaktu \cite{vertxNodejs}. Základní typy komunikace:
 \begin{itemize}
 \item{Point to Point}
 \item{Publish/Subscribe}
@@ -227,7 +227,7 @@ Jednou z nejdůležitějších architektonických součástí Vert.x je knihovna
 \item{Dle potřeby lze přidávat a odebírat servery}
 \end{itemize}
 
-Hazelcast je tedy typ distribuovaného úložiště, které běží jako vestavěný systém, lze díky němu distribuovat celou aplikaci a zasílat zprávy mezi jednotlivými komponentami. Vert.x API využívá Hazelcast API a odstiňuje tak programátora od poměrně nízko úrovňové API Hazelcastu. Když je Vert.x spuštěn, Hazelcast je spuštěn v módu vestavěného systému. Jako nejčastější příklad užití samotného Hazelcastu bývá uváděno ukládání uživatelské session\cite{session}. Hazelcast tedy usnadní práci v situaci, kdy budeme potřebovat uložit uživatelskou session, například pro eshop. Mohli bychom využít externí RDBMS tedy databázový server, který by obstarával komunikaci s klienty a udržoval integritu dat, díky kterému by jsme dosáhli stejného výsledku. S využitím knihovny Hazelcast ovšem odpadá nezbytná režie a monitoring, nemluvě o serverových prostředcích.
+Hazelcast je tedy typ distribuovaného úložiště, které běží jako vestavěný systém, lze díky němu distribuovat celou aplikaci a zasílat zprávy mezi jednotlivými komponentami. Vert.x API využívá Hazelcast API a odstiňuje tak programátora od poměrně nízko úrovňové API Hazelcastu. Když je Vert.x spuštěn, Hazelcast je spuštěn v módu vestavěného systému. Jako nejčastější příklad užití samotného Hazelcastu bývá uváděno ukládání uživatelské session \cite{session}. Hazelcast tedy usnadní práci v situaci, kdy budeme potřebovat uložit uživatelskou session, například pro eshop. Mohli bychom využít externí RDBMS tedy databázový server, který by obstarával komunikaci s klienty a udržoval integritu dat, díky kterému by jsme dosáhli stejného výsledku. S využitím knihovny Hazelcast ovšem odpadá nezbytná režie a monitoring, nemluvě o serverových prostředcích.
 Knihovnu Hazelcast lze využít v několika rolích:
 \begin{itemize}
 \item{NoSQL databáze v paměti}
@@ -321,11 +321,11 @@ Při spuštění Vert.x instance lze specifikovat kvorum\footnote{minimální po
 
 \subsection{Vertigo cluster}
 
-Důkazem jak dobrá je architektura, je rozšíření samotné funkcionality clusteru. Modul Vertigo\cite{vertigo}, obohacuje platformu o značné možnosti v oblasti clusterování. Jak píše sám autor projektu \emph{,,Vertigo kombinuje koncept real-time systémů a Flow-based programování."}. Architektura Vertigo by vydala sama na celou bakalářskou práci. Proto jen ve stručnosti. Vertigo podporuje dávkování zpráv mezi komponentami. Umožňuje vytváření a monitorování sítí mezi clustery a podporuje živou změnu bez restartu těchto sítí. Usnadňuje distribuci modulů přes celý cluster pro snadné nasazení v kterémkoliv jeho koutě z kteréhokoliv jeho místa.
+Důkazem jak dobrá je architektura, je rozšíření samotné funkcionality clusteru. Modul Vertigo \cite{vertigo}, obohacuje platformu o značné možnosti v oblasti clusterování. Jak píše sám autor projektu \emph{,,Vertigo kombinuje koncept real-time systémů a Flow-based programování."}. Architektura Vertigo by vydala sama na celou bakalářskou práci. Proto jen ve stručnosti. Vertigo podporuje dávkování zpráv mezi komponentami. Umožňuje vytváření a monitorování sítí mezi clustery a podporuje živou změnu bez restartu těchto sítí. Usnadňuje distribuci modulů přes celý cluster pro snadné nasazení v kterémkoliv jeho koutě z kteréhokoliv jeho místa.
 
 \section{Porovnání s Node.js}
 
-V následující kapitole bude porovnána platforma Vert.x s již zmíněnou platformou Node.js. Výkonnostní test\cite{benchmarkTim} je převzat od samotného autora projektu a jsou v něm zahrnuty jazyky, které v té době platforma podporovala. V druhé části kapitoly \ref{sub:performence} je tabulka \ref{table:odezvy}, srovnání odezev s vybranými webovými platformami s daty ze zdroje\cite{benchmark}.
+V následující kapitole bude porovnána platforma Vert.x s již zmíněnou platformou Node.js. Výkonnostní test \cite{benchmarkTim} je převzat od samotného autora projektu a jsou v něm zahrnuty jazyky, které v té době platforma podporovala. V druhé části kapitoly \ref{sub:performence} je tabulka \ref{table:odezvy}, srovnání odezev s vybranými webovými platformami s daty ze zdroje \cite{benchmark}.
 
 \subsection{Výkon}\label{sub:performence}
 
@@ -424,4 +424,4 @@ Výsledkem srovnání je tedy fakt, že pokud by se dnes někdo rozhodoval o vý
 
 \section{Budoucnost projektu}
 
-Tim Fox hlavní vedoucí projektu představil plán\cite{plan} pro budoucí rozvoj platformy. Nově tak bude šifrovaná veškerá komunikace na Event busu. API bude definováno pomocí vysoce abstraktního programovacího jazyka díky čemuž bude možné generovat API v jiných programovacích jazycích. Zveřejnění jednoduchého protokolu pro napojení na Event Bus což de v současné době pouze přes WebSocket a SockJS most. Objevit by se měla také nativní podpora pro Android a IoS. Je dobře, že vývoj jde stále dopředu a umožňuje tím rozšířit okruh programátorů.
+Tim Fox hlavní vedoucí projektu představil plán \cite{plan} pro budoucí rozvoj platformy. Nově tak bude šifrovaná veškerá komunikace na Event busu. API bude definováno pomocí vysoce abstraktního programovacího jazyka díky čemuž bude možné generovat API v jiných programovacích jazycích. Zveřejnění jednoduchého protokolu pro napojení na Event Bus což de v současné době pouze přes WebSocket a SockJS most. Objevit by se měla také nativní podpora pro Android a IoS. Je dobře, že vývoj jde stále dopředu a umožňuje tím rozšířit okruh programátorů.

@@ -263,7 +263,7 @@ css //složka pro kaskádové styly
 
 \subsubsection{Event Bus v prohlížeči}
 
-Nejdůležitější částí klientské aplikace je Vert.x vrstva nad SockJS\cite{sockjs}, která zabaluje komunikaci se serverem na protokolu WebSocket\cite{webSockets}. Knihovna naváže a udržuje neustálé spojení se serverem. Implementací metod \emph{eb.onopen a eb.onclose} může patřičně reagovat na otevření a uzavření spojení. Jediným parametrem samotného EventBusu je pak URL adresa na kterou se má připojit.
+Nejdůležitější částí klientské aplikace je Vert.x vrstva nad SockJS \cite{sockjs}, která zabaluje komunikaci se serverem na protokolu WebSocket \cite{webSockets}. Knihovna naváže a udržuje neustálé spojení se serverem. Implementací metod \emph{eb.onopen a eb.onclose} může patřičně reagovat na otevření a uzavření spojení. Jediným parametrem samotného EventBusu je pak URL adresa na kterou se má připojit.
 
 \begin{lstlisting}[caption=Připojení Event busu z prohlížeče a inicializace editoru]
 var eb = new vertx.EventBus(window.location.protocol + '//' + window.location.hostname + ':' + window.location.port + '/eventbus');
@@ -281,7 +281,7 @@ eb.onopen = function() {
 
 \subsubsection{D3.js}
 
-Vynikající knihovnou pro práci s grafy je D3.js, napsaná v jazyce JavaScript. Díky stovkám již hotových ukázek si stačí jen vybrat, kterou použít. Všechny jsou totiž volně dostupné. Pro vykreslení myšlenkových map tak poslouží Collapsible Tree\cite{d3js}, který se výborně hodí právě pro stromové struktury. Implementace webového editoru je v souboru \emph{editor.js}
+Vynikající knihovnou pro práci s grafy je D3.js, napsaná v jazyce JavaScript. Díky stovkám již hotových ukázek si stačí jen vybrat, kterou použít. Všechny jsou totiž volně dostupné. Pro vykreslení myšlenkových map tak poslouží Collapsible Tree \cite{d3js}, který se výborně hodí právě pro stromové struktury. Implementace webového editoru je v souboru \emph{editor.js}
 
 \begin{lstlisting}[caption=D3.js nicializace dat]
 var tree = d3.layout.tree()
@@ -318,7 +318,7 @@ Classloader při startu modulu automaticky načte všechny knihovny nacházejíc
 }
 \end{lstlisting}
 
-Jmenná konvence modulů vychází ze Java konvence\cite{javaPKG} pro pojmenování balíčků kterou rozšiřuje o číslo verze \emph{com.mycompany~my-mod~1.0}.
+Jmenná konvence modulů vychází ze Java konvence \cite{javaPKG} pro pojmenování balíčků kterou rozšiřuje o číslo verze \emph{com.mycompany~my-mod~1.0}.
 Pro publikování modulu jsou pak důležité nejrůznější metadata, které je dobré specifikovat.
 \begin{lstlisting}[caption=Deskriptor modulu]
 {
@@ -386,7 +386,7 @@ public class ImageExporter extends Verticle {
 
 \section{Základní software}
 
-Jádrem serveru je operační systém Ubuntu\cite{ubuntu} 14.04 LTS\footnote{dlouhodobá podpora} Server Edition s kódovým označením 
+Jádrem serveru je operační systém Ubuntu \cite{ubuntu} 14.04 LTS\footnote{dlouhodobá podpora} Server Edition s kódovým označením 
 Trusty Tahr. Je to osvědčený systém, který bude má zaručenou podporu do roku 2019. Systém má aplikaci pro správu softwarových balíků 
 aptitude. Všechny aplikace kromě samotného Vert.x jdou hravě nainstalovat pře tento systém.
 
@@ -400,7 +400,7 @@ Jediná služba, která se zatím nenachází jako systémový balíček je samo
 
 \subsection{Databázový server}
 
-Pro ukládání myšlenkových map je použita NoSQl databáze MongoDB ve verzi 2.6. MongoDB má za sebou více než pět let vývoje a několik obřích investic\cite{mongodb} do dalšího vývoje. V dnešní době existuje nespočet NoSQL databází, vzhledem k tomu, že již existuje Vert.x modul pro pohodlnou asynchronní spolupráci s touto databází, byla vybrána pravě tato NoSQL databáze. Pro instalaci stačí využít balíčkovací systém aptitude. Nastavení databáze lze ponechat ve výchozím stavu, kdy databáze naslouchá na portu 27017. Což lze vidět i z konfigurace aplikace v ukázce kódu \ref{confServ2}.
+Pro ukládání myšlenkových map je použita NoSQl databáze MongoDB ve verzi 2.6. MongoDB má za sebou více než pět let vývoje a několik obřích investic \cite{mongodb} do dalšího vývoje. V dnešní době existuje nespočet NoSQL databází, vzhledem k tomu, že již existuje Vert.x modul pro pohodlnou asynchronní spolupráci s touto databází, byla vybrána pravě tato NoSQL databáze. Pro instalaci stačí využít balíčkovací systém aptitude. Nastavení databáze lze ponechat ve výchozím stavu, kdy databáze naslouchá na portu 27017. Což lze vidět i z konfigurace aplikace v ukázce kódu \ref{confServ2}.
 
 \begin{lstlisting}
 apt-get install mongodb-server -y

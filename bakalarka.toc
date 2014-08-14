@@ -31,7 +31,7 @@
 \contentsline {subsubsection}{Automatick\IeC {\'e} zotaven\IeC {\'\i } z hav\IeC {\'a}rie}{17}{section*.23}
 \contentsline {subsubsection}{HA skupiny}{17}{section*.24}
 \contentsline {subsubsection}{Kvorum}{17}{section*.25}
-\contentsline {subsection}{\numberline {2.4.2}Vertigo cluster}{19}{subsection.2.4.2}
+\contentsline {subsection}{\numberline {2.4.2}Vertigo cluster}{17}{subsection.2.4.2}
 \contentsline {section}{\numberline {2.5}Porovn\IeC {\'a}n\IeC {\'\i } s Node.js}{19}{section.2.5}
 \contentsline {subsection}{\numberline {2.5.1}V\IeC {\'y}kon}{19}{subsection.2.5.1}
 \contentsline {subsubsection}{Metody testov\IeC {\'a}n\IeC {\'\i }}{19}{section*.26}
