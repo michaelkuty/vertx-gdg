@@ -14,6 +14,8 @@
 \usepackage{graphicx}
 \usepackage{placeins} %floatbarrier \FloatBarrier
 %\usepackage{listing}
+\usepackage{pdfpages}
+
 \makeatletter
 
 \usepackage[font=small,labelfont=bf]{caption} %captiony
@@ -379,4 +381,7 @@ The goal of this bachelor thesis, called Vert.x as a platform for distributed we
 \cleardoublepage{}
 
 \include{prilohy}
+
+\includepdf[pages={1}]{zadani.pdf}
+
 \end{document}
