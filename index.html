@@ -72,6 +72,15 @@
 				</section>
 
 				<section>
+					<h2>What does mean ?</h2>
+					<ul>
+						<li>simillar to Node.js - but not CLONE !</li>
+						<li>solving C10K problem</li>
+						<li>powered by JVM</li>
+						<li>vertical & horizontal scaling</li>
+					</ul>
+				</section>
+				<section>
 					<h2>General</h2>
 					<ul>
 						<li>Asynchronous by nature</li>
@@ -83,7 +92,7 @@
 				</section>
 
 				<section class="present" style="top: -232px; display: block;">
-                    <h2>Supported Core Protocols</h2>
+                    <h2>Core Protocols</h2>
                     <div>
                         <ul>
                             <li>TCP / UDP</li>
@@ -96,18 +105,59 @@
                 </section>
 
 				<section>
-					<img width="400" height="450" src="http://labs.viricmind.org/wp-content/uploads/2012/08/timfox.jpg" alt="Tim Fox" style="float:left;">
+					<h2>Polyglot</h2>
+					<ul>
+                        <li>Java</li>
+                        <li>JavaScript</li>
+                        <li>Groovy</li>
+                        <li>Ruby</li>
+                        <li>Python</li>
+                        <li>Scala*</li>
+                        <li>Clojure*</li>
+                        <li>PHP*</li>
+                    </ul><br>
+                    <i>* under heavy development</i>
+				</section>
+				<section>
+					<img width="400" height="450" src="img/timfox.jpg" alt="Tim Fox" style="float:left;">
 					<h3>History</h3>
 						<ul>
-						<li>Tim Fox</li>	
-						<li>VMware</li>
-						<li>Red Hat</li>
+						<li>Tim Fox - father of Vert.x</li>	
+						<li>VMware - incubator</li>
+						<li>Red Hat - adoptive parent</li>
 						<li>Eclipse Foundation</li>
 						</ul>	
 				</section>
 
 				<section>
+                    <h2>Thread-Model</h2>
+                    <div>
+                        <ul>
+                            <li>EventLoops (Usually one per Core)</li>
+                            <li>Each Verticle bound to one EventLoop and so single-Threaded</li>
+                            <li>No concurrency issues (synchronization, locking, ..)</li>
+                            <li>WorkerVerticles for blocking calls (jdbc, http requests, ...)</li>
+                        </ul>
+                    </div>
+                            <blockquote><strong>Never block the EventLoop!</strong></blockquote>
+                </section>
+				<section>
+					<h2>Architecture</h2>
+					<img width="540" height="500" src="https://raw.githubusercontent.com/michaelkuty/Vert.x-as-a-platform-for-web-application/master/obrazky/architecture_vertx.png" alt="Unicorn">
+				</section>
+				<section>
+				<h2>Comparasion </h2>
+				</section>
+
+				<section>
+					<img width="700" height="450" src="https://raw.githubusercontent.com/michaelkuty/Vert.x-as-a-platform-for-web-application/master/obrazky/chart_3-5.png" alt="Unicorn">
+				</section>
+				<section>
 					<h3>2.3 < 3.0</h3>
+					<ul>
+						<li>Stable & ready to use</li>
+						<li>Growing number of modules</li>
+					</ul>
 				</section>
 				<section>
 					<h3>3.0 +</h3>
@@ -121,24 +171,6 @@
 						<li>...</li>
 						https://github.com/eclipse/vert.x/wiki/Vert.x-3.0-plan
 					</ul>
-				</section>
-
-				<section>
-					<h2>Architecture</h2>
-					<img width="540" height="500" src="https://raw.githubusercontent.com/michaelkuty/Vert.x-as-a-platform-for-web-application/master/obrazky/architecture_vertx.png" alt="Unicorn">
-				</section>
-				<section>
-					<section>
-					<h2>Comparasion </h2>
-					</section>
-
-					<section>
-						<img width="700" height="450" src="https://raw.githubusercontent.com/michaelkuty/Vert.x-as-a-platform-for-web-application/master/obrazky/chart_3-5.png" alt="Unicorn">
-					</section>
-					<section>
-					<h2>Praktická ukázka</h2>
-						<a href="http://185.22.98.31" target="_blank"><img src="https://raw.githubusercontent.com/michaelkuty/Vert.x-as-a-platform-for-web-application/master/obrazky/mindmap3.png" alt="Unicorn"></a></br>
-					</section>
 				</section>
 				<section>
 					<section>
