@@ -1,27 +1,43 @@
 <!doctype html>
 <html lang="en">
 
+
 	<head>
 		<meta charset="utf-8">
 
 		<title>Vert.x - Michael Kuty</title>
 
-		<meta name="description" content="Presentation about Vert.x">
+		<meta name="description" content="Presentation about Vert.x platform. ">
+		<meta name="author" content="Michael Kuty">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-		<link rel="stylesheet" href="css/reveal.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
 		<link rel="stylesheet" href="css/theme/default.css" id="theme">
 
 		<!-- For syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="/css/default.css">
 
-		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script src="/js/highlight.pack.js"></script>
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
 		<script>
-			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+			hljs.initHighlightingOnLoad();
 		</script>
 
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
 	</head>
 
 	<body>
@@ -29,6 +45,7 @@
 		<div class="reveal">
 
 			<div class="slides">
+
 
 				<section>
 					<h1>Vert.x</h1>
@@ -38,127 +55,356 @@
 							</br>
 						</p>
 				</section>
-				<section>
-					<section>
-						<h2>Michael Kuty</h2>
-					
-						<h2 style="">
-                            <img src="img/tcp.png" width="90px;" style="border: none;">
-                        </h2>
-						<ul>
-							<li>Developer of web applications - Django</li>
-							<li>TCP Cloud - Django, SaltStack</li>
-							<li>Robotice - Python, Celery, ..</li>
-							<li>https://github.com/michaelkuty</li>
-						</ul>
-					</section>
-				</section>
-					<section>
-					<h2>Keynote</h2>
-					<p>
-						<ul>
-							<li>About, history, future</li>
-							<li>Why you want use it ?</li>
-							<li>Hello world</li>
-							<li>HA, Scaling</li>
-							<li>Advantages, disadvantages</li>
-						</ul>
-					</p>
-					</section>
 
 				<section>
-					<h2>What is it ?</h2>
-					<blockquote>Vert.x is a lightweight, high performance application platform for the JVM that's designed for modern mobile, web, and enterprise applications...</blockquote>
-				</section>
-
-				<section>
-					<h2>What does mean ?</h2>
+					<h2>Michael Kuty</h2>
+				
+					<h2 style="">
+                        <img src="img/tcp.png" width="90px;" style="border: none;">
+                    </h2>
 					<ul>
-						<li>simillar to Node.js - but not CLONE !</li>
-						<li>solving C10K problem</li>
-						<li>powered by JVM</li>
-						<li>vertical & horizontal scaling</li>
+						<li>Web application developer</li>
+						<li>TCP Cloud - Django, SaltStack, ..</li>
+						<li>Robotice - Python, Celery, ..</li>
+						<li>https://github.com/michaelkuty</li>
 					</ul>
 				</section>
+
+				<section>
+					<h2>Node.js for JVM</h2>
+					<img src="img/vertx_black.jpg" alt="vertx">
+				</section>
+				
+				<section>
+					<h2>Why ?</h2>
+					<img src="img/dashboard.png" alt="async">
+				</section>
+				
+				<section>
+					<h2>Addressing the Problem</h2>
+
+					<ul>
+						<li>C10K problem</li>
+						<li>Server push</li>
+						<li>Many long lived connections
+					</ul>
+				</section>
+				
+				<section>
+					<h2>2008</h2>
+				</section>
+
+				<section>
+					<h2>Request waiting ... Response</h2>
+					<img src="img/request.png" alt="async">
+					<br>Thread per Request/Response
+				</section>
+
+				<section>
+					<h2>Reactor pattern</h2>
+					<ul>
+						<li>Event loop</li>
+						<li>(Douglas C. Schmidt, 1995)</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>1995</h2>
+					<img src="img/logging.png">
+				</section>
+
+
+
+				<section>
+					<h2>... Loop</h2>
+					<img src="img/eventloop.png" alt="async">
+				</section>
+
+				<section>
+					<img src="img/scalling.png" alt="async">
+				</section>
+
+				<section>
+					<h2>Solutions</h2>
+					
+					<ul>
+						<h4>servers</h4>
+						<li>Nginx</li>
+						<li>Jetty</li>
+						<br>
+						<h4>platforms</h4>
+						<li>Node.js (JavaScript, JXCore)</li>
+						<li>Tornado, Eventlet (Python)</li>
+						<li>EventMachine (Ruby)</li>
+					</ul>
+
+				</section>
+
+				<section>
+					<h2>2009 - Node.js</h2>
+					<img src="img/nodejs.png">
+				</section>
+
+				<section>
+					<h2>2011 - Vert.x</h2>
+				</section>
+
+<!--
+
+				<section>
+					<h2>realy ?</h2>
+					<ul>
+						<li>JavaScript! WAT ?</li>
+						<li>Vertical scaling</li>
+						<li>Interprocess Communication</li>
+					</ul>
+				</section>
+-->
+
 				<section>
 					<h2>General</h2>
 					<ul>
 						<li>Asynchronous by nature</li>
+						<li>Simillarities with Node.js but not a clone !</li>
 						<li>High-Performing</li>
 						<li>Slim and leightweight core</li>
 						<li>Polyglot</li>
-						<li>Reusable modules</li>
+						<li>Inspired also from Erlang, RabbitMQ</li>
 					</ul>
-				</section>
+				</section>	
 
-				<section class="present" style="top: -232px; display: block;">
-                    <h2>Core Protocols</h2>
+				<section>
+                    <h2>Core API</h2>
                     <div>
                         <ul>
-                            <li>TCP / UDP</li>
+                            <li>TCP / SSL</li>
                             <li>HTTP(s) and compression</li>
-                            <li>WebSockets / Secure-WebSockets</li>
-                            <li>SockJS</li>
-                            <li>DNS Client</li>
+                            <li>WebSockets / SockJS</li>
+                            <li>File System</li>
+                            <li>Event Bus</li>
+                            <li>Timers, Buffers</li>
+                            <li>Streaming and Pumps</li>
+                            <li>UDP</li>
+                            <li>DNS</li>
+                            <li>...</li>
                         </ul>
                     </div>
                 </section>
+
+				<section>
+					<h2>Internals</h2>
+					<ul>
+						<li>Build on top of Netty 4</li>
+						<li>Hazelcast for group management of cluster members</li>
+						<li>Java7+</li>
+						<li>Jackson for JSON</li>
+					</ul>
+				</section>
 
 				<section>
 					<h2>Polyglot</h2>
 					<ul>
                         <li>Java</li>
-                        <li>JavaScript</li>
+                        <li>JS (Rhino, Nashorn)</li>
                         <li>Groovy</li>
                         <li>Ruby</li>
                         <li>Python</li>
-                        <li>Scala*</li>
-                        <li>Clojure*</li>
-                        <li>PHP*</li>
+                        <li>Scala</li>
+                        <li>Clojure</li>
+                        <li>PHP</li>
                     </ul><br>
-                    <i>* under heavy development</i>
-				</section>
-				<section>
-					<img width="400" height="450" src="img/timfox.jpg" alt="Tim Fox" style="float:left;">
-					<h3>History</h3>
-						<ul>
-						<li>Tim Fox - father of Vert.x</li>	
-						<li>VMware - incubator</li>
-						<li>Red Hat - adoptive parent</li>
-						<li>Eclipse Foundation</li>
-						</ul>	
 				</section>
 
 				<section>
-                    <h2>Thread-Model</h2>
+					<h2>Verticle</h2>
+                    <ul>
+                        <li>Execution unit of Vert.x</li>
+                        <li>Single threaded</li>
+                        <li>Verticles communicate via message passing</li>
+                        <li>Sounds like the Actor Model</li>
+                    </ul>
+				</section>
+
+				<section>
+                    <h2>Demo</h2>
+                </section>
+
+				<section>
+					<h2>Vert.x Instance</h2>
+					<img src="img/loops.png">
+				</section>
+
+				<section>
+                    <h2>Event Loops</h2>
+                    <ul>
+                        <li>EventLoops (Usually one per Core)</li>
+                        <li>Multi-reactor pattern</li>
+                        <li>No concurrency issues (synchronization, locking, ..)</li>
+                    </ul>
+                    <blockquote><strong>Never block the EventLoop!</strong></blockquote>
+                </section>
+
+				<section>
+	                <h2>Event Bus</h2>
+                    <ul>
+                        <li>Pub/Sub/P2P</li>
+                        <li>Bridges - (AMQP, 0MQ, Kafka, ..)</li>
+                        <li>JSON, BSON, Byte[], ...</li>
+                    </ul>
+                    <blockquote>Nervous system</blockquote>
+                </section>
+
+				<section>
+					<h2>Event Bus</h2>
+					<img src="img/eventbus.png">
+				</section>		
+
+				<section>
+	                <h2>Clustered Event Bus</h2>
+                    <ul>
+                        <li>Connects multiple Vert.x instances(JVM)</li>
+                        <li>Hazelcast as cluster manager(pluggable)</li>
+                        <li>Cluster manager used for group management not transport !!</li>
+                    </ul>
+                </section>
+
+				<section>
+	                <h2>Clustered Event Bus</h2>
+					<img src="img/clustered_eb.png">
+				</section>
+
+				<section>
+                    <h2>Event bus & Browser</h2>
+					<img src="img/clustered_eb_bw.png">
+                </section>
+
+				<section>
+                    <h2>Demo</h2>
+                </section>
+
+				<section>
+					<h2>Blocking tasks</h2>
+					<img src="img/waiting.gif">
+				</section>
+
+				<section>
+                    <h2>The background pool</h2>
                     <div>
                         <ul>
-                            <li>EventLoops (Usually one per Core)</li>
-                            <li>Each Verticle bound to one EventLoop and so single-Threaded</li>
-                            <li>No concurrency issues (synchronization, locking, ..)</li>
-                            <li>WorkerVerticles for blocking calls (jdbc, http requests, ...)</li>
+                        	<li>Hybrid model</li>
+                            <li>Worker Verticles</li>
+                            <li>blocking calls (jdbc, ...)</li>
                         </ul>
                     </div>
-                            <blockquote><strong>Never block the EventLoop!</strong></blockquote>
+                    <blockquote><strong>vertx.pool.worker.size</strong></blockquote>
                 </section>
+
 				<section>
-					<h2>Architecture</h2>
-					<img width="540" height="500" src="https://raw.githubusercontent.com/michaelkuty/Vert.x-as-a-platform-for-web-application/master/obrazky/architecture_vertx.png" alt="Unicorn">
-				</section>
-				<section>
-				<h2>Comparasion </h2>
+					<h2>Workers</h2>
+					<img src="img/hybrid.png">
 				</section>
 
 				<section>
-					<img width="700" height="450" src="https://raw.githubusercontent.com/michaelkuty/Vert.x-as-a-platform-for-web-application/master/obrazky/chart_3-5.png" alt="Unicorn">
+					<h3>event driven</h3>
 				</section>
-				<section>
-					<h3>2.3 < 3.0</h3>
+
+				<section data-background-image="img/java_callbacks2.png" class="present">
+					<div class="fragment">
+						<h3 >Callbacks hell</h3>
+						<img  width="400" height="450" src="img/callback.gif" alt="callback hell">
+						<!--<img width="400" height="450" src="img/callback.jpg" alt="callback hell">-->				
+					</div>
+				</section>
+
+				<section  class="present">
+					<h3>Callbacks help</h3>
 					<ul>
-						<li>Stable & ready to use</li>
-						<li>Growing number of modules</li>
+						<li>Rx (Reactive Extensions)</li>
+						<li>https://github.com/vert-x/mod-rxvertx</li>
+					</ul>
+					<img height="250px" src="img/rx.png">
+				</section>
+
+				<section>
+					<h2>Modules</h2>
+                    <ul>
+                    	<li>Even new language support is done via modules!</li>
+                        <li>No changes to core needed</li>
+                        <li>Runnable modules vs. includable modules</li>
+                        <li>Repositories (Maven, Bintray, ..)</li>
+                    </ul>
+				</section>
+
+				<section>
+                    <h2>High Availability</h2>
+                    <div>
+                        <ul>
+                            <li>Automatic failover</li>
+                            <li>HA groups</li>
+                            <li>Network partitions - Quora</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                	<h2>Clusters</h2>
+					<img src="img/provisioning.gif">
+                </section>
+
+				<section>
+                    <h2>Demo</h2>
+                </section>
+
+                <section data-background-color="rgba(255,255,255,0.5)">
+					<img src="img/devops_inifinity.png">
+                </section>
+
+				<section>
+                    <h2>Developing with Vert.x</h2>
+                    <div>
+                        <ul>
+                            <li>IDEs..</li>
+                            <li>Text editor</li>
+                            <li>Maven, Gradle, ..</li>
+                            <li>Auto-redeploy</li>
+                        </ul>
+                    </div>
+                </section>
+
+				<section>
+                    <h2>Deploying Vert.x</h2>
+                    <div>
+                        <ul>
+                            <li>Fat Jar, ZIP, verticles</li>
+                            <li>Modules, versions, configs</li>
+                            <li>Vert.x and Java version ?</li>
+                        </ul>
+                    </div>
+                </section>
+
+				<section>
+					<h2>Project info</h2>
+				</section>
+
+				<section>
+					<img width="400" height="450" src="img/timfox.jpg" alt="Tim Fox" style="float:left;">
+					<ul>
+						<li>Tim Fox - father of Vert.x</li>	
+						<li>VMware - incubator</li>
+						<li>Eclipse Foundation</li>
+						<li>Employed by Red Hat</li>
 					</ul>
 				</section>
+
+				<section>
+					<h3>Security</h3>
+					<img class="fragment" src="img/enterprise.gif">
+				</section>
+				
+				<section>
+					<h3>Enterprise ready ?</h3>
+				</section>
+
 				<section>
 					<h3>3.0 +</h3>
 					<ul>
@@ -167,20 +413,21 @@
 						<li>Code generation tool</li>
 						<li>Simplify cluster configuration</li>
 						<li>Wildcards on eventbus</li>
-						<li>Server management</li>
+						<li>Server management - GUI</li>
 						<li>...</li>
-						https://github.com/eclipse/vert.x/wiki/Vert.x-3.0-plan
 					</ul>
+                    <blockquote><strong>coming soon</strong></blockquote>
 				</section>
+
 				<section>
 					<section>
 						<h2>Summary</h2>
 						<ul>
 							<li>Horizontal & vertical scaling</li>
+							<li>High availability</li>
+							<li>Polyglot</li>
 							<li>Easily extendable</li>
-							<li>Vysokou dostupnost a škálování lze řešit již na aplikační úrovni.</li>
-							<li>Díky možnosti polyglot vývoje se zvyšuje BUS faktor aplikace.</li>
-							<li>Vert.x je vhodný pro vysokozátěžové aplikace.</li>
+							<li>Growing ecosystem</li>
 						</ul>
 					</section>
 				</section>
@@ -190,6 +437,19 @@
 
 				<section>
 				<h3>Thanks</h3>
+
+				<a target="_blank" href="http://spkr8.com/t/42891">http://spkr8.com/t/42891</a>
+				
+				</section>
+				<section>
+				<h3>Image credits</h3>
+
+					<ul>
+						<li>jbandi - http://www.slideshare.net/jbandi/vertx-asynchronous-eventdriven-web-applications-on-the-jvm</li>
+						<li>Matt Stine - http://www.slideshare.net/mstine/vertx-14673790</li>
+						<li>Sascha Möllering - http://www.slideshare.net/saschamoellering/vertx-in-productionfinal</li>
+					</ul>
+				
 				</section>
 			</div>
 
@@ -199,28 +459,28 @@
 		<script src="js/reveal.min.js"></script>
 
 		<script>
-
 			// Full list of configuration options available here:
 			// https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
 				controls: true,
 				progress: true,
 				history: true,
-
+				center: true,
 				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/none
-
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
 				// Optional libraries used to extend on reveal.js
 				dependencies: [
 					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
 					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
 					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
 				]
 			});
-
 		</script>
 
 	</body>
